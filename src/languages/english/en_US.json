@@ -1,0 +1,25 @@
+{
+  "aboutMe": {
+    "caption": "(and my cat Mantequillo).",
+    "description": "I am a software developer with a little more than 5 years of experience wanting to continue learning a little bit of everything every day and wanting to continue specializing in the expertise that I already have, in one way or another, like everyone else on the planet, wanting to change the world, I made this page as the beginning of a portfolio where to upload, show and share small projects and other useful content for any type of programmer.",
+    "name": "Hi, I am Jose Ríos C, "
+  },
+  "common": {
+    "changeLanguage": "Change language",
+    "footer": "This page is still under construction, wait for some major upgrades and new content soon!"
+  },
+  "homePage": {
+    "githubTitle": "Some of my repositories",
+    "title": "Welcome to Jorius dot me, "
+  },
+  "languages": {
+    "en_US": "English",
+    "es_LA": "Spanish"
+  },
+  "notFoundPage": {
+    "title": "Error 404, Page not found."
+  },
+  "settingsPage": {
+    "title": "Change it some stuff"
+  }
+}

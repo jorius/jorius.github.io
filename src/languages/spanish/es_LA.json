@@ -1,0 +1,25 @@
+{
+  "aboutMe": {
+    "caption": "(y mi gato Mantequillo).",
+    "description": "Soy un desarrollador de software con un poco más de 5 años de experiencia queriendo seguir aprendiendo día a día de todo un poco y queriendo seguir especializandome en las experticias que ya poseo, de una u otra manera, como todos en el planeta, queriendo cambiar el mundo, hice esta página como el inicio de un portafolio donde subir, mostrar y compartir pequeños proyectos y otro contenido útil para cualquier tipo de programador.",
+    "name": "Hola, soy Jose Ríos C, "
+  },
+  "common": {
+    "changeLanguage": "Cambiar idioma",
+    "footer": "Esta página todavía está bajo desarrollo y construcción, por favor espere por actualizaciones grandes y nuevo contenido!"
+  },
+  "homePage": {
+    "githubTitle": "Algunos de mis repositorios",
+    "title": "Bienvenido a Jorius dot me, "
+  },
+  "languages": {
+    "en_US": "Inglés",
+    "es_LA": "Español"
+  },
+  "notFoundPage": {
+    "title": "Error 404, Página no encontrada."
+  },
+  "settingsPage": {
+    "title": "Cambia algunas cosas"
+  }
+}

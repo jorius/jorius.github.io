@@ -1,0 +1,17 @@
+[
+  {
+    "component": "HomePage",
+    "name": "homePage",
+    "path": "/"
+  },
+  {
+    "component": "NotFoundPage",
+    "name": "notFoundPage",
+    "path": "*"
+  },
+  {
+    "component": "SettingsPage",
+    "name": "settingsPage",
+    "path": "/settings"
+  }
+]
