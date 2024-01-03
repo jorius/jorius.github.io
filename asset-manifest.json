@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/jorius.github.io/static/css/main.580d97ba.chunk.css",
+    "main.js": "/jorius.github.io/static/js/main.55daec1e.chunk.js",
+    "main.js.map": "/jorius.github.io/static/js/main.55daec1e.chunk.js.map",
+    "runtime-main.js": "/jorius.github.io/static/js/runtime-main.f5df2de7.js",
+    "runtime-main.js.map": "/jorius.github.io/static/js/runtime-main.f5df2de7.js.map",
+    "static/js/2.482dbbbc.chunk.js": "/jorius.github.io/static/js/2.482dbbbc.chunk.js",
+    "static/js/2.482dbbbc.chunk.js.map": "/jorius.github.io/static/js/2.482dbbbc.chunk.js.map",
+    "index.html": "/jorius.github.io/index.html",
+    "static/css/main.580d97ba.chunk.css.map": "/jorius.github.io/static/css/main.580d97ba.chunk.css.map",
+    "static/js/2.482dbbbc.chunk.js.LICENSE.txt": "/jorius.github.io/static/js/2.482dbbbc.chunk.js.LICENSE.txt",
+    "static/media/avatar.24736147.jpg": "/jorius.github.io/static/media/avatar.24736147.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f5df2de7.js",
+    "static/js/2.482dbbbc.chunk.js",
+    "static/css/main.580d97ba.chunk.css",
+    "static/js/main.55daec1e.chunk.js"
+  ]
+}
