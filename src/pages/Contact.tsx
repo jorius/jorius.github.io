@@ -15,8 +15,9 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // TODO: Implement a feature to send emails
+    // Form submission is intentionally a no-op for now.
+    // The form is being disabled in PR C pending a backend decision
+    // (Resend + serverless function vs. third-party form service).
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -127,9 +128,8 @@ const Contact = () => {
               <p className="text-gray-400 mb-6">
                 Prefer to chat directly? Reach me on WhatsApp for quick responses!
               </p>
-              {/* TODO: Replace placeholder phone number with real WhatsApp number */}
               <a
-                href="https://wa.me/1234567890"
+                href="https://wa.me/573013930289"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block px-8 py-3 bg-gradient-to-r from-neon-green to-neon-cyan text-dark-bg font-bold uppercase tracking-wider border-2 border-neon-green hover:scale-105 transition-transform duration-300"

@@ -30,9 +30,6 @@ const ServicesSection = () => {
       data-section="services"
       className="relative w-full bg-portfolio-dark-900 overflow-hidden px-16 py-32"
     >
-      {/* Background Pattern/Texture */}
-      <div className="absolute inset-0 opacity-20 bg-[url('/bg-pattern.jpg')] bg-cover bg-center" />
-
       <div className="relative z-10 max-w-[1299px] mx-auto flex flex-col gap-24">
         {/* Section Header */}
         <div className="flex items-end justify-between">

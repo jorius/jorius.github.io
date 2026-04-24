@@ -2,16 +2,24 @@
 import { useTranslation } from 'react-i18next';
 
 // data
-import testimonials from '../../data/testimonials.json';
+import testimonialsData from '../../data/testimonials.json';
+
+interface Testimonial {
+  id: number;
+  name: string;
+  role: string;
+  rating: number;
+  comment: string;
+  avatar: string;
+}
+
+const testimonials: Testimonial[] = testimonialsData as Testimonial[];
 
 const TestimonialsSection = () => {
   const { t } = useTranslation();
 
   return (
     <section className="relative w-full bg-portfolio-dark-900 rounded-[50px] overflow-hidden px-16 py-32">
-      {/* Background Pattern/Texture */}
-      <div className="absolute inset-0 opacity-20 bg-[url('/bg-pattern.jpg')] bg-cover bg-center" />
-
       <div className="relative z-10 max-w-[1300px] mx-auto flex flex-col gap-24">
         {/* Section Title */}
         <div className="flex flex-col items-center pb-5 text-center">

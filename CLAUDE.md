@@ -32,23 +32,20 @@ React **19** + TypeScript 5.9 + Vite 7 SPA.
 
 **Routing** — React Router DOM 7 with nested routes in `src/App.tsx`. Main pages (`Home`, `About`, `Portfolio`, `Contact`) share a `Header`/`Footer` layout; `/palette` is an isolated route without layout.
 
-**State** — Redux Toolkit. Theme (dark/light) lives in `src/store/slices/themeSlice.ts`. Always use the typed hooks from `src/store/hooks.ts` (`useAppDispatch`, `useAppSelector`) — never the raw `react-redux` hooks.
+**State** — No global state library. Per-component `useState` and i18next for locale. (A previous Redux + dark-mode toggle was removed in `fix/security-and-dead-code-removal` because the site is light-mode only.)
 
-**Styling** — Tailwind CSS 3 with **class-based dark mode** (`darkMode: 'class'`). Dark class is toggled on `<html>` by the theme reducer. Custom palette (neon/cyberpunk + portfolio tokens), fonts (Space Mono, Urbanist, Inter, Montserrat, Vast Shadow), and animations (glow, scan, flicker, marquee) are all defined in `tailwind.config.js`.
+**Styling** — Tailwind CSS 3, light theme only. Custom palette (neon/cyberpunk + portfolio tokens — some legacy dark-theme tokens remain in `tailwind.config.js`'s `COLORS` constant pending the design overhaul), fonts (Space Mono, Urbanist, Inter, Montserrat, Vast Shadow), and animations (glow, scan, flicker, marquee) all defined in `tailwind.config.js`. Note: a few `dark:` Tailwind variants survive in `App.tsx`, `pages/Contact.tsx`, `pages/About.tsx`, and `index.css`. With `darkMode: 'class'` removed, these now activate via the visitor's OS `prefers-color-scheme: dark` media query rather than a class toggle. Cleaning them up is a design-overhaul item.
 
 **i18n** — i18next + `i18next-browser-languagedetector`. Locale JSON in `src/i18n/locales/{en,es}.json`. User-facing text always goes through `useTranslation()` — when adding copy, add keys to **both** locale files.
-
-**3D** — Three.js via `@react-three/fiber` + `@react-three/drei`. Heavy — lazy-load where it materially matters.
 
 **Vite config quirk** (`vite.config.ts`) — a custom plugin forces a full page reload when `tailwind.config.js` changes (Tailwind v3 doesn't HMR config changes on its own). Don't remove this unless you migrate to Tailwind v4.
 
 ## Project structure
 
 - `src/components/sections/` — Homepage sections (Hero, Services, WorkExperience, WhyHireMe, ContactForm, SkillsBanner, Testimonials, Blog). Composed in `src/pages/Home.tsx`. **Some are currently commented out in Home.tsx** — that's intentional (disabled, not deleted). If you touch them, keep that convention or wire them back on purposefully.
-- `src/components/common/` — Shared UI (Header, Footer, Button, Badge, ThemeToggle, LanguageSelector, SectionTitle).
+- `src/components/common/` — Shared UI (Header, Footer, Button, Badge, LanguageSelector, SectionTitle).
 - `src/pages/` — Route-level components. `Portfolio.tsx` is the canonical portfolio renderer (uses `portfolio.json`'s `personalProjects`/`clientProjects` shape).
 - `src/data/*.json` — Content extracted from components (experiences, portfolio, services, blog posts, testimonials, private-repos config). Prefer editing JSON over hard-coding copy in components.
-- `src/store/` — RTK store config + slices.
 - `src/hooks/` — Cross-component hooks (e.g. `useGitHubRepos` for the GitHub API integration).
 - `src/utils/` — `scrollUtils` (smooth scroll to sections from other routes, reads `location.state.scrollTo`), `validationUtils` (email validation), `techConfig` (tech-stack chip mapping).
 - `src/i18n/` — i18next setup + locale JSON.
@@ -74,10 +71,9 @@ One blank line between groups, no blank lines within a group.
 
 `.env` is gitignored. Variables are Vite-prefixed (`VITE_*`), exposed to the client bundle. See `.env.example`:
 
-- `VITE_GITHUB_TOKEN` — used by `useGitHubRepos` to call the GitHub API (authenticated requests to avoid rate limiting / read private repo metadata).
-- `VITE_GITHUB_USERNAME` — target username for the GitHub API calls. Also injected by CI for the production build.
+- `VITE_GITHUB_USERNAME` — target username for the GitHub API calls (called unauthenticated via `/users/{username}/repos`; rate-limited to 60/hr per visitor IP). Also injected by CI for the production build.
 
-**Do not commit real tokens.** The CI build sets `VITE_GITHUB_USERNAME` from the workflow env; if you ever need a token in the deployed build, add it as a GitHub Actions secret and reference it in `deploy.yml`'s `env:` block — **never paste it into `.env.example`**.
+**No client-side tokens.** Anything prefixed `VITE_` is bundled into the browser JS by Vite, so it cannot hold a secret. The portfolio is intentionally token-free; if a token-bearing GitHub call ever becomes necessary, route it through a serverless backend rather than re-introducing a client-side env var.
 
 ## Deployment notes
 
@@ -87,5 +83,4 @@ One blank line between groups, no blank lines within a group.
 
 ## Known issues / tech debt
 
-- Referenced asset `/bg-pattern.jpg` is not in `public/` — Vite warns at build time but the reference is left in place to resolve at runtime (currently 404s). Add the asset or remove the reference before relying on that background.
-- 8 npm audit vulnerabilities (3 moderate, 5 high) from transitive deps in the current lock file. Not blocking CI; address with `npm audit fix` when touching the lockfile intentionally.
+- npm audit vulnerabilities from transitive deps in the current lock file. Not blocking CI; address with `npm audit fix` when touching the lockfile intentionally.

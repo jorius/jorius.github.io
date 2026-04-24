@@ -1,6 +1,5 @@
 // packages
 import { FaLinkedin, FaGithub, FaWhatsapp } from "react-icons/fa";
-import { SiUpwork } from "react-icons/si";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -98,14 +97,6 @@ const Header = () => {
             className={`${textColorClass} ${hoverClass} p-2 rounded transition-all`}
           >
             <FaWhatsapp className="w-5 h-5" />
-          </a>
-          <a
-            href="https://www.upwork.com/freelancers/~yourprofile"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${textColorClass} ${hoverClass} p-2 rounded transition-all`}
-          >
-            <SiUpwork className="w-5 h-5" />
           </a>
         </div>
 
