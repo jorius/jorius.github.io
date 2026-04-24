@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 
 // components
 // import BlogSection from "../components/sections/BlogSection";
-// import PortfolioSection from '../components/sections/PortfolioSection';
 // import TestimonialsSection from '../components/sections/TestimonialsSection';
 import ContactFormSection from "../components/sections/ContactFormSection";
 import HeroSection from "../components/sections/HeroSection";
@@ -36,8 +35,6 @@ const Home = () => {
       <WorkExperienceSection />
       {/* Why Hire Me Section */}
       <WhyHireMeSection />
-      {/* Portfolio Section */}
-      {/* <PortfolioSection /> */}
       {/* Testimonials Section */}
       {/* <TestimonialsSection /> */}
       {/* Contact Form Section */}
