@@ -7,7 +7,18 @@ import Badge from '../common/Badge';
 import Button from '../common/Button';
 
 // data
-import blogPosts from '../../data/blog-posts.json';
+import blogPostsData from '../../data/blog-posts.json';
+
+interface BlogPost {
+  id: number;
+  title: string;
+  author: string;
+  date: string;
+  category: string;
+  image: string;
+}
+
+const blogPosts: BlogPost[] = blogPostsData as BlogPost[];
 
 const BlogSection = () => {
   const { t } = useTranslation();

@@ -1,9 +1,1 @@
-[
-  {
-    "id": "private-1",
-    "name": "example-private-repo",
-    "description": "Add a description for this private repository.",
-    "tech": ["React", "TypeScript", "Node.js"],
-    "lastCommit": null
-  }
-]
+[]
