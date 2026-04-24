@@ -1,4 +1,5 @@
 // packages
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 // contexts
@@ -7,21 +8,36 @@ import { useBTheme } from '../../contexts/ThemeContext';
 // data
 import { JORIUS } from '../../data/jorius';
 
+// hooks
+import useGitHubRepos from '../../hooks/useGitHubRepos';
+import type { GitHubRepo } from '../../hooks/useGitHubRepos';
+
 // components
 import { Glitch } from '../primitives/Glitch';
 import { Reveal } from '../primitives/Reveal';
 import { BSectionHead } from './BSectionHead';
 
+const OSS_LIMIT = 6;
+
+const selectTopOss = (repos: GitHubRepo[]): GitHubRepo[] =>
+  repos
+    .filter((r) => !r.private && !r.fork && !r.archived)
+    .sort((a, b) => b.stargazers_count - a.stargazers_count)
+    .slice(0, OSS_LIMIT);
+
 export const BOssWriting = (): React.ReactElement => {
   const { t } = useBTheme();
-  const max = Math.max(...JORIUS.oss.map((o) => o.stars));
+  const { repos, loading, error } = useGitHubRepos();
+  const topOss = useMemo(() => selectTopOss(repos), [repos]);
+  const max = topOss.length > 0 ? Math.max(...topOss.map((r) => r.stargazers_count), 1) : 1;
+
   return (
     <>
       <BSectionHead
         id="b-writing"
         num="05"
         label="WRITING & OSS."
-        kicker="Long-form notes and maintained repositories. The things I'd point a hiring manager at, if asked."
+        kicker="Long-form notes and live public repositories. The things I'd point a hiring manager at, if asked."
       />
       <div
         style={{
@@ -88,30 +104,62 @@ export const BOssWriting = (): React.ReactElement => {
           >
             — Open source
           </div>
-          {JORIUS.oss.map((o, i) => (
+
+          {loading ? (
+            <div style={{ fontSize: 12, color: t.dim, padding: '16px 0' }}>loading public repos…</div>
+          ) : null}
+
+          {!loading && error ? (
+            <div style={{ fontSize: 12, color: t.dim, padding: '16px 0', lineHeight: 1.5 }}>
+              GitHub API unavailable: {error}.
+              <br />
+              Visit{' '}
+              <a
+                href={JORIUS.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: t.ink }}
+              >
+                github.com/{JORIUS.handle}
+              </a>{' '}directly.
+            </div>
+          ) : null}
+
+          {!loading && !error && topOss.length === 0 ? (
+            <div style={{ fontSize: 12, color: t.dim, padding: '16px 0' }}>
+              No public, non-forked, non-archived repositories found yet.
+            </div>
+          ) : null}
+
+          {topOss.map((r, i) => (
             <Reveal
-              key={o.repo}
+              key={r.id}
               delay={i * 50}
               style={{ padding: '16px 0', borderBottom: `1px solid ${t.soft}` }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                 <a
-                  href={`https://github.com/${o.repo}`}
+                  href={r.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: t.ink, textDecoration: 'none', fontSize: 15 }}
                 >
-                  <Glitch trigger="hover">{o.repo}</Glitch>
+                  <Glitch trigger="hover">{r.full_name}</Glitch>
                 </a>
-                <span style={{ fontSize: 12, color: t.dim }}>★ {o.stars.toLocaleString()} · {o.lang}</span>
+                <span style={{ fontSize: 12, color: t.dim }}>
+                  ★ {r.stargazers_count.toLocaleString()}
+                  {r.language ? ` · ${r.language}` : ''}
+                </span>
               </div>
-              <div style={{ fontSize: 13, color: t.dim, marginTop: 4 }}>{o.desc}</div>
+              {r.description ? (
+                <div style={{ fontSize: 13, color: t.dim, marginTop: 4 }}>{r.description}</div>
+              ) : null}
               <div style={{ height: 3, background: t.soft, marginTop: 10, position: 'relative' }}>
                 <div
                   style={{
                     position: 'absolute',
                     inset: 0,
-                    width: `${(o.stars / max) * 100}%`,
+                    width: `${(r.stargazers_count / max) * 100}%`,
                     background: t.ink,
                   }}
                 />
