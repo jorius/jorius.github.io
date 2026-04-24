@@ -26,7 +26,7 @@ interface PaletteItem {
 }
 
 export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactElement | null => {
-  const { theme } = useBTheme();
+  const { theme, t } = useBTheme();
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState('');
   const [idx, setIdx] = useState(0);
@@ -95,12 +95,14 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
 
   if (!open) return null;
   const dark = theme === 'dark';
-  const bg = dark ? '#0a0a0a' : '#f5f4f0';
-  const fg = dark ? '#eaeaea' : '#111';
-  const dim = dark ? '#666' : '#888';
-  const line = dark ? '#222' : '#d9d7d1';
-  const hi = dark ? '#fff' : '#111';
-  const hiFg = dark ? '#000' : '#fff';
+  // Theme-aware palette derived from the brutalist design tokens
+  // (#292929 / #c8c8c8 family) instead of generic black/white.
+  const bg = t.paper;
+  const fg = t.ink;
+  const dim = t.dim;
+  const line = t.sub;
+  const hi = t.ink;
+  const hiFg = t.paper;
 
   return (
     <div
