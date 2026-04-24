@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Design Unraveled: Behind the Scenes of UI/UX Magic",
+    "author": "Jayesh Patil",
+    "date": "10 Nov, 2023",
+    "category": "UI/UX Design",
+    "image": "/images/blog1.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Building Scalable Web Applications with Modern Architecture",
+    "author": "Jayesh Patil",
+    "date": "15 Nov, 2023",
+    "category": "Development",
+    "image": "/images/blog2.jpg"
+  },
+  {
+    "id": 3,
+    "title": "The Future of Frontend Development in 2024",
+    "author": "Jayesh Patil",
+    "date": "20 Nov, 2023",
+    "category": "Technology",
+    "image": "/images/blog3.jpg"
+  }
+]

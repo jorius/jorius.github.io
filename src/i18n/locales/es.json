@@ -1,0 +1,225 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca",
+    "services": "Servicios",
+    "portfolio": "Portafolio",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "¡Hola!",
+    "title": "Desarrollador de Software y Analista de Ciberseguridad",
+    "testimonial": {
+      "quote": "Jose convirtió la idea inicial de mi startup en una plataforma robusta y escalable. ¡Su enfoque fue metódico y su entrega impecable!",
+      "author": "Rachel Lee",
+      "role": "Fundadora de StartupXYZ"
+    },
+    "stats": {
+      "title": "Datos Rápidos",
+      "status": "Estado:",
+      "statusValue": "Disponible para contratar",
+      "location": "Ubicación:",
+      "locationValue": "América Latina",
+      "focus": "Enfoque:",
+      "focusValue": "React y Seguridad"
+    },
+    "experience": {
+      "years": "10+",
+      "label": "Años de Experiencia"
+    },
+    "cta": {
+      "portfolio": "Ver Mi Portafolio",
+      "email": "Envíame un Correo"
+    }
+  },
+  "services": {
+    "title": "Servicios",
+    "description": "Aprovechando más de 10 años de experiencia en desarrollo de software, arquitectura en la nube y ciberseguridad para entregar soluciones robustas y escalables para empresas en todo el mundo.",
+    "items": {
+      "fullstack": "Desarrollo Full-Stack",
+      "frontend": "Frontend con React",
+      "backend": "Backend con Node/NestJS",
+      "consulting": "Consultoría de Software",
+      "cybersecurity": "Análisis de Ciberseguridad"
+    }
+  },
+  "experience": {
+    "title": {
+      "part1": "Mi ",
+      "part2": "Experiencia Laboral"
+    },
+    "perficient_current": {
+      "company": "Perficient",
+      "period": "Nov 2025 - Presente",
+      "role": "Consultor Técnico Senior",
+      "description": "Liderando proyectos de consultoría técnica y arquitectura de software para clientes empresariales. Especializado en soluciones cloud-native y frameworks modernos de JavaScript."
+    },
+    "celerik_recent": {
+      "company": "Celerik",
+      "period": "Nov 2024 - Ene 2026",
+      "role": "Desarrollador Senior & Líder Técnico",
+      "description": "Liderando técnica y humanamente un par de equipos dentro del ecosistema de JavaScript y TypeScript para construir aplicaciones a gran escala. Arquitectura de software y desarrollo de software en general como Full-Stack."
+    },
+    "perficient": {
+      "company": "Perficient",
+      "period": "Oct 2021 - Nov 2024",
+      "role": "Analista de Software Full-Stack",
+      "description": "Microservicios y desarrollo de software en NodeJS con arquitectura serverless lambda en AWS. Desarrollo y mantenimiento de aplicaciones web en ReactJS. Soporte de arquitectura para proyectos React Native."
+    },
+    "globant": {
+      "company": "Globant",
+      "period": "Nov 2020 - Oct 2021",
+      "role": "Desarrollador UI Web Ssr",
+      "description": "Desarrollo de software, mantenimiento y soporte de arquitectura de aplicaciones web en ReactJS."
+    },
+    "celerik_2019": {
+      "company": "Celerik",
+      "period": "Ene 2019 - Nov 2020",
+      "role": "Desarrollador Front End Líder",
+      "description": "Desarrollo de software, mantenimiento y arquitectura de aplicaciones web en ReactJS."
+    },
+    "comtic": {
+      "company": "COMTIC",
+      "period": "Nov 2015 - Nov 2017",
+      "role": "Desarrollador Full-Stack",
+      "description": "Diseño, modelado y gestión de bases de datos y administración en MySQL y PostgreSQL. Administración de servidores Linux en Digital Ocean y Heroku. Desarrollo y mantenimiento de aplicaciones web en PHP con CodeIgniter y Laravel."
+    }
+  },
+  "whyHire": {
+    "title": "Por Qué Contratarme",
+    "subtitle": "Valor Único",
+    "description": "Con más de 10 años de experiencia, aporto un historial comprobado de entrega de soluciones de software de alta calidad. Combino experiencia técnica con sólidas habilidades de comunicación para garantizar el éxito del proyecto.",
+    "stats": {
+      "projects": {
+        "value": "100+",
+        "label": "Proyectos Completados"
+      },
+      "clients": {
+        "value": "50+",
+        "label": "Clientes Satisfechos"
+      },
+      "awards": {
+        "value": "15",
+        "label": "Premios Ganados"
+      }
+    }
+  },
+  "portfolio": {
+    "title": "Proyectos Destacados",
+    "categories": {
+      "all": "Todos",
+      "web": "Web",
+      "mobile": "Móvil",
+      "design": "Diseño"
+    },
+    "projects": {
+      "calathea": {
+        "title": "Calathea",
+        "description": "Una hermosa plataforma de comercio electrónico para entusiastas de las plantas con inventario en tiempo real y recomendaciones impulsadas por IA.",
+        "tags": ["React", "Node.js", "MongoDB", "IA"]
+      },
+      "modernApp": {
+        "title": "Aplicación Moderna",
+        "description": "Una aplicación móvil de vanguardia con experiencia de usuario fluida y características innovadoras.",
+        "tags": ["React Native", "Firebase", "TypeScript"]
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Lo Que Dicen los Clientes",
+    "items": {
+      "client1": {
+        "quote": "La experiencia técnica y profesionalismo de Jose superaron todas las expectativas. Entregó un proyecto complejo a tiempo y dentro del presupuesto.",
+        "author": "Sarah Johnson",
+        "role": "CTO, TechCorp"
+      },
+      "client2": {
+        "quote": "Trabajar con Jose fue un cambio radical para nuestra startup. Sus conocimientos y ejecución fueron invaluables.",
+        "author": "Michael Chen",
+        "role": "CEO, InnovateCo"
+      },
+      "client3": {
+        "quote": "Jose transformó nuestro sistema heredado en una plataforma moderna y escalable. Su experiencia es incomparable.",
+        "author": "Emily Rodriguez",
+        "role": "VP de Ingeniería, DataFlow"
+      }
+    }
+  },
+  "blog": {
+    "title": "Últimas Publicaciones del Blog",
+    "posts": {
+      "post1": {
+        "title": "Construyendo Aplicaciones React Escalables",
+        "excerpt": "Aprende las mejores prácticas para crear aplicaciones React mantenibles y de alto rendimiento.",
+        "date": "15 de Marzo, 2024",
+        "readTime": "5 min de lectura"
+      },
+      "post2": {
+        "title": "Patrones de Arquitectura de Microservicios",
+        "excerpt": "Explora patrones comunes y antipatrones en la arquitectura de microservicios.",
+        "date": "10 de Marzo, 2024",
+        "readTime": "8 min de lectura"
+      },
+      "post3": {
+        "title": "Mejores Prácticas de TypeScript",
+        "excerpt": "Maximiza la seguridad de tipos y la productividad del desarrollador con estos consejos de TypeScript.",
+        "date": "5 de Marzo, 2024",
+        "readTime": "6 min de lectura"
+      }
+    }
+  },
+  "contactForm": {
+    "title": "Trabajemos Juntos",
+    "subtitle": "Ponte en Contacto",
+    "description": "¿Tienes un proyecto en mente? Hablemos sobre cómo puedo ayudarte a hacer realidad tus ideas.",
+    "form": {
+      "email": "Tu Correo Electrónico",
+      "placeholder": "Ingresa tu correo",
+      "button": "Comenzar"
+    }
+  },
+  "skills": {
+    "banner": {
+      "items": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "AWS",
+        "Docker",
+        "Kubernetes",
+        "GraphQL",
+        "MongoDB",
+        "PostgreSQL",
+        "Redis"
+      ]
+    }
+  },
+  "footer": {
+    "navigation": {
+      "title": "Navegación",
+      "home": "Inicio",
+      "about": "Acerca",
+      "services": "Servicios",
+      "portfolio": "Portafolio",
+      "blog": "Blog",
+      "contact": "Contacto"
+    },
+    "contact": {
+      "title": "Contacto",
+      "email": "josed.riosc@gmail.com",
+      "phone": "+1 (555) 123-4567",
+      "location": "Disponible en Todo el Mundo"
+    },
+    "newsletter": {
+      "title": "Boletín",
+      "description": "Suscríbete para recibir las últimas actualizaciones e información directamente en tu bandeja de entrada.",
+      "placeholder": "Ingresa tu correo",
+      "button": "Suscribirse"
+    },
+    "social": {
+      "title": "Sígueme"
+    },
+    "copyright": "Copyright©",
+    "allRightsReserved": "Todos los derechos reservados."
+  }
+}

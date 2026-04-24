@@ -1,0 +1,7 @@
+[
+  { "key": "fullstack", "title": "Full-Stack Development" },
+  { "key": "frontend", "title": "Frontend with React" },
+  { "key": "backend", "title": "Backend with Node/NestJS" },
+  { "key": "consulting", "title": "Software Consulting" },
+  { "key": "cybersecurity", "title": "Cybersecurity Analysis" }
+]
