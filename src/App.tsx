@@ -11,6 +11,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
 import Palette from './pages/Palette';
+import Pgp from './pages/Pgp';
 import Portfolio from './pages/Portfolio';
 import Read from './pages/Read';
 
@@ -22,6 +23,7 @@ function App() {
         {/* Standalone routes — render their own chrome (header/footer baked in). */}
         <Route path="/" element={<Home />} />
         <Route path="/read/:slug" element={<Read />} />
+        <Route path="/pgp" element={<Pgp />} />
         <Route path="/palette" element={<Palette />} />
 
         {/* Legacy routes still wrapped in the pre-overhaul Header/Footer layout

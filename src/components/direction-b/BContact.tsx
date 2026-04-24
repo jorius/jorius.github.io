@@ -1,6 +1,7 @@
 // packages
 import { useTranslation } from 'react-i18next';
 import { FaWhatsapp } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
@@ -71,12 +72,29 @@ export const BContact = (): React.ReactElement => {
           >
             <Glitch trigger="hover">{JORIUS.email}</Glitch>
           </a>
-          <div style={{ fontSize: 11, color: t.dim, marginTop: 6, fontFamily: 'inherit', letterSpacing: '0.04em' }}>
+          {/* PGP block doubles as an easter-egg entry point: clicking it
+              navigates to /pgp where the full ASCII-armored key is shown.
+              Visually it reads as plain text — no underline, just a
+              cursor-pointer hint on hover. */}
+          <Link
+            to="/pgp"
+            title={tr('directionB.palette.items.showPgp')}
+            style={{
+              display: 'block',
+              fontSize: 11,
+              color: t.dim,
+              marginTop: 6,
+              fontFamily: 'inherit',
+              letterSpacing: '0.04em',
+              textDecoration: 'none',
+              cursor: 'pointer',
+            }}
+          >
             {tr('directionB.contact.pgp')} {JORIUS.pgp.algo} · {JORIUS.pgp.keyId}
             <div style={{ fontSize: 10, color: t.dim, opacity: 0.75, marginTop: 2 }}>
               {JORIUS.pgp.fingerprint}
             </div>
-          </div>
+          </Link>
 
           {JORIUS.affiliations.length > 0 ? (
             <div style={{ marginTop: 18, paddingTop: 14, borderTop: `1px dashed ${t.sub}` }}>
