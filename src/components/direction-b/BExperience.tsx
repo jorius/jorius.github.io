@@ -17,12 +17,12 @@ export const BExperience = (): React.ReactElement => {
         id="b-experience"
         num="03"
         label="RECORD."
-        kicker="Ten years, four companies, a lot of branches rebased into tidy commits."
+        kicker="Six engagements, four companies, a lot of branches merged into tidy commits."
       />
       <div style={{ padding: '0 32px 60px 32px' }}>
         {JORIUS.experience.map((e, i) => (
           <Reveal
-            key={`${e.co}-${e.from}`}
+            key={e.key}
             delay={i * 60}
             style={{
               display: 'grid',
@@ -36,22 +36,23 @@ export const BExperience = (): React.ReactElement => {
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
               <div
                 style={{
-                  width: 44,
-                  height: 44,
+                  width: 56,
+                  height: 56,
                   flexShrink: 0,
                   border: `1px solid ${t.rule}`,
-                  backgroundColor: t.sub,
+                  backgroundColor: '#ffffff',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: 22,
-                  fontWeight: 700,
-                  letterSpacing: '-0.02em',
-                  color: e.accent,
                   position: 'relative',
+                  overflow: 'hidden',
                 }}
               >
-                {e.mark}
+                <img
+                  src={e.logo}
+                  alt={`${e.co} logo`}
+                  style={{ maxWidth: '76%', maxHeight: '76%', objectFit: 'contain', display: 'block' }}
+                />
                 <span
                   style={{
                     position: 'absolute',
