@@ -35,8 +35,10 @@ export const Portrait = (): React.ReactElement => {
 
   return (
     <div
+      className="b-hero-portrait"
       style={{
-        width: 280,
+        width: '100%',
+        maxWidth: 480,
         aspectRatio: '3 / 4',
         border: `1px solid ${t.rule}`,
         position: 'relative',

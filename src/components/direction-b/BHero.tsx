@@ -24,7 +24,7 @@ export const BHero = (): React.ReactElement => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 280px', gap: 40, alignItems: 'end' }}>
+      <div className="b-hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr clamp(280px, 32vw, 480px)', gap: 40, alignItems: 'end' }}>
         <div style={{ fontSize: 'clamp(64px, 11vw, 172px)', lineHeight: 0.86, letterSpacing: '-0.045em', fontWeight: 700, color: t.ink }}>
           <Glitch as="div" strong period={3800}>FULL-STACK</Glitch>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 24, flexWrap: 'wrap' }}>
