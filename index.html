@@ -1,19 +1,51 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Jose Rios - Software Engineer & Cybersecurity Enthusiast" />
+    <meta name="description" content="Jose Rios — Full-stack engineer / security consultant. Personal record." />
 
-    <!-- Google Fonts for Portfolio Design -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Urbanist:wght@400;700&family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500&family=Vast+Shadow&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&display=swap"
+      rel="stylesheet"
+    />
 
-    <title>Jose Rios | jorius.me</title>
+    <title>Jorius — Personal Record</title>
+
+    <style>
+      html, body { margin: 0; padding: 0; background: #292929; color: #f2efe7; font-family: "Space Mono", ui-monospace, Menlo, monospace; }
+      * { box-sizing: border-box; }
+      ::selection { background: #fff; color: #000; }
+
+      /* INDEX card hover effect */
+      .b-index-card { transition: background-color 240ms ease; }
+      .b-index-card .b-index-thumb { transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+      .b-index-card .b-index-sheen { transform: translateX(-100%); transition: transform 900ms ease; }
+      .b-index-card .b-index-cta { opacity: 0; transform: translateX(-8px); transition: transform 260ms ease, opacity 260ms ease; }
+      .b-index-card:hover { background-color: var(--sub); }
+      .b-index-card:hover .b-index-thumb { transform: translateY(-4px); }
+      .b-index-card:hover .b-index-sheen { transform: translateX(100%); }
+      .b-index-card:hover .b-index-cta { opacity: 1; transform: translateX(0); }
+
+      /* Hero portrait row responsive — stack the headline and portrait below md */
+      @media (max-width: 768px) {
+        .b-hero-grid { grid-template-columns: 1fr !important; align-items: stretch !important; }
+        .b-hero-portrait { max-width: 320px !important; margin-left: auto !important; margin-right: auto !important; }
+      }
+
+      /* WHY step hover effect */
+      .b-why-step { transition: background-color 240ms ease; position: relative; cursor: default; }
+      .b-why-step::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--rgbB); transform: scaleX(0); transform-origin: left; transition: transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+      .b-why-step .b-why-num { transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1), color 300ms ease; display: inline-block; }
+      .b-why-step:hover { background-color: var(--sub); }
+      .b-why-step:hover::before { transform: scaleX(1); }
+      .b-why-step:hover .b-why-num { transform: translateX(4px); }
+    </style>
   </head>
-  <body class="bg-dark-bg">
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

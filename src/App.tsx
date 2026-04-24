@@ -4,40 +4,49 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // components
 import Footer from './components/common/Footer';
 import Header from './components/common/Header';
+import { ScrollToTop } from './components/ScrollToTop';
 
 // pages
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
 import Palette from './pages/Palette';
+import Pgp from './pages/Pgp';
 import Portfolio from './pages/Portfolio';
+import Read from './pages/Read';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
-        {/* Palette route - isolated without layout */}
+        {/* Standalone routes — render their own chrome (header/footer baked in). */}
+        <Route path="/" element={<Home />} />
+        <Route path="/read/:slug" element={<Read />} />
+        <Route path="/pgp" element={<Pgp />} />
         <Route path="/palette" element={<Palette />} />
 
-        {/* Main routes with layout */}
-        <Route path="/*" element={
-          <div className="min-h-screen bg-light-bg dark:bg-dark-bg text-light-text dark:text-white">
-            <Header />
-            <main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/portfolio" element={<Portfolio />} />
-                <Route path="/contact" element={<Contact />} />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
-        } />
+        {/* Legacy routes still wrapped in the pre-overhaul Header/Footer layout
+            until each page gets its own design pass. */}
+        <Route
+          path="/*"
+          element={(
+            <div className="min-h-screen bg-light-bg text-light-text">
+              <Header />
+              <main>
+                <Routes>
+                  <Route path="/about" element={<About />} />
+                  <Route path="/portfolio" element={<Portfolio />} />
+                  <Route path="/contact" element={<Contact />} />
+                </Routes>
+              </main>
+              <Footer />
+            </div>
+          )}
+        />
       </Routes>
     </Router>
   );
 }
 
 export default App;
-

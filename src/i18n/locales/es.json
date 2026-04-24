@@ -221,5 +221,117 @@
     },
     "copyright": "Copyright©",
     "allRightsReserved": "Todos los derechos reservados."
+  },
+  "directionB": {
+    "topbar": {
+      "volume": "Vol. X · 2026",
+      "nav": {
+        "now": "Ahora",
+        "work": "Trabajo",
+        "record": "Trayectoria",
+        "index": "Índice",
+        "writing": "Escritos",
+        "contact": "Contacto"
+      },
+      "available": "Disponible",
+      "themeToggle": { "toLight": "☀ CLARO", "toDark": "☾ OSCURO" },
+      "languageToggle": { "label": "Idioma" },
+      "pressKey": "pulsa"
+    },
+    "hero": {
+      "meta": "REGISTRO PERSONAL · N.º 010 · ABR 2026",
+      "intro": "Más de 10 años de software en producción. Full-stack por costumbre, mentalidad de seguridad por formación, consultor por la factura actual.",
+      "headline": {
+        "fullstack": "FULL-STACK",
+        "engineer": "INGENIERO.",
+        "engineerKicker": "(full-stack, remoto)",
+        "security": "SEGURIDAD,",
+        "shipped": "ENTREGADO."
+      },
+      "body": "Trabajo solo y en equipos pequeños, normalmente proyectos de 6–12 meses. Más cómodo cuando el problema es \"tenemos un sistema viejo que nadie quiere tocar\" o \"vamos a lanzar algo nuevo y los primeros seis meses no pueden ser un desastre.\"",
+      "operating": "Opero desde",
+      "operatingValue": "Medellín · GMT-5",
+      "remote": "remoto en toda América",
+      "writeMe": "ESCRÍBEME →",
+      "replies": "respondo en menos de 24h"
+    },
+    "portrait": {
+      "exhibit": "EXHIBICIÓN_01",
+      "type": "GATOS / 35mm",
+      "caption": "mis compañeros",
+      "subcaption": "[ 4 gatos, sin bugs ]"
+    },
+    "sections": {
+      "now": { "label": "AHORA.", "num": "01", "kicker": "Actualizado a mano, cada dos semanas más o menos. El resto del sitio es estático; esta parte se mueve." },
+      "work": { "label": "TRABAJO.", "num": "02", "kicker": "Tres tipos de servicio. Tarifa semanal, retainer trimestral o alcance cerrado — tú eliges." },
+      "record": { "label": "TRAYECTORIA.", "num": "03", "kicker": "Seis contratos, cuatro empresas, muchas ramas mergeadas en commits limpios." },
+      "index": { "label": "ÍNDICE.", "num": "04", "kicker": "Una selección de proyectos personales y de cliente. Casos detallados disponibles a petición." },
+      "writing": { "label": "ESCRITOS Y OSS.", "num": "05", "kicker": "Notas largas y repositorios públicos vivos. Lo que le mostraría a un reclutador, si me lo pide." },
+      "why": { "label": "POR QUÉ.", "num": "06", "kicker": "Cuatro razones honestas para sumarme a tu equipo o proyecto." },
+      "contact": "§ 07 · Contacto"
+    },
+    "now": {
+      "lastUpdatedLabel": "Última actualización",
+      "lastUpdatedDate": "2026-04-11",
+      "siversNote": "Esta página está inspirada en la \"now page\" de Derek Sivers. Si tu sitio web solo tiene tres cosas, esta debería ser una de ellas."
+    },
+    "projects": {
+      "openCase": "ver caso ↗",
+      "private": "privado",
+      "tagSuffix": "proyecto",
+      "category": { "personal": "PERSONAL", "client": "CLIENTE" }
+    },
+    "oss": {
+      "writingHeader": "— Escritos",
+      "ossHeader": "— Open source",
+      "loading": "cargando repositorios públicos…",
+      "errorPrefix": "API de GitHub no disponible",
+      "visitDirectly": "Visita",
+      "directly": "directamente.",
+      "empty": "Aún no hay repositorios públicos, sin forks ni archivados.",
+      "writingEmpty": "Los escritos volverán cuando conecte un CMS. Atento."
+    },
+    "contact": {
+      "headline1": "CUÉNTAME",
+      "headline2": "DE QUÉ SE TRATA.",
+      "email": "Correo",
+      "pgp": "PGP",
+      "affiliations": "Afiliaciones",
+      "elsewhere": "En otros lugares",
+      "availability": "Disponibilidad actual",
+      "book": "AGENDA 20 MIN →",
+      "whatsappLabel": "WhatsApp",
+      "footer": {
+        "copyright": "© 2026 JOSE RÍOS · REGISTRO PERSONAL",
+        "set": "EN ESPACIO MONO · SIN COOKIES",
+        "vol": "VOL. X, N.º 010"
+      }
+    },
+    "palette": {
+      "placeholder": "escribe para filtrar · ↑↓ para mover · ↵ para seleccionar · esc para cerrar",
+      "esc": "esc",
+      "noMatches": "sin resultados. prueba con \"email\", \"github\", \"ahora\".",
+      "footerLeft": "pulsa / en cualquier momento",
+      "footerRight": "{{count}} resultados",
+      "items": {
+        "jumpPrefix": "ir a ›",
+        "emailJorius": "escribir a Jose",
+        "openGithub": "abrir GitHub",
+        "downloadResume": "descargar CV",
+        "copyPgp": "copiar huella PGP",
+        "showPgp": "ver clave pública PGP",
+        "githubHint": "github.com/jorius",
+        "resumeHint": "pdf · 2026"
+      }
+    },
+    "read": {
+      "back": "← volver a la trayectoria",
+      "readingMeta": "§ LECTURA",
+      "lenSuffix": "lectura",
+      "placeholder": "Texto de relleno — pieza real próximamente",
+      "notFound": "NO ENCONTRADO.",
+      "notFoundBody1": "Ninguna entrada coincide con el slug",
+      "notFoundBody2": "Revisa el enlace o vuelve a la trayectoria."
+    }
   }
 }

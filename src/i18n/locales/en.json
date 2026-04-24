@@ -221,5 +221,117 @@
     },
     "copyright": "Copyright©",
     "allRightsReserved": "All Rights Reserved."
+  },
+  "directionB": {
+    "topbar": {
+      "volume": "Vol. X · 2026",
+      "nav": {
+        "now": "Now",
+        "work": "Work",
+        "record": "Record",
+        "index": "Index",
+        "writing": "Writing",
+        "contact": "Contact"
+      },
+      "available": "Available",
+      "themeToggle": { "toLight": "☀ LIGHT", "toDark": "☾ DARK" },
+      "languageToggle": { "label": "Language" },
+      "pressKey": "press"
+    },
+    "hero": {
+      "meta": "PERSONAL RECORD · NO. 010 · APR 2026",
+      "intro": "More than 10 years of production software. Full-stack by habit, security-minded by training, consultant by current invoice.",
+      "headline": {
+        "fullstack": "FULL-STACK",
+        "engineer": "ENGINEER.",
+        "engineerKicker": "(full-stack, remote)",
+        "security": "SECURITY,",
+        "shipped": "SHIPPED."
+      },
+      "body": "I work alone and in small teams, usually 6–12 month engagements. Strongest when the problem is \"we have an old system and nobody wants to touch it,\" or \"we're shipping something new and the first six months have to not be a mess.\"",
+      "operating": "Operating from",
+      "operatingValue": "Medellín · GMT-5",
+      "remote": "remote across the Americas",
+      "writeMe": "WRITE ME →",
+      "replies": "replies within 24h"
+    },
+    "portrait": {
+      "exhibit": "EXHIBIT_01",
+      "type": "CATS / 35mm",
+      "caption": "my co-workers",
+      "subcaption": "[ 4 cats, no bugs ]"
+    },
+    "sections": {
+      "now": { "label": "NOW.", "num": "01", "kicker": "Updated by hand, roughly every two weeks. The rest of the site is a static record; this part moves." },
+      "work": { "label": "WORK.", "num": "02", "kicker": "Three engagements I take. Weekly rate, quarterly retainer, or fixed scope — you decide." },
+      "record": { "label": "RECORD.", "num": "03", "kicker": "Six engagements, four companies, a lot of branches merged into tidy commits." },
+      "index": { "label": "INDEX.", "num": "04", "kicker": "A shortlist of personal and client projects. Case studies available on request." },
+      "writing": { "label": "WRITING & OSS.", "num": "05", "kicker": "Long-form notes and live public repositories. The things I'd point a hiring manager at, if asked." },
+      "why": { "label": "WHY.", "num": "06", "kicker": "Four honest reasons to bring me into your team or project." },
+      "contact": "§ 07 · Contact"
+    },
+    "now": {
+      "lastUpdatedLabel": "Last updated",
+      "lastUpdatedDate": "2026-04-11",
+      "siversNote": "This page is inspired by Derek Sivers's \"now page.\" If your website only has three things, this should be one of them."
+    },
+    "projects": {
+      "openCase": "open case ↗",
+      "private": "private",
+      "tagSuffix": "project",
+      "category": { "personal": "PERSONAL", "client": "CLIENT" }
+    },
+    "oss": {
+      "writingHeader": "— Writing",
+      "ossHeader": "— Open source",
+      "loading": "loading public repos…",
+      "errorPrefix": "GitHub API unavailable",
+      "visitDirectly": "Visit",
+      "directly": "directly.",
+      "empty": "No public, non-forked, non-archived repositories found yet.",
+      "writingEmpty": "Writing will return once a CMS is wired up. Stand by."
+    },
+    "contact": {
+      "headline1": "TELL ME",
+      "headline2": "ABOUT IT.",
+      "email": "Email",
+      "pgp": "PGP",
+      "affiliations": "Affiliations",
+      "elsewhere": "Elsewhere",
+      "availability": "Current availability",
+      "book": "BOOK 20 MIN →",
+      "whatsappLabel": "WhatsApp",
+      "footer": {
+        "copyright": "© 2026 JOSE RÍOS · PERSONAL RECORD",
+        "set": "SET IN SPACE MONO · NO COOKIES",
+        "vol": "VOL. X, NO. 010"
+      }
+    },
+    "palette": {
+      "placeholder": "type to filter · ↑↓ to move · ↵ to select · esc to close",
+      "esc": "esc",
+      "noMatches": "no matches. try \"email\", \"github\", \"now\".",
+      "footerLeft": "press / anywhere to reopen",
+      "footerRight": "{{count}} results",
+      "items": {
+        "jumpPrefix": "jump ›",
+        "emailJorius": "email Jose",
+        "openGithub": "open GitHub",
+        "downloadResume": "download résumé",
+        "copyPgp": "copy PGP fingerprint",
+        "showPgp": "show PGP public key",
+        "githubHint": "github.com/jorius",
+        "resumeHint": "pdf · 2026"
+      }
+    },
+    "read": {
+      "back": "← back to record",
+      "readingMeta": "§ READING",
+      "lenSuffix": "read",
+      "placeholder": "Placeholder copy — real piece coming soon",
+      "notFound": "NOT FOUND.",
+      "notFoundBody1": "No writing entry matches the slug",
+      "notFoundBody2": "Check the link or head back to the record."
+    }
   }
 }

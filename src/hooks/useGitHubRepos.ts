@@ -11,6 +11,9 @@ export interface GitHubRepo {
   homepage: string | null;
   topics: string[];
   private: boolean;
+  fork: boolean;
+  archived: boolean;
+  stargazers_count: number;
   lastCommitSha: string | null;
 }
 
