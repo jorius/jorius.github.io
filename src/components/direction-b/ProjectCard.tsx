@@ -4,16 +4,23 @@ import type { CSSProperties } from 'react';
 // contexts
 import type { ThemeTokens } from '../../contexts/ThemeContext';
 
-// data
-import type { ProjectEntry } from '../../data/jorius';
-
 // components
 import { Glitch } from '../primitives/Glitch';
 import { Reveal } from '../primitives/Reveal';
 import { StackChip } from './StackChip';
 
+export interface IndexProject {
+  id: string;
+  title: string;
+  description: string;
+  tech: string[];
+  github: string | null;
+  demo: string | null;
+  category: 'Personal' | 'Client';
+}
+
 interface ProjectCardProps {
-  p: ProjectEntry;
+  p: IndexProject;
   i: number;
   t: ThemeTokens;
 }
@@ -32,7 +39,7 @@ export const ProjectCard = ({ p, i, t }: ProjectCardProps): React.ReactElement =
     padding: 24,
     borderRight: !isLast ? `1px solid ${t.rule}` : 'none',
     borderBottom: `1px solid ${t.rule}`,
-    cursor: 'pointer',
+    cursor: p.github || p.demo ? 'pointer' : 'default',
     position: 'relative',
     '--sub': t.sub,
     '--ink': t.ink,
@@ -40,6 +47,7 @@ export const ProjectCard = ({ p, i, t }: ProjectCardProps): React.ReactElement =
     '--rule': t.rule,
     '--rgbB': t.rgbB,
   };
+  const externalUrl = p.demo ?? p.github;
   return (
     <Reveal delay={(i % 3) * 70} className="b-index-card" style={cardStyle}>
       <div
@@ -54,8 +62,20 @@ export const ProjectCard = ({ p, i, t }: ProjectCardProps): React.ReactElement =
         }}
       >
         <span>№ {String(i + 1).padStart(2, '0')}</span>
-        <span className="b-index-cta" style={{ color: t.ink, fontSize: 10 }}>open case ↗</span>
-        <span>{p.year}</span>
+        {externalUrl ? (
+          <a
+            href={externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="b-index-cta"
+            style={{ color: t.ink, fontSize: 10, textDecoration: 'none' }}
+          >
+            open case ↗
+          </a>
+        ) : (
+          <span className="b-index-cta" style={{ color: t.dim, fontSize: 10 }}>private</span>
+        )}
+        <span>{p.category.toUpperCase()}</span>
       </div>
       <div
         className="b-index-thumb"
@@ -73,7 +93,7 @@ export const ProjectCard = ({ p, i, t }: ProjectCardProps): React.ReactElement =
         }}
       >
         <span style={{ fontSize: 11, color: t.dim, position: 'relative', zIndex: 1 }}>
-          [ {p.tag} ]
+          [ {p.category.toLowerCase()} project ]
         </span>
         <span
           aria-hidden
@@ -90,9 +110,9 @@ export const ProjectCard = ({ p, i, t }: ProjectCardProps): React.ReactElement =
         <Glitch trigger="hover" strong>{p.title}</Glitch>
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, margin: '10px 0 12px 0' }}>
-        {p.stack.map((s) => <StackChip key={s} name={s} />)}
+        {p.tech.map((s) => <StackChip key={s} name={s} />)}
       </div>
-      <div style={{ fontSize: 13, color: t.ink, lineHeight: 1.55 }}>{p.body}</div>
+      <div style={{ fontSize: 13, color: t.ink, lineHeight: 1.55 }}>{p.description}</div>
     </Reveal>
   );
 };

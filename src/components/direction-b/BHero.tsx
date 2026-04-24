@@ -20,7 +20,7 @@ export const BHero = (): React.ReactElement => {
           <Scramble text="PERSONAL RECORD · NO. 010 · APR 2026" />
         </div>
         <div style={{ fontSize: 13, color: t.ink, maxWidth: 480, justifySelf: 'end', textAlign: 'right' }}>
-          Ten years of production software. Full-stack by habit, security-minded by training, consultant by current invoice.
+          More than 10 years of production software. Full-stack by habit, security-minded by training, consultant by current invoice.
         </div>
       </div>
 
@@ -50,7 +50,7 @@ export const BHero = (): React.ReactElement => {
         </div>
         <div>
           <div style={{ fontSize: 11, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Operating from</div>
-          <div style={{ fontSize: 15, color: t.ink, marginTop: 6 }}>Bogotá · GMT-5</div>
+          <div style={{ fontSize: 15, color: t.ink, marginTop: 6 }}>Medellín · GMT-5</div>
           <div style={{ fontSize: 13, color: t.dim, marginTop: 2 }}>remote across the Americas</div>
         </div>
         <div style={{ textAlign: 'right' }}>

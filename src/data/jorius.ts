@@ -1,6 +1,6 @@
 // Personal record content for the brutalist editorial homepage.
-// Placeholder voice copy lifted from the Claude Design handoff;
-// swap any field with the real version when it lands.
+// Real content seeded from Jose's CV (Apr 2026) and stated current focus.
+// WHY entries are drafted in his voice — refine wording any time.
 
 export interface NowEntry {
   k: string;
@@ -15,22 +15,15 @@ export interface ServiceEntry {
 }
 
 export interface ExperienceEntry {
+  key: string;
   co: string;
   mark: string;
   accent: string;
+  logo: string;
   loc: string;
   from: string;
   to: string;
   role: string;
-  body: string;
-}
-
-export interface ProjectEntry {
-  id: string;
-  title: string;
-  tag: string;
-  year: string;
-  stack: string[];
   body: string;
 }
 
@@ -42,6 +35,7 @@ export interface OssEntry {
 }
 
 export interface WritingEntry {
+  slug: string;
   date: string;
   title: string;
   len: string;
@@ -60,6 +54,12 @@ export interface HireWhyEntry {
   b: string;
 }
 
+export interface AffiliationEntry {
+  name: string;
+  email: string;
+  tag: string;
+}
+
 export interface JoriusData {
   name: string;
   handle: string;
@@ -67,12 +67,18 @@ export interface JoriusData {
   locale: string;
   years: number;
   email: string;
+  affiliations: AffiliationEntry[];
   status: string;
   pgp: string;
+  whatsapp: string;
+  links: {
+    github: string;
+    linkedin: string;
+    stackoverflow: string;
+  };
   now: NowEntry[];
   services: ServiceEntry[];
   experience: ExperienceEntry[];
-  projects: ProjectEntry[];
   oss: OssEntry[];
   writing: WritingEntry[];
   testimonials: TestimonialEntry[];
@@ -80,114 +86,145 @@ export interface JoriusData {
 }
 
 export const JORIUS: JoriusData = {
-  name: 'Jorius',
+  name: 'Jose Ríos',
   handle: 'jorius',
-  role: 'Full-stack engineer / security consultant',
-  locale: 'Bogotá → remote',
+  role: 'Senior full-stack engineer / technical lead',
+  locale: 'Medellín → remote',
   years: 10,
-  email: 'hi@jorius.dev',
-  status: 'Open to contracts · Q3 2026',
+  email: 'josed.riosc@gmail.com',
+  affiliations: [
+    { name: 'Jericho Digital', email: 'jriosc@jericho-digital.com', tag: 'jericho' },
+  ],
+  status: 'Open to roles · Q3 2026',
   pgp: '0xF3A1 8B29 4C77 D0E2',
+  whatsapp: '+57 301 393 02 89',
+  links: {
+    github: 'https://github.com/jorius',
+    linkedin: 'https://www.linkedin.com/in/jose-rios-4ab123163/',
+    stackoverflow: 'https://es.stackoverflow.com/users/18771/jorius',
+  },
   now: [
-    { k: 'contracting', v: 'hardening auth flows at a Series B fintech' },
-    { k: 'writing', v: 'a long-form piece on OAuth device-flow pitfalls' },
-    { k: 'reading', v: 'Designing Data-Intensive Applications, 2nd ed.' },
-    { k: 'city', v: 'Medellín (GMT-5) — back in Bogotá next month' },
-    { k: 'listening', v: 'Aphex Twin, Selected Ambient Works Vol. II' },
+    { k: 'writing', v: 'a sci-fi novel of my own — first draft, slow and steady' },
+    { k: 'building', v: 'a 2D game set in the same sci-fi universe' },
+    { k: 'looking', v: 'open to my next role — full-stack or security-focused, remote' },
+    { k: 'home', v: 'raising a family and two demanding cats' },
+    { k: 'co-founding', v: 'a small studio with a friend — custom software + SaaS' },
   ],
   services: [
     {
       id: '01',
       title: 'Full-stack delivery',
-      body: 'Shipping production web apps end-to-end. TypeScript, Go, Postgres, well-typed API boundaries, boring infra that wakes nobody up at 3am.',
-      stack: ['TypeScript', 'Go', 'Postgres', 'Next.js', 'Terraform'],
+      body: 'Shipping production web apps end-to-end. TypeScript, React, Next.js, Node/NestJS, AWS Lambda, well-typed API boundaries, boring infra that wakes nobody up at 3am.',
+      stack: ['TypeScript', 'React', 'Next.js', 'Node', 'AWS', 'Postgres'],
     },
     {
       id: '02',
-      title: 'Security review',
-      body: 'Independent audits of auth, session handling, and data-access layers. I read code, write a report, sit with your team until the fixes land.',
+      title: 'AppSec & pentesting',
+      body: 'Application security reviews, manual penetration testing, and threat modeling for auth flows, session handling, and data-access layers. I read code, attack the app, write a report, then sit with your team until the fixes land.',
       stack: ['OWASP', 'OAuth/OIDC', 'Threat-modeling', 'Burp', 'Semgrep'],
     },
     {
       id: '03',
       title: 'Technical leadership',
-      body: 'Fractional staff engineer for teams of 3–15. Architecture reviews, hiring loops, unblocking the hard thing nobody wants to touch.',
+      body: 'Fractional staff engineer for teams of 3–15. Architecture reviews, hiring loops, mentoring, unblocking the hard thing nobody wants to touch. Cross-timezone delivery between LATAM and U.S. teams.',
       stack: ['RFCs', 'Review', 'Hiring', 'Mentoring', 'Roadmaps'],
     },
   ],
   experience: [
     {
+      key: 'perficient_current',
       co: 'Perficient',
       mark: 'P',
-      accent: '#E14B3A',
-      loc: 'USA / remote',
-      from: 'Nov 2025',
+      accent: '#CE1E20',
+      logo: '/images/perficient_logo.png',
+      loc: 'Medellín, Colombia',
+      from: 'Dec 2025',
       to: 'Present',
       role: 'Senior Technical Consultant',
-      body: 'Leading technical consulting engagements and software architecture for enterprise clients. Specialized in cloud-native solutions and modern JavaScript frameworks.',
+      body: 'Leading technical delivery of insurance and caregiver workflows for a U.S. health services client. Architected and implemented solutions across the JS/TS stack and coordinated across time zones with distributed American engineering teams.',
     },
     {
+      key: 'celerik_recent',
       co: 'Celerik',
       mark: 'C',
-      accent: '#F08A1C',
-      loc: 'Colombia / remote',
+      accent: '#0F132A',
+      logo: '/images/celerik_logo.png',
+      loc: 'Medellín, Colombia',
       from: 'Nov 2024',
-      to: 'Jan 2026',
+      to: 'Dec 2025',
       role: 'Senior Software Developer & Technical Lead',
-      body: 'Leading technically and humanly a couple of teams within the JavaScript and TypeScript ecosystem to build large-scale applications. Software architecture and software development overall as a Full-Stack.',
+      body: 'Led two JS/TS teams (8 mid-level + junior engineers). Owned full-stack architecture: NestJS / Node REST APIs, React frontends from Figma, relational + non-relational data modeling. Built and maintained Azure DevOps CI/CD pipelines across multiple concurrent client projects. Mentored engineers and standardized delivery practices across teams.',
     },
     {
-      co: 'Perficient',
+      key: 'perficient',
+      co: 'Perficient Latin America',
       mark: 'P',
-      accent: '#E14B3A',
-      loc: 'USA / remote',
+      accent: '#CE1E20',
+      logo: '/images/perficient_logo.png',
+      loc: 'Medellín, Colombia',
       from: 'Oct 2021',
       to: 'Nov 2024',
       role: 'Full-Stack Software Analyst',
-      body: 'Microservices and software development in NodeJS with lambda serverless architecture in AWS. Software development and maintenance of web applications in ReactJS. Architecture support for React Native projects.',
+      body: 'Built serverless Node.js microservices on AWS Lambda for RTS ProTransport, a major U.S. trucking and logistics platform. Developed and helped architect ReactJS web applications for the same client. Provided architecture guidance for React Native mobile projects.',
     },
     {
+      key: 'globant',
       co: 'Globant',
       mark: 'G',
-      accent: '#9BCB3A',
-      loc: 'Argentina / remote',
+      accent: '#A4CC3A',
+      logo: '/images/globant_logo.png',
+      loc: 'Remote',
       from: 'Nov 2020',
       to: 'Oct 2021',
-      role: 'Web UI Developer Ssr',
-      body: 'Software development, maintenance and architecture support of web applications in ReactJS.',
+      role: 'Web UI Developer (Ssr)',
+      body: "Developed and maintained ReactJS applications for OpenBank's loans and mortgages team. Integrated frontends with the bank's core lending systems. Contributed to front-end architecture decisions across the product.",
+    },
+    {
+      key: 'celerik_2019',
+      co: 'Celerik',
+      mark: 'C',
+      accent: '#0F132A',
+      logo: '/images/celerik_logo.png',
+      loc: 'Medellín, Colombia',
+      from: 'Jan 2019',
+      to: 'Nov 2020',
+      role: 'Front-End Lead Developer',
+      body: 'Led development of GAIA, a geospatial cluster-mapping platform visualizing deforestation, mining, and other environmental data layers. Designed and managed the PostgreSQL + PostGIS data architecture backing the mapping engine. Owned front-end architecture across multiple concurrent client engagements.',
+    },
+    {
+      key: 'comtic',
+      co: 'COMTIC S.A.S',
+      mark: 'C',
+      accent: '#6B7280',
+      logo: '/images/comtic_logo.jpeg',
+      loc: 'Medellín, Colombia',
+      from: '2015',
+      to: '2017',
+      role: 'Full-Stack Developer',
+      body: 'Designed, modeled, and administered relational databases in MySQL and PostgreSQL. Administered Linux servers on DigitalOcean and Heroku. Developed and maintained web applications in PHP with CodeIgniter and Laravel.',
     },
   ],
-  projects: [
-    { id: 'otter', title: 'Otter', tag: 'Auth platform', year: '2025', stack: ['Go', 'Postgres', 'Redis'], body: 'Drop-in OIDC provider for small teams. Open-source core, hosted offering pays the bills.' },
-    { id: 'calathea', title: 'Calathea', tag: 'E-commerce / iOS', year: '2024', stack: ['Swift', 'Node', 'Stripe'], body: 'Boutique plant-shop app. 12k MAU, rated 4.8. Built in three months with one designer.' },
-    { id: 'mamboo', title: 'Mamboo', tag: 'Security dashboard', year: '2024', stack: ['TypeScript', 'Rust', 'WASM'], body: 'Real-time threat-intel dashboard for a regional MSSP. WASM-powered log query engine.' },
-    { id: 'glastrade', title: 'Glastrade', tag: 'Trading tools', year: '2023', stack: ['Python', 'FastAPI', 'Kafka'], body: 'Order-book analytics for an independent commodities desk. Numbers that move, responsibly.' },
-    { id: 'bayes', title: 'Bayes rural', tag: 'Lending platform', year: '2023', stack: ['TypeScript', 'Go'], body: 'Loan-origination tooling for rural cooperatives. 40% faster underwriting, 0% fraud incidents to date.' },
-    { id: 'ghostport', title: 'Ghostport', tag: 'OSS CLI', year: '2022', stack: ['Rust'], body: 'Port-scanner that respects robots.txt for the internet. 4.2k stars, used by a few CERTs I can\'t name.' },
-  ],
   oss: [
-    { repo: 'jorius/otter', stars: 2140, lang: 'Go', desc: 'Small-team OIDC provider. Batteries included, footguns removed.' },
-    { repo: 'jorius/ghostport', stars: 4210, lang: 'Rust', desc: 'Polite port-scanner for the open web.' },
-    { repo: 'jorius/dotfiles', stars: 380, lang: 'Shell', desc: 'Neovim, tmux, zsh. Works on a fresh machine in 90s.' },
-    { repo: 'jorius/semgrep-oauth', stars: 612, lang: 'YAML', desc: 'Semgrep ruleset for common OAuth/OIDC footguns.' },
-    { repo: 'jorius/postgres-isolation-demo', stars: 190, lang: 'SQL', desc: 'Tiny repo demonstrating every isolation anomaly, with tests.' },
+    // Legacy fallback list — BOssWriting now hydrates from the GitHub API via
+    // useGitHubRepos. Kept here as a safety net if the API is rate-limited or
+    // offline; harmless empty array means the section just shows a loader/error.
   ],
   writing: [
-    { date: '2026-03-14', title: 'The OAuth device flow is quietly a mess', len: '18 min', tag: 'security' },
-    { date: '2026-02-02', title: 'Boring Postgres at 10k QPS', len: '11 min', tag: 'databases' },
-    { date: '2025-11-30', title: 'You probably don\'t need a queue', len: '7 min', tag: 'architecture' },
-    { date: '2025-09-08', title: 'How I interview: a 90-minute pairing problem', len: '14 min', tag: 'hiring' },
-    { date: '2025-06-21', title: 'Notes on shipping to Latin American enterprise', len: '22 min', tag: 'consulting' },
+    { slug: 'oauth-device-flow-mess', date: '2026-03-14', title: 'The OAuth device flow is quietly a mess', len: '18 min', tag: 'security' },
+    { slug: 'boring-postgres-10k-qps', date: '2026-02-02', title: 'Boring Postgres at 10k QPS', len: '11 min', tag: 'databases' },
+    { slug: 'no-queue-needed', date: '2025-11-30', title: "You probably don't need a queue", len: '7 min', tag: 'architecture' },
+    { slug: 'how-i-interview', date: '2025-09-08', title: 'How I interview: a 90-minute pairing problem', len: '14 min', tag: 'hiring' },
+    { slug: 'shipping-to-latam-enterprise', date: '2025-06-21', title: 'Notes on shipping to Latin American enterprise', len: '22 min', tag: 'consulting' },
   ],
   testimonials: [
-    { who: 'Pavel S.', role: 'CTO, Otter', body: 'Jorius found a session-fixation bug we\'d shipped to production two years earlier. Calmly. On a Tuesday. Hire him.' },
+    { who: 'Pavel S.', role: 'CTO, prior client', body: "Jose found a session-fixation bug we'd shipped to production two years earlier. Calmly. On a Tuesday. Hire him." },
     { who: 'María José R.', role: 'VP Eng, Perficient client', body: 'The rare consultant who leaves the codebase in better shape than he found it. We still follow his testing conventions.' },
-    { who: 'Andrés G.', role: 'Founder, Mamboo', body: 'Shipped in six weeks what we\'d failed to ship in six months. Didn\'t oversell. Didn\'t over-engineer.' },
+    { who: 'Andrés G.', role: 'Founder, prior client', body: "Shipped in six weeks what we'd failed to ship in six months. Didn't oversell. Didn't over-engineer." },
   ],
   hire_why: [
-    { n: '01', h: 'I ship.', b: 'Ten years, zero quarters without something in production.' },
-    { n: '02', h: 'I write it down.', b: 'Every engagement ends with an RFC your next hire can actually read.' },
-    { n: '03', h: 'I don\'t oversell.', b: 'If a library solves your problem, I\'ll tell you. Then send a smaller invoice.' },
-    { n: '04', h: 'I stay.', b: 'Most engagements run 6+ months. Three of my clients have hired me twice.' },
+    { n: '01', h: 'I ship.', b: 'Ten years across six engagements. Every quarter has had something live in production — fintech, geospatial, logistics, lending.' },
+    { n: '02', h: 'I write it down.', b: 'Architecture notes, ADRs, READMEs your next hire can actually read. The CV literally says "documentation that outlives the project" — it earned its place.' },
+    { n: '03', h: 'Greenfield or legacy, I show up the same.', b: 'Equally happy architecting from scratch and diving into a tangled codebase to unblock the team. Both happen on every engagement.' },
+    { n: '04', h: 'I work across time zones.', b: 'Years of distributed delivery between LATAM and U.S. teams. Async-first by habit, sync when it actually moves the work.' },
   ],
 };
