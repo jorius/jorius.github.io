@@ -1,0 +1,44 @@
+[
+  {
+    "key": "perficient_current",
+    "company": "Perficient",
+    "period": "Nov 2025 - Present",
+    "logo": "/images/perficient_logo.png",
+    "color": "#CE1E20"
+  },
+  {
+    "key": "celerik_recent",
+    "company": "Celerik",
+    "period": "Nov 2024 - Jan 2026",
+    "logo": "/images/celerik_logo.png",
+    "color": "#0F132A"
+  },
+  {
+    "key": "perficient",
+    "company": "Perficient",
+    "period": "Oct 2021 - Nov 2024",
+    "logo": "/images/perficient_logo.png",
+    "color": "#CE1E20"
+  },
+  {
+    "key": "globant",
+    "company": "Globant",
+    "period": "Nov 2020 - Oct 2021",
+    "logo": "/images/globant_logo.png",
+    "color": "#A4CC3A"
+  },
+  {
+    "key": "celerik_2019",
+    "company": "Celerik",
+    "period": "Jan 2019 - Nov 2020",
+    "logo": "/images/celerik_logo.png",
+    "color": "#0F132A"
+  },
+  {
+    "key": "comtic",
+    "company": "COMTIC",
+    "period": "Nov 2015 - Nov 2017",
+    "logo": "/images/comtic_logo.jpeg",
+    "color": "#6B7280"
+  }
+]

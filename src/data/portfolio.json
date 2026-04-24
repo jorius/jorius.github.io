@@ -1,0 +1,54 @@
+{
+  "personalProjects": [
+    {
+      "id": 1,
+      "title": "Project Alpha",
+      "description": "A comprehensive full-stack web application featuring real-time data processing and user authentication.",
+      "tech": ["React", "TypeScript", "Node.js", "MongoDB"],
+      "github": "https://github.com/jorius/project-alpha",
+      "demo": null
+    },
+    {
+      "id": 2,
+      "title": "Security Scanner",
+      "description": "Automated security vulnerability scanner for web applications with detailed reporting.",
+      "tech": ["Python", "Flask", "SQLite", "Selenium"],
+      "github": "https://github.com/jorius/security-scanner",
+      "demo": null
+    },
+    {
+      "id": 3,
+      "title": "DevOps Pipeline",
+      "description": "Complete CI/CD pipeline with automated testing, deployment, and infrastructure as code.",
+      "tech": ["Docker", "Kubernetes", "Terraform", "GitHub Actions"],
+      "github": "https://github.com/jorius/devops-pipeline",
+      "demo": null
+    },
+    {
+      "id": 4,
+      "title": "Real-time Analytics",
+      "description": "Real-time data analytics dashboard with streaming data processing and visualization.",
+      "tech": ["React", "D3.js", "Apache Kafka", "WebSocket"],
+      "github": "https://github.com/jorius/analytics-dashboard",
+      "demo": null
+    }
+  ],
+  "clientProjects": [
+    {
+      "id": 1,
+      "title": "Calathea",
+      "description": "E-commerce platform for plant enthusiasts with real-time inventory and AI-powered recommendations.",
+      "tech": ["React", "Node.js", "MongoDB", "AI"],
+      "github": null,
+      "demo": null
+    },
+    {
+      "id": 2,
+      "title": "Modern App",
+      "description": "A cutting-edge mobile application featuring seamless user experience and innovative features.",
+      "tech": ["React Native", "Firebase", "TypeScript"],
+      "github": null,
+      "demo": null
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Fawzi Sayed",
+    "role": "Ui Ux Designer",
+    "rating": 5.0,
+    "comment": "consectetur adipiscing elit. Sed congue interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas lobortis.Sed lobortis orci elementum egestas lobortis.Sed lobortis orci elementum egestas lobortis.",
+    "avatar": "/avatar1.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Sarah Johnson",
+    "role": "Product Manager",
+    "rating": 5.0,
+    "comment": "consectetur adipiscing elit. Sed congue interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas lobortis.Sed lobortis orci elementum egestas lobortis.Sed lobortis orci elementum egestas lobortis.",
+    "avatar": "/avatar2.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Mike Chen",
+    "role": "Tech Lead",
+    "rating": 5.0,
+    "comment": "consectetur adipiscing elit. Sed congue interdum ligula a dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis orci elementum egestas lobortis.Sed lobortis orci elementum egestas lobortis.Sed lobortis orci elementum egestas lobortis.",
+    "avatar": "/avatar3.jpg"
+  }
+]

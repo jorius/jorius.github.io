@@ -1,0 +1,225 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hello!",
+    "title": "Software Developer and Cybersecurity Analyst",
+    "testimonial": {
+      "quote": "Jose turned my startup's rough idea into a robust, scalable platform. His approach was methodical and his delivery was on point!",
+      "author": "Rachel Lee",
+      "role": "Founder of StartupXYZ"
+    },
+    "stats": {
+      "title": "Quick Stats",
+      "status": "Status:",
+      "statusValue": "Available for consulting",
+      "location": "Location:",
+      "locationValue": "Colombia, Latin America",
+      "focus": "Focus:",
+      "focusValue": "FullStack Development & Cybersecurity Analyst"
+    },
+    "experience": {
+      "years": "10+",
+      "label": "Years of Experience"
+    },
+    "cta": {
+      "portfolio": "See My Portfolio",
+      "email": "Email Me"
+    }
+  },
+  "services": {
+    "title": "Services",
+    "description": "Leveraging 10+ years of experience in software development, cloud architecture, and cybersecurity to deliver robust, scalable solutions for businesses worldwide.",
+    "items": {
+      "fullstack": "Full-Stack Development",
+      "frontend": "Frontend with React",
+      "backend": "Backend with Node/NestJS",
+      "consulting": "Software Consulting",
+      "cybersecurity": "Cybersecurity Analysis"
+    }
+  },
+  "experience": {
+    "title": {
+      "part1": "My ",
+      "part2": "Work Experience"
+    },
+    "perficient_current": {
+      "company": "Perficient",
+      "period": "Nov 2025 - Present",
+      "role": "Senior Technical Consultant",
+      "description": "Leading technical consulting engagements and software architecture for enterprise clients. Specialized in cloud-native solutions and modern JavaScript frameworks."
+    },
+    "celerik_recent": {
+      "company": "Celerik",
+      "period": "Nov 2024 - Jan 2026",
+      "role": "Senior Software Developer & Technical Lead",
+      "description": "Leading technically and humanly a couple of teams within the JavaScript and TypeScript ecosystem to build large-scale applications. Software architecture and software development overall as a Full-Stack."
+    },
+    "perficient": {
+      "company": "Perficient",
+      "period": "Oct 2021 - Nov 2024",
+      "role": "Full-Stack Software Analyst",
+      "description": "Microservices and software development in NodeJS with lambda serverless architecture in AWS. Software development and maintenance of web applications in ReactJS. Architecture support for React Native projects."
+    },
+    "globant": {
+      "company": "Globant",
+      "period": "Nov 2020 - Oct 2021",
+      "role": "Web UI Developer Ssr",
+      "description": "Software development, maintenance and architecture support of web applications in ReactJS."
+    },
+    "celerik_2019": {
+      "company": "Celerik",
+      "period": "Jan 2019 - Nov 2020",
+      "role": "Front End Lead Developer",
+      "description": "Software development, maintenance and architecture of web applications in ReactJS."
+    },
+    "comtic": {
+      "company": "COMTIC",
+      "period": "Nov 2015 - Nov 2017",
+      "role": "Full-Stack Developer",
+      "description": "Design, modeling and database management and administration in MySQL and PostgreSQL. Linux server administration in Digital Ocean and Heroku. Software development and maintenance of web applications in PHP with CodeIgniter and Laravel."
+    }
+  },
+  "whyHire": {
+    "title": "Why Hire Me",
+    "subtitle": "Unique Value",
+    "description": "With over 10 years of experience, I bring a proven track record of delivering high-quality software solutions. I combine technical expertise with strong communication skills to ensure project success.",
+    "stats": {
+      "projects": {
+        "value": "100+",
+        "label": "Projects Completed"
+      },
+      "clients": {
+        "value": "50+",
+        "label": "Happy Clients"
+      },
+      "awards": {
+        "value": "15",
+        "label": "Awards Won"
+      }
+    }
+  },
+  "portfolio": {
+    "title": "Featured Projects",
+    "categories": {
+      "all": "All",
+      "web": "Web",
+      "mobile": "Mobile",
+      "design": "Design"
+    },
+    "projects": {
+      "calathea": {
+        "title": "Calathea",
+        "description": "A beautiful e-commerce platform for plant enthusiasts with real-time inventory and AI-powered recommendations.",
+        "tags": ["React", "Node.js", "MongoDB", "AI"]
+      },
+      "modernApp": {
+        "title": "Modern App",
+        "description": "A cutting-edge mobile application featuring seamless user experience and innovative features.",
+        "tags": ["React Native", "Firebase", "TypeScript"]
+      }
+    }
+  },
+  "testimonials": {
+    "title": "What Clients Say",
+    "items": {
+      "client1": {
+        "quote": "Jose's technical expertise and professionalism exceeded all expectations. He delivered a complex project on time and within budget.",
+        "author": "Sarah Johnson",
+        "role": "CTO, TechCorp"
+      },
+      "client2": {
+        "quote": "Working with Jose was a game-changer for our startup. His insights and execution were invaluable.",
+        "author": "Michael Chen",
+        "role": "CEO, InnovateCo"
+      },
+      "client3": {
+        "quote": "Jose transformed our legacy system into a modern, scalable platform. His expertise is unmatched.",
+        "author": "Emily Rodriguez",
+        "role": "VP Engineering, DataFlow"
+      }
+    }
+  },
+  "blog": {
+    "title": "Latest Blog Posts",
+    "posts": {
+      "post1": {
+        "title": "Building Scalable React Applications",
+        "excerpt": "Learn the best practices for creating maintainable and performant React applications.",
+        "date": "March 15, 2024",
+        "readTime": "5 min read"
+      },
+      "post2": {
+        "title": "Microservices Architecture Patterns",
+        "excerpt": "Explore common patterns and anti-patterns in microservices architecture.",
+        "date": "March 10, 2024",
+        "readTime": "8 min read"
+      },
+      "post3": {
+        "title": "TypeScript Best Practices",
+        "excerpt": "Maximize type safety and developer productivity with these TypeScript tips.",
+        "date": "March 5, 2024",
+        "readTime": "6 min read"
+      }
+    }
+  },
+  "contactForm": {
+    "title": "Let's Work Together",
+    "subtitle": "Get In Touch",
+    "description": "Have a project in mind? Let's discuss how I can help bring your ideas to life.",
+    "form": {
+      "email": "Your Email",
+      "placeholder": "Enter your email",
+      "button": "Get Started"
+    }
+  },
+  "skills": {
+    "banner": {
+      "items": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "AWS",
+        "Docker",
+        "Kubernetes",
+        "GraphQL",
+        "MongoDB",
+        "PostgreSQL",
+        "Redis"
+      ]
+    }
+  },
+  "footer": {
+    "navigation": {
+      "title": "Navigation",
+      "home": "Home",
+      "about": "About",
+      "services": "Services",
+      "portfolio": "Portfolio",
+      "blog": "Blog",
+      "contact": "Contact"
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "josed.riosc@gmail.com",
+      "phone": "+1 (555) 123-4567",
+      "location": "Available Worldwide"
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Subscribe to get the latest updates and insights delivered to your inbox.",
+      "placeholder": "Enter your email",
+      "button": "Subscribe"
+    },
+    "social": {
+      "title": "Follow Me"
+    },
+    "copyright": "Copyright©",
+    "allRightsReserved": "All Rights Reserved."
+  }
+}
