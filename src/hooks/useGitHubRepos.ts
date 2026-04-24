@@ -20,16 +20,15 @@ interface UseGitHubReposResult {
   error: string | null;
 }
 
-const fetchLastCommitSha = async (fullName: string, token: string): Promise<string | null> => {
+// No Authorization header anywhere in this file: the hook ships to a
+// static GitHub Pages site, so any token would leak to every visitor.
+// Trade-off: GitHub limits unauthenticated requests to 60/hr per visitor IP,
+// and only public repositories are returned.
+const fetchLastCommitSha = async (fullName: string): Promise<string | null> => {
   try {
     const response = await fetch(
       `https://api.github.com/repos/${fullName}/commits?per_page=1`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/vnd.github.v3+json',
-        },
-      }
+      { headers: { Accept: 'application/vnd.github.v3+json' } },
     );
     if (!response.ok) return null;
     const [commit] = await response.json();
@@ -47,16 +46,14 @@ const useGitHubRepos = (): UseGitHubReposResult => {
   useEffect(() => {
     const fetchRepos = async () => {
       try {
-        const token = import.meta.env.VITE_GITHUB_TOKEN;
+        const username = import.meta.env.VITE_GITHUB_USERNAME;
+        if (!username) {
+          throw new Error('VITE_GITHUB_USERNAME is not configured');
+        }
 
         const response = await fetch(
-          'https://api.github.com/user/repos?type=all&sort=updated&per_page=100',
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              Accept: 'application/vnd.github.v3+json',
-            },
-          }
+          `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`,
+          { headers: { Accept: 'application/vnd.github.v3+json' } },
         );
 
         if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
@@ -64,7 +61,7 @@ const useGitHubRepos = (): UseGitHubReposResult => {
         const data: Omit<GitHubRepo, 'lastCommitSha'>[] = await response.json();
 
         const commitShas = await Promise.all(
-          data.map((repo) => fetchLastCommitSha(repo.full_name, token))
+          data.map((repo) => fetchLastCommitSha(repo.full_name)),
         );
 
         setRepos(data.map((repo, i) => ({ ...repo, lastCommitSha: commitShas[i] })));
