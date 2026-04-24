@@ -8,6 +8,13 @@ import { JORIUS } from '../../data/jorius';
 import { Glitch } from '../primitives/Glitch';
 import { TypedCaret } from '../primitives/TypedCaret';
 
+// Strip the protocol and trailing slash for cleaner display.
+const displayUrl = (url: string): string =>
+  url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+
+const WHATSAPP_NUMBER_DISPLAY = JORIUS.whatsapp;
+const WHATSAPP_HREF = `https://wa.me/${JORIUS.whatsapp.replace(/[^0-9]/g, '')}`;
+
 export const BContact = (): React.ReactElement => {
   const { t } = useBTheme();
   return (
@@ -40,6 +47,7 @@ export const BContact = (): React.ReactElement => {
         <Glitch strong period={3200}>ABOUT IT.</Glitch>
         <TypedCaret />
       </h2>
+
       <div
         style={{
           display: 'grid',
@@ -50,6 +58,7 @@ export const BContact = (): React.ReactElement => {
           borderTop: `1px solid ${t.rule}`,
         }}
       >
+        {/* EMAIL column — primary mail + PGP, then any affiliations */}
         <div>
           <div style={{ fontSize: 11, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Email</div>
           <a
@@ -59,36 +68,125 @@ export const BContact = (): React.ReactElement => {
             <Glitch trigger="hover">{JORIUS.email}</Glitch>
           </a>
           <div style={{ fontSize: 12, color: t.dim, marginTop: 4 }}>PGP {JORIUS.pgp}</div>
+
+          {JORIUS.affiliations.length > 0 ? (
+            <div style={{ marginTop: 18, paddingTop: 14, borderTop: `1px dashed ${t.sub}` }}>
+              <div style={{ fontSize: 10, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.14em', marginBottom: 6 }}>
+                Affiliations
+              </div>
+              {JORIUS.affiliations.map((a) => (
+                <div key={a.email} style={{ marginTop: 4 }}>
+                  <a
+                    href={`mailto:${a.email}`}
+                    style={{ fontSize: 13, color: t.ink, textDecoration: 'none' }}
+                  >
+                    <Glitch trigger="hover">{a.email}</Glitch>
+                  </a>
+                  <span
+                    style={{
+                      marginLeft: 8,
+                      fontSize: 9,
+                      color: t.dim,
+                      letterSpacing: '0.14em',
+                      textTransform: 'uppercase',
+                      border: `1px solid ${t.sub}`,
+                      padding: '1px 6px',
+                    }}
+                  >
+                    [ {a.tag} ]
+                  </span>
+                  <div style={{ fontSize: 11, color: t.dim, marginTop: 2 }}>{a.name}</div>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
+
+        {/* ELSEWHERE column — clickable links */}
         <div>
           <div style={{ fontSize: 11, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Elsewhere</div>
-          <div style={{ fontSize: 15, color: t.ink, marginTop: 6, lineHeight: 1.6 }}>
-            github.com/jorius
-            <br />
-            linkedin.com/in/jorius
-            <br />
-            keybase.io/jorius
+          <div style={{ fontSize: 15, color: t.ink, marginTop: 6, lineHeight: 1.7 }}>
+            <a
+              href={JORIUS.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: t.ink, textDecoration: 'none', display: 'block' }}
+            >
+              <Glitch trigger="hover">{displayUrl(JORIUS.links.github)}</Glitch>
+            </a>
+            <a
+              href={JORIUS.links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: t.ink, textDecoration: 'none', display: 'block' }}
+            >
+              <Glitch trigger="hover">{displayUrl(JORIUS.links.linkedin)}</Glitch>
+            </a>
+            <a
+              href={JORIUS.links.stackoverflow}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: t.ink, textDecoration: 'none', display: 'block' }}
+            >
+              <Glitch trigger="hover">{displayUrl(JORIUS.links.stackoverflow)}</Glitch>
+            </a>
           </div>
         </div>
+
+        {/* AVAILABILITY column — status, WhatsApp + booking buttons */}
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontSize: 11, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Current availability</div>
           <div style={{ fontSize: 18, color: t.ink, marginTop: 6 }}>{JORIUS.status}</div>
-          <a
-            href="https://cal.com/jorius"
-            style={{
-              display: 'inline-block',
-              marginTop: 16,
-              background: t.ink,
-              color: t.paper,
-              padding: '12px 18px',
-              fontSize: 13,
-              textDecoration: 'none',
-            }}
-          >
-            <Glitch trigger="hover">BOOK 20 MIN →</Glitch>
-          </a>
+
+          <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 16, flexWrap: 'wrap' }}>
+            <a
+              href={WHATSAPP_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                background: 'transparent',
+                color: t.ink,
+                border: `1px solid ${t.rule}`,
+                padding: '11px 14px',
+                fontSize: 12,
+                textDecoration: 'none',
+                letterSpacing: '0.04em',
+              }}
+            >
+              <span
+                aria-hidden
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  background: '#25D366',
+                  boxShadow: '0 0 6px rgba(37, 211, 102, 0.7)',
+                }}
+              />
+              <Glitch trigger="hover">WHATSAPP {WHATSAPP_NUMBER_DISPLAY}</Glitch>
+            </a>
+            <a
+              href="https://cal.com/jorius"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-block',
+                background: t.ink,
+                color: t.paper,
+                padding: '12px 18px',
+                fontSize: 13,
+                textDecoration: 'none',
+              }}
+            >
+              <Glitch trigger="hover">BOOK 20 MIN →</Glitch>
+            </a>
+          </div>
         </div>
       </div>
+
       <div
         style={{
           marginTop: 60,
@@ -98,9 +196,11 @@ export const BContact = (): React.ReactElement => {
           justifyContent: 'space-between',
           fontSize: 11,
           color: t.dim,
+          flexWrap: 'wrap',
+          gap: 12,
         }}
       >
-        <span>© 2026 JORIUS · PERSONAL RECORD</span>
+        <span>© 2026 JOSE RÍOS · PERSONAL RECORD</span>
         <span>SET IN SPACE MONO · NO COOKIES</span>
         <span>VOL. X, NO. 010</span>
       </div>
