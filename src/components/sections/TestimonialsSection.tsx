@@ -2,7 +2,18 @@
 import { useTranslation } from 'react-i18next';
 
 // data
-import testimonials from '../../data/testimonials.json';
+import testimonialsData from '../../data/testimonials.json';
+
+interface Testimonial {
+  id: number;
+  name: string;
+  role: string;
+  rating: number;
+  comment: string;
+  avatar: string;
+}
+
+const testimonials: Testimonial[] = testimonialsData as Testimonial[];
 
 const TestimonialsSection = () => {
   const { t } = useTranslation();
