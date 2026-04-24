@@ -69,7 +69,12 @@ export const BContact = (): React.ReactElement => {
           >
             <Glitch trigger="hover">{JORIUS.email}</Glitch>
           </a>
-          <div style={{ fontSize: 12, color: t.dim, marginTop: 4 }}>PGP {JORIUS.pgp}</div>
+          <div style={{ fontSize: 11, color: t.dim, marginTop: 6, fontFamily: 'inherit', letterSpacing: '0.04em' }}>
+            PGP {JORIUS.pgp.algo} · {JORIUS.pgp.keyId}
+            <div style={{ fontSize: 10, color: t.dim, opacity: 0.75, marginTop: 2 }}>
+              {JORIUS.pgp.fingerprint}
+            </div>
+          </div>
 
           {JORIUS.affiliations.length > 0 ? (
             <div style={{ marginTop: 18, paddingTop: 14, borderTop: `1px dashed ${t.sub}` }}>

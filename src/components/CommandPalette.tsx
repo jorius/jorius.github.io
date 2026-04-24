@@ -75,7 +75,7 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
     all.push({ kind: 'cmd', label: 'email Jorius', target: `mailto:${JORIUS.email}`, hint: JORIUS.email, ext: true });
     all.push({ kind: 'cmd', label: 'open GitHub', target: 'https://github.com/jorius', hint: 'github.com/jorius', ext: true });
     all.push({ kind: 'cmd', label: 'download résumé', target: '#', hint: 'pdf · 2026', ext: false });
-    all.push({ kind: 'cmd', label: 'copy PGP', target: 'copy:pgp', hint: JORIUS.pgp });
+    all.push({ kind: 'cmd', label: 'copy PGP fingerprint', target: 'copy:pgp', hint: JORIUS.pgp.keyId });
     const f = q.trim().toLowerCase();
     return f ? all.filter((i) => i.label.toLowerCase().includes(f) || i.hint.toLowerCase().includes(f)) : all;
   }, [q, sections]);
@@ -86,7 +86,7 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
       const el = document.querySelector(`[data-jump="${it.target}"]`);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else if (it.target === 'copy:pgp') {
-      if (navigator.clipboard) navigator.clipboard.writeText(JORIUS.pgp);
+      if (navigator.clipboard) navigator.clipboard.writeText(JORIUS.pgp.fingerprint);
     } else if (it.ext) {
       window.open(it.target, '_blank', 'noopener');
     }

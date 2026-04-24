@@ -69,7 +69,11 @@ export interface JoriusData {
   email: string;
   affiliations: AffiliationEntry[];
   status: string;
-  pgp: string;
+  pgp: {
+    fingerprint: string;
+    keyId: string;
+    algo: string;
+  };
   whatsapp: string;
   links: {
     github: string;
@@ -96,7 +100,11 @@ export const JORIUS: JoriusData = {
     { name: 'Jericho Digital', email: 'jriosc@jericho-digital.com', tag: 'jericho' },
   ],
   status: 'Open to roles · Q3 2026',
-  pgp: '0xF3A1 8B29 4C77 D0E2',
+  pgp: {
+    fingerprint: '5C63 48A7 862E 4138 372F  28CC 3656 0282 0FC1 B86C',
+    keyId: '0x365602820FC1B86C',
+    algo: 'ed25519',
+  },
   whatsapp: '+57 301 393 02 89',
   links: {
     github: 'https://github.com/jorius',
@@ -107,7 +115,7 @@ export const JORIUS: JoriusData = {
     { k: 'writing', v: 'a sci-fi novel of my own — first draft, slow and steady' },
     { k: 'building', v: 'a 2D game set in the same sci-fi universe' },
     { k: 'looking', v: 'open to my next role — full-stack or security-focused, remote' },
-    { k: 'home', v: 'raising a family and two demanding cats' },
+    { k: 'home', v: 'raising a family and 4 demanding cats' },
     { k: 'co-founding', v: 'a small studio with a friend — custom software + SaaS' },
   ],
   services: [
@@ -209,18 +217,10 @@ export const JORIUS: JoriusData = {
     // useGitHubRepos. Kept here as a safety net if the API is rate-limited or
     // offline; harmless empty array means the section just shows a loader/error.
   ],
-  writing: [
-    { slug: 'oauth-device-flow-mess', date: '2026-03-14', title: 'The OAuth device flow is quietly a mess', len: '18 min', tag: 'security' },
-    { slug: 'boring-postgres-10k-qps', date: '2026-02-02', title: 'Boring Postgres at 10k QPS', len: '11 min', tag: 'databases' },
-    { slug: 'no-queue-needed', date: '2025-11-30', title: "You probably don't need a queue", len: '7 min', tag: 'architecture' },
-    { slug: 'how-i-interview', date: '2025-09-08', title: 'How I interview: a 90-minute pairing problem', len: '14 min', tag: 'hiring' },
-    { slug: 'shipping-to-latam-enterprise', date: '2025-06-21', title: 'Notes on shipping to Latin American enterprise', len: '22 min', tag: 'consulting' },
-  ],
-  testimonials: [
-    { who: 'Pavel S.', role: 'CTO, prior client', body: "Jose found a session-fixation bug we'd shipped to production two years earlier. Calmly. On a Tuesday. Hire him." },
-    { who: 'María José R.', role: 'VP Eng, Perficient client', body: 'The rare consultant who leaves the codebase in better shape than he found it. We still follow his testing conventions.' },
-    { who: 'Andrés G.', role: 'Founder, prior client', body: "Shipped in six weeks what we'd failed to ship in six months. Didn't oversell. Didn't over-engineer." },
-  ],
+  // Writing entries are intentionally empty until a real CMS (Strapi or
+  // similar) is wired up. Don't seed AI-drafted blog posts here.
+  writing: [],
+  testimonials: [],
   hire_why: [
     { n: '01', h: 'I ship.', b: 'Ten years across six engagements. Every quarter has had something live in production — fintech, geospatial, logistics, lending.' },
     { n: '02', h: 'I write it down.', b: 'Architecture notes, ADRs, READMEs your next hire can actually read. The CV literally says "documentation that outlives the project" — it earned its place.' },

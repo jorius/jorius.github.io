@@ -25,11 +25,11 @@ export const BWhy = (): React.ReactElement => {
         id="b-why"
         num="06"
         label="WHY."
-        kicker="Four honest reasons. The testimonials below are real; names may be redacted on request."
+        kicker="Four honest reasons to bring me into your team or project."
       />
       <div
         style={{
-          padding: '0 32px 40px 32px',
+          padding: '0 32px 60px 32px',
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
           gap: 0,
@@ -56,25 +56,6 @@ export const BWhy = (): React.ReactElement => {
             </Reveal>
           );
         })}
-      </div>
-      <div
-        style={{
-          padding: '0 32px 60px 32px',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: 24,
-        }}
-      >
-        {JORIUS.testimonials.map((tst) => (
-          <div key={tst.who} style={{ padding: '8px 0' }}>
-            <div style={{ fontSize: 20, color: t.ink, lineHeight: 1.4, letterSpacing: '-0.01em' }}>
-              &ldquo;{tst.body}&rdquo;
-            </div>
-            <div style={{ fontSize: 12, color: t.dim, marginTop: 14, borderTop: `1px solid ${t.rule}`, paddingTop: 10 }}>
-              — {tst.who} · {tst.role}
-            </div>
-          </div>
-        ))}
       </div>
     </>
   );
