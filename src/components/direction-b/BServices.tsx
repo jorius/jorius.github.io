@@ -1,3 +1,6 @@
+// packages
+import { useTranslation } from 'react-i18next';
+
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
@@ -12,13 +15,14 @@ import { StackChip } from './StackChip';
 
 export const BServices = (): React.ReactElement => {
   const { t } = useBTheme();
+  const { t: tr } = useTranslation();
   return (
     <>
       <BSectionHead
         id="b-services"
-        num="02"
-        label="WORK."
-        kicker="Three engagements I take. Weekly rate, quarterly retainer, or fixed scope — you decide."
+        num={tr('directionB.sections.work.num')}
+        label={tr('directionB.sections.work.label')}
+        kicker={tr('directionB.sections.work.kicker')}
       />
       <div style={{ padding: '0 32px 60px 32px' }}>
         {JORIUS.services.map((s, i) => (

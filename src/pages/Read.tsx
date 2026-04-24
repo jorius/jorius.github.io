@@ -1,4 +1,5 @@
 // packages
+import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
 
 // contexts
@@ -24,6 +25,7 @@ const LOREM = [
 
 const Read = (): React.ReactElement => {
   const { t } = useBTheme();
+  const { t: tr } = useTranslation();
   const { slug } = useParams<{ slug: string }>();
   const entry = JORIUS.writing.find((w) => w.slug === slug);
 
@@ -54,7 +56,7 @@ const Read = (): React.ReactElement => {
               marginBottom: 28,
             }}
           >
-            ← back to record
+            {tr('directionB.read.back')}
           </Link>
         </Reveal>
 
@@ -70,7 +72,7 @@ const Read = (): React.ReactElement => {
                   marginBottom: 20,
                 }}
               >
-                § READING · {entry.date} · {entry.tag}
+                {tr('directionB.read.readingMeta')} · {entry.date} · {entry.tag}
               </div>
             </Reveal>
             <Reveal delay={160}>
@@ -95,12 +97,12 @@ const Read = (): React.ReactElement => {
                   letterSpacing: '0.06em',
                 }}
               >
-                {entry.len} read
+                {entry.len} {tr('directionB.read.lenSuffix')}
               </div>
             </Reveal>
             <Reveal delay={320} style={{ marginTop: 48, borderTop: `1px solid ${t.rule}`, paddingTop: 32 }}>
               <p style={{ fontSize: 12, color: t.dim, letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 24 }}>
-                Placeholder copy — real piece coming soon
+                {tr('directionB.read.placeholder')}
               </p>
               {LOREM.map((para, i) => (
                 <p
@@ -120,12 +122,12 @@ const Read = (): React.ReactElement => {
         ) : (
           <Reveal delay={80}>
             <h1 style={{ margin: 0, fontSize: 'clamp(40px, 6vw, 76px)', letterSpacing: '-0.035em', lineHeight: 0.95, color: t.ink }}>
-              <Glitch strong>NOT FOUND.</Glitch>
+              <Glitch strong>{tr('directionB.read.notFound')}</Glitch>
             </h1>
             <p style={{ marginTop: 24, fontSize: 14, color: t.dim, lineHeight: 1.6 }}>
-              No writing entry matches the slug{' '}
+              {tr('directionB.read.notFoundBody1')}{' '}
               <code style={{ background: t.sub, padding: '2px 6px', color: t.ink }}>{slug}</code>.
-              Check the link or head back to the record.
+              {' '}{tr('directionB.read.notFoundBody2')}
             </p>
           </Reveal>
         )}
@@ -141,7 +143,7 @@ const Read = (): React.ReactElement => {
               textDecoration: 'none',
             }}
           >
-            ← back to record
+            {tr('directionB.read.back')}
           </Link>
         </Reveal>
       </article>

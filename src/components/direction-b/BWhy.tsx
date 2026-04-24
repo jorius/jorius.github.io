@@ -1,5 +1,6 @@
 // packages
 import type { CSSProperties } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
@@ -19,13 +20,14 @@ interface WhyStepCSS extends CSSProperties {
 
 export const BWhy = (): React.ReactElement => {
   const { t } = useBTheme();
+  const { t: tr } = useTranslation();
   return (
     <>
       <BSectionHead
         id="b-why"
-        num="06"
-        label="WHY."
-        kicker="Four honest reasons to bring me into your team or project."
+        num={tr('directionB.sections.why.num')}
+        label={tr('directionB.sections.why.label')}
+        kicker={tr('directionB.sections.why.kicker')}
       />
       <div
         style={{

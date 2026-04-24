@@ -1,11 +1,13 @@
 // packages
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
 export const Portrait = (): React.ReactElement => {
   const { t } = useBTheme();
+  const { t: tr } = useTranslation();
   const [glitching, setGlitching] = useState(false);
 
   useEffect(() => {
@@ -95,8 +97,8 @@ export const Portrait = (): React.ReactElement => {
           justifyContent: 'space-between',
         }}
       >
-        <span>EXHIBIT_01</span>
-        <span>CATS / 35mm</span>
+        <span>{tr('directionB.portrait.exhibit')}</span>
+        <span>{tr('directionB.portrait.type')}</span>
       </div>
       <div
         style={{
@@ -111,8 +113,8 @@ export const Portrait = (): React.ReactElement => {
           alignItems: 'baseline',
         }}
       >
-        <span style={{ letterSpacing: '0.08em', textTransform: 'uppercase' }}>my co-workers</span>
-        <span style={{ fontSize: 10, color: t.dim }}>[ 2 cats, no bugs ]</span>
+        <span style={{ letterSpacing: '0.08em', textTransform: 'uppercase' }}>{tr('directionB.portrait.caption')}</span>
+        <span style={{ fontSize: 10, color: t.dim }}>{tr('directionB.portrait.subcaption')}</span>
       </div>
       <div
         aria-hidden

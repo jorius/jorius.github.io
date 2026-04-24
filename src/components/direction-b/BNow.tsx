@@ -1,3 +1,6 @@
+// packages
+import { useTranslation } from 'react-i18next';
+
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
@@ -11,13 +14,14 @@ import { BSectionHead } from './BSectionHead';
 
 export const BNow = (): React.ReactElement => {
   const { t } = useBTheme();
+  const { t: tr } = useTranslation();
   return (
     <>
       <BSectionHead
         id="b-now"
-        num="01"
-        label="NOW."
-        kicker="Updated by hand, roughly every two weeks. The rest of the site is a static record; this part moves."
+        num={tr('directionB.sections.now.num')}
+        label={tr('directionB.sections.now.label')}
+        kicker={tr('directionB.sections.now.kicker')}
       />
       <div
         style={{
@@ -47,13 +51,12 @@ export const BNow = (): React.ReactElement => {
           ))}
         </div>
         <div style={{ alignSelf: 'end', paddingBottom: 18 }}>
-          <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>Last updated</div>
+          <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{tr('directionB.now.lastUpdatedLabel')}</div>
           <div style={{ fontSize: 40, color: t.ink, letterSpacing: '-0.02em', marginTop: 6 }}>
-            <Glitch trigger="hover" strong>2026-04-11</Glitch>
+            <Glitch trigger="hover" strong>{tr('directionB.now.lastUpdatedDate')}</Glitch>
           </div>
           <div style={{ fontSize: 13, color: t.dim, marginTop: 10, maxWidth: 380 }}>
-            This page is inspired by Derek Sivers&apos;s &quot;now page.&quot; If your website only
-            has three things, this should be one of them.
+            {tr('directionB.now.siversNote')}
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 // packages
 import type { CSSProperties } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // contexts
 import type { ThemeTokens } from '../../contexts/ThemeContext';
@@ -34,6 +35,7 @@ interface ProjectCardCSS extends CSSProperties {
 }
 
 export const ProjectCard = ({ p, i, t }: ProjectCardProps): React.ReactElement => {
+  const { t: tr } = useTranslation();
   const isLast = i % 3 === 2;
   const cardStyle: ProjectCardCSS = {
     padding: 24,
@@ -48,6 +50,7 @@ export const ProjectCard = ({ p, i, t }: ProjectCardProps): React.ReactElement =
     '--rgbB': t.rgbB,
   };
   const externalUrl = p.demo ?? p.github;
+  const categoryKey = p.category === 'Personal' ? 'personal' : 'client';
   return (
     <Reveal delay={(i % 3) * 70} className="b-index-card" style={cardStyle}>
       <div
@@ -70,12 +73,12 @@ export const ProjectCard = ({ p, i, t }: ProjectCardProps): React.ReactElement =
             className="b-index-cta"
             style={{ color: t.ink, fontSize: 10, textDecoration: 'none' }}
           >
-            open case ↗
+            {tr('directionB.projects.openCase')}
           </a>
         ) : (
-          <span className="b-index-cta" style={{ color: t.dim, fontSize: 10 }}>private</span>
+          <span className="b-index-cta" style={{ color: t.dim, fontSize: 10 }}>{tr('directionB.projects.private')}</span>
         )}
-        <span>{p.category.toUpperCase()}</span>
+        <span>{tr(`directionB.projects.category.${categoryKey}`)}</span>
       </div>
       <div
         className="b-index-thumb"
@@ -93,7 +96,7 @@ export const ProjectCard = ({ p, i, t }: ProjectCardProps): React.ReactElement =
         }}
       >
         <span style={{ fontSize: 11, color: t.dim, position: 'relative', zIndex: 1 }}>
-          [ {p.category.toLowerCase()} project ]
+          [ {tr(`directionB.projects.category.${categoryKey}`).toLowerCase()} {tr('directionB.projects.tagSuffix')} ]
         </span>
         <span
           aria-hidden

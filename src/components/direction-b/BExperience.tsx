@@ -1,3 +1,6 @@
+// packages
+import { useTranslation } from 'react-i18next';
+
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
@@ -11,13 +14,14 @@ import { BSectionHead } from './BSectionHead';
 
 export const BExperience = (): React.ReactElement => {
   const { t } = useBTheme();
+  const { t: tr } = useTranslation();
   return (
     <>
       <BSectionHead
         id="b-experience"
-        num="03"
-        label="RECORD."
-        kicker="Six engagements, four companies, a lot of branches merged into tidy commits."
+        num={tr('directionB.sections.record.num')}
+        label={tr('directionB.sections.record.label')}
+        kicker={tr('directionB.sections.record.kicker')}
       />
       <div style={{ padding: '0 32px 60px 32px' }}>
         {JORIUS.experience.map((e, i) => (

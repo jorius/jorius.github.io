@@ -1,20 +1,31 @@
+// packages
+import { useTranslation } from 'react-i18next';
+
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
 // components
 import { Glitch } from '../primitives/Glitch';
 
-const NAV_LINKS: ReadonlyArray<readonly [string, string]> = [
-  ['Now', 'b-now'],
-  ['Work', 'b-services'],
-  ['Record', 'b-experience'],
-  ['Index', 'b-projects'],
-  ['Writing', 'b-writing'],
-  ['Contact', 'b-contact'],
-];
+const NAV_KEYS = ['now', 'work', 'record', 'index', 'writing', 'contact'] as const;
+const NAV_TARGETS: Record<(typeof NAV_KEYS)[number], string> = {
+  now: 'b-now',
+  work: 'b-services',
+  record: 'b-experience',
+  index: 'b-projects',
+  writing: 'b-writing',
+  contact: 'b-contact',
+};
 
 export const BTopBar = (): React.ReactElement => {
-  const { t, theme, toggleTheme } = useBTheme();
+  const { t, i18n } = useTranslation();
+  const { t: th, theme, toggleTheme } = useBTheme();
+  const lang = i18n.language.startsWith('es') ? 'es' : 'en';
+  const otherLang = lang === 'es' ? 'en' : 'es';
+  const switchLang = (): void => {
+    i18n.changeLanguage(otherLang);
+  };
+
   return (
     <div
       style={{
@@ -23,42 +34,42 @@ export const BTopBar = (): React.ReactElement => {
         zIndex: 40,
         background: theme === 'dark' ? 'rgba(11,11,11,0.85)' : 'rgba(239,236,228,0.85)',
         backdropFilter: 'blur(8px)',
-        borderBottom: `1px solid ${t.rule}`,
+        borderBottom: `1px solid ${th.rule}`,
         display: 'grid',
         gridTemplateColumns: '1fr auto 1fr',
         alignItems: 'center',
         padding: '14px 32px',
         fontSize: 12,
-        color: t.ink,
+        color: th.ink,
       }}
     >
-      <div style={{ display: 'flex', gap: 20, color: t.dim, alignItems: 'baseline' }}>
-        <Glitch trigger="hover" style={{ color: t.ink, fontWeight: 700, letterSpacing: '0.04em' }}>
+      <div style={{ display: 'flex', gap: 20, color: th.dim, alignItems: 'baseline' }}>
+        <Glitch trigger="hover" style={{ color: th.ink, fontWeight: 700, letterSpacing: '0.04em' }}>
           JORIUS
         </Glitch>
-        <span>Vol. X · 2026</span>
+        <span>{t('directionB.topbar.volume')}</span>
       </div>
       <nav style={{ display: 'flex', gap: 22 }}>
-        {NAV_LINKS.map(([label, id]) => (
+        {NAV_KEYS.map((key) => (
           <a
-            key={id}
-            href={`#${id}`}
+            key={key}
+            href={`#${NAV_TARGETS[key]}`}
             onClick={(e) => {
               e.preventDefault();
               document
-                .querySelector(`[data-jump="${id}"]`)
+                .querySelector(`[data-jump="${NAV_TARGETS[key]}"]`)
                 ?.scrollIntoView({ behavior: 'smooth' });
             }}
-            style={{ color: t.ink, textDecoration: 'none', letterSpacing: '0.04em' }}
+            style={{ color: th.ink, textDecoration: 'none', letterSpacing: '0.04em' }}
           >
-            <Glitch trigger="hover">{label}</Glitch>
+            <Glitch trigger="hover">{t(`directionB.topbar.nav.${key}`)}</Glitch>
           </a>
         ))}
       </nav>
       <div
         style={{
           textAlign: 'right',
-          color: t.dim,
+          color: th.dim,
           display: 'flex',
           justifyContent: 'flex-end',
           gap: 14,
@@ -76,27 +87,46 @@ export const BTopBar = (): React.ReactElement => {
               display: 'inline-block',
             }}
           />
-          {' '}Available · Q3 2026
+          {' '}{t('directionB.topbar.available')} · Q3 2026
         </span>
+        <button
+          type="button"
+          onClick={switchLang}
+          aria-label={t('directionB.topbar.languageToggle.label')}
+          title={t('directionB.topbar.languageToggle.label')}
+          style={{
+            background: 'transparent',
+            border: `1px solid ${th.rule}`,
+            color: th.ink,
+            padding: '3px 9px',
+            fontSize: 11,
+            cursor: 'pointer',
+            fontFamily: 'inherit',
+            textTransform: 'uppercase',
+            letterSpacing: '0.04em',
+          }}
+        >
+          {otherLang}
+        </button>
         <button
           type="button"
           onClick={toggleTheme}
           aria-label="toggle theme"
           style={{
             background: 'transparent',
-            border: `1px solid ${t.rule}`,
-            color: t.ink,
+            border: `1px solid ${th.rule}`,
+            color: th.ink,
             padding: '3px 9px',
             fontSize: 11,
             cursor: 'pointer',
             fontFamily: 'inherit',
           }}
         >
-          {theme === 'dark' ? '☀ LIGHT' : '☾ DARK'}
+          {theme === 'dark' ? t('directionB.topbar.themeToggle.toLight') : t('directionB.topbar.themeToggle.toDark')}
         </button>
-        <span style={{ color: t.dim }}>
-          press{' '}
-          <kbd style={{ border: `1px solid ${t.rule}`, padding: '0 6px', color: t.ink }}>/</kbd>
+        <span style={{ color: th.dim }}>
+          {t('directionB.topbar.pressKey')}{' '}
+          <kbd style={{ border: `1px solid ${th.rule}`, padding: '0 6px', color: th.ink }}>/</kbd>
         </span>
       </div>
     </div>

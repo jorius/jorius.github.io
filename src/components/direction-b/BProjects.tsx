@@ -1,3 +1,6 @@
+// packages
+import { useTranslation } from 'react-i18next';
+
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
@@ -42,14 +45,15 @@ const flattenPortfolio = (): IndexProject[] => {
 
 export const BProjects = (): React.ReactElement => {
   const { t } = useBTheme();
+  const { t: tr } = useTranslation();
   const projects = flattenPortfolio();
   return (
     <>
       <BSectionHead
         id="b-projects"
-        num="04"
-        label="INDEX."
-        kicker="A shortlist of personal and client projects. Case studies available on request."
+        num={tr('directionB.sections.index.num')}
+        label={tr('directionB.sections.index.label')}
+        kicker={tr('directionB.sections.index.kicker')}
       />
       <div
         style={{

@@ -1,5 +1,7 @@
 // packages
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 // contexts
 import { useBTheme } from '../contexts/ThemeContext';
@@ -23,10 +25,13 @@ interface PaletteItem {
   target: string;
   hint: string;
   ext?: boolean;
+  internal?: boolean;
 }
 
 export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactElement | null => {
   const { theme, t } = useBTheme();
+  const { t: tr } = useTranslation();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState('');
   const [idx, setIdx] = useState(0);
@@ -64,21 +69,24 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
     if (open && inputRef.current) inputRef.current.focus();
   }, [open]);
 
+  const jumpPrefix = tr('directionB.palette.items.jumpPrefix');
+
   const items: PaletteItem[] = useMemo(() => {
     const all: PaletteItem[] = [];
     sections.forEach((s) => all.push({
       kind: 'section',
-      label: `jump › ${s.label}`,
+      label: `${jumpPrefix} ${s.label}`,
       target: s.id,
       hint: s.hint ?? '',
     }));
-    all.push({ kind: 'cmd', label: 'email Jorius', target: `mailto:${JORIUS.email}`, hint: JORIUS.email, ext: true });
-    all.push({ kind: 'cmd', label: 'open GitHub', target: 'https://github.com/jorius', hint: 'github.com/jorius', ext: true });
-    all.push({ kind: 'cmd', label: 'download résumé', target: '#', hint: 'pdf · 2026', ext: false });
-    all.push({ kind: 'cmd', label: 'copy PGP fingerprint', target: 'copy:pgp', hint: JORIUS.pgp.keyId });
+    all.push({ kind: 'cmd', label: tr('directionB.palette.items.emailJorius'), target: `mailto:${JORIUS.email}`, hint: JORIUS.email, ext: true });
+    all.push({ kind: 'cmd', label: tr('directionB.palette.items.openGithub'), target: JORIUS.links.github, hint: tr('directionB.palette.items.githubHint'), ext: true });
+    all.push({ kind: 'cmd', label: tr('directionB.palette.items.downloadResume'), target: '#', hint: tr('directionB.palette.items.resumeHint'), ext: false });
+    all.push({ kind: 'cmd', label: tr('directionB.palette.items.copyPgp'), target: 'copy:pgp', hint: JORIUS.pgp.keyId });
+    all.push({ kind: 'cmd', label: tr('directionB.palette.items.showPgp'), target: '/pgp', hint: JORIUS.pgp.algo, internal: true });
     const f = q.trim().toLowerCase();
     return f ? all.filter((i) => i.label.toLowerCase().includes(f) || i.hint.toLowerCase().includes(f)) : all;
-  }, [q, sections]);
+  }, [q, sections, jumpPrefix, tr]);
 
   const choose = (it: PaletteItem | undefined): void => {
     if (!it) return;
@@ -87,6 +95,8 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else if (it.target === 'copy:pgp') {
       if (navigator.clipboard) navigator.clipboard.writeText(JORIUS.pgp.fingerprint);
+    } else if (it.internal) {
+      navigate(it.target);
     } else if (it.ext) {
       window.open(it.target, '_blank', 'noopener');
     }
@@ -95,8 +105,6 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
 
   if (!open) return null;
   const dark = theme === 'dark';
-  // Theme-aware palette derived from the brutalist design tokens
-  // (#292929 / #c8c8c8 family) instead of generic black/white.
   const bg = t.paper;
   const fg = t.ink;
   const dim = t.dim;
@@ -152,7 +160,7 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
                 choose(items[idx]);
               }
             }}
-            placeholder="type to filter · ↑↓ to move · ↵ to select · esc to close"
+            placeholder={tr('directionB.palette.placeholder')}
             style={{
               flex: 1,
               background: 'transparent',
@@ -164,11 +172,11 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
               padding: '4px 0',
             }}
           />
-          <span style={{ color: dim, fontSize: 11, border: `1px solid ${line}`, padding: '2px 6px' }}>esc</span>
+          <span style={{ color: dim, fontSize: 11, border: `1px solid ${line}`, padding: '2px 6px' }}>{tr('directionB.palette.esc')}</span>
         </div>
         <div style={{ maxHeight: 360, overflowY: 'auto' }}>
           {items.length === 0 ? (
-            <div style={{ padding: 16, color: dim, fontSize: 13 }}>no matches. try &quot;email&quot;, &quot;github&quot;, &quot;now&quot;.</div>
+            <div style={{ padding: 16, color: dim, fontSize: 13 }}>{tr('directionB.palette.noMatches')}</div>
           ) : null}
           {items.map((it, i) => (
             <div
@@ -192,8 +200,8 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
           ))}
         </div>
         <div style={{ borderTop: `1px solid ${line}`, padding: '8px 14px', display: 'flex', justifyContent: 'space-between', color: dim, fontSize: 11 }}>
-          <span>press / anywhere to reopen</span>
-          <span>{items.length} results</span>
+          <span>{tr('directionB.palette.footerLeft')}</span>
+          <span>{tr('directionB.palette.footerRight', { count: items.length })}</span>
         </div>
       </div>
     </div>

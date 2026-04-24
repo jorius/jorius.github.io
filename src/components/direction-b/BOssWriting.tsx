@@ -1,5 +1,6 @@
 // packages
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 // contexts
@@ -27,17 +28,19 @@ const selectTopOss = (repos: GitHubRepo[]): GitHubRepo[] =>
 
 export const BOssWriting = (): React.ReactElement => {
   const { t } = useBTheme();
+  const { t: tr } = useTranslation();
   const { repos, loading, error } = useGitHubRepos();
   const topOss = useMemo(() => selectTopOss(repos), [repos]);
   const max = topOss.length > 0 ? Math.max(...topOss.map((r) => r.stargazers_count), 1) : 1;
+  const hasWriting = JORIUS.writing.length > 0;
 
   return (
     <>
       <BSectionHead
         id="b-writing"
-        num="05"
-        label="WRITING & OSS."
-        kicker="Long-form notes and live public repositories. The things I'd point a hiring manager at, if asked."
+        num={tr('directionB.sections.writing.num')}
+        label={tr('directionB.sections.writing.label')}
+        kicker={tr('directionB.sections.writing.kicker')}
       />
       <div
         style={{
@@ -59,8 +62,15 @@ export const BOssWriting = (): React.ReactElement => {
               marginBottom: 10,
             }}
           >
-            — Writing
+            {tr('directionB.oss.writingHeader')}
           </div>
+
+          {!hasWriting ? (
+            <div style={{ fontSize: 13, color: t.dim, padding: '24px 0', lineHeight: 1.5 }}>
+              {tr('directionB.oss.writingEmpty')}
+            </div>
+          ) : null}
+
           {JORIUS.writing.map((w, i) => (
             <Reveal key={w.slug} delay={i * 40}>
               <Link
@@ -102,18 +112,18 @@ export const BOssWriting = (): React.ReactElement => {
               marginBottom: 10,
             }}
           >
-            — Open source
+            {tr('directionB.oss.ossHeader')}
           </div>
 
           {loading ? (
-            <div style={{ fontSize: 12, color: t.dim, padding: '16px 0' }}>loading public repos…</div>
+            <div style={{ fontSize: 12, color: t.dim, padding: '16px 0' }}>{tr('directionB.oss.loading')}</div>
           ) : null}
 
           {!loading && error ? (
             <div style={{ fontSize: 12, color: t.dim, padding: '16px 0', lineHeight: 1.5 }}>
-              GitHub API unavailable: {error}.
+              {tr('directionB.oss.errorPrefix')}: {error}.
               <br />
-              Visit{' '}
+              {tr('directionB.oss.visitDirectly')}{' '}
               <a
                 href={JORIUS.links.github}
                 target="_blank"
@@ -121,13 +131,13 @@ export const BOssWriting = (): React.ReactElement => {
                 style={{ color: t.ink }}
               >
                 github.com/{JORIUS.handle}
-              </a>{' '}directly.
+              </a>{' '}{tr('directionB.oss.directly')}
             </div>
           ) : null}
 
           {!loading && !error && topOss.length === 0 ? (
             <div style={{ fontSize: 12, color: t.dim, padding: '16px 0' }}>
-              No public, non-forked, non-archived repositories found yet.
+              {tr('directionB.oss.empty')}
             </div>
           ) : null}
 
