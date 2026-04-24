@@ -1,3 +1,6 @@
+// packages
+import { FaWhatsapp } from 'react-icons/fa';
+
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
@@ -12,7 +15,6 @@ import { TypedCaret } from '../primitives/TypedCaret';
 const displayUrl = (url: string): string =>
   url.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
-const WHATSAPP_NUMBER_DISPLAY = JORIUS.whatsapp;
 const WHATSAPP_HREF = `https://wa.me/${JORIUS.whatsapp.replace(/[^0-9]/g, '')}`;
 
 export const BContact = (): React.ReactElement => {
@@ -138,35 +140,25 @@ export const BContact = (): React.ReactElement => {
           <div style={{ fontSize: 11, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Current availability</div>
           <div style={{ fontSize: 18, color: t.ink, marginTop: 6 }}>{JORIUS.status}</div>
 
-          <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 16, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 16, flexWrap: 'wrap', alignItems: 'stretch' }}>
             <a
               href={WHATSAPP_HREF}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`WhatsApp ${JORIUS.whatsapp}`}
+              title={`WhatsApp ${JORIUS.whatsapp}`}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: 8,
+                justifyContent: 'center',
                 background: 'transparent',
                 color: t.ink,
                 border: `1px solid ${t.rule}`,
-                padding: '11px 14px',
-                fontSize: 12,
+                width: 44,
                 textDecoration: 'none',
-                letterSpacing: '0.04em',
               }}
             >
-              <span
-                aria-hidden
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: '50%',
-                  background: '#25D366',
-                  boxShadow: '0 0 6px rgba(37, 211, 102, 0.7)',
-                }}
-              />
-              <Glitch trigger="hover">WHATSAPP {WHATSAPP_NUMBER_DISPLAY}</Glitch>
+              <FaWhatsapp aria-hidden style={{ width: 18, height: 18 }} />
             </a>
             <a
               href="https://cal.com/jorius"

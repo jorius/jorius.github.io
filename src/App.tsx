@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // components
 import Footer from './components/common/Footer';
 import Header from './components/common/Header';
+import { ScrollToTop } from './components/ScrollToTop';
 
 // pages
 import About from './pages/About';
@@ -16,6 +17,7 @@ import Read from './pages/Read';
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         {/* Standalone routes — render their own chrome (header/footer baked in). */}
         <Route path="/" element={<Home />} />
