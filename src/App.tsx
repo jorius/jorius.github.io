@@ -16,28 +16,31 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Palette route - isolated without layout */}
+        {/* Standalone routes — render their own chrome (header/footer baked in). */}
+        <Route path="/" element={<Home />} />
         <Route path="/palette" element={<Palette />} />
 
-        {/* Main routes with layout */}
-        <Route path="/*" element={
-          <div className="min-h-screen bg-light-bg dark:bg-dark-bg text-light-text dark:text-white">
-            <Header />
-            <main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/portfolio" element={<Portfolio />} />
-                <Route path="/contact" element={<Contact />} />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
-        } />
+        {/* Legacy routes still wrapped in the pre-overhaul Header/Footer layout
+            until each page gets its own design pass. */}
+        <Route
+          path="/*"
+          element={(
+            <div className="min-h-screen bg-light-bg text-light-text">
+              <Header />
+              <main>
+                <Routes>
+                  <Route path="/about" element={<About />} />
+                  <Route path="/portfolio" element={<Portfolio />} />
+                  <Route path="/contact" element={<Contact />} />
+                </Routes>
+              </main>
+              <Footer />
+            </div>
+          )}
+        />
       </Routes>
     </Router>
   );
 }
 
 export default App;
-
