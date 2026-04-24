@@ -1,3 +1,6 @@
+// packages
+import { Link } from 'react-router-dom';
+
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
@@ -43,34 +46,33 @@ export const BOssWriting = (): React.ReactElement => {
             — Writing
           </div>
           {JORIUS.writing.map((w, i) => (
-            <Reveal
-              key={w.title}
-              delay={i * 40}
-              as="a"
-              href="#"
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '110px 1fr 72px',
-                padding: '18px 0',
-                borderBottom: `1px solid ${t.soft}`,
-                color: t.ink,
-                textDecoration: 'none',
-                gap: 12,
-                alignItems: 'baseline',
-                transition: 'background 180ms',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = t.sub;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent';
-              }}
-            >
-              <span style={{ color: t.dim, fontSize: 12 }}>{w.date}</span>
-              <span style={{ fontSize: 17, letterSpacing: '-0.01em' }}>
-                <Glitch trigger="hover">{w.title}</Glitch>
-              </span>
-              <span style={{ color: t.dim, fontSize: 12, textAlign: 'right' }}>{w.len}</span>
+            <Reveal key={w.slug} delay={i * 40}>
+              <Link
+                to={`/read/${w.slug}`}
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '110px 1fr 72px',
+                  padding: '18px 0',
+                  borderBottom: `1px solid ${t.soft}`,
+                  color: t.ink,
+                  textDecoration: 'none',
+                  gap: 12,
+                  alignItems: 'baseline',
+                  transition: 'background 180ms',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = t.sub;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'transparent';
+                }}
+              >
+                <span style={{ color: t.dim, fontSize: 12 }}>{w.date}</span>
+                <span style={{ fontSize: 17, letterSpacing: '-0.01em' }}>
+                  <Glitch trigger="hover">{w.title}</Glitch>
+                </span>
+                <span style={{ color: t.dim, fontSize: 12, textAlign: 'right' }}>{w.len}</span>
+              </Link>
             </Reveal>
           ))}
         </div>

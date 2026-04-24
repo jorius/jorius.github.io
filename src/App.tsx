@@ -11,6 +11,7 @@ import Contact from './pages/Contact';
 import Home from './pages/Home';
 import Palette from './pages/Palette';
 import Portfolio from './pages/Portfolio';
+import Read from './pages/Read';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         {/* Standalone routes — render their own chrome (header/footer baked in). */}
         <Route path="/" element={<Home />} />
+        <Route path="/read/:slug" element={<Read />} />
         <Route path="/palette" element={<Palette />} />
 
         {/* Legacy routes still wrapped in the pre-overhaul Header/Footer layout
