@@ -34,7 +34,7 @@ React **19** + TypeScript 5.9 + Vite 7 SPA.
 
 **State** — No global state library. Per-component `useState` and i18next for locale. (A previous Redux + dark-mode toggle was removed in `fix/security-and-dead-code-removal` because the site is light-mode only.)
 
-**Styling** — Tailwind CSS 3, light theme only. Custom palette (neon/cyberpunk + portfolio tokens — some legacy dark-theme tokens remain in `tailwind.config.js`'s `COLORS` constant pending the design overhaul), fonts (Space Mono, Urbanist, Inter, Montserrat, Vast Shadow), and animations (glow, scan, flicker, marquee) all defined in `tailwind.config.js`.
+**Styling** — Tailwind CSS 3, light theme only. Custom palette (neon/cyberpunk + portfolio tokens — some legacy dark-theme tokens remain in `tailwind.config.js`'s `COLORS` constant pending the design overhaul), fonts (Space Mono, Urbanist, Inter, Montserrat, Vast Shadow), and animations (glow, scan, flicker, marquee) all defined in `tailwind.config.js`. Note: a few `dark:` Tailwind variants survive in `App.tsx`, `pages/Contact.tsx`, `pages/About.tsx`, and `index.css`. With `darkMode: 'class'` removed, these now activate via the visitor's OS `prefers-color-scheme: dark` media query rather than a class toggle. Cleaning them up is a design-overhaul item.
 
 **i18n** — i18next + `i18next-browser-languagedetector`. Locale JSON in `src/i18n/locales/{en,es}.json`. User-facing text always goes through `useTranslation()` — when adding copy, add keys to **both** locale files.
 
@@ -83,5 +83,4 @@ One blank line between groups, no blank lines within a group.
 
 ## Known issues / tech debt
 
-- Referenced asset `/bg-pattern.jpg` is not in `public/` — Vite warns at build time but the reference is left in place to resolve at runtime (currently 404s). Add the asset or remove the reference before relying on that background.
-- 8 npm audit vulnerabilities (3 moderate, 5 high) from transitive deps in the current lock file. Not blocking CI; address with `npm audit fix` when touching the lockfile intentionally.
+- npm audit vulnerabilities from transitive deps in the current lock file. Not blocking CI; address with `npm audit fix` when touching the lockfile intentionally.
