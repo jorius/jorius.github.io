@@ -7,6 +7,9 @@ import { useBTheme } from '../../contexts/ThemeContext';
 // data
 import { JORIUS } from '../../data/jorius';
 
+// hooks
+import { useIsMobile } from '../../hooks/useMediaQuery';
+
 // components
 import { Glitch } from '../primitives/Glitch';
 import { Reveal } from '../primitives/Reveal';
@@ -15,6 +18,7 @@ import { BSectionHead } from './BSectionHead';
 export const BExperience = (): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr } = useTranslation();
+  const isMobile = useIsMobile();
   return (
     <>
       <BSectionHead
@@ -23,16 +27,16 @@ export const BExperience = (): React.ReactElement => {
         label={tr('directionB.sections.record.label')}
         kicker={tr('directionB.sections.record.kicker')}
       />
-      <div style={{ padding: '0 32px 60px 32px' }}>
+      <div style={{ padding: isMobile ? '0 20px 40px 20px' : '0 32px 60px 32px' }}>
         {JORIUS.experience.map((e, i) => (
           <Reveal
             key={e.key}
             delay={i * 60}
             style={{
               display: 'grid',
-              gridTemplateColumns: '220px 1.2fr 2fr',
-              gap: 24,
-              padding: '28px 0',
+              gridTemplateColumns: isMobile ? '1fr' : '220px 1.2fr 2fr',
+              gap: isMobile ? 12 : 24,
+              padding: isMobile ? '22px 0' : '28px 0',
               borderBottom: `1px solid ${t.rule}`,
               alignItems: 'start',
             }}

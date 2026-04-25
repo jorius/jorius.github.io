@@ -24,6 +24,7 @@ interface ProjectCardProps {
   p: IndexProject;
   i: number;
   t: ThemeTokens;
+  columnsPerRow: number;
 }
 
 interface ProjectCardCSS extends CSSProperties {
@@ -34,12 +35,12 @@ interface ProjectCardCSS extends CSSProperties {
   '--rgbB'?: string;
 }
 
-export const ProjectCard = ({ p, i, t }: ProjectCardProps): React.ReactElement => {
+export const ProjectCard = ({ p, i, t, columnsPerRow }: ProjectCardProps): React.ReactElement => {
   const { t: tr } = useTranslation();
-  const isLast = i % 3 === 2;
+  const isLastInRow = i % columnsPerRow === columnsPerRow - 1;
   const cardStyle: ProjectCardCSS = {
     padding: 24,
-    borderRight: !isLast ? `1px solid ${t.rule}` : 'none',
+    borderRight: !isLastInRow ? `1px solid ${t.rule}` : 'none',
     borderBottom: `1px solid ${t.rule}`,
     cursor: p.github || p.demo ? 'pointer' : 'default',
     position: 'relative',
@@ -52,7 +53,7 @@ export const ProjectCard = ({ p, i, t }: ProjectCardProps): React.ReactElement =
   const externalUrl = p.demo ?? p.github;
   const categoryKey = p.category === 'Personal' ? 'personal' : 'client';
   return (
-    <Reveal delay={(i % 3) * 70} className="b-index-card" style={cardStyle}>
+    <Reveal delay={(i % columnsPerRow) * 70} className="b-index-card" style={cardStyle}>
       <div
         className="b-index-meta"
         style={{
