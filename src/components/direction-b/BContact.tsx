@@ -36,18 +36,13 @@ const PgpBlock = (): React.ReactElement => {
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (!hovered) {
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
-      return;
-    }
-    const loop = (): void => {
-      setScrambled(scrambleFp(JORIUS.pgp.fingerprint));
+    if (hovered) {
+      const loop = (): void => {
+        setScrambled(scrambleFp(JORIUS.pgp.fingerprint));
+        rafRef.current = requestAnimationFrame(loop);
+      };
       rafRef.current = requestAnimationFrame(loop);
-    };
-    rafRef.current = requestAnimationFrame(loop);
+    }
     return () => {
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
@@ -62,7 +57,7 @@ const PgpBlock = (): React.ReactElement => {
     <div
       style={{ position: 'relative' }}
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseLeave={() => { setHovered(false); setScrambled(null); }}
     >
       <Link
         to="/pgp"
