@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next';
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
+// hooks
+import { useScrollDirection } from '../../hooks/useScrollDirection';
+
 // components
 import { Glitch } from '../primitives/Glitch';
 
@@ -20,6 +23,8 @@ const NAV_TARGETS: Record<(typeof NAV_KEYS)[number], string> = {
 export const BTopBar = (): React.ReactElement => {
   const { t, i18n } = useTranslation();
   const { t: th, theme, toggleTheme } = useBTheme();
+  const scrollDir = useScrollDirection();
+  const visible = scrollDir === 'up';
   const lang = i18n.language.startsWith('es') ? 'es' : 'en';
   const otherLang = lang === 'es' ? 'en' : 'es';
   const switchLang = (): void => {
@@ -41,6 +46,8 @@ export const BTopBar = (): React.ReactElement => {
         padding: '14px 32px',
         fontSize: 12,
         color: th.ink,
+        transform: visible ? 'translateY(0)' : 'translateY(-100%)',
+        transition: 'transform 260ms ease',
       }}
     >
       <div style={{ display: 'flex', gap: 20, color: th.dim, alignItems: 'baseline' }}>
