@@ -2,11 +2,6 @@
 // Real content seeded from Jose's CV (Apr 2026) and stated current focus.
 // WHY entries are drafted in his voice — refine wording any time.
 
-export interface NowEntry {
-  k: string;
-  v: string;
-}
-
 export interface ServiceEntry {
   id: string;
   title: string;
@@ -80,7 +75,6 @@ export interface JoriusData {
     linkedin: string;
     stackoverflow: string;
   };
-  now: NowEntry[];
   services: ServiceEntry[];
   experience: ExperienceEntry[];
   oss: OssEntry[];
@@ -109,13 +103,6 @@ export const JORIUS: JoriusData = {
     linkedin: 'https://www.linkedin.com/in/jose-rios-4ab123163/',
     stackoverflow: 'https://es.stackoverflow.com/users/18771/jorius',
   },
-  now: [
-    { k: 'writing', v: 'a sci-fi novel of my own — first draft, slow and steady' },
-    { k: 'building', v: 'a 2D game set in the same sci-fi universe' },
-    { k: 'looking', v: 'open to my next role — full-stack or security-focused, remote' },
-    { k: 'home', v: 'raising a family and 4 demanding cats' },
-    { k: 'co-founding', v: 'a small studio with a friend — custom software + SaaS' },
-  ],
   services: [
     {
       id: '01',
