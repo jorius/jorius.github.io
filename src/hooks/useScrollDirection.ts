@@ -8,10 +8,11 @@ const NEAR_TOP = 60;
 
 export const useScrollDirection = (): ScrollDirection => {
   const [direction, setDirection] = useState<ScrollDirection>('up');
-  const prevY = useRef(typeof window !== 'undefined' ? window.scrollY : 0);
+  const prevY = useRef(0);
   const delta = useRef(0);
 
   useEffect(() => {
+    prevY.current = window.scrollY;
     const onScroll = (): void => {
       const y = window.scrollY;
       if (y < NEAR_TOP) {
