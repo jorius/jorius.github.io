@@ -37,7 +37,7 @@ const Read = (): React.ReactElement => {
         fontFamily: 'Space Mono, monospace',
         minHeight: '100vh',
         position: 'relative',
-        overflow: 'hidden',
+        overflow: 'clip',
       }}
     >
       <BTopBar />
