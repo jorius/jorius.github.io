@@ -52,7 +52,7 @@ export const BWhy = (): React.ReactElement => {
         {JORIUS.hire_why.map((w, i) => {
           const isLastInRow = i % columnsPerRow === columnsPerRow - 1;
           const stepStyle: WhyStepCSS = {
-            padding: 24,
+            padding: isMobile ? 16 : 24,
             borderRight: !isLastInRow ? `1px solid ${t.rule}` : 'none',
             borderBottom: `1px solid ${t.rule}`,
             '--sub': t.sub,
@@ -60,10 +60,10 @@ export const BWhy = (): React.ReactElement => {
           };
           return (
             <Reveal key={w.n} delay={i * 60} className="b-why-step" style={stepStyle}>
-              <div className="b-why-num" style={{ fontSize: 48, color: t.ink, letterSpacing: '-0.03em' }}>
+              <div className="b-why-num" style={{ fontSize: 'clamp(32px, 10vw, 48px)', color: t.ink, letterSpacing: '-0.03em' }}>
                 <Glitch trigger="hover" strong>{w.n}</Glitch>
               </div>
-              <div style={{ fontSize: 22, color: t.ink, margin: '10px 0 10px 0', letterSpacing: '-0.01em' }}>
+              <div style={{ fontSize: isMobile ? 18 : 22, color: t.ink, margin: '10px 0 10px 0', letterSpacing: '-0.01em' }}>
                 <Glitch trigger="hover">{w.h}</Glitch>
               </div>
               <div style={{ fontSize: 13, color: t.dim, lineHeight: 1.55 }}>{w.b}</div>

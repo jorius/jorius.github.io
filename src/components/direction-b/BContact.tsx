@@ -64,7 +64,7 @@ export const BContact = (): React.ReactElement => {
         style={{
           display: 'grid',
           gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr',
-          gap: isMobile ? 32 : 32,
+          gap: isMobile ? 20 : 32,
           marginTop: isMobile ? 40 : 56,
           paddingTop: 28,
           borderTop: `1px solid ${t.rule}`,

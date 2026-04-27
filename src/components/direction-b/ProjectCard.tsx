@@ -38,8 +38,9 @@ interface ProjectCardCSS extends CSSProperties {
 export const ProjectCard = ({ p, i, t, columnsPerRow }: ProjectCardProps): React.ReactElement => {
   const { t: tr } = useTranslation();
   const isLastInRow = i % columnsPerRow === columnsPerRow - 1;
+  const isMobileCard = columnsPerRow === 1;
   const cardStyle: ProjectCardCSS = {
-    padding: 24,
+    padding: isMobileCard ? 16 : 24,
     borderRight: !isLastInRow ? `1px solid ${t.rule}` : 'none',
     borderBottom: `1px solid ${t.rule}`,
     cursor: p.github || p.demo ? 'pointer' : 'default',
@@ -110,7 +111,7 @@ export const ProjectCard = ({ p, i, t, columnsPerRow }: ProjectCardProps): React
           }}
         />
       </div>
-      <div style={{ fontSize: 28, color: t.ink, letterSpacing: '-0.02em', lineHeight: 1 }}>
+      <div style={{ fontSize: isMobileCard ? 22 : 28, color: t.ink, letterSpacing: '-0.02em', lineHeight: 1 }}>
         <Glitch trigger="hover" strong>{p.title}</Glitch>
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, margin: '10px 0 12px 0' }}>

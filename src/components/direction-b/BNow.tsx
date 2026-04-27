@@ -44,7 +44,7 @@ export const BNow = (): React.ReactElement => {
               delay={i * 60}
               style={{
                 display: 'grid',
-                gridTemplateColumns: isMobile ? '120px 1fr' : '160px 1fr',
+                gridTemplateColumns: isMobile ? '80px 1fr' : '160px 1fr',
                 padding: '18px 0',
                 borderBottom: `1px solid ${t.soft}`,
                 gap: isMobile ? 12 : 0,
@@ -57,10 +57,10 @@ export const BNow = (): React.ReactElement => {
         </div>
         <div style={{ alignSelf: isMobile ? 'start' : 'end', paddingBottom: isMobile ? 0 : 18 }}>
           <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{tr('directionB.now.lastUpdatedLabel')}</div>
-          <div style={{ fontSize: isMobile ? 32 : 40, color: t.ink, letterSpacing: '-0.02em', marginTop: 6 }}>
+          <div style={{ fontSize: isMobile ? 24 : 40, color: t.ink, letterSpacing: '-0.02em', marginTop: 6 }}>
             <Glitch trigger="hover" strong>{tr('directionB.now.lastUpdatedDate')}</Glitch>
           </div>
-          <div style={{ fontSize: 13, color: t.dim, marginTop: 10, maxWidth: 380 }}>
+          <div style={{ fontSize: 13, color: t.dim, marginTop: 10, maxWidth: isMobile ? '100%' : 380 }}>
             {tr('directionB.now.siversNote')}
           </div>
         </div>
