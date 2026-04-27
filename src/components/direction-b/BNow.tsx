@@ -4,9 +4,6 @@ import { useTranslation } from 'react-i18next';
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
-// data
-import { JORIUS } from '../../data/jorius';
-
 // hooks
 import { useIsMobile } from '../../hooks/useMediaQuery';
 
@@ -19,6 +16,7 @@ export const BNow = (): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr } = useTranslation();
   const isMobile = useIsMobile();
+  const entries = tr('directionB.now.entries', { returnObjects: true }) as Array<{ k: string; v: string }>;
   return (
     <>
       <BSectionHead
@@ -38,7 +36,7 @@ export const BNow = (): React.ReactElement => {
         }}
       >
         <div>
-          {JORIUS.now.map((n, i) => (
+          {entries.map((n, i) => (
             <Reveal
               key={n.k}
               delay={i * 60}
