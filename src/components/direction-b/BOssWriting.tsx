@@ -12,6 +12,7 @@ import { JORIUS } from '../../data/jorius';
 // hooks
 import useGitHubRepos from '../../hooks/useGitHubRepos';
 import type { GitHubRepo } from '../../hooks/useGitHubRepos';
+import { useIsMobile } from '../../hooks/useMediaQuery';
 
 // components
 import { Glitch } from '../primitives/Glitch';
@@ -29,6 +30,7 @@ const selectTopOss = (repos: GitHubRepo[]): GitHubRepo[] =>
 export const BOssWriting = (): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr } = useTranslation();
+  const isMobile = useIsMobile();
   const { repos, loading, error } = useGitHubRepos();
   const topOss = useMemo(() => selectTopOss(repos), [repos]);
   const max = topOss.length > 0 ? Math.max(...topOss.map((r) => r.stargazers_count), 1) : 1;
@@ -44,10 +46,10 @@ export const BOssWriting = (): React.ReactElement => {
       />
       <div
         style={{
-          padding: '0 32px 60px 32px',
+          padding: isMobile ? '0 20px 40px 20px' : '0 32px 60px 32px',
           display: 'grid',
-          gridTemplateColumns: '1.2fr 1fr',
-          gap: 48,
+          gridTemplateColumns: isMobile ? '1fr' : '1.2fr 1fr',
+          gap: isMobile ? 32 : 48,
           borderTop: `1px solid ${t.rule}`,
           paddingTop: 32,
         }}
@@ -77,12 +79,12 @@ export const BOssWriting = (): React.ReactElement => {
                 to={`/read/${w.slug}`}
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: '110px 1fr 72px',
+                  gridTemplateColumns: isMobile ? '1fr' : '110px 1fr 72px',
                   padding: '18px 0',
                   borderBottom: `1px solid ${t.soft}`,
                   color: t.ink,
                   textDecoration: 'none',
-                  gap: 12,
+                  gap: isMobile ? 6 : 12,
                   alignItems: 'baseline',
                   transition: 'background 180ms',
                 }}
@@ -97,7 +99,7 @@ export const BOssWriting = (): React.ReactElement => {
                 <span style={{ fontSize: 17, letterSpacing: '-0.01em' }}>
                   <Glitch trigger="hover">{w.title}</Glitch>
                 </span>
-                <span style={{ color: t.dim, fontSize: 12, textAlign: 'right' }}>{w.len}</span>
+                <span style={{ color: t.dim, fontSize: 12, textAlign: isMobile ? 'left' : 'right' }}>{w.len}</span>
               </Link>
             </Reveal>
           ))}
@@ -147,7 +149,7 @@ export const BOssWriting = (): React.ReactElement => {
               delay={i * 50}
               style={{ padding: '16px 0', borderBottom: `1px solid ${t.soft}` }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
                 <a
                   href={r.html_url}
                   target="_blank"

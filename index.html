@@ -30,12 +30,6 @@
       .b-index-card:hover .b-index-sheen { transform: translateX(100%); }
       .b-index-card:hover .b-index-cta { opacity: 1; transform: translateX(0); }
 
-      /* Hero portrait row responsive — stack the headline and portrait below md */
-      @media (max-width: 768px) {
-        .b-hero-grid { grid-template-columns: 1fr !important; align-items: stretch !important; }
-        .b-hero-portrait { max-width: 320px !important; margin-left: auto !important; margin-right: auto !important; }
-      }
-
       /* WHY step hover effect */
       .b-why-step { transition: background-color 240ms ease; position: relative; cursor: default; }
       .b-why-step::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--rgbB); transform: scaleX(0); transform-origin: left; transition: transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1); }

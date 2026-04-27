@@ -7,6 +7,9 @@ import { useBTheme } from '../../contexts/ThemeContext';
 // data
 import { JORIUS } from '../../data/jorius';
 
+// hooks
+import { useIsMobile } from '../../hooks/useMediaQuery';
+
 // components
 import { Glitch } from '../primitives/Glitch';
 import { Reveal } from '../primitives/Reveal';
@@ -15,6 +18,7 @@ import { BSectionHead } from './BSectionHead';
 export const BNow = (): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr } = useTranslation();
+  const isMobile = useIsMobile();
   return (
     <>
       <BSectionHead
@@ -25,10 +29,10 @@ export const BNow = (): React.ReactElement => {
       />
       <div
         style={{
-          padding: '0 32px 60px 32px',
+          padding: isMobile ? '0 20px 40px 20px' : '0 32px 60px 32px',
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 32,
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+          gap: isMobile ? 24 : 32,
           borderTop: `1px solid ${t.soft}`,
           paddingTop: 28,
         }}
@@ -40,9 +44,10 @@ export const BNow = (): React.ReactElement => {
               delay={i * 60}
               style={{
                 display: 'grid',
-                gridTemplateColumns: '160px 1fr',
+                gridTemplateColumns: isMobile ? '120px 1fr' : '160px 1fr',
                 padding: '18px 0',
                 borderBottom: `1px solid ${t.soft}`,
+                gap: isMobile ? 12 : 0,
               }}
             >
               <div style={{ color: t.dim, fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{n.k}</div>
@@ -50,9 +55,9 @@ export const BNow = (): React.ReactElement => {
             </Reveal>
           ))}
         </div>
-        <div style={{ alignSelf: 'end', paddingBottom: 18 }}>
+        <div style={{ alignSelf: isMobile ? 'start' : 'end', paddingBottom: isMobile ? 0 : 18 }}>
           <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{tr('directionB.now.lastUpdatedLabel')}</div>
-          <div style={{ fontSize: 40, color: t.ink, letterSpacing: '-0.02em', marginTop: 6 }}>
+          <div style={{ fontSize: isMobile ? 32 : 40, color: t.ink, letterSpacing: '-0.02em', marginTop: 6 }}>
             <Glitch trigger="hover" strong>{tr('directionB.now.lastUpdatedDate')}</Glitch>
           </div>
           <div style={{ fontSize: 13, color: t.dim, marginTop: 10, maxWidth: 380 }}>

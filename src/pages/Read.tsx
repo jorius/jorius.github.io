@@ -5,6 +5,9 @@ import { Link, useParams } from 'react-router-dom';
 // contexts
 import { useBTheme } from '../contexts/ThemeContext';
 
+// hooks
+import { useIsMobile } from '../hooks/useMediaQuery';
+
 // data
 import { JORIUS } from '../data/jorius';
 
@@ -26,6 +29,7 @@ const LOREM = [
 const Read = (): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr } = useTranslation();
+  const isMobile = useIsMobile();
   const { slug } = useParams<{ slug: string }>();
   const entry = JORIUS.writing.find((w) => w.slug === slug);
 
@@ -42,7 +46,7 @@ const Read = (): React.ReactElement => {
     >
       <BTopBar />
 
-      <article style={{ maxWidth: 760, margin: '0 auto', padding: '64px 32px 96px 32px' }}>
+      <article style={{ maxWidth: 760, margin: '0 auto', padding: isMobile ? '40px 20px 64px 20px' : '64px 32px 96px 32px' }}>
         <Reveal>
           <Link
             to="/"

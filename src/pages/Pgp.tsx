@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 // contexts
 import { useBTheme } from '../contexts/ThemeContext';
 
+// hooks
+import { useIsMobile } from '../hooks/useMediaQuery';
+
 // data
 import { JORIUS } from '../data/jorius';
 import { PGP_PUBLIC_KEY } from '../data/pgp-public-key';
@@ -20,6 +23,7 @@ import { ScanLines } from '../components/primitives/ScanLines';
 const Pgp = (): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr } = useTranslation();
+  const isMobile = useIsMobile();
   const [copied, setCopied] = useState<'block' | 'fingerprint' | null>(null);
 
   const copy = async (which: 'block' | 'fingerprint'): Promise<void> => {
@@ -43,7 +47,7 @@ const Pgp = (): React.ReactElement => {
     >
       <BTopBar />
 
-      <article style={{ maxWidth: 920, margin: '0 auto', padding: '64px 32px 96px 32px' }}>
+      <article style={{ maxWidth: 920, margin: '0 auto', padding: isMobile ? '40px 20px 64px 20px' : '64px 32px 96px 32px' }}>
         <Reveal>
           <Link
             to="/"

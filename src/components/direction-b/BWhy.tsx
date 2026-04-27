@@ -8,6 +8,9 @@ import { useBTheme } from '../../contexts/ThemeContext';
 // data
 import { JORIUS } from '../../data/jorius';
 
+// hooks
+import { useIsMobile, useIsTablet } from '../../hooks/useMediaQuery';
+
 // components
 import { Glitch } from '../primitives/Glitch';
 import { Reveal } from '../primitives/Reveal';
@@ -21,6 +24,14 @@ interface WhyStepCSS extends CSSProperties {
 export const BWhy = (): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr } = useTranslation();
+  const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
+
+  // Mobile: 1 col, tablet: 2 cols, desktop: 4 cols.
+  let columnsPerRow = 4;
+  if (isMobile) columnsPerRow = 1;
+  else if (isTablet) columnsPerRow = 2;
+
   return (
     <>
       <BSectionHead
@@ -31,17 +42,18 @@ export const BWhy = (): React.ReactElement => {
       />
       <div
         style={{
-          padding: '0 32px 60px 32px',
+          padding: isMobile ? '0 20px 40px 20px' : '0 32px 60px 32px',
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: `repeat(${columnsPerRow}, 1fr)`,
           gap: 0,
           borderTop: `1px solid ${t.rule}`,
         }}
       >
         {JORIUS.hire_why.map((w, i) => {
+          const isLastInRow = i % columnsPerRow === columnsPerRow - 1;
           const stepStyle: WhyStepCSS = {
             padding: 24,
-            borderRight: i < 3 ? `1px solid ${t.rule}` : 'none',
+            borderRight: !isLastInRow ? `1px solid ${t.rule}` : 'none',
             borderBottom: `1px solid ${t.rule}`,
             '--sub': t.sub,
             '--rgbB': t.rgbB,
