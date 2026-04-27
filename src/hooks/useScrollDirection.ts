@@ -7,7 +7,9 @@ const THRESHOLD = 6;
 const NEAR_TOP = 60;
 
 export const useScrollDirection = (): ScrollDirection => {
-  const [direction, setDirection] = useState<ScrollDirection>('up');
+  const [direction, setDirection] = useState<ScrollDirection>(() =>
+    typeof window !== 'undefined' && window.scrollY > NEAR_TOP ? 'down' : 'up'
+  );
   const prevY = useRef(0);
   const delta = useRef(0);
 

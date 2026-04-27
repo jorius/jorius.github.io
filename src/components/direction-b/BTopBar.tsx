@@ -46,6 +46,7 @@ export const BTopBar = (): React.ReactElement => {
         padding: '14px 32px',
         fontSize: 12,
         color: th.ink,
+        willChange: 'transform',
         transform: visible ? 'translateY(0)' : 'translateY(-100%)',
         transition: 'transform 260ms ease',
       }}

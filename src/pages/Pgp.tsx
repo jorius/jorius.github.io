@@ -38,7 +38,7 @@ const Pgp = (): React.ReactElement => {
         fontFamily: 'Space Mono, monospace',
         minHeight: '100vh',
         position: 'relative',
-        overflow: 'clip',
+        overflowX: 'clip',
       }}
     >
       <BTopBar />
