@@ -96,9 +96,7 @@ export const JORIUS: JoriusData = {
   locale: 'Medellín → remote',
   years: 10,
   email: 'josed.riosc@gmail.com',
-  affiliations: [
-    { name: 'Jericho Digital', email: 'jriosc@jericho-digital.com', tag: 'jericho' },
-  ],
+  affiliations: [],
   status: 'Open to roles · Q3 2026',
   pgp: {
     fingerprint: '5C63 48A7 862E 4138 372F  28CC 3656 0282 0FC1 B86C',
