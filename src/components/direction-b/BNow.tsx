@@ -4,9 +4,6 @@ import { useTranslation } from 'react-i18next';
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
-// data
-import { JORIUS } from '../../data/jorius';
-
 // components
 import { Glitch } from '../primitives/Glitch';
 import { Reveal } from '../primitives/Reveal';
@@ -15,6 +12,7 @@ import { BSectionHead } from './BSectionHead';
 export const BNow = (): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr } = useTranslation();
+  const entries = tr('directionB.now.entries', { returnObjects: true }) as Array<{ k: string; v: string }>;
   return (
     <>
       <BSectionHead
@@ -34,7 +32,7 @@ export const BNow = (): React.ReactElement => {
         }}
       >
         <div>
-          {JORIUS.now.map((n, i) => (
+          {entries.map((n, i) => (
             <Reveal
               key={n.k}
               delay={i * 60}
