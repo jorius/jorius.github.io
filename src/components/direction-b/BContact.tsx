@@ -1,4 +1,5 @@
 // packages
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaWhatsapp } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -18,6 +19,105 @@ const displayUrl = (url: string): string =>
   url.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
 const WHATSAPP_HREF = `https://wa.me/${JORIUS.whatsapp.replace(/[^0-9]/g, '')}`;
+
+const HEX_CHARS = '0123456789ABCDEF';
+
+const scrambleFp = (fp: string): string =>
+  fp
+    .split('')
+    .map((ch) => (ch === ' ' ? ' ' : HEX_CHARS[Math.floor(Math.random() * 16)]))
+    .join('');
+
+const PgpBlock = (): React.ReactElement => {
+  const { t } = useBTheme();
+  const { t: tr } = useTranslation();
+  const [hovered, setHovered] = useState(false);
+  const [scrambled, setScrambled] = useState<string | null>(null);
+  const rafRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (!hovered) {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+      return;
+    }
+    const loop = (): void => {
+      setScrambled(scrambleFp(JORIUS.pgp.fingerprint));
+      rafRef.current = requestAnimationFrame(loop);
+    };
+    rafRef.current = requestAnimationFrame(loop);
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, [hovered]);
+
+  const displayedFp = hovered && scrambled !== null ? scrambled : JORIUS.pgp.fingerprint;
+
+  return (
+    <div
+      style={{ position: 'relative' }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <Link
+        to="/pgp"
+        title={tr('directionB.palette.items.showPgp')}
+        style={{
+          display: 'block',
+          fontSize: 11,
+          color: t.dim,
+          marginTop: 6,
+          fontFamily: 'inherit',
+          letterSpacing: '0.04em',
+          textDecoration: 'none',
+          cursor: hovered ? 'crosshair' : 'pointer',
+        }}
+      >
+        <Glitch trigger={hovered ? 'always' : 'off'} strong>
+          {tr('directionB.contact.pgp')} {JORIUS.pgp.algo} · {JORIUS.pgp.keyId}
+        </Glitch>
+        <div style={{ fontSize: 10, color: t.dim, opacity: 0.75, marginTop: 2, wordBreak: 'break-all' }}>
+          {displayedFp}
+        </div>
+      </Link>
+
+      {/* scan line overlay */}
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent 0px 3px, rgba(0,0,0,0.06) 3px 4px)',
+          opacity: hovered ? 0.1 : 0,
+          transition: 'opacity 200ms',
+        }}
+      />
+
+      {/* encrypted label */}
+      <div
+        aria-hidden
+        style={{
+          fontSize: 10,
+          color: t.dim,
+          letterSpacing: '0.14em',
+          opacity: hovered ? 1 : 0,
+          transform: hovered ? 'translateY(0)' : 'translateY(4px)',
+          transition: 'opacity 150ms, transform 150ms',
+          marginTop: 4,
+          userSelect: 'none',
+        }}
+      >
+        [ ENCRYPTED ]
+      </div>
+    </div>
+  );
+};
 
 export const BContact = (): React.ReactElement => {
   const { t } = useBTheme();
@@ -76,25 +176,7 @@ export const BContact = (): React.ReactElement => {
               navigates to /pgp where the full ASCII-armored key is shown.
               Visually it reads as plain text — no underline, just a
               cursor-pointer hint on hover. */}
-          <Link
-            to="/pgp"
-            title={tr('directionB.palette.items.showPgp')}
-            style={{
-              display: 'block',
-              fontSize: 11,
-              color: t.dim,
-              marginTop: 6,
-              fontFamily: 'inherit',
-              letterSpacing: '0.04em',
-              textDecoration: 'none',
-              cursor: 'pointer',
-            }}
-          >
-            {tr('directionB.contact.pgp')} {JORIUS.pgp.algo} · {JORIUS.pgp.keyId}
-            <div style={{ fontSize: 10, color: t.dim, opacity: 0.75, marginTop: 2 }}>
-              {JORIUS.pgp.fingerprint}
-            </div>
-          </Link>
+          <PgpBlock />
 
           {JORIUS.affiliations.length > 0 ? (
             <div style={{ marginTop: 18, paddingTop: 14, borderTop: `1px dashed ${t.sub}` }}>
