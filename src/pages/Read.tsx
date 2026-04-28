@@ -5,6 +5,9 @@ import { Link, useParams } from 'react-router-dom';
 // contexts
 import { useBTheme } from '../contexts/ThemeContext';
 
+// hooks
+import { useIsMobile } from '../hooks/useMediaQuery';
+
 // data
 import { JORIUS } from '../data/jorius';
 
@@ -26,6 +29,7 @@ const LOREM = [
 const Read = (): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr } = useTranslation();
+  const isMobile = useIsMobile();
   const { slug } = useParams<{ slug: string }>();
   const entry = JORIUS.writing.find((w) => w.slug === slug);
 
@@ -37,12 +41,12 @@ const Read = (): React.ReactElement => {
         fontFamily: 'Space Mono, monospace',
         minHeight: '100vh',
         position: 'relative',
-        overflow: 'hidden',
+        overflowX: 'clip',
       }}
     >
       <BTopBar />
 
-      <article style={{ maxWidth: 760, margin: '0 auto', padding: '64px 32px 96px 32px' }}>
+      <article style={{ maxWidth: 760, margin: '0 auto', padding: isMobile ? '40px 20px 64px 20px' : '64px 32px 96px 32px' }}>
         <Reveal>
           <Link
             to="/"
@@ -79,7 +83,7 @@ const Read = (): React.ReactElement => {
               <h1
                 style={{
                   margin: 0,
-                  fontSize: 'clamp(40px, 6vw, 76px)',
+                  fontSize: 'clamp(26px, 6vw, 76px)',
                   letterSpacing: '-0.035em',
                   lineHeight: 0.95,
                   color: t.ink,
@@ -121,7 +125,7 @@ const Read = (): React.ReactElement => {
           </>
         ) : (
           <Reveal delay={80}>
-            <h1 style={{ margin: 0, fontSize: 'clamp(40px, 6vw, 76px)', letterSpacing: '-0.035em', lineHeight: 0.95, color: t.ink }}>
+            <h1 style={{ margin: 0, fontSize: 'clamp(26px, 6vw, 76px)', letterSpacing: '-0.035em', lineHeight: 0.95, color: t.ink }}>
               <Glitch strong>{tr('directionB.read.notFound')}</Glitch>
             </h1>
             <p style={{ marginTop: 24, fontSize: 14, color: t.dim, lineHeight: 1.6 }}>

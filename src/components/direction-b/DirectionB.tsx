@@ -35,7 +35,7 @@ export const DirectionB = (): React.ReactElement => {
         fontFamily: 'Space Mono, monospace',
         width: '100%',
         position: 'relative',
-        overflow: 'hidden',
+        overflowX: 'clip',
       }}
     >
       <BTopBar />

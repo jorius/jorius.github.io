@@ -7,6 +7,9 @@ import { useBTheme } from '../../contexts/ThemeContext';
 // data
 import portfolio from '../../data/portfolio.json';
 
+// hooks
+import { useIsMobile, useIsTablet } from '../../hooks/useMediaQuery';
+
 // components
 import { BSectionHead } from './BSectionHead';
 import { ProjectCard } from './ProjectCard';
@@ -46,7 +49,15 @@ const flattenPortfolio = (): IndexProject[] => {
 export const BProjects = (): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr } = useTranslation();
+  const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
   const projects = flattenPortfolio();
+
+  // Mobile: 1 column. Tablet: 2 columns. Desktop: 3 columns.
+  let columnsPerRow = 3;
+  if (isMobile) columnsPerRow = 1;
+  else if (isTablet) columnsPerRow = 2;
+
   return (
     <>
       <BSectionHead
@@ -57,15 +68,15 @@ export const BProjects = (): React.ReactElement => {
       />
       <div
         style={{
-          padding: '0 32px 60px 32px',
+          padding: isMobile ? '0 20px 40px 20px' : '0 32px 60px 32px',
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
+          gridTemplateColumns: `repeat(${columnsPerRow}, 1fr)`,
           gap: 0,
           borderTop: `1px solid ${t.rule}`,
         }}
       >
         {projects.map((p, i) => (
-          <ProjectCard key={p.id} p={p} i={i} t={t} />
+          <ProjectCard key={p.id} p={p} i={i} t={t} columnsPerRow={columnsPerRow} />
         ))}
       </div>
     </>

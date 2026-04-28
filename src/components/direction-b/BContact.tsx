@@ -10,6 +10,9 @@ import { useBTheme } from '../../contexts/ThemeContext';
 // data
 import { JORIUS } from '../../data/jorius';
 
+// hooks
+import { useIsMobile } from '../../hooks/useMediaQuery';
+
 // components
 import { Glitch } from '../primitives/Glitch';
 import { TypedCaret } from '../primitives/TypedCaret';
@@ -117,10 +120,14 @@ const PgpBlock = (): React.ReactElement => {
 export const BContact = (): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr } = useTranslation();
+  const isMobile = useIsMobile();
   return (
     <section
       data-jump="b-contact"
-      style={{ borderTop: `1px solid ${t.rule}`, padding: '80px 32px 40px 32px' }}
+      style={{
+        borderTop: `1px solid ${t.rule}`,
+        padding: isMobile ? '60px 20px 32px 20px' : '80px 32px 40px 32px',
+      }}
     >
       <div
         style={{
@@ -136,7 +143,7 @@ export const BContact = (): React.ReactElement => {
       <h2
         style={{
           margin: 0,
-          fontSize: 'clamp(72px, 14vw, 220px)',
+          fontSize: 'clamp(56px, 14vw, 220px)',
           letterSpacing: '-0.05em',
           lineHeight: 0.85,
           color: t.ink,
@@ -151,9 +158,9 @@ export const BContact = (): React.ReactElement => {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr',
-          gap: 32,
-          marginTop: 56,
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr',
+          gap: isMobile ? 20 : 32,
+          marginTop: isMobile ? 40 : 56,
           paddingTop: 28,
           borderTop: `1px solid ${t.rule}`,
         }}
@@ -163,7 +170,7 @@ export const BContact = (): React.ReactElement => {
           <div style={{ fontSize: 11, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>{tr('directionB.contact.email')}</div>
           <a
             href={`mailto:${JORIUS.email}`}
-            style={{ fontSize: 20, color: t.ink, textDecoration: 'none', display: 'block', marginTop: 6 }}
+            style={{ fontSize: isMobile ? 17 : 20, color: t.ink, textDecoration: 'none', display: 'block', marginTop: 6, wordBreak: 'break-all' }}
           >
             <Glitch trigger="hover">{JORIUS.email}</Glitch>
           </a>
@@ -182,7 +189,7 @@ export const BContact = (): React.ReactElement => {
                 <div key={a.email} style={{ marginTop: 4 }}>
                   <a
                     href={`mailto:${a.email}`}
-                    style={{ fontSize: 13, color: t.ink, textDecoration: 'none' }}
+                    style={{ fontSize: 13, color: t.ink, textDecoration: 'none', wordBreak: 'break-all' }}
                   >
                     <Glitch trigger="hover">{a.email}</Glitch>
                   </a>
@@ -238,11 +245,11 @@ export const BContact = (): React.ReactElement => {
         </div>
 
         {/* AVAILABILITY column */}
-        <div style={{ textAlign: 'right' }}>
+        <div style={{ textAlign: isMobile ? 'left' : 'right' }}>
           <div style={{ fontSize: 11, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>{tr('directionB.contact.availability')}</div>
           <div style={{ fontSize: 18, color: t.ink, marginTop: 6 }}>{JORIUS.status}</div>
 
-          <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 16, flexWrap: 'wrap', alignItems: 'stretch' }}>
+          <div style={{ display: 'flex', gap: 10, justifyContent: isMobile ? 'flex-start' : 'flex-end', marginTop: 16, flexWrap: 'wrap', alignItems: 'stretch' }}>
             <a
               href={WHATSAPP_HREF}
               target="_blank"
@@ -283,15 +290,16 @@ export const BContact = (): React.ReactElement => {
 
       <div
         style={{
-          marginTop: 60,
+          marginTop: isMobile ? 36 : 60,
           paddingTop: 14,
           borderTop: `1px solid ${t.rule}`,
           display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
           justifyContent: 'space-between',
           fontSize: 11,
           color: t.dim,
           flexWrap: 'wrap',
-          gap: 12,
+          gap: isMobile ? 6 : 12,
         }}
       >
         <span>{tr('directionB.contact.footer.copyright')}</span>
