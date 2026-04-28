@@ -7,6 +7,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { useBTheme } from '../../contexts/ThemeContext';
 
 // hooks
+import { useScrollDirection } from '../../hooks/useScrollDirection';
 import { useIsMobile } from '../../hooks/useMediaQuery';
 
 // components
@@ -25,6 +26,8 @@ const NAV_TARGETS: Record<(typeof NAV_KEYS)[number], string> = {
 export const BTopBar = (): React.ReactElement => {
   const { t, i18n } = useTranslation();
   const { t: th, theme, toggleTheme } = useBTheme();
+  const scrollDir = useScrollDirection();
+  const visible = scrollDir === 'up';
   const isMobile = useIsMobile();
   const [menuRequested, setMenuRequested] = useState(false);
   // Derive the visible-open state from isMobile so we never need an effect
@@ -132,6 +135,9 @@ export const BTopBar = (): React.ReactElement => {
         borderBottom: `1px solid ${th.rule}`,
         color: th.ink,
         fontSize: 12,
+        willChange: 'transform',
+        transform: visible ? 'translateY(0)' : 'translateY(-100%)',
+        transition: 'transform 260ms ease',
       }}
     >
       <div

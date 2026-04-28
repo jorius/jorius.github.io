@@ -41,7 +41,7 @@ const Read = (): React.ReactElement => {
         fontFamily: 'Space Mono, monospace',
         minHeight: '100vh',
         position: 'relative',
-        overflow: 'hidden',
+        overflowX: 'clip',
       }}
     >
       <BTopBar />
@@ -83,7 +83,7 @@ const Read = (): React.ReactElement => {
               <h1
                 style={{
                   margin: 0,
-                  fontSize: 'clamp(40px, 6vw, 76px)',
+                  fontSize: 'clamp(26px, 6vw, 76px)',
                   letterSpacing: '-0.035em',
                   lineHeight: 0.95,
                   color: t.ink,
@@ -125,7 +125,7 @@ const Read = (): React.ReactElement => {
           </>
         ) : (
           <Reveal delay={80}>
-            <h1 style={{ margin: 0, fontSize: 'clamp(40px, 6vw, 76px)', letterSpacing: '-0.035em', lineHeight: 0.95, color: t.ink }}>
+            <h1 style={{ margin: 0, fontSize: 'clamp(26px, 6vw, 76px)', letterSpacing: '-0.035em', lineHeight: 0.95, color: t.ink }}>
               <Glitch strong>{tr('directionB.read.notFound')}</Glitch>
             </h1>
             <p style={{ marginTop: 24, fontSize: 14, color: t.dim, lineHeight: 1.6 }}>

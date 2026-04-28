@@ -42,7 +42,7 @@ const Pgp = (): React.ReactElement => {
         fontFamily: 'Space Mono, monospace',
         minHeight: '100vh',
         position: 'relative',
-        overflow: 'hidden',
+        overflowX: 'clip',
       }}
     >
       <BTopBar />
@@ -83,7 +83,7 @@ const Pgp = (): React.ReactElement => {
           <h1
             style={{
               margin: 0,
-              fontSize: 'clamp(40px, 6vw, 76px)',
+              fontSize: 'clamp(26px, 6vw, 76px)',
               letterSpacing: '-0.035em',
               lineHeight: 0.95,
               color: t.ink,
@@ -108,7 +108,7 @@ const Pgp = (): React.ReactElement => {
           </div>
         </Reveal>
 
-        <Reveal delay={320} style={{ marginTop: 32, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+        <Reveal delay={320} style={{ marginTop: 32, display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: 10 }}>
           <button
             type="button"
             onClick={() => copy('fingerprint')}
@@ -149,11 +149,11 @@ const Pgp = (): React.ReactElement => {
           <pre
             style={{
               margin: 0,
-              padding: 24,
+              padding: isMobile ? 12 : 24,
               background: t.sub,
               color: t.ink,
               border: `1px solid ${t.rule}`,
-              fontSize: 12,
+              fontSize: isMobile ? 10 : 12,
               lineHeight: 1.5,
               fontFamily: 'Space Mono, ui-monospace, Menlo, monospace',
               whiteSpace: 'pre-wrap',
