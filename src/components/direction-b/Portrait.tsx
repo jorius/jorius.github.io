@@ -14,8 +14,8 @@ interface CatPhoto {
 const CATS: CatPhoto[] = [
   { name: 'Gasolina', src: '/images/cats/gasolina.jpg', role: 'Lead QA' },
   { name: 'Pancho', src: '/images/cats/pancho.jpg', role: 'CEO' },
-  { name: 'Toji', src: '/images/cats/taquito.jpeg', role: 'CFO' },
-  { name: 'Cohete', src: '/images/cats/cohete.jpeg', role: 'Right-hand man' },
+  { name: 'Toji', src: '/images/cats/toji.jpg', role: 'CFO' },
+  { name: 'Cohete', src: '/images/cats/cohete.jpg', role: 'Right-hand man' },
 ];
 
 const ROTATION_BASE_MS = 5400;
