@@ -8,13 +8,14 @@ import { useBTheme } from '../../contexts/ThemeContext';
 interface CatPhoto {
   name: string;
   src: string;
+  role: string;
 }
 
 const CATS: CatPhoto[] = [
-  { name: 'Gasolina', src: '/images/cats/gasolina.jpg' },
-  { name: 'Pancho', src: '/images/cats/pancho.jpg' },
-  { name: 'Taquito', src: '/images/cats/taquito.jpeg' },
-  { name: 'Cohete', src: '/images/cats/cohete.jpeg' },
+  { name: 'Gasolina', src: '/images/cats/gasolina.jpg', role: 'Lead QA' },
+  { name: 'Pancho', src: '/images/cats/pancho.jpg', role: 'CEO' },
+  { name: 'Toji', src: '/images/cats/taquito.jpeg', role: 'CFO' },
+  { name: 'Cohete', src: '/images/cats/cohete.jpeg', role: 'Right-hand man' },
 ];
 
 const ROTATION_BASE_MS = 5400;
@@ -178,7 +179,7 @@ export const Portrait = (): React.ReactElement => {
       >
         <span>{tr('directionB.portrait.exhibit')}</span>
         <span>
-          {activeCat.name.toUpperCase()}
+          {activeCat.name.toUpperCase()} · {activeCat.role.toUpperCase()}
           {tr('directionB.portrait.type')}
         </span>
       </div>

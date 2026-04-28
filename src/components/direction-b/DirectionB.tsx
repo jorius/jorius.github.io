@@ -11,7 +11,7 @@ import { BExperience } from './BExperience';
 import { BHero } from './BHero';
 import { BNow } from './BNow';
 import { BOssWriting } from './BOssWriting';
-import { BProjects } from './BProjects';
+// import { BProjects } from './BProjects';
 import { BServices } from './BServices';
 import { BTopBar } from './BTopBar';
 import { BWhy } from './BWhy';
@@ -20,7 +20,6 @@ const PALETTE_SECTIONS: CommandPaletteSection[] = [
   { id: 'b-now', label: 'now', hint: "what I'm up to" },
   { id: 'b-services', label: 'work', hint: 'services' },
   { id: 'b-experience', label: 'record', hint: 'experience' },
-  { id: 'b-projects', label: 'index', hint: 'projects' },
   { id: 'b-writing', label: 'writing', hint: '& oss' },
   { id: 'b-why', label: 'why', hint: 'hire me' },
   { id: 'b-contact', label: 'contact', hint: 'email' },
@@ -44,7 +43,7 @@ export const DirectionB = (): React.ReactElement => {
       <BNow />
       <BServices />
       <BExperience />
-      <BProjects />
+      {/* <BProjects /> */}
       <BOssWriting />
       <BWhy />
       <BContact />

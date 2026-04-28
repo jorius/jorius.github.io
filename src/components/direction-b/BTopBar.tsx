@@ -13,12 +13,11 @@ import { useIsMobile } from '../../hooks/useMediaQuery';
 // components
 import { Glitch } from '../primitives/Glitch';
 
-const NAV_KEYS = ['now', 'work', 'record', 'index', 'writing', 'contact'] as const;
+const NAV_KEYS = ['now', 'work', 'record', 'writing', 'contact'] as const;
 const NAV_TARGETS: Record<(typeof NAV_KEYS)[number], string> = {
   now: 'b-now',
   work: 'b-services',
   record: 'b-experience',
-  index: 'b-projects',
   writing: 'b-writing',
   contact: 'b-contact',
 };

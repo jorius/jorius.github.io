@@ -177,21 +177,6 @@ const Pgp = (): React.ReactElement => {
             Verify the fingerprint above out-of-band before trusting this key for encrypted mail.
           </p>
         </Reveal>
-
-        <Reveal delay={560} style={{ marginTop: 56, borderTop: `1px solid ${t.rule}`, paddingTop: 24 }}>
-          <Link
-            to="/"
-            style={{
-              fontSize: 12,
-              color: t.dim,
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-            }}
-          >
-            {tr('directionB.read.back')}
-          </Link>
-        </Reveal>
       </article>
 
       <ScanLines />
