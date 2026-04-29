@@ -308,6 +308,7 @@
       "availability": "Current availability",
       "book": "BOOK 20 MIN →",
       "whatsappLabel": "WhatsApp",
+      "status": "Open to roles · Q3 2026",
       "footer": {
         "copyright": "© 2026 JOSE RÍOS · PERSONAL RECORD",
         "set": "SET IN SPACE MONO · NO COOKIES",
@@ -339,6 +340,66 @@
       "notFound": "NOT FOUND.",
       "notFoundBody1": "No writing entry matches the slug",
       "notFoundBody2": "Check the link or head back to the record."
+    },
+    "services": {
+      "01": {
+        "title": "Full-stack delivery",
+        "body": "Shipping production web apps end-to-end. TypeScript, React, Next.js, Node/NestJS, AWS Lambda, well-typed API boundaries, boring infra that wakes nobody up at 3am."
+      },
+      "02": {
+        "title": "AppSec & pentesting",
+        "body": "Application security reviews, manual penetration testing, and threat modeling for auth flows, session handling, and data-access layers. I read code, attack the app, write a report, then sit with your team until the fixes land."
+      },
+      "03": {
+        "title": "Technical leadership",
+        "body": "Fractional staff engineer for teams of 3–15. Architecture reviews, hiring loops, mentoring, unblocking the hard thing nobody wants to touch. Cross-timezone delivery between LATAM and U.S. teams."
+      }
+    },
+    "experience": {
+      "present": "Present",
+      "remote": "Remote",
+      "perficient_current": {
+        "role": "Senior Technical Consultant",
+        "body": "Leading technical delivery of insurance and caregiver workflows for a U.S. health services client. Architected and implemented solutions across the JS/TS stack and coordinated across time zones with distributed American engineering teams."
+      },
+      "celerik_recent": {
+        "role": "Senior Software Developer & Technical Lead",
+        "body": "Led two JS/TS teams (8 mid-level + junior engineers). Owned full-stack architecture: NestJS / Node REST APIs, React frontends from Figma, relational + non-relational data modeling. Built and maintained Azure DevOps CI/CD pipelines across multiple concurrent client projects. Mentored engineers and standardized delivery practices across teams."
+      },
+      "perficient": {
+        "role": "Full-Stack Software Analyst",
+        "body": "Built serverless Node.js microservices on AWS Lambda for RTS ProTransport, a major U.S. trucking and logistics platform. Developed and helped architect ReactJS web applications for the same client. Provided architecture guidance for React Native mobile projects."
+      },
+      "globant": {
+        "role": "Web UI Developer (Ssr)",
+        "body": "Developed and maintained ReactJS applications for OpenBank's loans and mortgages team. Integrated frontends with the bank's core lending systems. Contributed to front-end architecture decisions across the product."
+      },
+      "celerik_2019": {
+        "role": "Front-End Lead Developer",
+        "body": "Led development of GAIA, a geospatial cluster-mapping platform visualizing deforestation, mining, and other environmental data layers. Designed and managed the PostgreSQL + PostGIS data architecture backing the mapping engine. Owned front-end architecture across multiple concurrent client engagements."
+      },
+      "comtic": {
+        "role": "Full-Stack Developer",
+        "body": "Designed, modeled, and administered relational databases in MySQL and PostgreSQL. Administered Linux servers on DigitalOcean and Heroku. Developed and maintained web applications in PHP with CodeIgniter and Laravel."
+      }
+    },
+    "hireWhy": {
+      "01": {
+        "h": "I ship.",
+        "b": "Ten years across six engagements. Every quarter has had something live in production — fintech, geospatial, logistics, lending."
+      },
+      "02": {
+        "h": "I write it down.",
+        "b": "Architecture notes, ADRs, READMEs your next hire can actually read. The CV literally says \"documentation that outlives the project\" — it earned its place."
+      },
+      "03": {
+        "h": "Greenfield or legacy, I show up the same.",
+        "b": "Equally happy architecting from scratch and diving into a tangled codebase to unblock the team. Both happen on every engagement."
+      },
+      "04": {
+        "h": "I work across time zones.",
+        "b": "Years of distributed delivery between LATAM and U.S. teams. Async-first by habit, sync when it actually moves the work."
+      }
     }
   }
 }
