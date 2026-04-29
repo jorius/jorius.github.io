@@ -78,14 +78,14 @@ export const BExperience = (): React.ReactElement => {
                 <div style={{ fontSize: 18, color: t.ink, letterSpacing: '-0.01em', fontWeight: 500 }}>
                   <Glitch trigger="hover">{e.co}</Glitch>
                 </div>
-                <div style={{ fontSize: 11, color: t.dim, marginTop: 4 }}>{e.from} → {e.to}</div>
+                <div style={{ fontSize: 11, color: t.dim, marginTop: 4 }}>{e.from} → {e.to === 'Present' ? tr('directionB.experience.present') : e.to}</div>
                 <div style={{ fontSize: 10, color: t.dim, marginTop: 2, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                  {e.loc}
+                  {e.loc === 'Remote' ? tr('directionB.experience.remote') : e.loc}
                 </div>
               </div>
             </div>
-            <div style={{ fontSize: 14, color: t.ink, fontWeight: 500, letterSpacing: '-0.005em' }}>{e.role}</div>
-            <div style={{ fontSize: 14, color: t.ink, lineHeight: 1.55 }}>{e.body}</div>
+            <div style={{ fontSize: 14, color: t.ink, fontWeight: 500, letterSpacing: '-0.005em' }}>{tr(`directionB.experience.${e.key}.role`)}</div>
+            <div style={{ fontSize: 14, color: t.ink, lineHeight: 1.55 }}>{tr(`directionB.experience.${e.key}.body`)}</div>
           </Reveal>
         ))}
       </div>
