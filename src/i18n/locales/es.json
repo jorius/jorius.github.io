@@ -242,11 +242,11 @@
       "meta": "REGISTRO PERSONAL · N.º 010 · ABR 2026",
       "intro": "Más de 10 años de software en producción. Full-stack por costumbre, mentalidad de seguridad por formación, consultor por la factura actual.",
       "headline": {
-        "fullstack": "FULL-STACK",
-        "engineer": "INGENIERO.",
+        "fullstack": "INGENIERO",
+        "engineer": "FULL-STACK,",
         "engineerKicker": "(full-stack, remoto)",
         "security": "SEGURIDAD,",
-        "shipped": "ENTREGADO."
+        "shipped": "ENTREGADA."
       },
       "body": "Trabajo solo y en equipos pequeños, normalmente proyectos de 6–12 meses. Más cómodo cuando el problema es \"tenemos un sistema viejo que nadie quiere tocar\" o \"vamos a lanzar algo nuevo y los primeros seis meses no pueden ser un desastre.\"",
       "operating": "Opero desde",
@@ -299,8 +299,8 @@
       "writingEmpty": "Los escritos volverán cuando conecte un CMS. Atento."
     },
     "contact": {
-      "headline1": "CUÉNTAME",
-      "headline2": "DE QUÉ SE TRATA.",
+      "headline1": "CUÉNTAME,",
+      "headline2": "DE QUÉ SE TRATA?",
       "email": "Correo",
       "pgp": "PGP",
       "affiliations": "Afiliaciones",
@@ -308,6 +308,7 @@
       "availability": "Disponibilidad actual",
       "book": "AGENDA 20 MIN →",
       "whatsappLabel": "WhatsApp",
+      "status": "Abierto a roles · Q3 2026",
       "footer": {
         "copyright": "© 2026 JOSE RÍOS · REGISTRO PERSONAL",
         "set": "EN ESPACIO MONO · SIN COOKIES",
@@ -339,6 +340,66 @@
       "notFound": "NO ENCONTRADO.",
       "notFoundBody1": "Ninguna entrada coincide con el slug",
       "notFoundBody2": "Revisa el enlace o vuelve a la trayectoria."
+    },
+    "services": {
+      "01": {
+        "title": "Desarrollo full-stack",
+        "body": "Entrega de software en producción de principio a fin. TypeScript, React, Next.js, Node/NestJS, AWS Lambda, interfaces API bien estructuradas, infraestructura sólida que no despierta a nadie a las 3am."
+      },
+      "02": {
+        "title": "AppSec y pentesting",
+        "body": "Revisiones de seguridad en aplicaciones, pentesting manual y modelado de amenazas para flujos de autenticación, manejo de sesiones y capas de acceso a datos. Leo el código, ataco la app, escribo el informe y me siento con tu equipo hasta que los arreglos lleguen a producción."
+      },
+      "03": {
+        "title": "Liderazgo técnico",
+        "body": "Líder técnico a tiempo parcial para equipos de entre 3 y 15 personas. Revisiones de arquitectura, procesos de contratación, mentoría y soporte en los problemas que nadie quiere afrontar. Experiencia en entrega distribuida entre equipos de LATAM y EE.UU."
+      }
+    },
+    "experience": {
+      "present": "Presente",
+      "remote": "Remoto",
+      "perficient_current": {
+        "role": "Consultor Técnico Senior",
+        "body": "Liderando la entrega técnica de flujos de seguros y cuidado personal para un cliente de servicios de salud en EE.UU. Arquitecté e implementé soluciones en la pila JS/TS y coordiné con equipos de ingeniería distribuidos en distintas zonas horarias."
+      },
+      "celerik_recent": {
+        "role": "Desarrollador Senior & Líder Técnico",
+        "body": "Lideré dos equipos de JS/TS (8 ingenieros de nivel intermedio y junior). Arquitectura full-stack: APIs REST con NestJS/Node, frontends en React desde Figma, modelado de datos relacionales y no relacionales. Construí y mantuve pipelines de CI/CD en Azure DevOps para múltiples proyectos simultáneos. Mentoricé ingenieros y estandaricé prácticas de entrega."
+      },
+      "perficient": {
+        "role": "Analista de Software Full-Stack",
+        "body": "Construí microservicios Node.js serverless en AWS Lambda para RTS ProTransport, una plataforma de logística y transporte de carga en EE.UU. Desarrollé y ayudé a arquitectar aplicaciones web ReactJS para el mismo cliente. Brindé orientación de arquitectura para proyectos móviles en React Native."
+      },
+      "globant": {
+        "role": "Desarrollador UI Web (Ssr)",
+        "body": "Desarrollé y mantuve aplicaciones ReactJS para el equipo de préstamos e hipotecas de OpenBank. Integré los frontends con los sistemas centrales de préstamos del banco. Contribuí a las decisiones de arquitectura frontend en todo el producto."
+      },
+      "celerik_2019": {
+        "role": "Desarrollador Front-End Líder",
+        "body": "Lideré el desarrollo de GAIA, una plataforma de mapeo geoespacial que visualiza capas de datos sobre deforestación, minería y otros impactos ambientales. Diseñé y gestioné la arquitectura de datos en PostgreSQL + PostGIS que respalda el motor de mapas. Lideré la arquitectura frontend en múltiples proyectos de clientes simultáneos."
+      },
+      "comtic": {
+        "role": "Desarrollador Full-Stack",
+        "body": "Diseñé, modelé y administré bases de datos relacionales en MySQL y PostgreSQL. Administré servidores Linux en DigitalOcean y Heroku. Desarrollé y mantuve aplicaciones web en PHP con CodeIgniter y Laravel."
+      }
+    },
+    "hireWhy": {
+      "01": {
+        "h": "Lo entrego.",
+        "b": "Diez años en seis proyectos. Cada trimestre algo estuvo vivo en producción: fintech, geoespacial, logística, créditos."
+      },
+      "02": {
+        "h": "Lo dejo documentado.",
+        "b": "Notas de arquitectura, ADRs, READMEs que tu próxima contratación puede leer. El CV literalmente dice 'documentación que sobrevive al proyecto' — se ganó ese lugar."
+      },
+      "03": {
+        "h": "Proyecto nuevo o legacy, aparezco igual.",
+        "b": "Igual de cómodo arquitectando desde cero que entrando a un codebase enredado para desbloquear al equipo. Las dos situaciones ocurren en cada proyecto."
+      },
+      "04": {
+        "h": "Trabajo entre zonas horarias.",
+        "b": "Años de entrega distribuida entre equipos de LATAM y EE.UU. Async por costumbre, sync cuando realmente mueve el trabajo."
+      }
     }
   }
 }
