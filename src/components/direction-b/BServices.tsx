@@ -44,9 +44,9 @@ export const BServices = (): React.ReactElement => {
           >
             <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.15em' }}>{s.id}</div>
             <h3 style={{ margin: 0, fontSize: 'clamp(22px, 7vw, 40px)', color: t.ink, letterSpacing: '-0.025em', lineHeight: 1 }}>
-              <Glitch trigger="hover" strong>{s.title}</Glitch>
+              <Glitch trigger="hover" strong>{tr(`directionB.services.${s.id}.title`)}</Glitch>
             </h3>
-            <p style={{ color: t.ink, fontSize: 15, lineHeight: 1.55, margin: 0 }}>{s.body}</p>
+            <p style={{ color: t.ink, fontSize: 15, lineHeight: 1.55, margin: 0 }}>{tr(`directionB.services.${s.id}.body`)}</p>
             <div
               style={{
                 display: 'flex',
