@@ -64,9 +64,9 @@ export const BWhy = (): React.ReactElement => {
                 <Glitch trigger="hover" strong>{w.n}</Glitch>
               </div>
               <div style={{ fontSize: isMobile ? 18 : 22, color: t.ink, margin: '10px 0 10px 0', letterSpacing: '-0.01em' }}>
-                <Glitch trigger="hover">{w.h}</Glitch>
+                <Glitch trigger="hover">{tr(`directionB.hireWhy.${w.n}.h`)}</Glitch>
               </div>
-              <div style={{ fontSize: 13, color: t.dim, lineHeight: 1.55 }}>{w.b}</div>
+              <div style={{ fontSize: 13, color: t.dim, lineHeight: 1.55 }}>{tr(`directionB.hireWhy.${w.n}.b`)}</div>
             </Reveal>
           );
         })}
