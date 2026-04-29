@@ -1,5 +1,5 @@
 // packages
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 // contexts
@@ -29,11 +29,11 @@ export const Portrait = (): React.ReactElement => {
   const [activeIdx, setActiveIdx] = useState(0);
   const [glitching, setGlitching] = useState(false);
 
-  // Rotate the visible cat every ~5.5s (with a small random offset so it
-  // doesn't feel mechanical). Each rotation fires a brief RGB-split glitch
-  // halfway through to mask the crossfade and reinforce the design's
-  // glitch language.
-  useEffect(() => {
+  // Holds a cancel function for the currently scheduled auto-rotation chain.
+  // Calling it stops all pending timers in that chain.
+  const stopAutoRef = useRef<() => void>(() => {});
+
+  const startAuto = useCallback((): void => {
     let alive = true;
     let outerTimer: ReturnType<typeof setTimeout>;
     let glitchOnTimer: ReturnType<typeof setTimeout>;
@@ -46,14 +46,16 @@ export const Portrait = (): React.ReactElement => {
         if (!alive) return;
         setActiveIdx((i) => (i + 1) % CATS.length);
         glitchOffTimer = setTimeout(() => {
-          if (alive) setGlitching(false);
+          if (!alive) return;
+          setGlitching(false);
+          outerTimer = setTimeout(tick, ROTATION_BASE_MS + Math.random() * ROTATION_JITTER_MS);
         }, GLITCH_DURATION_MS - GLITCH_LEAD_MS);
       }, GLITCH_LEAD_MS);
-      outerTimer = setTimeout(tick, ROTATION_BASE_MS + Math.random() * ROTATION_JITTER_MS);
     };
 
-    outerTimer = setTimeout(tick, 4200);
-    return () => {
+    outerTimer = setTimeout(tick, ROTATION_BASE_MS + Math.random() * ROTATION_JITTER_MS);
+
+    stopAutoRef.current = (): void => {
       alive = false;
       clearTimeout(outerTimer);
       clearTimeout(glitchOnTimer);
@@ -61,9 +63,51 @@ export const Portrait = (): React.ReactElement => {
     };
   }, []);
 
+  useEffect(() => {
+    const initialTimer = setTimeout(startAuto, 4200);
+    return (): void => {
+      clearTimeout(initialTimer);
+      stopAutoRef.current();
+    };
+  }, [startAuto]);
+
+  const navigate = (dir: 1 | -1): void => {
+    if (glitching) return;
+    stopAutoRef.current();
+    setGlitching(true);
+    let t2: ReturnType<typeof setTimeout>;
+    const t1 = setTimeout(() => {
+      setActiveIdx((i) => (i + dir + CATS.length) % CATS.length);
+      t2 = setTimeout(() => {
+        setGlitching(false);
+        startAuto();
+      }, GLITCH_DURATION_MS - GLITCH_LEAD_MS);
+    }, GLITCH_LEAD_MS);
+    // Allow a second nav tap to cancel the in-flight transition cleanly
+    stopAutoRef.current = (): void => { clearTimeout(t1); clearTimeout(t2); };
+  };
+
   const activeCat = CATS[activeIdx];
   const shiftA = glitching ? 'translate(-6px, 2px)' : 'none';
   const shiftB = glitching ? 'translate(6px, -2px)' : 'none';
+
+  const navBtnStyle = (opacity: number): React.CSSProperties => ({
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    background: 'none',
+    border: 'none',
+    padding: '8px 6px',
+    cursor: glitching ? 'default' : 'pointer',
+    fontSize: 14,
+    fontFamily: 'inherit',
+    letterSpacing: '0.12em',
+    color: '#f2efe7',
+    opacity: glitching ? 0 : opacity,
+    transition: 'opacity 150ms',
+    zIndex: 10,
+    userSelect: 'none',
+  });
 
   return (
     <div
@@ -204,8 +248,7 @@ export const Portrait = (): React.ReactElement => {
         <span style={{ fontSize: 10, opacity: 0.85 }}>{tr('directionB.portrait.subcaption')}</span>
       </div>
 
-      {/* Roving scan bar — same pulse as before but now the position swap
-          coincides with the cat rotation */}
+      {/* Roving scan bar — position swap coincides with the cat rotation */}
       <div
         aria-hidden
         style={{
@@ -220,6 +263,28 @@ export const Portrait = (): React.ReactElement => {
           pointerEvents: 'none',
         }}
       />
+
+      {/* Prev nav control */}
+      <button
+        aria-label="Previous photo"
+        onClick={() => navigate(-1)}
+        style={{ ...navBtnStyle(0.55), left: 8 }}
+        onMouseEnter={(e) => { if (!glitching) e.currentTarget.style.opacity = '1'; }}
+        onMouseLeave={(e) => { if (!glitching) e.currentTarget.style.opacity = '0.55'; }}
+      >
+        ‹
+      </button>
+
+      {/* Next nav control */}
+      <button
+        aria-label="Next photo"
+        onClick={() => navigate(1)}
+        style={{ ...navBtnStyle(0.55), right: 8 }}
+        onMouseEnter={(e) => { if (!glitching) e.currentTarget.style.opacity = '1'; }}
+        onMouseLeave={(e) => { if (!glitching) e.currentTarget.style.opacity = '0.55'; }}
+      >
+        ›
+      </button>
     </div>
   );
 };
