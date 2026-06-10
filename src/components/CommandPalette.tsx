@@ -1,7 +1,7 @@
 // packages
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // contexts
 import { useBTheme } from '../contexts/ThemeContext';
@@ -32,6 +32,7 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
   const { theme, t } = useBTheme();
   const { t: tr } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState('');
   const [idx, setIdx] = useState(0);
@@ -90,8 +91,13 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
   const choose = (it: PaletteItem | undefined): void => {
     if (!it) return;
     if (it.kind === 'section') {
-      const el = document.querySelector(`[data-jump="${it.target}"]`);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (location.pathname === '/') {
+        const el = document.querySelector(`[data-jump="${it.target}"]`);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        // Off the landing page: go home, then DirectionB scrolls to the section.
+        navigate('/', { state: { scrollTo: it.target } });
+      }
     } else if (it.target === 'copy:pgp') {
       if (navigator.clipboard) navigator.clipboard.writeText(JORIUS.pgp.fingerprint);
     } else if (it.internal) {

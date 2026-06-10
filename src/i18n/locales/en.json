@@ -322,7 +322,7 @@
       }
     },
     "read": {
-      "back": "← back to record",
+      "back": "← back",
       "readingMeta": "§ READING",
       "lenSuffix": "read",
       "placeholder": "Placeholder copy — real piece coming soon",

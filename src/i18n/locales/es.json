@@ -322,7 +322,7 @@
       }
     },
     "read": {
-      "back": "← volver a la trayectoria",
+      "back": "← volver",
       "readingMeta": "§ LECTURA",
       "lenSuffix": "lectura",
       "placeholder": "Texto de relleno — pieza real próximamente",

@@ -70,9 +70,9 @@ const PgpBlock = (): React.ReactElement => {
         title={tr('directionB.palette.items.showPgp')}
         style={{
           display: 'block',
-          fontSize: 11,
+          fontSize: 15,
           color: t.dim,
-          marginTop: 6,
+          marginTop: 10,
           fontFamily: 'inherit',
           letterSpacing: '0.04em',
           textDecoration: 'none',
@@ -82,7 +82,7 @@ const PgpBlock = (): React.ReactElement => {
         <Glitch trigger={hovered ? 'off' : 'always'} strong>
           {tr('directionB.contact.pgp')} {JORIUS.pgp.algo} · {JORIUS.pgp.keyId}
         </Glitch>
-        <div style={{ fontSize: 10, color: t.dim, opacity: 0.75, marginTop: 2, wordBreak: 'break-all' }}>
+        <div style={{ fontSize: 13, color: t.dim, opacity: 0.85, marginTop: 5, wordBreak: 'break-all' }}>
           {displayedFp}
         </div>
       </Link>
@@ -104,12 +104,12 @@ const PgpBlock = (): React.ReactElement => {
       <div
         aria-hidden
         style={{
-          fontSize: 10,
+          fontSize: 12,
           color: t.dim,
           letterSpacing: '0.14em',
           opacity: 1,
           transition: 'opacity 150ms',
-          marginTop: 4,
+          marginTop: 8,
           userSelect: 'none',
         }}
       >

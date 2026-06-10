@@ -1,6 +1,7 @@
 // packages
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 // contexts
@@ -28,6 +29,8 @@ const NAV_TARGETS: Record<(typeof NAV_KEYS)[number], string> = {
 export const BTopBar = (): React.ReactElement => {
   const { t, i18n } = useTranslation();
   const { t: th, theme, toggleTheme } = useBTheme();
+  const navigate = useNavigate();
+  const location = useLocation();
   const scrollDir = useScrollDirection();
   const visible = scrollDir === 'up';
   const isMobile = useIsMobile();
@@ -50,9 +53,15 @@ export const BTopBar = (): React.ReactElement => {
       onClick={(e) => {
         e.preventDefault();
         setMenuRequested(false);
-        document
-          .querySelector(`[data-jump="${NAV_TARGETS[key]}"]`)
-          ?.scrollIntoView({ behavior: 'smooth' });
+        const targetId = NAV_TARGETS[key];
+        if (location.pathname === '/') {
+          document
+            .querySelector(`[data-jump="${targetId}"]`)
+            ?.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          // Off the landing page: go home, then DirectionB scrolls to the section.
+          navigate('/', { state: { scrollTo: targetId } });
+        }
       }}
       style={{
         color: th.ink,
@@ -152,9 +161,11 @@ export const BTopBar = (): React.ReactElement => {
         }}
       >
         <div style={{ display: 'flex', gap: 20, color: th.dim, alignItems: 'baseline' }}>
-          <Glitch trigger="hover" style={{ color: th.ink, fontWeight: 700, letterSpacing: '0.04em' }}>
-            JORIUS
-          </Glitch>
+          <Link to="/" style={{ textDecoration: 'none', color: th.ink }} aria-label="Home">
+            <Glitch trigger="hover" style={{ color: th.ink, fontWeight: 700, letterSpacing: '0.04em' }}>
+              JORIUS
+            </Glitch>
+          </Link>
           {!isMobile ? <span>{t('directionB.topbar.volume')}{currentYear()}</span> : null}
         </div>
 

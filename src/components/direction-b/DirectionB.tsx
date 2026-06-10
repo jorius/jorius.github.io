@@ -1,9 +1,13 @@
+// packages
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
 // components
 import { CommandPalette } from '../CommandPalette';
-import type { CommandPaletteSection } from '../CommandPalette';
+import { PALETTE_SECTIONS } from './paletteSections';
 import { DarkGrain } from '../primitives/DarkGrain';
 import { ScanLines } from '../primitives/ScanLines';
 import { BContact } from './BContact';
@@ -16,17 +20,31 @@ import { BServices } from './BServices';
 import { BTopBar } from './BTopBar';
 import { BWhy } from './BWhy';
 
-const PALETTE_SECTIONS: CommandPaletteSection[] = [
-  { id: 'b-now', label: 'now', hint: "what I'm up to" },
-  { id: 'b-services', label: 'work', hint: 'services' },
-  { id: 'b-experience', label: 'record', hint: 'experience' },
-  { id: 'b-writing', label: 'writing', hint: '& oss' },
-  { id: 'b-why', label: 'why', hint: 'hire me' },
-  { id: 'b-contact', label: 'contact', hint: 'email' },
-];
-
 export const DirectionB = (): React.ReactElement => {
   const { t } = useBTheme();
+  const location = useLocation();
+
+  // When we arrive from another route with a requested section (set by the top
+  // bar / command palette while off the landing page), scroll to it once the
+  // sections have mounted. Retries briefly to absorb layout/async content.
+  useEffect(() => {
+    const target = (location.state as { scrollTo?: string } | null)?.scrollTo;
+    if (!target) return;
+    // Clear the state so a refresh or back-navigation doesn't re-scroll.
+    window.history.replaceState({}, '');
+    let attempts = 0;
+    const tryScroll = (): void => {
+      const el = document.querySelector(`[data-jump="${target}"]`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else if (attempts < 12) {
+        attempts += 1;
+        window.setTimeout(tryScroll, 80);
+      }
+    };
+    window.setTimeout(tryScroll, 60);
+  }, [location]);
+
   return (
     <div
       style={{
