@@ -60,6 +60,10 @@ content:
     type: collection
     path: src/content/writing/categories
     filename: '{fields.id}.json'
+    view:
+      primary: id
+      sort: order
+      order: asc
     fields:
       - { name: id, label: ID, type: string }
       - { name: order, label: Order, type: number }
@@ -75,6 +79,10 @@ content:
     type: collection
     path: src/content/writing/posts
     filename: '{fields.slug}.json'
+    view:
+      primary: slug
+      sort: date
+      order: desc
     fields:
       - { name: slug, label: Slug, type: string }
       - name: category
@@ -82,8 +90,9 @@ content:
         type: reference
         options:
           collection: writing-categories
-          value: id
-          label: label.en
+          value: '{fields.id}'
+          label: '{fields.label.en}'
+          search: 'fields.id,fields.label.en'
       - { name: date, label: Date, type: date }
       - { name: len, label: Length, type: string }
       - { name: tag, label: Tag, type: string }
