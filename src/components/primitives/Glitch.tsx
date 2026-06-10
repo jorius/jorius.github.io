@@ -30,7 +30,11 @@ export const Glitch = ({
   strong = false,
   className,
 }: GlitchProps): React.ReactElement => {
-  const { t, glitch } = useBTheme();
+  const { t, glitch, theme } = useBTheme();
+  // 'screen' lightens the channel-split copies over the dark paper; on the
+  // light paper that washes them out, so 'multiply' (which darkens) is what
+  // makes the red/blue split actually visible in the light theme.
+  const blendMode: CSSProperties['mixBlendMode'] = theme === 'dark' ? 'screen' : 'multiply';
   const [pulseOn, setPulseOn] = useState(false);
   const [hoverOn, setHoverOn] = useState(false);
   const [rev, setRev] = useState(0);
@@ -125,7 +129,7 @@ export const Glitch = ({
               ...layer,
               color: t.rgbR,
               transform: `translate(${-jx}px, ${jy}px)`,
-              mixBlendMode: 'screen',
+              mixBlendMode: blendMode,
               clipPath: clipA,
             }}
           >
@@ -137,7 +141,7 @@ export const Glitch = ({
               ...layer,
               color: t.rgbB,
               transform: `translate(${jx}px, ${-jy}px)`,
-              mixBlendMode: 'screen',
+              mixBlendMode: blendMode,
               clipPath: clipB,
             }}
           >
@@ -149,7 +153,7 @@ export const Glitch = ({
               ...layer,
               color: t.rgbR,
               transform: `translate(${jx * 0.6}px, ${-jy * 0.5}px)`,
-              mixBlendMode: 'screen',
+              mixBlendMode: blendMode,
               clipPath: clipC,
               opacity: 0.85,
             }}

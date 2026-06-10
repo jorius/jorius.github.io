@@ -18,6 +18,8 @@ import { loadCategories, loadPosts, pickLocale } from '../utils/content';
 
 // components
 import { BTopBar } from '../components/direction-b/BTopBar';
+import { CommandPalette } from '../components/CommandPalette';
+import { PALETTE_SECTIONS } from '../components/direction-b/paletteSections';
 import { DarkGrain } from '../components/primitives/DarkGrain';
 import { Glitch } from '../components/primitives/Glitch';
 import { ScanLines } from '../components/primitives/ScanLines';
@@ -169,7 +171,7 @@ const Writing = (): React.ReactElement => {
             border: `1px solid ${t.rule}`,
             boxShadow: `8px 8px 0 ${t.ink}`,
             padding: isMobile ? '28px 22px' : '64px clamp(32px, 6vw, 96px)',
-            maxWidth: 820,
+            maxWidth: 940,
             width: '100%',
             margin: isMobile ? '0' : '0 auto',
           }}
@@ -193,7 +195,7 @@ const Writing = (): React.ReactElement => {
               </h1>
               <div
                 className="b-reader"
-                style={{ fontSize: 17, lineHeight: 1.75, color: t.ink, maxWidth: '64ch' }}
+                style={{ fontSize: 18, lineHeight: 1.75, color: t.ink, maxWidth: '72ch' }}
               >
                 <Markdown remarkPlugins={[remarkGfm]}>{pickLocale(active.body, lang)}</Markdown>
               </div>
@@ -203,6 +205,8 @@ const Writing = (): React.ReactElement => {
           )}
         </article>
       </div>
+
+      <CommandPalette sections={PALETTE_SECTIONS} />
     </div>
   );
 };
