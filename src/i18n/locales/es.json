@@ -332,20 +332,6 @@
       "notFoundBody1": "Ninguna entrada coincide con el slug",
       "notFoundBody2": "Revisa el enlace o vuelve a la trayectoria."
     },
-    "services": {
-      "01": {
-        "title": "Desarrollo full-stack",
-        "body": "Entrega de software en producción de principio a fin. TypeScript, React, Next.js, Node/NestJS, AWS Lambda, interfaces API bien estructuradas, infraestructura sólida que no despierta a nadie a las 3am."
-      },
-      "02": {
-        "title": "AppSec y pentesting",
-        "body": "Revisiones de seguridad en aplicaciones, pentesting manual y modelado de amenazas para flujos de autenticación, manejo de sesiones y capas de acceso a datos. Leo el código, ataco la app, escribo el informe y me siento con tu equipo hasta que los arreglos lleguen a producción."
-      },
-      "03": {
-        "title": "Liderazgo técnico",
-        "body": "Líder técnico a tiempo parcial para equipos de entre 3 y 15 personas. Revisiones de arquitectura, procesos de contratación, mentoría y soporte en los problemas que nadie quiere afrontar. Experiencia en entrega distribuida entre equipos de LATAM y EE.UU."
-      }
-    },
     "experience": {
       "present": "Presente",
       "remote": "Remoto",

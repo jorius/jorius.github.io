@@ -2,11 +2,6 @@
 // Real content seeded from Jose's CV (Apr 2026) and stated current focus.
 // WHY entries are drafted in his voice — refine wording any time.
 
-export interface ServiceEntry {
-  id: string;
-  stack: string[];
-}
-
 export interface ExperienceEntry {
   key: string;
   co: string;
@@ -68,7 +63,6 @@ export interface JoriusData {
     linkedin: string;
     stackoverflow: string;
   };
-  services: ServiceEntry[];
   experience: ExperienceEntry[];
   oss: OssEntry[];
   writing: WritingEntry[];
@@ -95,11 +89,6 @@ export const JORIUS: JoriusData = {
     linkedin: 'https://www.linkedin.com/in/jose-rios-4ab123163/',
     stackoverflow: 'https://es.stackoverflow.com/users/18771/jorius',
   },
-  services: [
-    { id: '01', stack: ['TypeScript', 'React', 'Next.js', 'Node', 'AWS', 'Postgres'] },
-    { id: '02', stack: ['OWASP', 'OAuth/OIDC', 'Threat-modeling', 'Burp', 'Semgrep'] },
-    { id: '03', stack: ['RFCs', 'Review', 'Hiring', 'Mentoring', 'Roadmaps'] },
-  ],
   experience: [
     {
       key: 'perficient_current',
