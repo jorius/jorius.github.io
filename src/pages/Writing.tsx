@@ -1,7 +1,7 @@
 // src/pages/Writing.tsx
 
 // packages
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Markdown from 'react-markdown';
@@ -49,6 +49,12 @@ const Writing = (): React.ReactElement => {
 
   const postsByCategory = (catId: string): typeof posts => posts.filter((p) => p.category === catId);
 
+  // Collapsed category ids. Empty = all expanded by default; the user can fold
+  // any parent branch closed.
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
+  const toggleCategory = (catId: string): void =>
+    setCollapsed((c) => ({ ...c, [catId]: !c[catId] }));
+
   const treeWidth = isMobile ? '100%' : 'clamp(220px, 26vw, 320px)';
 
   return (
@@ -77,7 +83,7 @@ const Writing = (): React.ReactElement => {
         >
           <Link
             to="/"
-            style={{ fontSize: 11, color: t.dim, textDecoration: 'none', letterSpacing: '0.08em', textTransform: 'uppercase' }}
+            style={{ fontSize: 11, color: t.ink, opacity: 0.6, textDecoration: 'none', letterSpacing: '0.08em', textTransform: 'uppercase' }}
           >
             <Glitch trigger="hover">{tr('directionB.read.back')}</Glitch>
           </Link>
@@ -85,40 +91,71 @@ const Writing = (): React.ReactElement => {
             {categories.map((cat) => {
               const catPosts = postsByCategory(cat.id);
               if (catPosts.length === 0) return null;
+              const isCollapsed = collapsed[cat.id] ?? false;
               return (
                 <div key={cat.id} style={{ marginBottom: 20 }}>
-                  <div
+                  <button
+                    type="button"
+                    onClick={() => toggleCategory(cat.id)}
+                    aria-expanded={!isCollapsed}
                     style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      width: '100%',
+                      background: 'transparent',
+                      border: 'none',
+                      padding: 0,
+                      marginBottom: 8,
+                      cursor: 'pointer',
+                      fontFamily: 'inherit',
+                      textAlign: 'left',
                       fontSize: 11,
-                      color: t.dim,
+                      color: t.ink,
+                      opacity: 0.62,
                       letterSpacing: '0.14em',
                       textTransform: 'uppercase',
-                      marginBottom: 8,
                     }}
                   >
+                    <span
+                      aria-hidden
+                      style={{
+                        fontSize: 9,
+                        display: 'inline-block',
+                        transform: isCollapsed ? 'rotate(-90deg)' : 'none',
+                        transition: 'transform 150ms',
+                      }}
+                    >
+                      ▾
+                    </span>
                     {pickLocale(cat.label, lang)}
-                  </div>
-                  {catPosts.map((p) => {
-                    const isActive = active?.slug === p.slug;
-                    return (
-                      <Link
-                        key={p.slug}
-                        to={`/writing/${p.slug}`}
-                        style={{
-                          display: 'block',
-                          padding: '7px 0 7px 12px',
-                          borderLeft: `2px solid ${isActive ? t.ink : t.soft}`,
-                          color: isActive ? t.ink : t.dim,
-                          textDecoration: 'none',
-                          fontSize: 14,
-                          lineHeight: 1.4,
-                          transition: 'color 150ms, border-color 150ms',
-                        }}
-                      >
-                        <Glitch trigger="hover">{pickLocale(p.title, lang)}</Glitch>
-                      </Link>
-                    );
-                  })}
+                  </button>
+                  {!isCollapsed
+                    ? catPosts.map((p) => {
+                        const isActive = active?.slug === p.slug;
+                        return (
+                          <Link
+                            key={p.slug}
+                            to={`/writing/${p.slug}`}
+                            style={{
+                              display: 'block',
+                              padding: '7px 0 7px 12px',
+                              borderLeft: `2px solid ${isActive ? t.ink : t.soft}`,
+                              color: t.ink,
+                              opacity: isActive ? 1 : 0.72,
+                              textDecoration: 'none',
+                              fontSize: 14,
+                              lineHeight: 1.4,
+                              transition: 'opacity 150ms, border-color 150ms',
+                            }}
+                            onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.opacity = isActive ? '1' : '0.72'; }}
+                          >
+                            <Glitch trigger="hover">{pickLocale(p.title, lang)}</Glitch>
+                          </Link>
+                        );
+                      })
+                    : null}
                 </div>
               );
             })}
@@ -128,7 +165,7 @@ const Writing = (): React.ReactElement => {
         {/* RIGHT — paper reader */}
         <article
           style={{
-            background: t.paper,
+            background: t.sub,
             border: `1px solid ${t.rule}`,
             boxShadow: `8px 8px 0 ${t.ink}`,
             padding: isMobile ? '28px 22px' : '56px clamp(32px, 6vw, 88px)',
