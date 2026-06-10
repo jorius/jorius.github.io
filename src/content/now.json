@@ -1,14 +1,54 @@
 {
-  "lastUpdated": "2026-04-11",
+  "lastUpdated": "2026-06-10",
   "siversNote": {
     "en": "This page is inspired by Derek Sivers's \"now page.\" If your website only has three things, this should be one of them.",
     "es": "Esta página está inspirada en la \"now page\" de Derek Sivers. Si tu sitio web solo tiene tres cosas, esta debería ser una de ellas."
   },
   "entries": [
-    { "key": "writing", "label": { "en": "writing", "es": "escribiendo" }, "en": "a sci-fi novel of my own — first draft, slow and steady", "es": "una novela de ciencia ficción propia — primer borrador, poco a poco" },
-    { "key": "building", "label": { "en": "building", "es": "construyendo" }, "en": "a 2D game set in the same sci-fi universe", "es": "un juego 2D ambientado en el mismo universo de ciencia ficción" },
-    { "key": "looking", "label": { "en": "looking", "es": "buscando" }, "en": "open to my next role — full-stack or security-focused, remote", "es": "abierto a mi próximo rol — full-stack o seguridad, remoto" },
-    { "key": "home", "label": { "en": "home", "es": "hogar" }, "en": "raising a family and 4 demanding cats", "es": "criando una familia y 4 gatos exigentes" },
-    { "key": "co-founding", "label": { "en": "co-founding", "es": "co-fundando" }, "en": "a small studio with a friend — custom software + SaaS", "es": "un pequeño estudio con un amigo — software a medida + SaaS" }
+    {
+      "key": "writing",
+      "label": {
+        "en": "writing",
+        "es": "escribiendo"
+      },
+      "en": "Sci-Fi universe -DG- stories of my own, a couple of drafts, slow but with vision!",
+      "es": "Un universo de historias de ciencia ficción -DG- ya con un par de borradores, despacio pero con visión!"
+    },
+    {
+      "key": "building",
+      "label": {
+        "en": "building",
+        "es": "construyendo"
+      },
+      "en": "2D game set in the same Sci-Fi universe -DG-",
+      "es": "Un juego 2D ambientado en el mismo universo de ciencia ficción -DG-"
+    },
+    {
+      "key": "looking",
+      "label": {
+        "en": "looking",
+        "es": "buscando"
+      },
+      "en": "Looking for new open positions as full-stack and/or cybersec-focused, remote.",
+      "es": "Buscando nuevas oportunidades laborales como full-stack y/u orientado a ciberseguridad, remoto."
+    },
+    {
+      "key": "home",
+      "label": {
+        "en": "home",
+        "es": "hogar"
+      },
+      "en": "Taking care of a lovely family and 4 naughty cats.",
+      "es": "Cuidando de mi amada familia y 4 gatos traviesos."
+    },
+    {
+      "key": "co-founding",
+      "label": {
+        "en": "co-founding",
+        "es": "co-fundando"
+      },
+      "en": "Small studio with a friend, custom software + SaaS + agentic development with AI",
+      "es": "Un pequeño estudio con un amigo, software a medida + SaaS + desarrollo \"agentico\" con IA."
+    }
   ]
 }
