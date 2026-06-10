@@ -10,6 +10,9 @@ import { JORIUS } from '../../data/jorius';
 // hooks
 import { useIsMobile } from '../../hooks/useMediaQuery';
 
+// utils
+import { currentMonthYear } from '../../utils/dateLabels';
+
 // components
 import { Glitch } from '../primitives/Glitch';
 import { Scramble } from '../primitives/Scramble';
@@ -18,7 +21,7 @@ import { Portrait } from './Portrait';
 
 export const BHero = (): React.ReactElement => {
   const { t } = useBTheme();
-  const { t: tr } = useTranslation();
+  const { t: tr, i18n } = useTranslation();
   const isMobile = useIsMobile();
 
   const sectionPadding = isMobile ? '40px 20px 32px 20px' : '64px 32px 48px 32px';
@@ -36,7 +39,7 @@ export const BHero = (): React.ReactElement => {
     <section style={{ borderBottom: `1px solid ${t.rule}`, padding: sectionPadding, position: 'relative' }}>
       <div style={{ ...stack, marginBottom: isMobile ? 24 : 40 }}>
         <div style={{ fontSize: 12, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-          <Scramble text={tr('directionB.hero.meta')} />
+          <Scramble text={`${tr('directionB.hero.meta')}${currentMonthYear(i18n.language)}`} />
         </div>
         <div
           style={{

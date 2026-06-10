@@ -224,7 +224,7 @@
   },
   "directionB": {
     "topbar": {
-      "volume": "Vol. X · 2026",
+      "volume": "Vol. X · ",
       "nav": {
         "now": "Ahora",
         "work": "Trabajo",
@@ -239,7 +239,7 @@
       "pressKey": "pulsa"
     },
     "hero": {
-      "meta": "REGISTRO PERSONAL · N.º 010 · ABR 2026",
+      "meta": "REGISTRO PERSONAL · ",
       "intro": "Más de 10 años de software en producción. Full-stack por costumbre, mentalidad de seguridad por formación, consultor por la factura actual.",
       "headline": {
         "fullstack": "INGENIERO",
@@ -248,15 +248,15 @@
         "security": "SEGURIDAD,",
         "shipped": "ENTREGADA."
       },
-      "body": "Trabajo solo y en equipos pequeños, normalmente proyectos de 6–12 meses. Más cómodo cuando el problema es \"tenemos un sistema viejo que nadie quiere tocar\" o \"vamos a lanzar algo nuevo y los primeros seis meses no pueden ser un desastre.\"",
+      "body": "Diseño y entrego sistemas a gran escala de punta a punta — frontend, backend, AWS, infraestructura, CI/CD. Me integro a equipos grandes y ecosistemas ya establecidos, o los diseño desde cero: plataformas que deben sostenerse a escala Twitch, Spotify o Amazon desde el primer día.",
       "operating": "Opero desde",
-      "operatingValue": "Medellín · GMT-5",
+      "operatingValue": "Colombia · GMT-5",
       "remote": "remoto en toda América",
       "writeMe": "ESCRÍBEME →",
       "replies": "respondo en menos de 24h"
     },
     "portrait": {
-      "exhibit": "EXHIBICIÓN_01",
+      "exhibit": "EXHIBICIÓN_",
       "type": " / 35mm",
       "caption": "mis compañeros",
       "subcaption": "[ 4 gatos, sin bugs ]"
@@ -271,16 +271,7 @@
       "contact": "§ 07 · Contacto"
     },
     "now": {
-      "lastUpdatedLabel": "Última actualización",
-      "lastUpdatedDate": "2026-04-11",
-      "siversNote": "Esta página está inspirada en la \"now page\" de Derek Sivers. Si tu sitio web solo tiene tres cosas, esta debería ser una de ellas.",
-      "entries": [
-        { "k": "escribiendo", "v": "una novela de ciencia ficción propia — primer borrador, poco a poco" },
-        { "k": "construyendo", "v": "un juego 2D ambientado en el mismo universo de ciencia ficción" },
-        { "k": "buscando", "v": "abierto a mi próximo rol — full-stack o seguridad, remoto" },
-        { "k": "hogar", "v": "criando una familia y 4 gatos exigentes" },
-        { "k": "co-fundando", "v": "un pequeño estudio con un amigo — software a medida + SaaS" }
-      ]
+      "lastUpdatedLabel": "Última actualización"
     },
     "projects": {
       "openCase": "ver caso ↗",
@@ -308,9 +299,9 @@
       "availability": "Disponibilidad actual",
       "book": "AGENDA 20 MIN →",
       "whatsappLabel": "WhatsApp",
-      "status": "Abierto a roles · Q3 2026",
+      "status": "Abierto a roles ·",
       "footer": {
-        "copyright": "© 2026 JOSE RÍOS · REGISTRO PERSONAL",
+        "copyright": "JOSE RÍOS · REGISTRO PERSONAL",
         "set": "EN ESPACIO MONO · SIN COOKIES",
         "vol": "VOL. X, N.º 010"
       }
@@ -325,11 +316,9 @@
         "jumpPrefix": "ir a ›",
         "emailJorius": "escribir a Jose",
         "openGithub": "abrir GitHub",
-        "downloadResume": "descargar CV",
         "copyPgp": "copiar huella PGP",
         "showPgp": "ver clave pública PGP",
-        "githubHint": "github.com/jorius",
-        "resumeHint": "pdf · 2026"
+        "githubHint": "github.com/jorius"
       }
     },
     "read": {
@@ -340,20 +329,6 @@
       "notFound": "NO ENCONTRADO.",
       "notFoundBody1": "Ninguna entrada coincide con el slug",
       "notFoundBody2": "Revisa el enlace o vuelve a la trayectoria."
-    },
-    "services": {
-      "01": {
-        "title": "Desarrollo full-stack",
-        "body": "Entrega de software en producción de principio a fin. TypeScript, React, Next.js, Node/NestJS, AWS Lambda, interfaces API bien estructuradas, infraestructura sólida que no despierta a nadie a las 3am."
-      },
-      "02": {
-        "title": "AppSec y pentesting",
-        "body": "Revisiones de seguridad en aplicaciones, pentesting manual y modelado de amenazas para flujos de autenticación, manejo de sesiones y capas de acceso a datos. Leo el código, ataco la app, escribo el informe y me siento con tu equipo hasta que los arreglos lleguen a producción."
-      },
-      "03": {
-        "title": "Liderazgo técnico",
-        "body": "Líder técnico a tiempo parcial para equipos de entre 3 y 15 personas. Revisiones de arquitectura, procesos de contratación, mentoría y soporte en los problemas que nadie quiere afrontar. Experiencia en entrega distribuida entre equipos de LATAM y EE.UU."
-      }
     },
     "experience": {
       "present": "Presente",

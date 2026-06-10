@@ -224,7 +224,7 @@
   },
   "directionB": {
     "topbar": {
-      "volume": "Vol. X · 2026",
+      "volume": "Vol. X · ",
       "nav": {
         "now": "Now",
         "work": "Work",
@@ -239,7 +239,7 @@
       "pressKey": "press"
     },
     "hero": {
-      "meta": "PERSONAL RECORD · NO. 010 · APR 2026",
+      "meta": "PERSONAL RECORD · ",
       "intro": "More than 10 years of production software. Full-stack by habit, security-minded by training, consultant by current invoice.",
       "headline": {
         "fullstack": "FULL-STACK",
@@ -248,15 +248,15 @@
         "security": "SECURITY,",
         "shipped": "SHIPPED."
       },
-      "body": "I work alone and in small teams, usually 6–12 month engagements. Strongest when the problem is \"we have an old system and nobody wants to touch it,\" or \"we're shipping something new and the first six months have to not be a mess.\"",
+      "body": "I design and ship large-scale systems end to end — frontend, backend, AWS, infrastructure, CI/CD. I plug into big teams and established ecosystems, or architect new ones from scratch: the kind of platform that has to hold up at Twitch-, Spotify-, or Amazon-scale from day one.",
       "operating": "Operating from",
-      "operatingValue": "Medellín · GMT-5",
+      "operatingValue": "Colombia · GMT-5",
       "remote": "remote across the Americas",
       "writeMe": "WRITE ME →",
       "replies": "replies within 24h"
     },
     "portrait": {
-      "exhibit": "EXHIBIT_01",
+      "exhibit": "EXHIBIT_",
       "type": " / 35mm",
       "caption": "my co-workers",
       "subcaption": "[ 4 cats, no bugs ]"
@@ -271,16 +271,7 @@
       "contact": "§ 07 · Contact"
     },
     "now": {
-      "lastUpdatedLabel": "Last updated",
-      "lastUpdatedDate": "2026-04-11",
-      "siversNote": "This page is inspired by Derek Sivers's \"now page.\" If your website only has three things, this should be one of them.",
-      "entries": [
-        { "k": "writing", "v": "a sci-fi novel of my own — first draft, slow and steady" },
-        { "k": "building", "v": "a 2D game set in the same sci-fi universe" },
-        { "k": "looking", "v": "open to my next role — full-stack or security-focused, remote" },
-        { "k": "home", "v": "raising a family and 4 demanding cats" },
-        { "k": "co-founding", "v": "a small studio with a friend — custom software + SaaS" }
-      ]
+      "lastUpdatedLabel": "Last updated"
     },
     "projects": {
       "openCase": "open case ↗",
@@ -308,9 +299,9 @@
       "availability": "Current availability",
       "book": "BOOK 20 MIN →",
       "whatsappLabel": "WhatsApp",
-      "status": "Open to roles · Q3 2026",
+      "status": "Open to roles ·",
       "footer": {
-        "copyright": "© 2026 JOSE RÍOS · PERSONAL RECORD",
+        "copyright": "JOSE RÍOS · PERSONAL RECORD",
         "set": "SET IN SPACE MONO · NO COOKIES",
         "vol": "VOL. X, NO. 010"
       }
@@ -325,11 +316,9 @@
         "jumpPrefix": "jump ›",
         "emailJorius": "email Jose",
         "openGithub": "open GitHub",
-        "downloadResume": "download résumé",
         "copyPgp": "copy PGP fingerprint",
         "showPgp": "show PGP public key",
-        "githubHint": "github.com/jorius",
-        "resumeHint": "pdf · 2026"
+        "githubHint": "github.com/jorius"
       }
     },
     "read": {
@@ -340,20 +329,6 @@
       "notFound": "NOT FOUND.",
       "notFoundBody1": "No writing entry matches the slug",
       "notFoundBody2": "Check the link or head back to the record."
-    },
-    "services": {
-      "01": {
-        "title": "Full-stack delivery",
-        "body": "Shipping production web apps end-to-end. TypeScript, React, Next.js, Node/NestJS, AWS Lambda, well-typed API boundaries, boring infra that wakes nobody up at 3am."
-      },
-      "02": {
-        "title": "AppSec & pentesting",
-        "body": "Application security reviews, manual penetration testing, and threat modeling for auth flows, session handling, and data-access layers. I read code, attack the app, write a report, then sit with your team until the fixes land."
-      },
-      "03": {
-        "title": "Technical leadership",
-        "body": "Fractional staff engineer for teams of 3–15. Architecture reviews, hiring loops, mentoring, unblocking the hard thing nobody wants to touch. Cross-timezone delivery between LATAM and U.S. teams."
-      }
     },
     "experience": {
       "present": "Present",

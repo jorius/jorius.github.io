@@ -10,6 +10,9 @@ import { useBTheme } from '../../contexts/ThemeContext';
 import { useScrollDirection } from '../../hooks/useScrollDirection';
 import { useIsMobile } from '../../hooks/useMediaQuery';
 
+// utils
+import { currentQuarter, currentYear } from '../../utils/dateLabels';
+
 // components
 import { Glitch } from '../primitives/Glitch';
 
@@ -77,7 +80,7 @@ export const BTopBar = (): React.ReactElement => {
             display: 'inline-block',
           }}
         />
-        {' '}{t('directionB.topbar.available')} · Q3 2026
+        {' '}{t('directionB.topbar.available')} · {currentQuarter()}
       </span>
       <button
         type="button"
@@ -152,7 +155,7 @@ export const BTopBar = (): React.ReactElement => {
           <Glitch trigger="hover" style={{ color: th.ink, fontWeight: 700, letterSpacing: '0.04em' }}>
             JORIUS
           </Glitch>
-          {!isMobile ? <span>{t('directionB.topbar.volume')}</span> : null}
+          {!isMobile ? <span>{t('directionB.topbar.volume')}{currentYear()}</span> : null}
         </div>
 
         {!isMobile ? (

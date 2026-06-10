@@ -2,11 +2,6 @@
 // Real content seeded from Jose's CV (Apr 2026) and stated current focus.
 // WHY entries are drafted in his voice — refine wording any time.
 
-export interface ServiceEntry {
-  id: string;
-  stack: string[];
-}
-
 export interface ExperienceEntry {
   key: string;
   co: string;
@@ -23,14 +18,6 @@ export interface OssEntry {
   stars: number;
   lang: string;
   desc: string;
-}
-
-export interface WritingEntry {
-  slug: string;
-  date: string;
-  title: string;
-  len: string;
-  tag: string;
 }
 
 export interface TestimonialEntry {
@@ -68,10 +55,8 @@ export interface JoriusData {
     linkedin: string;
     stackoverflow: string;
   };
-  services: ServiceEntry[];
   experience: ExperienceEntry[];
   oss: OssEntry[];
-  writing: WritingEntry[];
   testimonials: TestimonialEntry[];
   hire_why: HireWhyEntry[];
 }
@@ -80,7 +65,7 @@ export const JORIUS: JoriusData = {
   name: 'Jose Ríos',
   handle: 'jorius',
   role: 'Senior full-stack engineer / technical lead',
-  locale: 'Medellín → remote',
+  locale: 'Colombia → remote',
   years: 10,
   email: 'josed.riosc@gmail.com',
   affiliations: [],
@@ -95,11 +80,6 @@ export const JORIUS: JoriusData = {
     linkedin: 'https://www.linkedin.com/in/jose-rios-4ab123163/',
     stackoverflow: 'https://es.stackoverflow.com/users/18771/jorius',
   },
-  services: [
-    { id: '01', stack: ['TypeScript', 'React', 'Next.js', 'Node', 'AWS', 'Postgres'] },
-    { id: '02', stack: ['OWASP', 'OAuth/OIDC', 'Threat-modeling', 'Burp', 'Semgrep'] },
-    { id: '03', stack: ['RFCs', 'Review', 'Hiring', 'Mentoring', 'Roadmaps'] },
-  ],
   experience: [
     {
       key: 'perficient_current',
@@ -107,7 +87,7 @@ export const JORIUS: JoriusData = {
       mark: 'P',
       accent: '#CE1E20',
       logo: '/images/perficient_logo.png',
-      loc: 'Medellín, Colombia',
+      loc: 'Colombia',
       from: 'Dec 2025',
       to: 'Present',
     },
@@ -117,7 +97,7 @@ export const JORIUS: JoriusData = {
       mark: 'C',
       accent: '#0F132A',
       logo: '/images/celerik_logo.png',
-      loc: 'Medellín, Colombia',
+      loc: 'Colombia',
       from: 'Nov 2024',
       to: 'Dec 2025',
     },
@@ -127,7 +107,7 @@ export const JORIUS: JoriusData = {
       mark: 'P',
       accent: '#CE1E20',
       logo: '/images/perficient_logo.png',
-      loc: 'Medellín, Colombia',
+      loc: 'Colombia',
       from: 'Oct 2021',
       to: 'Nov 2024',
     },
@@ -147,7 +127,7 @@ export const JORIUS: JoriusData = {
       mark: 'C',
       accent: '#0F132A',
       logo: '/images/celerik_logo.png',
-      loc: 'Medellín, Colombia',
+      loc: 'Colombia',
       from: 'Jan 2019',
       to: 'Nov 2020',
     },
@@ -157,7 +137,7 @@ export const JORIUS: JoriusData = {
       mark: 'C',
       accent: '#6B7280',
       logo: '/images/comtic_logo.jpeg',
-      loc: 'Medellín, Colombia',
+      loc: 'Colombia',
       from: '2015',
       to: '2017',
     },
@@ -167,9 +147,6 @@ export const JORIUS: JoriusData = {
     // useGitHubRepos. Kept here as a safety net if the API is rate-limited or
     // offline; harmless empty array means the section just shows a loader/error.
   ],
-  // Writing entries are intentionally empty until a real CMS (Strapi or
-  // similar) is wired up. Don't seed AI-drafted blog posts here.
-  writing: [],
   testimonials: [],
   hire_why: [
     { n: '01' },

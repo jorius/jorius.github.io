@@ -81,7 +81,6 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
     }));
     all.push({ kind: 'cmd', label: tr('directionB.palette.items.emailJorius'), target: `mailto:${JORIUS.email}`, hint: JORIUS.email, ext: true });
     all.push({ kind: 'cmd', label: tr('directionB.palette.items.openGithub'), target: JORIUS.links.github, hint: tr('directionB.palette.items.githubHint'), ext: true });
-    all.push({ kind: 'cmd', label: tr('directionB.palette.items.downloadResume'), target: '#', hint: tr('directionB.palette.items.resumeHint'), ext: false });
     all.push({ kind: 'cmd', label: tr('directionB.palette.items.copyPgp'), target: 'copy:pgp', hint: JORIUS.pgp.keyId });
     all.push({ kind: 'cmd', label: tr('directionB.palette.items.showPgp'), target: '/pgp', hint: JORIUS.pgp.algo, internal: true });
     const f = q.trim().toLowerCase();

@@ -13,6 +13,9 @@ import { JORIUS } from '../../data/jorius';
 // hooks
 import { useIsMobile } from '../../hooks/useMediaQuery';
 
+// utils
+import { currentQuarter, currentYear } from '../../utils/dateLabels';
+
 // components
 import { Glitch } from '../primitives/Glitch';
 import { TypedCaret } from '../primitives/TypedCaret';
@@ -39,7 +42,7 @@ const PgpBlock = (): React.ReactElement => {
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (hovered) {
+    if (!hovered) {
       const loop = (): void => {
         setScrambled(scrambleFp(JORIUS.pgp.fingerprint));
         rafRef.current = requestAnimationFrame(loop);
@@ -54,13 +57,13 @@ const PgpBlock = (): React.ReactElement => {
     };
   }, [hovered]);
 
-  const displayedFp = hovered && scrambled !== null ? scrambled : JORIUS.pgp.fingerprint;
+  const displayedFp = !hovered && scrambled !== null ? scrambled : JORIUS.pgp.fingerprint;
 
   return (
     <div
       style={{ position: 'relative' }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => { setHovered(false); setScrambled(null); }}
+      onMouseEnter={() => { setHovered(true); setScrambled(null); }}
+      onMouseLeave={() => setHovered(false)}
     >
       <Link
         to="/pgp"
@@ -76,7 +79,7 @@ const PgpBlock = (): React.ReactElement => {
           cursor: hovered ? 'crosshair' : 'pointer',
         }}
       >
-        <Glitch trigger={hovered ? 'always' : 'off'} strong>
+        <Glitch trigger={hovered ? 'off' : 'always'} strong>
           {tr('directionB.contact.pgp')} {JORIUS.pgp.algo} · {JORIUS.pgp.keyId}
         </Glitch>
         <div style={{ fontSize: 10, color: t.dim, opacity: 0.75, marginTop: 2, wordBreak: 'break-all' }}>
@@ -97,21 +100,20 @@ const PgpBlock = (): React.ReactElement => {
         }}
       />
 
-      {/* encrypted label */}
+      {/* encrypted / decrypted label */}
       <div
         aria-hidden
         style={{
           fontSize: 10,
           color: t.dim,
           letterSpacing: '0.14em',
-          opacity: hovered ? 1 : 0,
-          transform: hovered ? 'translateY(0)' : 'translateY(4px)',
-          transition: 'opacity 150ms, transform 150ms',
+          opacity: 1,
+          transition: 'opacity 150ms',
           marginTop: 4,
           userSelect: 'none',
         }}
       >
-        [ ENCRYPTED ]
+        {hovered ? '[ DECRYPTED ]' : '[ ENCRYPTED ]'}
       </div>
     </div>
   );
@@ -247,7 +249,7 @@ export const BContact = (): React.ReactElement => {
         {/* AVAILABILITY column */}
         <div style={{ textAlign: isMobile ? 'left' : 'right' }}>
           <div style={{ fontSize: 11, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>{tr('directionB.contact.availability')}</div>
-          <div style={{ fontSize: 18, color: t.ink, marginTop: 6 }}>{tr('directionB.contact.status')}</div>
+          <div style={{ fontSize: 18, color: t.ink, marginTop: 6 }}>{tr('directionB.contact.status')} {currentQuarter()}</div>
 
           <div style={{ display: 'flex', gap: 10, justifyContent: isMobile ? 'flex-start' : 'flex-end', marginTop: 16, flexWrap: 'wrap', alignItems: 'stretch' }}>
             <a
@@ -302,7 +304,7 @@ export const BContact = (): React.ReactElement => {
           gap: isMobile ? 6 : 12,
         }}
       >
-        <span>{tr('directionB.contact.footer.copyright')}</span>
+        <span>© {currentYear()} {tr('directionB.contact.footer.copyright')}</span>
         <span>{tr('directionB.contact.footer.set')}</span>
         <span>{tr('directionB.contact.footer.vol')}</span>
       </div>

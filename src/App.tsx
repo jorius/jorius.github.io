@@ -1,5 +1,5 @@
 // packages
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // components
 import Footer from './components/common/Footer';
@@ -13,7 +13,7 @@ import Home from './pages/Home';
 import Palette from './pages/Palette';
 import Pgp from './pages/Pgp';
 import Portfolio from './pages/Portfolio';
-import Read from './pages/Read';
+import Writing from './pages/Writing';
 
 function App() {
   return (
@@ -22,7 +22,9 @@ function App() {
       <Routes>
         {/* Standalone routes — render their own chrome (header/footer baked in). */}
         <Route path="/" element={<Home />} />
-        <Route path="/read/:slug" element={<Read />} />
+        <Route path="/writing" element={<Writing />} />
+        <Route path="/writing/:slug" element={<Writing />} />
+        <Route path="/read/:slug" element={<Navigate to="/writing" replace />} />
         <Route path="/pgp" element={<Pgp />} />
         <Route path="/palette" element={<Palette />} />
 

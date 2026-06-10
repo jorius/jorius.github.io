@@ -1,0 +1,13 @@
+{
+  "slug": "the-origin",
+  "category": "scifi",
+  "date": "2026-06-01",
+  "len": "8 min",
+  "tag": "fiction",
+  "draft": false,
+  "title": { "en": "The Origin", "es": "El origen" },
+  "body": {
+    "en": "# The Origin\n\nThe first draft of a short story set in my sci-fi universe.\n\nReplace this placeholder body in Pages CMS.",
+    "es": "# El origen\n\nEl primer borrador de un relato corto ambientado en mi universo de ciencia ficción.\n\nReemplaza este cuerpo de ejemplo en Pages CMS."
+  }
+}

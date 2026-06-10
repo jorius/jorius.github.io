@@ -2,6 +2,7 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { FaGithub } from 'react-icons/fa';
 
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
@@ -13,6 +14,10 @@ import { JORIUS } from '../../data/jorius';
 import useGitHubRepos from '../../hooks/useGitHubRepos';
 import type { GitHubRepo } from '../../hooks/useGitHubRepos';
 import { useIsMobile } from '../../hooks/useMediaQuery';
+
+// utils
+import { getLanguageIcon } from '../../utils/languageIcons';
+import { loadPosts, pickLocale } from '../../utils/content';
 
 // components
 import { Glitch } from '../primitives/Glitch';
@@ -29,12 +34,13 @@ const selectTopOss = (repos: GitHubRepo[]): GitHubRepo[] =>
 
 export const BOssWriting = (): React.ReactElement => {
   const { t } = useBTheme();
-  const { t: tr } = useTranslation();
+  const { t: tr, i18n } = useTranslation();
   const isMobile = useIsMobile();
   const { repos, loading, error } = useGitHubRepos();
   const topOss = useMemo(() => selectTopOss(repos), [repos]);
   const max = topOss.length > 0 ? Math.max(...topOss.map((r) => r.stargazers_count), 1) : 1;
-  const hasWriting = JORIUS.writing.length > 0;
+  const posts = loadPosts();
+  const hasWriting = posts.length > 0;
 
   return (
     <>
@@ -73,10 +79,10 @@ export const BOssWriting = (): React.ReactElement => {
             </div>
           ) : null}
 
-          {JORIUS.writing.map((w, i) => (
+          {posts.map((w, i) => (
             <Reveal key={w.slug} delay={i * 40}>
               <Link
-                to={`/read/${w.slug}`}
+                to={`/writing/${w.slug}`}
                 style={{
                   display: 'grid',
                   gridTemplateColumns: isMobile ? '1fr' : '110px 1fr 72px',
@@ -97,7 +103,7 @@ export const BOssWriting = (): React.ReactElement => {
               >
                 <span style={{ color: t.dim, fontSize: 12 }}>{w.date}</span>
                 <span style={{ fontSize: 17, letterSpacing: '-0.01em' }}>
-                  <Glitch trigger="hover">{w.title}</Glitch>
+                  <Glitch trigger="hover">{pickLocale(w.title, i18n.language)}</Glitch>
                 </span>
                 <span style={{ color: t.dim, fontSize: 12, textAlign: isMobile ? 'left' : 'right' }}>{w.len}</span>
               </Link>
@@ -154,13 +160,23 @@ export const BOssWriting = (): React.ReactElement => {
                   href={r.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: t.ink, textDecoration: 'none', fontSize: 15 }}
+                  style={{ color: t.ink, textDecoration: 'none', fontSize: 15, display: 'inline-flex', alignItems: 'center', gap: 6 }}
                 >
+                  <FaGithub aria-hidden style={{ width: 14, height: 14, flexShrink: 0 }} />
                   <Glitch trigger="hover">{r.full_name}</Glitch>
                 </a>
-                <span style={{ fontSize: 12, color: t.dim }}>
+                <span style={{ fontSize: 12, color: t.dim, display: 'inline-flex', alignItems: 'center', gap: 5 }}>
                   ★ {r.stargazers_count.toLocaleString()}
-                  {r.language ? ` · ${r.language}` : ''}
+                  {r.language ? (() => {
+                    const li = getLanguageIcon(r.language);
+                    return (
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                        ·
+                        {li ? <li.Icon aria-hidden style={{ width: 12, height: 12, color: li.color }} /> : null}
+                        {r.language}
+                      </span>
+                    );
+                  })() : null}
                 </span>
               </div>
               {r.description ? (

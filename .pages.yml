@@ -1,0 +1,100 @@
+media:
+  input: public/images
+  output: /images
+
+content:
+  - name: now
+    label: Now
+    type: file
+    path: src/content/now.json
+    fields:
+      - { name: lastUpdated, label: Last updated, type: date }
+      - name: siversNote
+        label: Sivers note
+        type: object
+        fields:
+          - { name: en, label: English, type: text }
+          - { name: es, label: Spanish, type: text }
+      - name: entries
+        label: Entries
+        type: list
+        fields:
+          - { name: key, label: Key, type: string }
+          - name: label
+            label: Label
+            type: object
+            fields:
+              - { name: en, label: English, type: string }
+              - { name: es, label: Spanish, type: string }
+          - { name: en, label: English (value), type: string }
+          - { name: es, label: Spanish (value), type: string }
+
+  - name: work
+    label: Work
+    type: file
+    path: src/content/work.json
+    fields:
+      - name: services
+        label: Services
+        type: list
+        fields:
+          - { name: id, label: ID, type: string }
+          - { name: stack, label: Stack, type: string, list: true }
+          - name: title
+            label: Title
+            type: object
+            fields:
+              - { name: en, label: English, type: string }
+              - { name: es, label: Spanish, type: string }
+          - name: body
+            label: Body
+            type: object
+            fields:
+              - { name: en, label: English, type: text }
+              - { name: es, label: Spanish, type: text }
+
+  - name: writing-categories
+    label: Writing — Categories
+    type: collection
+    path: src/content/writing/categories
+    filename: '{fields.id}.json'
+    fields:
+      - { name: id, label: ID, type: string }
+      - { name: order, label: Order, type: number }
+      - name: label
+        label: Label
+        type: object
+        fields:
+          - { name: en, label: English, type: string }
+          - { name: es, label: Spanish, type: string }
+
+  - name: writing-posts
+    label: Writing — Posts
+    type: collection
+    path: src/content/writing/posts
+    filename: '{fields.slug}.json'
+    fields:
+      - { name: slug, label: Slug, type: string }
+      - name: category
+        label: Category
+        type: reference
+        options:
+          collection: writing-categories
+          value: id
+          label: label.en
+      - { name: date, label: Date, type: date }
+      - { name: len, label: Length, type: string }
+      - { name: tag, label: Tag, type: string }
+      - { name: draft, label: Draft, type: boolean, default: false }
+      - name: title
+        label: Title
+        type: object
+        fields:
+          - { name: en, label: English, type: string }
+          - { name: es, label: Spanish, type: string }
+      - name: body
+        label: Body
+        type: object
+        fields:
+          - { name: en, label: English, type: rich-text }
+          - { name: es, label: Spanish, type: rich-text }

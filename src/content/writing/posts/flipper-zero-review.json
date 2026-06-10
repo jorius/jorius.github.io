@@ -1,0 +1,13 @@
+{
+  "slug": "flipper-zero-review",
+  "category": "cybersec",
+  "date": "2026-04-20",
+  "len": "10 min",
+  "tag": "hardware",
+  "draft": false,
+  "title": { "en": "Flipper Zero Review", "es": "Reseña del Flipper Zero" },
+  "body": {
+    "en": "# Flipper Zero Review\n\nHands-on notes on the multi-tool for pentesters and tinkerers.\n\nReplace this placeholder body in Pages CMS.",
+    "es": "# Reseña del Flipper Zero\n\nNotas prácticas sobre la multiherramienta para pentesters y curiosos.\n\nReemplaza este cuerpo de ejemplo en Pages CMS."
+  }
+}
