@@ -20,14 +20,6 @@ export interface OssEntry {
   desc: string;
 }
 
-export interface WritingEntry {
-  slug: string;
-  date: string;
-  title: string;
-  len: string;
-  tag: string;
-}
-
 export interface TestimonialEntry {
   who: string;
   role: string;
@@ -65,7 +57,6 @@ export interface JoriusData {
   };
   experience: ExperienceEntry[];
   oss: OssEntry[];
-  writing: WritingEntry[];
   testimonials: TestimonialEntry[];
   hire_why: HireWhyEntry[];
 }
@@ -156,9 +147,6 @@ export const JORIUS: JoriusData = {
     // useGitHubRepos. Kept here as a safety net if the API is rate-limited or
     // offline; harmless empty array means the section just shows a loader/error.
   ],
-  // Writing entries are intentionally empty until a real CMS (Strapi or
-  // similar) is wired up. Don't seed AI-drafted blog posts here.
-  writing: [],
   testimonials: [],
   hire_why: [
     { n: '01' },
