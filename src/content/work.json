@@ -2,21 +2,58 @@
   "services": [
     {
       "id": "01",
-      "stack": ["TypeScript", "React", "Next.js", "Node", "AWS", "Postgres"],
-      "title": { "en": "Full-stack delivery", "es": "Desarrollo full-stack" },
-      "body": { "en": "Shipping production web apps end-to-end. TypeScript, React, Next.js, Node/NestJS, AWS Lambda, well-typed API boundaries, boring infra that wakes nobody up at 3am.", "es": "Entrega de software en producción de principio a fin. TypeScript, React, Next.js, Node/NestJS, AWS Lambda, interfaces API bien estructuradas, infraestructura sólida que no despierta a nadie a las 3am." }
+      "stack": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Node",
+        "AWS",
+        "Postgres"
+      ],
+      "title": {
+        "en": "Full-Stack Development",
+        "es": "Desarrollo Full-Stack"
+      },
+      "body": {
+        "en": "Shipping production apps end-to-end. TypeScript, React, Next.js, Node/NestJS, AWS, well-typed API boundaries, boring infra that wakes nobody up at 3am.",
+        "es": "Entrega de software en producción de principio a fin. TypeScript, React, Next.js, Node/NestJS, AWS, interfaces API bien estructuradas, infraestructura sólida que no despierta a nadie a las 3am."
+      }
     },
     {
       "id": "02",
-      "stack": ["OWASP", "OAuth/OIDC", "Threat-modeling", "Burp", "Semgrep"],
-      "title": { "en": "AppSec & pentesting", "es": "AppSec y pentesting" },
-      "body": { "en": "Application security reviews, manual penetration testing, and threat modeling for auth flows, session handling, and data-access layers. I read code, attack the app, write a report, then sit with your team until the fixes land.", "es": "Revisiones de seguridad en aplicaciones, pentesting manual y modelado de amenazas para flujos de autenticación, manejo de sesiones y capas de acceso a datos. Leo el código, ataco la app, escribo el informe y me siento con tu equipo hasta que los arreglos lleguen a producción." }
+      "stack": [
+        "OWASP",
+        "OAuth/OIDC",
+        "Threat-modeling",
+        "Burp",
+        "Semgrep"
+      ],
+      "title": {
+        "en": "AppSec & pentesting",
+        "es": "AppSec y pentesting"
+      },
+      "body": {
+        "en": "Application security reviews, manual penetration testing, and threat modeling for auth flows, session handling, and data-access layers. I read code, attack the app, write a report, then sit with your team until the fixes land.",
+        "es": "Revisiones de seguridad en aplicaciones, pentesting manual y modelado de amenazas para flujos de autenticación, manejo de sesiones y capas de acceso a datos. Leo el código, ataco la app, escribo el informe y me siento con tu equipo hasta que los arreglos lleguen a producción."
+      }
     },
     {
       "id": "03",
-      "stack": ["RFCs", "Review", "Hiring", "Mentoring", "Roadmaps"],
-      "title": { "en": "Technical leadership", "es": "Liderazgo técnico" },
-      "body": { "en": "Fractional staff engineer for teams of 3–15. Architecture reviews, hiring loops, mentoring, unblocking the hard thing nobody wants to touch. Cross-timezone delivery between LATAM and U.S. teams.", "es": "Líder técnico a tiempo parcial para equipos de entre 3 y 15 personas. Revisiones de arquitectura, procesos de contratación, mentoría y soporte en los problemas que nadie quiere afrontar. Experiencia en entrega distribuida entre equipos de LATAM y EE.UU." }
+      "stack": [
+        "RFCs",
+        "Review",
+        "Hiring",
+        "Mentoring",
+        "Roadmaps"
+      ],
+      "title": {
+        "en": "Technical leadership",
+        "es": "Liderazgo técnico"
+      },
+      "body": {
+        "en": "Fractional staff engineer for teams of 3–15. Architecture reviews, hiring loops, mentoring, unblocking the hard thing nobody wants to touch. Cross-timezone delivery between LATAM and U.S. teams.",
+        "es": "Líder técnico a tiempo parcial para equipos de entre 3 y 15 personas. Revisiones de arquitectura, procesos de contratación, mentoría y soporte en los problemas que nadie quiere afrontar. Experiencia en entrega distribuida entre equipos de LATAM y EE.UU."
+      }
     }
   ]
 }
