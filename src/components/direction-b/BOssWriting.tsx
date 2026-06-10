@@ -2,6 +2,7 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { FaGithub } from 'react-icons/fa';
 
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
@@ -13,6 +14,9 @@ import { JORIUS } from '../../data/jorius';
 import useGitHubRepos from '../../hooks/useGitHubRepos';
 import type { GitHubRepo } from '../../hooks/useGitHubRepos';
 import { useIsMobile } from '../../hooks/useMediaQuery';
+
+// utils
+import { getLanguageIcon } from '../../utils/languageIcons';
 
 // components
 import { Glitch } from '../primitives/Glitch';
@@ -154,13 +158,23 @@ export const BOssWriting = (): React.ReactElement => {
                   href={r.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: t.ink, textDecoration: 'none', fontSize: 15 }}
+                  style={{ color: t.ink, textDecoration: 'none', fontSize: 15, display: 'inline-flex', alignItems: 'center', gap: 6 }}
                 >
+                  <FaGithub aria-hidden style={{ width: 14, height: 14, flexShrink: 0 }} />
                   <Glitch trigger="hover">{r.full_name}</Glitch>
                 </a>
-                <span style={{ fontSize: 12, color: t.dim }}>
+                <span style={{ fontSize: 12, color: t.dim, display: 'inline-flex', alignItems: 'center', gap: 5 }}>
                   ★ {r.stargazers_count.toLocaleString()}
-                  {r.language ? ` · ${r.language}` : ''}
+                  {r.language ? (() => {
+                    const li = getLanguageIcon(r.language);
+                    return (
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                        ·
+                        {li ? <li.Icon aria-hidden style={{ width: 12, height: 12, color: li.color }} /> : null}
+                        {r.language}
+                      </span>
+                    );
+                  })() : null}
                 </span>
               </div>
               {r.description ? (
