@@ -17,6 +17,7 @@ import { useIsMobile } from '../../hooks/useMediaQuery';
 
 // utils
 import { getLanguageIcon } from '../../utils/languageIcons';
+import { loadPosts, pickLocale } from '../../utils/content';
 
 // components
 import { Glitch } from '../primitives/Glitch';
@@ -33,12 +34,13 @@ const selectTopOss = (repos: GitHubRepo[]): GitHubRepo[] =>
 
 export const BOssWriting = (): React.ReactElement => {
   const { t } = useBTheme();
-  const { t: tr } = useTranslation();
+  const { t: tr, i18n } = useTranslation();
   const isMobile = useIsMobile();
   const { repos, loading, error } = useGitHubRepos();
   const topOss = useMemo(() => selectTopOss(repos), [repos]);
   const max = topOss.length > 0 ? Math.max(...topOss.map((r) => r.stargazers_count), 1) : 1;
-  const hasWriting = JORIUS.writing.length > 0;
+  const posts = loadPosts();
+  const hasWriting = posts.length > 0;
 
   return (
     <>
@@ -77,10 +79,10 @@ export const BOssWriting = (): React.ReactElement => {
             </div>
           ) : null}
 
-          {JORIUS.writing.map((w, i) => (
+          {posts.map((w, i) => (
             <Reveal key={w.slug} delay={i * 40}>
               <Link
-                to={`/read/${w.slug}`}
+                to={`/writing/${w.slug}`}
                 style={{
                   display: 'grid',
                   gridTemplateColumns: isMobile ? '1fr' : '110px 1fr 72px',
@@ -101,7 +103,7 @@ export const BOssWriting = (): React.ReactElement => {
               >
                 <span style={{ color: t.dim, fontSize: 12 }}>{w.date}</span>
                 <span style={{ fontSize: 17, letterSpacing: '-0.01em' }}>
-                  <Glitch trigger="hover">{w.title}</Glitch>
+                  <Glitch trigger="hover">{pickLocale(w.title, i18n.language)}</Glitch>
                 </span>
                 <span style={{ color: t.dim, fontSize: 12, textAlign: isMobile ? 'left' : 'right' }}>{w.len}</span>
               </Link>
