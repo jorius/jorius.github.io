@@ -221,7 +221,7 @@ export const Portrait = (): React.ReactElement => {
           pointerEvents: 'none',
         }}
       >
-        <span>{tr('directionB.portrait.exhibit')}</span>
+        <span>{tr('directionB.portrait.exhibit')}{String(activeIdx + 1).padStart(2, '0')}</span>
         <span>
           {activeCat.name.toUpperCase()} · {activeCat.role.toUpperCase()}
           {tr('directionB.portrait.type')}
