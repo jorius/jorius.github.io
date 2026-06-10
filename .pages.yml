@@ -17,7 +17,8 @@ content:
           - { name: es, label: Spanish, type: text }
       - name: entries
         label: Entries
-        type: list
+        type: object
+        list: true
         fields:
           - { name: key, label: Key, type: string }
           - name: label
@@ -36,7 +37,8 @@ content:
     fields:
       - name: services
         label: Services
-        type: list
+        type: object
+        list: true
         fields:
           - { name: id, label: ID, type: string }
           - { name: stack, label: Stack, type: string, list: true }
