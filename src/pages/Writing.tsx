@@ -168,9 +168,10 @@ const Writing = (): React.ReactElement => {
             background: t.sub,
             border: `1px solid ${t.rule}`,
             boxShadow: `8px 8px 0 ${t.ink}`,
-            padding: isMobile ? '28px 22px' : '56px clamp(32px, 6vw, 88px)',
-            maxWidth: 760,
+            padding: isMobile ? '28px 22px' : '64px clamp(32px, 6vw, 96px)',
+            maxWidth: 820,
             width: '100%',
+            margin: isMobile ? '0' : '0 auto',
           }}
         >
           {active ? (
