@@ -13,6 +13,9 @@ import { JORIUS } from '../../data/jorius';
 // hooks
 import { useIsMobile } from '../../hooks/useMediaQuery';
 
+// utils
+import { currentQuarter, currentYear } from '../../utils/dateLabels';
+
 // components
 import { Glitch } from '../primitives/Glitch';
 import { TypedCaret } from '../primitives/TypedCaret';
@@ -247,7 +250,7 @@ export const BContact = (): React.ReactElement => {
         {/* AVAILABILITY column */}
         <div style={{ textAlign: isMobile ? 'left' : 'right' }}>
           <div style={{ fontSize: 11, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>{tr('directionB.contact.availability')}</div>
-          <div style={{ fontSize: 18, color: t.ink, marginTop: 6 }}>{tr('directionB.contact.status')}</div>
+          <div style={{ fontSize: 18, color: t.ink, marginTop: 6 }}>{tr('directionB.contact.status')} {currentQuarter()}</div>
 
           <div style={{ display: 'flex', gap: 10, justifyContent: isMobile ? 'flex-start' : 'flex-end', marginTop: 16, flexWrap: 'wrap', alignItems: 'stretch' }}>
             <a
@@ -302,7 +305,7 @@ export const BContact = (): React.ReactElement => {
           gap: isMobile ? 6 : 12,
         }}
       >
-        <span>{tr('directionB.contact.footer.copyright')}</span>
+        <span>© {currentYear()} {tr('directionB.contact.footer.copyright')}</span>
         <span>{tr('directionB.contact.footer.set')}</span>
         <span>{tr('directionB.contact.footer.vol')}</span>
       </div>
