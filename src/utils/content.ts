@@ -17,7 +17,7 @@ export const pickLocale = (field: Localized, lang: string): string => {
 export interface NowContent {
   lastUpdated: string;
   siversNote: Localized;
-  entries: Array<{ key: string } & Localized>;
+  entries: Array<{ key: string; label: Localized } & Localized>;
 }
 
 export interface WorkService {

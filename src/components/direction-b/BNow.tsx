@@ -54,7 +54,7 @@ export const BNow = (): React.ReactElement => {
                 gap: isMobile ? 12 : 0,
               }}
             >
-              <div style={{ color: t.dim, fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{n.key}</div>
+              <div style={{ color: t.dim, fontSize: 12, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{pickLocale(n.label, lang)}</div>
               <div style={{ color: t.ink, fontSize: 15, lineHeight: 1.5 }}>{pickLocale(n, lang)}</div>
             </Reveal>
           ))}
