@@ -248,7 +248,7 @@
         "security": "SECURITY,",
         "shipped": "SHIPPED."
       },
-      "body": "I work alone and in small teams, usually 6–12 month engagements. Strongest when the problem is \"we have an old system and nobody wants to touch it,\" or \"we're shipping something new and the first six months have to not be a mess.\"",
+      "body": "I design and ship large-scale systems end to end — frontend, backend, AWS, infrastructure, CI/CD. I plug into big teams and established ecosystems, or architect new ones from scratch: the kind of platform that has to hold up at Twitch-, Spotify-, or Amazon-scale from day one.",
       "operating": "Operating from",
       "operatingValue": "Colombia · GMT-5",
       "remote": "remote across the Americas",

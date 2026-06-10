@@ -248,7 +248,7 @@
         "security": "SEGURIDAD,",
         "shipped": "ENTREGADA."
       },
-      "body": "Trabajo solo y en equipos pequeños, normalmente proyectos de 6–12 meses. Más cómodo cuando el problema es \"tenemos un sistema viejo que nadie quiere tocar\" o \"vamos a lanzar algo nuevo y los primeros seis meses no pueden ser un desastre.\"",
+      "body": "Diseño y entrego sistemas a gran escala de punta a punta — frontend, backend, AWS, infraestructura, CI/CD. Me integro a equipos grandes y ecosistemas ya establecidos, o los diseño desde cero: plataformas que deben sostenerse a escala Twitch, Spotify o Amazon desde el primer día.",
       "operating": "Opero desde",
       "operatingValue": "Colombia · GMT-5",
       "remote": "remoto en toda América",
