@@ -1,0 +1,14 @@
+{
+  "lastUpdated": "2026-04-11",
+  "siversNote": {
+    "en": "This page is inspired by Derek Sivers's \"now page.\" If your website only has three things, this should be one of them.",
+    "es": "Esta página está inspirada en la \"now page\" de Derek Sivers. Si tu sitio web solo tiene tres cosas, esta debería ser una de ellas."
+  },
+  "entries": [
+    { "key": "writing", "en": "a sci-fi novel of my own — first draft, slow and steady", "es": "una novela de ciencia ficción propia — primer borrador, poco a poco" },
+    { "key": "building", "en": "a 2D game set in the same sci-fi universe", "es": "un juego 2D ambientado en el mismo universo de ciencia ficción" },
+    { "key": "looking", "en": "open to my next role — full-stack or security-focused, remote", "es": "abierto a mi próximo rol — full-stack o seguridad, remoto" },
+    { "key": "home", "en": "raising a family and 4 demanding cats", "es": "criando una familia y 4 gatos exigentes" },
+    { "key": "co-founding", "en": "a small studio with a friend — custom software + SaaS", "es": "un pequeño estudio con un amigo — software a medida + SaaS" }
+  ]
+}

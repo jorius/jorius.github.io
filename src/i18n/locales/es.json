@@ -271,16 +271,7 @@
       "contact": "§ 07 · Contacto"
     },
     "now": {
-      "lastUpdatedLabel": "Última actualización",
-      "lastUpdatedDate": "2026-04-11",
-      "siversNote": "Esta página está inspirada en la \"now page\" de Derek Sivers. Si tu sitio web solo tiene tres cosas, esta debería ser una de ellas.",
-      "entries": [
-        { "k": "escribiendo", "v": "una novela de ciencia ficción propia — primer borrador, poco a poco" },
-        { "k": "construyendo", "v": "un juego 2D ambientado en el mismo universo de ciencia ficción" },
-        { "k": "buscando", "v": "abierto a mi próximo rol — full-stack o seguridad, remoto" },
-        { "k": "hogar", "v": "criando una familia y 4 gatos exigentes" },
-        { "k": "co-fundando", "v": "un pequeño estudio con un amigo — software a medida + SaaS" }
-      ]
+      "lastUpdatedLabel": "Última actualización"
     },
     "projects": {
       "openCase": "ver caso ↗",

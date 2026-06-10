@@ -271,16 +271,7 @@
       "contact": "§ 07 · Contact"
     },
     "now": {
-      "lastUpdatedLabel": "Last updated",
-      "lastUpdatedDate": "2026-04-11",
-      "siversNote": "This page is inspired by Derek Sivers's \"now page.\" If your website only has three things, this should be one of them.",
-      "entries": [
-        { "k": "writing", "v": "a sci-fi novel of my own — first draft, slow and steady" },
-        { "k": "building", "v": "a 2D game set in the same sci-fi universe" },
-        { "k": "looking", "v": "open to my next role — full-stack or security-focused, remote" },
-        { "k": "home", "v": "raising a family and 4 demanding cats" },
-        { "k": "co-founding", "v": "a small studio with a friend — custom software + SaaS" }
-      ]
+      "lastUpdatedLabel": "Last updated"
     },
     "projects": {
       "openCase": "open case ↗",
