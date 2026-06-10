@@ -26,7 +26,11 @@ interface PaletteItem {
   hint: string;
   ext?: boolean;
   internal?: boolean;
+  download?: boolean;
 }
+
+// Static résumé asset served from the site root (public/resume.pdf).
+const RESUME_HREF = '/resume.pdf';
 
 export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactElement | null => {
   const { theme, t } = useBTheme();
@@ -81,7 +85,7 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
     }));
     all.push({ kind: 'cmd', label: tr('directionB.palette.items.emailJorius'), target: `mailto:${JORIUS.email}`, hint: JORIUS.email, ext: true });
     all.push({ kind: 'cmd', label: tr('directionB.palette.items.openGithub'), target: JORIUS.links.github, hint: tr('directionB.palette.items.githubHint'), ext: true });
-    all.push({ kind: 'cmd', label: tr('directionB.palette.items.downloadResume'), target: '#', hint: tr('directionB.palette.items.resumeHint'), ext: false });
+    all.push({ kind: 'cmd', label: tr('directionB.palette.items.downloadResume'), target: RESUME_HREF, hint: tr('directionB.palette.items.resumeHint'), download: true });
     all.push({ kind: 'cmd', label: tr('directionB.palette.items.copyPgp'), target: 'copy:pgp', hint: JORIUS.pgp.keyId });
     all.push({ kind: 'cmd', label: tr('directionB.palette.items.showPgp'), target: '/pgp', hint: JORIUS.pgp.algo, internal: true });
     const f = q.trim().toLowerCase();
@@ -97,6 +101,17 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
       if (navigator.clipboard) navigator.clipboard.writeText(JORIUS.pgp.fingerprint);
     } else if (it.internal) {
       navigate(it.target);
+    } else if (it.download) {
+      // Trigger a download (or open in a new tab if the browser can't download
+      // cross-context) of the static résumé asset.
+      const a = document.createElement('a');
+      a.href = it.target;
+      a.download = '';
+      a.rel = 'noopener';
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
     } else if (it.ext) {
       window.open(it.target, '_blank', 'noopener');
     }
