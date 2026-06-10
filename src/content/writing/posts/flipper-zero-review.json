@@ -4,10 +4,13 @@
   "date": "2026-04-20",
   "len": "10 min",
   "tag": "hardware",
-  "draft": false,
-  "title": { "en": "Flipper Zero Review", "es": "Reseña del Flipper Zero" },
+  "draft": true,
+  "title": {
+    "en": "Flipper Zero Review",
+    "es": "Reseña del Flipper Zero"
+  },
   "body": {
-    "en": "# Flipper Zero Review\n\nHands-on notes on the multi-tool for pentesters and tinkerers.\n\nReplace this placeholder body in Pages CMS.",
-    "es": "# Reseña del Flipper Zero\n\nNotas prácticas sobre la multiherramienta para pentesters y curiosos.\n\nReemplaza este cuerpo de ejemplo en Pages CMS."
+    "en": "# Flipper Zero Review\n\nHands-on notes on the multi-tool for hackers and hardware enthusiasts!\n\nBefore going into the review I want to share a couple of photos of my device and some gadgets that I bought for it:  \n  \n- [Wi-Fi Developer Board ESP32, (2.4Ghz Single Channel, unfortunately)](https://www.amazon.com/dp/B0FT89TNCL)  \n- [GPIO Expansion Board, 433MHz CC1101 & 2.4G NRF24 Module](https://www.amazon.com/GEEKEYES-CC1101-NRF24L01-Expansion-NRF24/dp/B0GH8NXQT3/ref=pd_bxgy_d_sccl_1/)\n\n\n",
+    "es": "# Reseña del Flipper Zero\n\nNotas prácticas sobre la multiherramienta para hackers y entusiastas del hardware!\n\n"
   }
 }
