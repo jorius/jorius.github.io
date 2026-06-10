@@ -316,11 +316,9 @@
         "jumpPrefix": "jump ›",
         "emailJorius": "email Jose",
         "openGithub": "open GitHub",
-        "downloadResume": "download résumé",
         "copyPgp": "copy PGP fingerprint",
         "showPgp": "show PGP public key",
-        "githubHint": "github.com/jorius",
-        "resumeHint": "pdf · 2026"
+        "githubHint": "github.com/jorius"
       }
     },
     "read": {
