@@ -9,10 +9,17 @@ export interface Localized {
   es: string;
 }
 
-export const pickLocale = (field: Localized, lang: string): string => {
+export const pickLocale = (field: Localized | undefined, lang: string): string => {
+  if (!field) return '';
   const key: Lang = lang.startsWith('es') ? 'es' : 'en';
-  return field[key] ?? field.en;
+  return field[key] ?? field.en ?? '';
 };
+
+// A paired { en, es } field is only usable if it actually carries copy. Pages
+// CMS can persist a half-finished entry (missing title/body) which would
+// otherwise crash the reader at render time.
+const isLocalized = (field: unknown): field is Localized =>
+  typeof field === 'object' && field !== null && typeof (field as Localized).en === 'string';
 
 export interface NowContent {
   lastUpdated: string;
@@ -59,5 +66,8 @@ export const loadCategories = (): WritingCategory[] =>
 export const loadPosts = (): WritingPost[] =>
   Object.values(postModules)
     .map((m) => (m as { default: WritingPost }).default)
+    // Drop incomplete CMS entries: a post without localized title/body has
+    // nothing to render and would throw in pickLocale.
+    .filter((p) => isLocalized(p.title) && isLocalized(p.body))
     .filter((p) => (import.meta.env.PROD ? !p.draft : true))
     .sort((a, b) => b.date.localeCompare(a.date));

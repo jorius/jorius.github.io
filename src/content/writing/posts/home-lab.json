@@ -1,7 +1,16 @@
 {
   "slug": "home-lab",
-  "category": "id",
+  "category": "tech",
   "date": "2026-06-10",
   "len": "10 min",
-  "draft": false
+  "tag": "homelab",
+  "draft": true,
+  "title": {
+    "en": "Home Lab",
+    "es": "Home Lab"
+  },
+  "body": {
+    "en": "# Home Lab\n\nDraft — coming soon.\n",
+    "es": "# Home Lab\n\nBorrador — próximamente.\n"
+  }
 }
