@@ -57,6 +57,25 @@ const Writing = (): React.ReactElement => {
   const toggleCategory = (catId: string): void =>
     setCollapsed((c) => ({ ...c, [catId]: !c[catId] }));
 
+  // Reader width: session-only preference, desktop only (mobile is already full width).
+  const [fullWidth, setFullWidth] = useState(false);
+
+  // Lightbox for post images; null = closed.
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+
+  useEffect(() => {
+    if (!lightbox) return undefined;
+    const onKey = (e: KeyboardEvent): void => {
+      if (e.key === 'Escape') setLightbox(null);
+    };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [lightbox]);
+
   const treeWidth = isMobile ? '100%' : 'clamp(220px, 26vw, 320px)';
 
   return (
@@ -171,15 +190,38 @@ const Writing = (): React.ReactElement => {
             border: `1px solid ${t.rule}`,
             boxShadow: `8px 8px 0 ${t.ink}`,
             padding: isMobile ? '28px 22px' : '64px clamp(32px, 6vw, 96px)',
-            maxWidth: 940,
+            maxWidth: fullWidth ? 'none' : 940,
             width: '100%',
             margin: isMobile ? '0' : '0 auto',
           }}
         >
           {active ? (
             <>
-              <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-                {active.date} · {active.len} · {active.tag}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                  {active.date} · {active.len} · {active.tag}
+                </div>
+                {!isMobile ? (
+                  <button
+                    type="button"
+                    onClick={() => setFullWidth((v) => !v)}
+                    aria-pressed={fullWidth}
+                    style={{
+                      background: 'transparent',
+                      border: `1px solid ${t.rule}`,
+                      color: t.ink,
+                      padding: '3px 9px',
+                      fontSize: 11,
+                      cursor: 'pointer',
+                      fontFamily: 'inherit',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.04em',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {fullWidth ? tr('directionB.read.normalWidth') : tr('directionB.read.fullWidth')}
+                  </button>
+                ) : null}
               </div>
               <h1
                 style={{
@@ -195,9 +237,32 @@ const Writing = (): React.ReactElement => {
               </h1>
               <div
                 className="b-reader"
-                style={{ fontSize: 18, lineHeight: 1.75, color: t.ink, maxWidth: '72ch' }}
+                style={{ fontSize: 18, lineHeight: 1.75, color: t.ink, maxWidth: fullWidth ? 'none' : '72ch' }}
               >
-                <Markdown remarkPlugins={[remarkGfm]}>{pickLocale(active.body, lang)}</Markdown>
+                <Markdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    table: ({ children }) => (
+                      <div className="b-table-wrap">
+                        <table>{children}</table>
+                      </div>
+                    ),
+                    img: ({ src, alt }) => (
+                      <button
+                        type="button"
+                        className="b-img-zoom"
+                        aria-label={alt || tr('directionB.read.imageZoom')}
+                        onClick={() => {
+                          if (typeof src === 'string') setLightbox({ src, alt: alt ?? '' });
+                        }}
+                      >
+                        <img src={typeof src === 'string' ? src : undefined} alt={alt} />
+                      </button>
+                    ),
+                  }}
+                >
+                  {pickLocale(active.body, lang)}
+                </Markdown>
               </div>
             </>
           ) : (
@@ -205,6 +270,71 @@ const Writing = (): React.ReactElement => {
           )}
         </article>
       </div>
+
+      {lightbox ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setLightbox(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 300,
+            background: 'rgba(10, 10, 10, 0.88)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: isMobile ? 16 : 40,
+            cursor: 'zoom-out',
+          }}
+        >
+          <img
+            src={lightbox.src}
+            alt={lightbox.alt}
+            style={{
+              maxWidth: '100%',
+              maxHeight: '85vh',
+              border: '1px solid #f2efe7',
+              boxShadow: '8px 8px 0 #000',
+            }}
+          />
+          {lightbox.alt ? (
+            <div
+              style={{
+                marginTop: 16,
+                fontSize: 12,
+                color: '#f2efe7',
+                opacity: 0.75,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                textAlign: 'center',
+              }}
+            >
+              {lightbox.alt}
+            </div>
+          ) : null}
+          <button
+            type="button"
+            onClick={() => setLightbox(null)}
+            aria-label={tr('directionB.read.lightboxClose')}
+            style={{
+              position: 'absolute',
+              top: 20,
+              right: 24,
+              background: 'transparent',
+              border: '1px solid #f2efe7',
+              color: '#f2efe7',
+              fontSize: 14,
+              padding: '4px 10px',
+              cursor: 'pointer',
+              fontFamily: 'inherit',
+            }}
+          >
+            ✕
+          </button>
+        </div>
+      ) : null}
 
       <CommandPalette sections={PALETTE_SECTIONS} />
     </div>

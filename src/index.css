@@ -50,3 +50,12 @@
 .b-reader pre code { padding: 0; background: none; }
 .b-reader blockquote { margin: 0 0 1.2em; padding-left: 16px; border-left: 2px solid currentColor; opacity: 0.85; }
 .b-reader img { max-width: 100%; height: auto; display: block; margin: 1.6em 0; border: 1px solid currentColor; }
+.b-reader .b-table-wrap { overflow-x: auto; margin: 0 0 1.4em; }
+.b-reader table { width: 100%; border-collapse: collapse; font-size: 0.82em; line-height: 1.5; }
+.b-reader th, .b-reader td { border: 1px solid currentColor; padding: 0.55em 0.8em; text-align: left; vertical-align: top; }
+.b-reader th { font-family: 'Space Mono', monospace; font-size: 0.82em; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(0,0,0,0.06); }
+
+/* Markdown images are wrapped in a button that opens the lightbox */
+.b-img-zoom { display: block; width: 100%; padding: 0; margin: 0; border: none; background: none; cursor: zoom-in; text-align: left; font: inherit; color: inherit; }
+.b-img-zoom img { transition: opacity 150ms; }
+.b-img-zoom:hover img { opacity: 0.85; }

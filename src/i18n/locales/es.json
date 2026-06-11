@@ -328,7 +328,11 @@
       "placeholder": "Texto de relleno — pieza real próximamente",
       "notFound": "NO ENCONTRADO.",
       "notFoundBody1": "Ninguna entrada coincide con el slug",
-      "notFoundBody2": "Revisa el enlace o vuelve a la trayectoria."
+      "notFoundBody2": "Revisa el enlace o vuelve a la trayectoria.",
+      "fullWidth": "⤢ ancho completo",
+      "normalWidth": "⤡ ancho normal",
+      "imageZoom": "ver a tamaño completo",
+      "lightboxClose": "cerrar imagen"
     },
     "experience": {
       "present": "Presente",

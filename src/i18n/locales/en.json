@@ -328,7 +328,11 @@
       "placeholder": "Placeholder copy — real piece coming soon",
       "notFound": "NOT FOUND.",
       "notFoundBody1": "No writing entry matches the slug",
-      "notFoundBody2": "Check the link or head back to the record."
+      "notFoundBody2": "Check the link or head back to the record.",
+      "fullWidth": "⤢ full width",
+      "normalWidth": "⤡ normal width",
+      "imageZoom": "view full size",
+      "lightboxClose": "close image"
     },
     "experience": {
       "present": "Present",
