@@ -237,7 +237,15 @@ const Writing = (): React.ReactElement => {
               </h1>
               <div
                 className="b-reader"
-                style={{ fontSize: 18, lineHeight: 1.75, color: t.ink, maxWidth: fullWidth ? 'none' : '72ch' }}
+                style={
+                  {
+                    fontSize: 18,
+                    lineHeight: 1.75,
+                    color: t.ink,
+                    maxWidth: fullWidth ? 'none' : '72ch',
+                    '--b-link': t.rgbB,
+                  } as React.CSSProperties
+                }
               >
                 <Markdown
                   remarkPlugins={[remarkGfm]}

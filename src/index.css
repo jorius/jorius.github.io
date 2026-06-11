@@ -44,7 +44,8 @@
 .b-reader p { margin: 0 0 1.1em; }
 .b-reader ul, .b-reader ol { margin: 0 0 1.1em 1.2em; }
 .b-reader li { margin: 0.3em 0; }
-.b-reader a { color: inherit; text-underline-offset: 3px; }
+.b-reader a { color: var(--b-link, currentColor); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.b-reader a:hover { text-decoration-thickness: 2px; }
 .b-reader code { font-family: 'Space Mono', monospace; font-size: 0.9em; padding: 0.1em 0.35em; background: rgba(0,0,0,0.06); }
 .b-reader pre { overflow-x: auto; padding: 14px 16px; background: rgba(0,0,0,0.06); margin: 0 0 1.2em; }
 .b-reader pre code { padding: 0; background: none; }
