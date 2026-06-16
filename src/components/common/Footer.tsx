@@ -1,5 +1,4 @@
 // packages
-import React from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 

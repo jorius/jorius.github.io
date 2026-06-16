@@ -1,5 +1,4 @@
 // packages
-import React from "react";
 import { FaLinkedin, FaGithub, FaWhatsapp } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";

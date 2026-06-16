@@ -1,5 +1,5 @@
 // packages
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { FaGithub, FaLock } from 'react-icons/fa';
 import { FiArrowUpRight, FiLoader } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
