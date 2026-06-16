@@ -1,5 +1,5 @@
 // packages
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { FaGithub, FaLock } from 'react-icons/fa';
 import { FiArrowUpRight, FiLoader } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
@@ -32,7 +32,7 @@ interface PrivateRepoConfig {
   lastCommit: string | null;
 }
 
-const TechChip = ({ name }: { name: string }) => {
+const TechChip = ({ name }: { name: string }): React.ReactElement => {
   const config = techConfig[name];
   const color = config?.color ?? '#707070';
   return (
@@ -46,7 +46,7 @@ const TechChip = ({ name }: { name: string }) => {
   );
 };
 
-const RepoCard = ({ repo }: { repo: GitHubRepo }) => {
+const RepoCard = ({ repo }: { repo: GitHubRepo }): React.ReactElement => {
   const techs = [
     repo.language,
     ...repo.topics.filter((t) => techConfig[t] !== undefined),
@@ -119,7 +119,7 @@ const RepoCard = ({ repo }: { repo: GitHubRepo }) => {
   );
 };
 
-const PrivateConfigCard = ({ repo }: { repo: PrivateRepoConfig }) => (
+const PrivateConfigCard = ({ repo }: { repo: PrivateRepoConfig }): React.ReactElement => (
   <div className="flex flex-col gap-3 bg-portfolio-dark-800 border border-portfolio-gray-200 p-5 h-[220px] group hover:border-principal transition-all duration-300 overflow-hidden">
     <h3 className="font-space-mono font-bold text-lg text-white tracking-[-0.27px] truncate">
       {repo.name}
@@ -148,7 +148,7 @@ const PrivateConfigCard = ({ repo }: { repo: PrivateRepoConfig }) => (
   </div>
 );
 
-const ClientCard = ({ project }: { project: ClientProject }) => (
+const ClientCard = ({ project }: { project: ClientProject }): React.ReactElement => (
   <div className="flex flex-col gap-3 bg-portfolio-dark-800 border border-portfolio-gray-200 p-5 h-[220px] group hover:border-principal transition-all duration-300 overflow-hidden">
     <h3 className="font-space-mono font-bold text-lg text-white tracking-[-0.27px] truncate">
       {project.title}
@@ -190,7 +190,7 @@ const ClientCard = ({ project }: { project: ClientProject }) => (
   </div>
 );
 
-const Portfolio = () => {
+const Portfolio = (): React.ReactElement => {
   const { t } = useTranslation();
   const { repos, loading, error } = useGitHubRepos();
 

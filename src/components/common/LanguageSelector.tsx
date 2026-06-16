@@ -1,8 +1,8 @@
 // packages
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const LanguageSelector = () => {
+const LanguageSelector = (): React.ReactElement => {
   const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 

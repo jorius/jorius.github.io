@@ -1,4 +1,5 @@
 // packages
+import React from "react";
 import { FaLinkedin, FaGithub, FaWhatsapp } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -10,7 +11,7 @@ import LanguageSelector from "./LanguageSelector";
 // utils
 import { scrollToSection } from "../../utils/scrollUtils";
 
-const Header = () => {
+const Header = (): React.ReactElement => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();

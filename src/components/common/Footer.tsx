@@ -1,4 +1,5 @@
 // packages
+import React from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 
@@ -8,7 +9,7 @@ import Button from "./Button";
 // utils
 import { scrollToSection } from "../../utils/scrollUtils";
 
-const Footer = () => {
+const Footer = (): React.ReactElement => {
   const { t } = useTranslation();
 
   return (
