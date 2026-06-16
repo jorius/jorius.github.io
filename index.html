@@ -14,6 +14,22 @@
     />
 
     <title>Jorius — Personal Record</title>
+    <script>
+      // Companion to public/404.html: restore the original URL that GitHub
+      // Pages couldn't serve so React Router sees the real path on first load.
+      (function () {
+        var qs = window.location.search;
+        if (qs[1] === '/') {
+          var parts = qs.slice(2).split('&').map(function (s) {
+            return s.replace(/~and~/g, '&');
+          });
+          window.history.replaceState(
+            null, null,
+            '/' + parts.shift() + (parts.length ? '?' + parts.join('&') : '') + window.location.hash
+          );
+        }
+      })();
+    </script>
 
     <style>
       html, body { margin: 0; padding: 0; background: #292929; color: #f2efe7; font-family: "Space Mono", ui-monospace, Menlo, monospace; }

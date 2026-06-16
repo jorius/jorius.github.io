@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Jorius — Personal Record</title>
+    <script>
+      // GitHub Pages serves this file for any path it can't find.
+      // Encode the original path into the query string and redirect to
+      // index.html so the SPA can restore it and let React Router decide
+      // whether the route exists.
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.host + '/?/' +
+        l.pathname.slice(1).replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
