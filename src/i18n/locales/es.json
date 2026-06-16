@@ -1,7 +1,8 @@
 {
   "notFound": {
-    "title": "404 — no encontrado.",
-    "body": "Esta página no existe.",
+    "errorLabel": "error · ruta no encontrada",
+    "title": "NO ENCONTRADO.",
+    "body": "La página que buscas no existe, fue movida o el enlace está roto.",
     "home": "← ir al inicio"
   },
   "nav": {

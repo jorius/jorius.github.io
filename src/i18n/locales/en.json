@@ -1,7 +1,8 @@
 {
   "notFound": {
-    "title": "404 — not found.",
-    "body": "This page doesn't exist.",
+    "errorLabel": "error · route not found",
+    "title": "NOT FOUND.",
+    "body": "The page you're looking for doesn't exist, was moved, or the link is broken.",
     "home": "← go home"
   },
   "nav": {
