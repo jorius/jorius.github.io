@@ -1,9 +1,6 @@
 import type { ThemeMode } from '../contexts/ThemeContext';
 
-export const STORAGE_KEYS = {
-  theme: 'b-theme',
-  lang: 'b-lang',
-} as const;
+const THEME_KEY = 'theme';
 
 function safeGet(key: string): string | null {
   try {
@@ -23,16 +20,10 @@ function safeSet(key: string, value: string): void {
 
 export const storage = {
   getTheme(): ThemeMode {
-    const val = safeGet(STORAGE_KEYS.theme);
+    const val = safeGet(THEME_KEY);
     return val === 'light' || val === 'dark' ? val : 'dark';
   },
   setTheme(theme: ThemeMode): void {
-    safeSet(STORAGE_KEYS.theme, theme);
-  },
-  getLanguage(): string | null {
-    return safeGet(STORAGE_KEYS.lang);
-  },
-  setLanguage(lang: string): void {
-    safeSet(STORAGE_KEYS.lang, lang);
+    safeSet(THEME_KEY, theme);
   },
 };
