@@ -1,5 +1,3 @@
-// packages
-
 interface ColorEntry {
   name: string;
   code: string;

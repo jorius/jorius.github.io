@@ -16,6 +16,8 @@ interface NavItem {
   route?: string;
 }
 
+const NAV_HEIGHT_PX = 60;
+
 const NAV_ITEMS: NavItem[] = [
   { labelKey: 'nav.home', sectionId: 'b-now' },
   { labelKey: 'nav.services', sectionId: 'b-services' },
@@ -37,14 +39,14 @@ const Header = (): React.ReactElement => {
       const servicesSection = document.querySelector('section[data-section="services"]');
       if (servicesSection) {
         const rect = servicesSection.getBoundingClientRect();
-        setIsInServicesSection(rect.top <= 60 && rect.bottom >= 60);
+        setIsInServicesSection(rect.top <= NAV_HEIGHT_PX && rect.bottom >= NAV_HEIGHT_PX);
       }
 
       const sectionIds = ['home', 'services', 'about', 'contact'];
       let current = 'home';
       for (const id of sectionIds) {
         const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= 61) current = id;
+        if (el && el.getBoundingClientRect().top <= NAV_HEIGHT_PX + 1) current = id;
       }
       setActiveSection(current);
     };
@@ -117,9 +119,9 @@ const Header = (): React.ReactElement => {
           {NAV_ITEMS.map((item) => (
             <a
               key={item.labelKey}
+              className={getNavLinkClass(item)}
               href={item.route ?? `#${item.sectionId}`}
               onClick={(e) => handleNavClick(e, item)}
-              className={getNavLinkClass(item)}
             >
               {t(item.labelKey)}
             </a>

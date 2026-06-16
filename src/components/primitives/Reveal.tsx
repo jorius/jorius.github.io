@@ -32,8 +32,8 @@ export const Reveal = ({
   return (
     <Component
       ref={ref}
-      href={href}
       className={className}
+      href={href}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       style={{
