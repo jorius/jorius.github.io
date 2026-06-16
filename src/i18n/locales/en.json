@@ -1,4 +1,9 @@
 {
+  "notFound": {
+    "title": "404 — not found.",
+    "body": "This page doesn't exist.",
+    "home": "← go home"
+  },
   "nav": {
     "home": "Home",
     "about": "About",

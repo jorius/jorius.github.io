@@ -10,6 +10,7 @@ import { ScrollToTop } from './components/ScrollToTop';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 import Palette from './pages/Palette';
 import Pgp from './pages/Pgp';
 import Portfolio from './pages/Portfolio';
@@ -40,6 +41,7 @@ function App() {
                   <Route path="/about" element={<About />} />
                   <Route path="/portfolio" element={<Portfolio />} />
                   <Route path="/contact" element={<Contact />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
               <Footer />
