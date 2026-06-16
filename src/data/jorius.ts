@@ -13,13 +13,6 @@ export interface ExperienceEntry {
   to: string;
 }
 
-export interface OssEntry {
-  repo: string;
-  stars: number;
-  lang: string;
-  desc: string;
-}
-
 export interface TestimonialEntry {
   who: string;
   role: string;
@@ -56,7 +49,6 @@ export interface JoriusData {
     stackoverflow: string;
   };
   experience: ExperienceEntry[];
-  oss: OssEntry[];
   testimonials: TestimonialEntry[];
   hire_why: HireWhyEntry[];
 }
@@ -141,11 +133,6 @@ export const JORIUS: JoriusData = {
       from: '2015',
       to: '2017',
     },
-  ],
-  oss: [
-    // Legacy fallback list — BOssWriting now hydrates from the GitHub API via
-    // useGitHubRepos. Kept here as a safety net if the API is rate-limited or
-    // offline; harmless empty array means the section just shows a loader/error.
   ],
   testimonials: [],
   hire_why: [
