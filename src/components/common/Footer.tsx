@@ -1,15 +1,18 @@
 // packages
 import { FiArrowUpRight } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 // components
 import Button from "./Button";
 
-// utils
-import { scrollToSection } from "../../utils/scrollUtils";
+// hooks
+import { useScrollToSection } from "../../hooks/useNavigation";
 
 const Footer = (): React.ReactElement => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const scrollToSection = useScrollToSection();
 
   return (
     <footer className="bg-[#272727] rounded-tl-[24px] rounded-tr-[24px] px-16 py-6">
@@ -42,40 +45,40 @@ const Footer = (): React.ReactElement => {
             </h3>
             <nav className="flex flex-col gap-5 font-space-mono text-base text-white tracking-[-0.24px]">
               <a
-                href="#home"
+                href="#b-now"
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollToSection("home");
+                  scrollToSection("b-now");
                 }}
                 className="hover:text-principal transition-colors cursor-pointer"
               >
                 {t("nav.home", "Home")}
               </a>
               <a
-                href="#about"
+                href="/about"
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollToSection("about");
+                  navigate("/about");
                 }}
                 className="hover:text-principal transition-colors cursor-pointer"
               >
                 {t("nav.about", "About")}
               </a>
               <a
-                href="#services"
+                href="#b-services"
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollToSection("services");
+                  scrollToSection("b-services");
                 }}
                 className="hover:text-principal transition-colors cursor-pointer"
               >
                 {t("nav.services", "Services")}
               </a>
               <a
-                href="#contact"
+                href="#b-contact"
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollToSection("contact");
+                  scrollToSection("b-contact");
                 }}
                 className="hover:text-principal transition-colors cursor-pointer"
               >
