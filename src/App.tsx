@@ -2,8 +2,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // components
-import Footer from './components/common/Footer';
-import Header from './components/common/Header';
+import LegacyLayout from './components/LegacyLayout';
 import { ScrollToTop } from './components/ScrollToTop';
 
 // pages
@@ -29,25 +28,15 @@ function App() {
         <Route path="/pgp" element={<Pgp />} />
         <Route path="/palette" element={<Palette />} />
 
-        {/* Legacy routes still wrapped in the pre-overhaul Header/Footer layout
-            until each page gets its own design pass. */}
-        <Route
-          path="/*"
-          element={(
-            <div className="min-h-screen bg-light-bg text-light-text">
-              <Header />
-              <main>
-                <Routes>
-                  <Route path="/about" element={<About />} />
-                  <Route path="/portfolio" element={<Portfolio />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </main>
-              <Footer />
-            </div>
-          )}
-        />
+        {/* Legacy routes — wrapped in old Header/Footer until each page is redesigned. */}
+        <Route element={<LegacyLayout />}>
+          <Route path="/about" element={<About />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/contact" element={<Contact />} />
+        </Route>
+
+        {/* 404 — standalone, uses BTopBar. Must be last. */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
