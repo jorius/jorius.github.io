@@ -28,22 +28,20 @@ export const Reveal = ({
   const [ref, seen] = useInView<HTMLElement>();
 
   const Component = As as ElementType;
-  const extraProps: Record<string, unknown> = {};
-  if (href !== undefined) extraProps.href = href;
-  if (onMouseEnter) extraProps.onMouseEnter = onMouseEnter;
-  if (onMouseLeave) extraProps.onMouseLeave = onMouseLeave;
-  if (className) extraProps.className = className;
 
   return (
     <Component
       ref={ref}
+      href={href}
+      className={className}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       style={{
         opacity: seen ? 1 : 0,
         transform: seen ? 'translateY(0)' : 'translateY(12px)',
         transition: `opacity 600ms cubic-bezier(.2,.7,.2,1) ${delay}ms, transform 600ms cubic-bezier(.2,.7,.2,1) ${delay}ms`,
         ...style,
       }}
-      {...extraProps}
     >
       {children}
     </Component>
