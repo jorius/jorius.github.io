@@ -1,7 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
 // packages
-import { createContext, useContext, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import type { ReactElement, ReactNode } from 'react';
+
+// utils
+import { storage } from '../utils/storage';
 
 export type ThemeMode = 'dark' | 'light';
 
@@ -76,7 +79,14 @@ export const BThemeProvider = ({
   glitch = 1,
   scanLines = true,
 }: BThemeProviderProps): ReactElement => {
-  const [theme, setTheme] = useState<ThemeMode>(initialTheme);
+  const [theme, setThemeState] = useState<ThemeMode>(
+    () => storage.getTheme() ?? initialTheme,
+  );
+
+  const setTheme = useCallback((mode: ThemeMode) => {
+    storage.setTheme(mode);
+    setThemeState(mode);
+  }, []);
 
   const value = useMemo<BThemeContextValue>(() => {
     const base = B_THEMES[theme];
@@ -84,12 +94,12 @@ export const BThemeProvider = ({
     return {
       theme,
       setTheme,
-      toggleTheme: () => setTheme((m) => (m === 'dark' ? 'light' : 'dark')),
+      toggleTheme: () => setTheme(theme === 'dark' ? 'light' : 'dark'),
       t,
       glitch,
       scanLines,
     };
-  }, [theme, glitch, scanLines]);
+  }, [theme, glitch, scanLines, setTheme]);
 
   return <BThemeContext.Provider value={value}>{children}</BThemeContext.Provider>;
 };
