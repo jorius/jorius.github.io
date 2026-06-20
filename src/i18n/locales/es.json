@@ -349,7 +349,8 @@
       "tagsShowMore": "+ Ver más",
       "tagsAllTags": "Todas las etiquetas",
       "tagsFilterLabel": "Artículos con etiqueta",
-      "tagsAllPosts": "← Todos los artículos"
+      "tagsAllPosts": "← Todos los artículos",
+      "tagsModalClose": "Cerrar etiquetas"
     },
     "experience": {
       "present": "Presente",

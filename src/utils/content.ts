@@ -77,7 +77,16 @@ export const loadTags = (): WritingTag[] =>
 
 export const loadPosts = (): WritingPost[] =>
   Object.values(postModules)
-    .map((m) => (m as { default: WritingPost }).default)
+    .map((m) => {
+      const raw = (m as { default: WritingPost }).default;
+      return {
+        ...raw,
+        // Pages CMS may omit or null the tags field when no tags are selected;
+        // normalize here so every post always carries a valid string[].
+        tags: Array.isArray(raw.tags) ? raw.tags : [],
+        draft: raw.draft ?? false,
+      };
+    })
     // Drop incomplete CMS entries: a post without localized title/body has
     // nothing to render and would throw in pickLocale.
     .filter((p) => isLocalized(p.title) && isLocalized(p.body))

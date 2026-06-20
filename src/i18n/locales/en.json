@@ -349,7 +349,8 @@
       "tagsShowMore": "+ Show More",
       "tagsAllTags": "All Tags",
       "tagsFilterLabel": "Posts tagged",
-      "tagsAllPosts": "← All posts"
+      "tagsAllPosts": "← All posts",
+      "tagsModalClose": "Close tags"
     },
     "experience": {
       "present": "Present",

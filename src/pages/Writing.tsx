@@ -24,6 +24,8 @@ import { DarkGrain } from '../components/primitives/DarkGrain';
 import { Glitch } from '../components/primitives/Glitch';
 import { ScanLines } from '../components/primitives/ScanLines';
 
+const TAGS_VISIBLE = 5;
+
 const Writing = (): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr, i18n } = useTranslation();
@@ -290,7 +292,7 @@ const Writing = (): React.ReactElement => {
                 {tr('directionB.read.tagsLabel')}
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                {tags.slice(0, 5).map((tg) => (
+                {tags.slice(0, TAGS_VISIBLE).map((tg) => (
                   <button
                     key={tg.id}
                     type="button"
@@ -314,7 +316,7 @@ const Writing = (): React.ReactElement => {
                     {pickLocale(tg.label, lang)}
                   </button>
                 ))}
-                {tags.length > 5 ? (
+                {tags.length > TAGS_VISIBLE ? (
                   <button
                     type="button"
                     onClick={() => setShowAllTags(true)}
@@ -668,7 +670,7 @@ const Writing = (): React.ReactElement => {
             <button
               type="button"
               onClick={() => setShowAllTags(false)}
-              aria-label={tr('directionB.read.lightboxClose')}
+              aria-label={tr('directionB.read.tagsModalClose')}
               style={{
                 position: 'absolute',
                 top: 14,
