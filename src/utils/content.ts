@@ -44,23 +44,35 @@ export interface WritingCategory {
   label: Localized;
 }
 
+export interface WritingTag {
+  id: string;
+  order: number;
+  label: Localized;
+}
+
 export interface WritingPost {
   slug: string;
   category: string;
   date: string;
   len: string;
-  tag: string;
+  tags: string[];
   draft: boolean;
   title: Localized;
   body: Localized;
 }
 
 const categoryModules = import.meta.glob('../content/writing/categories/*.json', { eager: true });
+const tagModules = import.meta.glob('../content/writing/tags/*.json', { eager: true });
 const postModules = import.meta.glob('../content/writing/posts/*.json', { eager: true });
 
 export const loadCategories = (): WritingCategory[] =>
   Object.values(categoryModules)
     .map((m) => (m as { default: WritingCategory }).default)
+    .sort((a, b) => a.order - b.order);
+
+export const loadTags = (): WritingTag[] =>
+  Object.values(tagModules)
+    .map((m) => (m as { default: WritingTag }).default)
     .sort((a, b) => a.order - b.order);
 
 export const loadPosts = (): WritingPost[] =>

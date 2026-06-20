@@ -74,6 +74,25 @@ content:
           - { name: en, label: English, type: string }
           - { name: es, label: Spanish, type: string }
 
+  - name: writing-tags
+    label: Writing — Tags
+    type: collection
+    path: src/content/writing/tags
+    filename: '{fields.id}.json'
+    view:
+      primary: id
+      sort: order
+      order: asc
+    fields:
+      - { name: id, label: ID, type: string }
+      - { name: order, label: Order, type: number }
+      - name: label
+        label: Label
+        type: object
+        fields:
+          - { name: en, label: English, type: string }
+          - { name: es, label: Spanish, type: string }
+
   - name: writing-posts
     label: Writing — Posts
     type: collection
@@ -95,7 +114,15 @@ content:
           search: 'fields.id,fields.label.en'
       - { name: date, label: Date, type: date }
       - { name: len, label: Length, type: string }
-      - { name: tag, label: Tag, type: string }
+      - name: tags
+        label: Tags
+        type: reference
+        list: true
+        options:
+          collection: writing-tags
+          value: '{fields.id}'
+          label: '{fields.label.en}'
+          search: 'fields.id,fields.label.en'
       - { name: draft, label: Draft, type: boolean, default: false }
       - name: title
         label: Title

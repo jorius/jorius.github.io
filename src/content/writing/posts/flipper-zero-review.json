@@ -3,7 +3,7 @@
   "category": "cybersec",
   "date": "2026-04-20",
   "len": "10 min",
-  "tag": "hardware",
+  "tags": ["hardware"],
   "draft": false,
   "title": {
     "en": "Flipper Zero Review",

@@ -199,7 +199,7 @@ const Writing = (): React.ReactElement => {
             <>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
                 <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-                  {active.date} · {active.len} · {active.tag}
+                  {active.date} · {active.len}
                 </div>
                 {!isMobile ? (
                   <button
