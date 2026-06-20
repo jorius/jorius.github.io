@@ -453,8 +453,46 @@ const Writing = (): React.ReactElement => {
           ) : active ? (
             <>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-                <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-                  {active.date} · {active.len}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                  <span>{active.date} · {active.len}</span>
+                  {active.tags.map((tid) => {
+                    const tg = tags.find((x) => x.id === tid);
+                    const isActiveChip = activeTag === tid;
+                    return (
+                      <button
+                        key={tid}
+                        type="button"
+                        onClick={() => setActiveTag((prev) => (prev === tid ? null : tid))}
+                        style={{
+                          fontFamily: 'inherit',
+                          fontSize: 10,
+                          letterSpacing: '0.1em',
+                          textTransform: 'uppercase',
+                          color: isActiveChip ? t.ink : t.dim,
+                          border: `1px solid ${isActiveChip ? t.ink : t.rule}`,
+                          background: isActiveChip ? `${t.ink}18` : 'transparent',
+                          padding: '3px 8px',
+                          cursor: 'pointer',
+                          lineHeight: 1,
+                          transition: 'color 150ms, border-color 150ms, background 150ms',
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isActiveChip) {
+                            e.currentTarget.style.color = t.ink;
+                            e.currentTarget.style.borderColor = t.ink;
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!isActiveChip) {
+                            e.currentTarget.style.color = t.dim;
+                            e.currentTarget.style.borderColor = t.rule;
+                          }
+                        }}
+                      >
+                        {tg ? pickLocale(tg.label, lang) : tid}
+                      </button>
+                    );
+                  })}
                 </div>
                 {!isMobile ? (
                   <button
