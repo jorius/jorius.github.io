@@ -293,7 +293,8 @@
       "visitDirectly": "Visit",
       "directly": "directly.",
       "empty": "No public, non-forked, non-archived repositories found yet.",
-      "writingEmpty": "Writing will return once a CMS is wired up. Stand by."
+      "writingEmpty": "Writing will return once a CMS is wired up. Stand by.",
+      "viewAllPosts": "→ All posts"
     },
     "contact": {
       "headline1": "TELL ME",
@@ -338,7 +339,17 @@
       "fullWidth": "⤢ full width",
       "normalWidth": "⤡ normal width",
       "imageZoom": "view full size",
-      "lightboxClose": "close image"
+      "lightboxClose": "close image",
+      "blogHomeMeta": "JOSE RÍOS · PERSONAL BLOG",
+      "blogHomeTitle": "Writing",
+      "blogHomeIntro": "A personal space where I write about the things I'm exploring — hardware tinkering, cybersecurity, infrastructure, databases, and the occasional sci-fi rabbit hole. No editorial calendar. Just notes from someone who enjoys learning out loud.",
+      "blogHomeCms": "Content managed with",
+      "blogHomeRecent": "Recent Posts",
+      "tagsLabel": "Tags",
+      "tagsShowMore": "+ Show More",
+      "tagsAllTags": "All Tags",
+      "tagsFilterLabel": "Posts tagged",
+      "tagsAllPosts": "← All posts"
     },
     "experience": {
       "present": "Present",
