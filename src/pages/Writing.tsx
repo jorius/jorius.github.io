@@ -3,7 +3,7 @@
 // packages
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -14,7 +14,7 @@ import { useBTheme } from '../contexts/ThemeContext';
 import { useIsMobile } from '../hooks/useMediaQuery';
 
 // utils
-import { loadCategories, loadPosts, pickLocale } from '../utils/content';
+import { loadCategories, loadPosts, loadTags, pickLocale } from '../utils/content';
 
 // components
 import { BTopBar } from '../components/direction-b/BTopBar';
@@ -28,26 +28,18 @@ const Writing = (): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr, i18n } = useTranslation();
   const isMobile = useIsMobile();
-  const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
   const lang = i18n.language;
 
   const categories = useMemo(() => loadCategories(), []);
   const posts = useMemo(() => loadPosts(), []);
+  const tags = useMemo(() => loadTags(), []);
 
-  // Active post: the slug from the URL, else the first post (newest first).
+  // Active post: only when there is a slug in the URL. No slug = blog home.
   const active = useMemo(
-    () => posts.find((p) => p.slug === slug) ?? posts[0] ?? null,
+    () => (slug ? posts.find((p) => p.slug === slug) ?? null : null),
     [posts, slug],
   );
-
-  // Keep the URL canonical: if no slug (or unknown slug) and we have posts,
-  // redirect to the active post so links are shareable.
-  useEffect(() => {
-    if (active && active.slug !== slug) {
-      navigate(`/writing/${active.slug}`, { replace: true });
-    }
-  }, [active, slug, navigate]);
 
   const postsByCategory = (catId: string): typeof posts => posts.filter((p) => p.category === catId);
 
@@ -195,7 +187,103 @@ const Writing = (): React.ReactElement => {
             margin: isMobile ? '0' : '0 auto',
           }}
         >
-          {active ? (
+          {!slug ? (
+            /* ── BLOG HOME ── */
+            <>
+              <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 24 }}>
+                {tr('directionB.read.blogHomeMeta')}
+              </div>
+              <h1
+                style={{
+                  fontFamily: "'Space Mono', monospace",
+                  fontSize: isMobile ? 28 : 'clamp(32px, 5vw, 52px)',
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.05,
+                  margin: '14px 0 20px 0',
+                  color: t.ink,
+                }}
+              >
+                {tr('directionB.read.blogHomeTitle')}
+              </h1>
+              <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 16, lineHeight: 1.75, color: t.ink, opacity: 0.8, maxWidth: '62ch', marginBottom: 12 }}>
+                {tr('directionB.read.blogHomeIntro')}
+              </p>
+              <p style={{ fontSize: 12, color: t.dim, marginBottom: 48 }}>
+                {tr('directionB.read.blogHomeCms')}{' '}
+                <a
+                  href="https://pagescms.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: t.dim, textDecoration: 'underline', textUnderlineOffset: '3px' }}
+                >
+                  Pages CMS
+                </a>
+              </p>
+              <div
+                style={{
+                  fontSize: 10,
+                  color: t.dim,
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  marginBottom: 12,
+                  paddingBottom: 10,
+                  borderBottom: `1px solid ${t.rule}`,
+                }}
+              >
+                {tr('directionB.read.blogHomeRecent')}
+              </div>
+              {posts.map((p) => (
+                <Link
+                  key={p.slug}
+                  to={`/writing/${p.slug}`}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: isMobile ? '1fr' : '100px 1fr 64px',
+                    padding: '16px 0',
+                    borderBottom: `1px solid ${t.soft}`,
+                    gap: isMobile ? 6 : 12,
+                    alignItems: 'baseline',
+                    textDecoration: 'none',
+                    color: t.ink,
+                    transition: 'background 180ms',
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = t.sub; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
+                >
+                  <span style={{ color: t.dim, fontSize: 12 }}>{p.date}</span>
+                  <span>
+                    <span style={{ fontSize: 16, letterSpacing: '-0.01em' }}>
+                      {pickLocale(p.title, lang)}
+                    </span>
+                    {p.tags.length > 0 ? (
+                      <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', marginTop: 6 }}>
+                        {p.tags.map((tid) => {
+                          const tg = tags.find((x) => x.id === tid);
+                          return (
+                            <span
+                              key={tid}
+                              style={{
+                                fontSize: 9,
+                                letterSpacing: '0.1em',
+                                textTransform: 'uppercase',
+                                color: t.dim,
+                                border: `1px solid ${t.soft}`,
+                                padding: '2px 6px',
+                                lineHeight: 1,
+                              }}
+                            >
+                              {tg ? pickLocale(tg.label, lang) : tid}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    ) : null}
+                  </span>
+                  <span style={{ color: t.dim, fontSize: 12, textAlign: isMobile ? 'left' : 'right' }}>{p.len}</span>
+                </Link>
+              ))}
+            </>
+          ) : active ? (
             <>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
                 <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
