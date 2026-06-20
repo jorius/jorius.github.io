@@ -52,6 +52,9 @@ const Writing = (): React.ReactElement => {
   // Reader width: session-only preference, desktop only (mobile is already full width).
   const [fullWidth, setFullWidth] = useState(false);
 
+  const [showAllTags, setShowAllTags] = useState(false);
+  const [activeTag, setActiveTag] = useState<string | null>(null);
+
   // Lightbox for post images; null = closed.
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
@@ -67,6 +70,19 @@ const Writing = (): React.ReactElement => {
       document.body.style.overflow = '';
     };
   }, [lightbox]);
+
+  useEffect(() => {
+    if (!showAllTags) return undefined;
+    const onKey = (e: KeyboardEvent): void => {
+      if (e.key === 'Escape') setShowAllTags(false);
+    };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [showAllTags]);
 
   const treeWidth = isMobile ? '100%' : 'clamp(220px, 26vw, 320px)';
 
@@ -91,88 +107,167 @@ const Writing = (): React.ReactElement => {
             position: isMobile ? 'static' : 'sticky',
             top: isMobile ? undefined : 80,
             borderRight: isMobile ? 'none' : `1px solid ${t.rule}`,
-            paddingRight: isMobile ? 0 : 20,
+            display: 'flex',
+            flexDirection: 'column',
+            height: isMobile ? 'auto' : 'calc(100vh - 80px)',
           }}
         >
-          <Link
-            to="/"
-            style={{ fontSize: 11, color: t.ink, opacity: 0.6, textDecoration: 'none', letterSpacing: '0.08em', textTransform: 'uppercase' }}
-          >
-            <Glitch trigger="hover">{tr('directionB.read.back')}</Glitch>
-          </Link>
-          <div style={{ marginTop: 20 }}>
-            {categories.map((cat) => {
-              const catPosts = postsByCategory(cat.id);
-              if (catPosts.length === 0) return null;
-              const isCollapsed = collapsed[cat.id] ?? false;
-              return (
-                <div key={cat.id} style={{ marginBottom: 20 }}>
-                  <button
-                    type="button"
-                    onClick={() => toggleCategory(cat.id)}
-                    aria-expanded={!isCollapsed}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 8,
-                      width: '100%',
-                      background: 'transparent',
-                      border: 'none',
-                      padding: 0,
-                      marginBottom: 8,
-                      cursor: 'pointer',
-                      fontFamily: 'inherit',
-                      textAlign: 'left',
-                      fontSize: 11,
-                      color: t.ink,
-                      opacity: 0.62,
-                      letterSpacing: '0.14em',
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    <span
-                      aria-hidden
+          {/* scrollable tree area */}
+          <div style={{ flex: 1, overflowY: isMobile ? 'visible' : 'auto', paddingRight: isMobile ? 0 : 20 }}>
+            <Link
+              to="/"
+              style={{ fontSize: 11, color: t.ink, opacity: 0.6, textDecoration: 'none', letterSpacing: '0.08em', textTransform: 'uppercase' }}
+            >
+              <Glitch trigger="hover">{tr('directionB.read.back')}</Glitch>
+            </Link>
+            <div style={{ marginTop: 20 }}>
+              {categories.map((cat) => {
+                const catPosts = postsByCategory(cat.id);
+                if (catPosts.length === 0) return null;
+                const isCollapsed = collapsed[cat.id] ?? false;
+                return (
+                  <div key={cat.id} style={{ marginBottom: 20 }}>
+                    <button
+                      type="button"
+                      onClick={() => toggleCategory(cat.id)}
+                      aria-expanded={!isCollapsed}
                       style={{
-                        fontSize: 9,
-                        display: 'inline-block',
-                        transform: isCollapsed ? 'rotate(-90deg)' : 'none',
-                        transition: 'transform 150ms',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        width: '100%',
+                        background: 'transparent',
+                        border: 'none',
+                        padding: 0,
+                        marginBottom: 8,
+                        cursor: 'pointer',
+                        fontFamily: 'inherit',
+                        textAlign: 'left',
+                        fontSize: 11,
+                        color: t.ink,
+                        opacity: 0.62,
+                        letterSpacing: '0.14em',
+                        textTransform: 'uppercase',
                       }}
                     >
-                      ▾
-                    </span>
-                    {pickLocale(cat.label, lang)}
-                  </button>
-                  {!isCollapsed
-                    ? catPosts.map((p) => {
-                        const isActive = active?.slug === p.slug;
-                        return (
-                          <Link
-                            key={p.slug}
-                            to={`/writing/${p.slug}`}
-                            style={{
-                              display: 'block',
-                              padding: '7px 0 7px 12px',
-                              borderLeft: `2px solid ${isActive ? t.ink : t.soft}`,
-                              color: t.ink,
-                              opacity: isActive ? 1 : 0.72,
-                              textDecoration: 'none',
-                              fontSize: 14,
-                              lineHeight: 1.4,
-                              transition: 'opacity 150ms, border-color 150ms',
-                            }}
-                            onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
-                            onMouseLeave={(e) => { e.currentTarget.style.opacity = isActive ? '1' : '0.72'; }}
-                          >
-                            <Glitch trigger="hover">{pickLocale(p.title, lang)}</Glitch>
-                          </Link>
-                        );
-                      })
-                    : null}
-                </div>
-              );
-            })}
+                      <span
+                        aria-hidden
+                        style={{
+                          fontSize: 9,
+                          display: 'inline-block',
+                          transform: isCollapsed ? 'rotate(-90deg)' : 'none',
+                          transition: 'transform 150ms',
+                        }}
+                      >
+                        ▾
+                      </span>
+                      {pickLocale(cat.label, lang)}
+                    </button>
+                    {!isCollapsed
+                      ? catPosts.map((p) => {
+                          const isActive = active?.slug === p.slug;
+                          return (
+                            <Link
+                              key={p.slug}
+                              to={`/writing/${p.slug}`}
+                              style={{
+                                display: 'block',
+                                padding: '7px 0 7px 12px',
+                                borderLeft: `2px solid ${isActive ? t.ink : t.soft}`,
+                                color: t.ink,
+                                opacity: isActive ? 1 : 0.72,
+                                textDecoration: 'none',
+                                fontSize: 14,
+                                lineHeight: 1.4,
+                                transition: 'opacity 150ms, border-color 150ms',
+                              }}
+                              onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
+                              onMouseLeave={(e) => { e.currentTarget.style.opacity = isActive ? '1' : '0.72'; }}
+                            >
+                              <Glitch trigger="hover">{pickLocale(p.title, lang)}</Glitch>
+                            </Link>
+                          );
+                        })
+                      : null}
+                  </div>
+                );
+              })}
+            </div>
           </div>
+
+          {/* tags footer — always visible */}
+          {tags.length > 0 ? (
+            <div
+              style={{
+                borderTop: `1px solid ${t.rule}`,
+                paddingTop: 16,
+                paddingBottom: isMobile ? 0 : 16,
+                paddingRight: isMobile ? 0 : 20,
+                flexShrink: 0,
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 10,
+                  color: t.dim,
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  marginBottom: 10,
+                }}
+              >
+                {tr('directionB.read.tagsLabel')}
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                {tags.slice(0, 5).map((tg) => (
+                  <button
+                    key={tg.id}
+                    type="button"
+                    onClick={() => setActiveTag((prev) => (prev === tg.id ? null : tg.id))}
+                    style={{
+                      fontFamily: 'inherit',
+                      fontSize: 10,
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                      color: activeTag === tg.id ? t.ink : t.dim,
+                      border: `1px solid ${activeTag === tg.id ? t.ink : t.rule}`,
+                      background: activeTag === tg.id ? `${t.ink}18` : 'transparent',
+                      padding: '4px 9px',
+                      cursor: 'pointer',
+                      lineHeight: 1,
+                      transition: 'color 150ms, border-color 150ms, background 150ms',
+                    }}
+                    onMouseEnter={(e) => { if (activeTag !== tg.id) { e.currentTarget.style.color = t.ink; e.currentTarget.style.borderColor = t.ink; } }}
+                    onMouseLeave={(e) => { if (activeTag !== tg.id) { e.currentTarget.style.color = t.dim; e.currentTarget.style.borderColor = t.rule; } }}
+                  >
+                    {pickLocale(tg.label, lang)}
+                  </button>
+                ))}
+                {tags.length > 5 ? (
+                  <button
+                    type="button"
+                    onClick={() => setShowAllTags(true)}
+                    style={{
+                      fontFamily: 'inherit',
+                      fontSize: 10,
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                      color: t.rgbB,
+                      border: `1px solid ${t.rgbB}55`,
+                      background: 'transparent',
+                      padding: '4px 9px',
+                      cursor: 'pointer',
+                      lineHeight: 1,
+                      transition: 'border-color 150ms',
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = t.rgbB; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${t.rgbB}55`; }}
+                  >
+                    {tr('directionB.read.tagsShowMore')}
+                  </button>
+                ) : null}
+              </div>
+            </div>
+          ) : null}
         </nav>
 
         {/* RIGHT — paper reader */}
@@ -429,6 +524,98 @@ const Writing = (): React.ReactElement => {
           >
             ✕
           </button>
+        </div>
+      ) : null}
+
+      {showAllTags ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setShowAllTags(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 300,
+            background: 'rgba(10, 10, 10, 0.8)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: isMobile ? 16 : 40,
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: t.sub,
+              border: `1px solid ${t.rule}`,
+              boxShadow: `8px 8px 0 ${t.ink}`,
+              padding: '28px 32px',
+              maxWidth: 480,
+              width: '90%',
+              position: 'relative',
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setShowAllTags(false)}
+              aria-label={tr('directionB.read.lightboxClose')}
+              style={{
+                position: 'absolute',
+                top: 14,
+                right: 16,
+                background: 'transparent',
+                border: 'none',
+                color: t.dim,
+                fontSize: 16,
+                padding: '4px 6px',
+                cursor: 'pointer',
+                lineHeight: 1,
+                fontFamily: 'inherit',
+                transition: 'color 150ms',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = t.ink; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = t.dim; }}
+            >
+              ✕
+            </button>
+            <div
+              style={{
+                fontSize: 10,
+                color: t.dim,
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                marginBottom: 16,
+              }}
+            >
+              {tr('directionB.read.tagsAllTags')}
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {tags.map((tg) => (
+                <button
+                  key={tg.id}
+                  type="button"
+                  onClick={() => { setActiveTag(tg.id); setShowAllTags(false); }}
+                  style={{
+                    fontFamily: 'inherit',
+                    fontSize: 10,
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase',
+                    color: t.dim,
+                    border: `1px solid ${t.rule}`,
+                    background: 'transparent',
+                    padding: '4px 9px',
+                    cursor: 'pointer',
+                    lineHeight: 1,
+                    transition: 'color 150ms, border-color 150ms',
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = t.ink; e.currentTarget.style.borderColor = t.ink; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = t.dim; e.currentTarget.style.borderColor = t.rule; }}
+                >
+                  {pickLocale(tg.label, lang)}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       ) : null}
 
