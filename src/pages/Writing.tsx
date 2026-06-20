@@ -120,79 +120,151 @@ const Writing = (): React.ReactElement => {
             >
               <Glitch trigger="hover">{tr('directionB.read.back')}</Glitch>
             </Link>
-            <div style={{ marginTop: 20 }}>
-              {categories.map((cat) => {
-                const catPosts = postsByCategory(cat.id);
-                if (catPosts.length === 0) return null;
-                const isCollapsed = collapsed[cat.id] ?? false;
-                return (
-                  <div key={cat.id} style={{ marginBottom: 20 }}>
-                    <button
-                      type="button"
-                      onClick={() => toggleCategory(cat.id)}
-                      aria-expanded={!isCollapsed}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 8,
-                        width: '100%',
-                        background: 'transparent',
-                        border: 'none',
-                        padding: 0,
-                        marginBottom: 8,
-                        cursor: 'pointer',
-                        fontFamily: 'inherit',
-                        textAlign: 'left',
-                        fontSize: 11,
-                        color: t.ink,
-                        opacity: 0.62,
-                        letterSpacing: '0.14em',
-                        textTransform: 'uppercase',
-                      }}
-                    >
-                      <span
-                        aria-hidden
+
+            {activeTag ? (
+              /* ── FILTERED VIEW ── */
+              <div style={{ marginTop: 20 }}>
+                <button
+                  type="button"
+                  onClick={() => setActiveTag(null)}
+                  style={{
+                    fontFamily: 'inherit',
+                    fontSize: 11,
+                    color: t.rgbB,
+                    opacity: 0.85,
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    background: 'none',
+                    border: 'none',
+                    padding: '0 0 16px 0',
+                    cursor: 'pointer',
+                    display: 'block',
+                  }}
+                >
+                  {tr('directionB.read.tagsAllPosts')}
+                </button>
+                <div
+                  style={{
+                    fontSize: 10,
+                    color: t.dim,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    marginBottom: 14,
+                  }}
+                >
+                  {tr('directionB.read.tagsFilterLabel')}{' '}
+                  {(() => {
+                    const tg = tags.find((x) => x.id === activeTag);
+                    return tg ? pickLocale(tg.label, lang).toUpperCase() : activeTag.toUpperCase();
+                  })()}
+                </div>
+                {posts
+                  .filter((p) => p.tags.includes(activeTag))
+                  .map((p) => {
+                    const isActive = active?.slug === p.slug;
+                    return (
+                      <Link
+                        key={p.slug}
+                        to={`/writing/${p.slug}`}
                         style={{
-                          fontSize: 9,
-                          display: 'inline-block',
-                          transform: isCollapsed ? 'rotate(-90deg)' : 'none',
-                          transition: 'transform 150ms',
+                          display: 'block',
+                          padding: '10px 0',
+                          borderBottom: `1px solid ${t.soft}`,
+                          color: t.ink,
+                          opacity: isActive ? 1 : 0.78,
+                          textDecoration: 'none',
+                          fontSize: 13,
+                          fontWeight: isActive ? 700 : 400,
+                          lineHeight: 1.4,
+                          transition: 'opacity 150ms',
+                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.opacity = isActive ? '1' : '0.78'; }}
+                      >
+                        <Glitch trigger="hover">{pickLocale(p.title, lang)}</Glitch>
+                        <span style={{ display: 'block', fontSize: 11, color: t.dim, marginTop: 2 }}>
+                          {p.date} · {p.len}
+                        </span>
+                      </Link>
+                    );
+                  })}
+              </div>
+            ) : (
+              /* ── CATEGORY TREE (existing) ── */
+              <div style={{ marginTop: 20 }}>
+                {categories.map((cat) => {
+                  const catPosts = postsByCategory(cat.id);
+                  if (catPosts.length === 0) return null;
+                  const isCollapsed = collapsed[cat.id] ?? false;
+                  return (
+                    <div key={cat.id} style={{ marginBottom: 20 }}>
+                      <button
+                        type="button"
+                        onClick={() => toggleCategory(cat.id)}
+                        aria-expanded={!isCollapsed}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 8,
+                          width: '100%',
+                          background: 'transparent',
+                          border: 'none',
+                          padding: 0,
+                          marginBottom: 8,
+                          cursor: 'pointer',
+                          fontFamily: 'inherit',
+                          textAlign: 'left',
+                          fontSize: 11,
+                          color: t.ink,
+                          opacity: 0.62,
+                          letterSpacing: '0.14em',
+                          textTransform: 'uppercase',
                         }}
                       >
-                        ▾
-                      </span>
-                      {pickLocale(cat.label, lang)}
-                    </button>
-                    {!isCollapsed
-                      ? catPosts.map((p) => {
-                          const isActive = active?.slug === p.slug;
-                          return (
-                            <Link
-                              key={p.slug}
-                              to={`/writing/${p.slug}`}
-                              style={{
-                                display: 'block',
-                                padding: '7px 0 7px 12px',
-                                borderLeft: `2px solid ${isActive ? t.ink : t.soft}`,
-                                color: t.ink,
-                                opacity: isActive ? 1 : 0.72,
-                                textDecoration: 'none',
-                                fontSize: 14,
-                                lineHeight: 1.4,
-                                transition: 'opacity 150ms, border-color 150ms',
-                              }}
-                              onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
-                              onMouseLeave={(e) => { e.currentTarget.style.opacity = isActive ? '1' : '0.72'; }}
-                            >
-                              <Glitch trigger="hover">{pickLocale(p.title, lang)}</Glitch>
-                            </Link>
-                          );
-                        })
-                      : null}
-                  </div>
-                );
-              })}
-            </div>
+                        <span
+                          aria-hidden
+                          style={{
+                            fontSize: 9,
+                            display: 'inline-block',
+                            transform: isCollapsed ? 'rotate(-90deg)' : 'none',
+                            transition: 'transform 150ms',
+                          }}
+                        >
+                          ▾
+                        </span>
+                        {pickLocale(cat.label, lang)}
+                      </button>
+                      {!isCollapsed
+                        ? catPosts.map((p) => {
+                            const isActive = active?.slug === p.slug;
+                            return (
+                              <Link
+                                key={p.slug}
+                                to={`/writing/${p.slug}`}
+                                style={{
+                                  display: 'block',
+                                  padding: '7px 0 7px 12px',
+                                  borderLeft: `2px solid ${isActive ? t.ink : t.soft}`,
+                                  color: t.ink,
+                                  opacity: isActive ? 1 : 0.72,
+                                  textDecoration: 'none',
+                                  fontSize: 14,
+                                  lineHeight: 1.4,
+                                  transition: 'opacity 150ms, border-color 150ms',
+                                }}
+                                onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
+                                onMouseLeave={(e) => { e.currentTarget.style.opacity = isActive ? '1' : '0.72'; }}
+                              >
+                                <Glitch trigger="hover">{pickLocale(p.title, lang)}</Glitch>
+                              </Link>
+                            );
+                          })
+                        : null}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* tags footer — always visible */}
