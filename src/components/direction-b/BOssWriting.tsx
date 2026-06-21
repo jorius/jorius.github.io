@@ -39,7 +39,7 @@ export const BOssWriting = (): React.ReactElement => {
   const { repos, loading, error } = useGitHubRepos();
   const topOss = useMemo(() => selectTopOss(repos), [repos]);
   const max = topOss.length > 0 ? Math.max(...topOss.map((r) => r.stargazers_count), 1) : 1;
-  const posts = loadPosts();
+  const posts = useMemo(() => loadPosts(), []);
   const hasWriting = posts.length > 0;
 
   return (
@@ -109,6 +109,25 @@ export const BOssWriting = (): React.ReactElement => {
               </Link>
             </Reveal>
           ))}
+
+          {hasWriting ? (
+            <Link
+              to="/writing"
+              style={{
+                display: 'block',
+                marginTop: 16,
+                fontSize: 12,
+                color: t.dim,
+                textDecoration: 'none',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = t.ink; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = t.dim; }}
+            >
+              <Glitch trigger="hover">{tr('directionB.oss.viewAllPosts')}</Glitch>
+            </Link>
+          ) : null}
         </div>
         <div>
           <div

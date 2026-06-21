@@ -1,70 +1,85 @@
 // packages
-import { FaLinkedin, FaGithub, FaWhatsapp } from "react-icons/fa";
-import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // components
-import LanguageSelector from "./LanguageSelector";
+import LanguageSelector from './LanguageSelector';
 
-// utils
-import { scrollToSection } from "../../utils/scrollUtils";
+// hooks
+import { useScrollToSection } from '../../hooks/useNavigation';
 
-const Header = () => {
+interface NavItem {
+  labelKey: string;
+  sectionId?: string;
+  route?: string;
+}
+
+const NAV_HEIGHT_PX = 60;
+
+const NAV_ITEMS: NavItem[] = [
+  { labelKey: 'nav.home', sectionId: 'b-now' },
+  { labelKey: 'nav.services', sectionId: 'b-services' },
+  { labelKey: 'nav.about', route: '/about' },
+  { labelKey: 'nav.contact', sectionId: 'b-contact' },
+  { labelKey: 'nav.portfolio', route: '/portfolio' },
+];
+
+const Header = (): React.ReactElement => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
+  const scrollToSection = useScrollToSection();
   const [isInServicesSection, setIsInServicesSection] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>("home");
+  const [activeSection, setActiveSection] = useState<string>('home');
 
   useEffect(() => {
-    const handleScroll = () => {
-      const servicesSection = document.querySelector(
-        'section[data-section="services"]',
-      );
+    const handleScroll = (): void => {
+      const servicesSection = document.querySelector('section[data-section="services"]');
       if (servicesSection) {
         const rect = servicesSection.getBoundingClientRect();
-        const isInView = rect.top <= 60 && rect.bottom >= 60;
-        setIsInServicesSection(isInView);
+        setIsInServicesSection(rect.top <= NAV_HEIGHT_PX && rect.bottom >= NAV_HEIGHT_PX);
       }
 
-      const sectionIds = ["home", "services", "about", "contact"];
-      let current = "home";
+      const sectionIds = ['home', 'services', 'about', 'contact'];
+      let current = 'home';
       for (const id of sectionIds) {
         const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 61) {
-            current = id;
-          }
-        }
+        if (el && el.getBoundingClientRect().top <= NAV_HEIGHT_PX + 1) current = id;
       }
       setActiveSection(current);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Check on mount
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navBgClass = isInServicesSection
-    ? "backdrop-blur-[7.5px] bg-white border border-solid border-portfolio-dark-900"
-    : "backdrop-blur-[7.5px] bg-[#171717] border border-solid border-white";
+    ? 'backdrop-blur-[7.5px] bg-white border border-solid border-portfolio-dark-900'
+    : 'backdrop-blur-[7.5px] bg-[#171717] border border-solid border-white';
 
-  const textColorClass = isInServicesSection
-    ? "text-portfolio-dark-900"
-    : "text-white";
-  const hoverClass = isInServicesSection
-    ? "hover:bg-portfolio-dark-900/10"
-    : "hover:bg-white/10";
+  const textColorClass = isInServicesSection ? 'text-portfolio-dark-900' : 'text-white';
+  const hoverClass = isInServicesSection ? 'hover:bg-portfolio-dark-900/10' : 'hover:bg-white/10';
 
-  const getNavLinkClass = (sectionId: string): string => {
-    const isPortfolioRoute = sectionId === "portfolio" && location.pathname === "/portfolio";
-    const isSectionActive = sectionId !== "portfolio" && activeSection === sectionId && location.pathname === "/";
+  const getNavLinkClass = (item: NavItem): string => {
+    const isPortfolioRoute = item.route === '/portfolio' && location.pathname === '/portfolio';
+    const isSectionActive = item.sectionId !== undefined && activeSection === item.sectionId && location.pathname === '/';
     if (isPortfolioRoute || isSectionActive) {
-      return "px-8 py-3 rounded-none font-space-mono text-lg text-white tracking-[-0.3px] bg-[#505050] hover:bg-[#505050]/90 transition-all cursor-pointer";
+      return 'px-8 py-3 rounded-none font-space-mono text-lg text-white tracking-[-0.3px] bg-[#505050] hover:bg-[#505050]/90 transition-all cursor-pointer';
     }
     return `px-8 py-3 rounded-none font-space-mono text-lg ${textColorClass} tracking-[-0.3px] ${hoverClass} transition-all cursor-pointer`;
+  };
+
+  const handleNavClick = (e: React.MouseEvent, item: NavItem): void => {
+    e.preventDefault();
+    if (item.route) {
+      navigate(item.route);
+      window.scrollTo(0, 0);
+    } else if (item.sectionId) {
+      scrollToSection(item.sectionId);
+    }
   };
 
   return (
@@ -101,82 +116,16 @@ const Header = () => {
         </div>
 
         <div className="flex items-center justify-center flex-1">
-          {/* Home */}
-          <a
-            href="#home"
-            onClick={(e) => {
-              e.preventDefault();
-              if (location.pathname === "/") {
-                scrollToSection("home");
-              } else {
-                navigate("/", { state: { scrollTo: "home" } });
-              }
-            }}
-            className={getNavLinkClass("home")}
-          >
-            {t("nav.home")}
-          </a>
-
-          {/* Services */}
-          <a
-            href="#services"
-            onClick={(e) => {
-              e.preventDefault();
-              if (location.pathname === "/") {
-                scrollToSection("services");
-              } else {
-                navigate("/", { state: { scrollTo: "services" } });
-              }
-            }}
-            className={getNavLinkClass("services")}
-          >
-            {t("nav.services", "Services")}
-          </a>
-
-          {/* About */}
-          <a
-            href="#about"
-            onClick={(e) => {
-              e.preventDefault();
-              if (location.pathname === "/") {
-                scrollToSection("about");
-              } else {
-                navigate("/", { state: { scrollTo: "about" } });
-              }
-            }}
-            className={getNavLinkClass("about")}
-          >
-            {t("nav.about")}
-          </a>
-
-          {/* Contact */}
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              if (location.pathname === "/") {
-                scrollToSection("contact");
-              } else {
-                navigate("/", { state: { scrollTo: "contact" } });
-              }
-            }}
-            className={getNavLinkClass("contact")}
-          >
-            {t("nav.contact")}
-          </a>
-
-          {/* Portfolio */}
-          <a
-            href="/portfolio"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate("/portfolio");
-              window.scrollTo(0, 0);
-            }}
-            className={getNavLinkClass("portfolio")}
-          >
-            {t("nav.portfolio")}
-          </a>
+          {NAV_ITEMS.map((item) => (
+            <a
+              key={item.labelKey}
+              className={getNavLinkClass(item)}
+              href={item.route ?? `#${item.sectionId}`}
+              onClick={(e) => handleNavClick(e, item)}
+            >
+              {t(item.labelKey)}
+            </a>
+          ))}
         </div>
 
         <div className="flex items-center gap-2">

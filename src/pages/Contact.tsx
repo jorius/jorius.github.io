@@ -1,31 +1,10 @@
 // packages
 import { AiOutlineSend } from 'react-icons/ai';
 import { FaWhatsapp } from 'react-icons/fa';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const Contact = () => {
+const Contact = (): React.ReactElement => {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    from: '',
-    subject: '',
-    category: '',
-    body: '',
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Form submission is intentionally a no-op for now.
-    // The form is being disabled in PR C pending a backend decision
-    // (Resend + serverless function vs. third-party form service).
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   return (
     <div className="min-h-screen bg-dark-bg dark:bg-dark-bg text-white pt-32 pb-20">
@@ -35,9 +14,9 @@ const Contact = () => {
         </h1>
 
         <div className="max-w-4xl mx-auto grid grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div className="cyber-card">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Contact Form — backend pending */}
+          <div className="cyber-card opacity-60">
+            <form className="space-y-6">
               <div>
                 <label htmlFor="from" className="block text-sm font-mono text-neon-cyan mb-2">
                   {t('contact.form.from')}
@@ -46,10 +25,8 @@ const Contact = () => {
                   type="email"
                   id="from"
                   name="from"
-                  value={formData.from}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-dark-bg border border-dark-border focus:border-neon-cyan rounded-lg text-white font-mono outline-none transition-colors duration-300"
+                  disabled
+                  className="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg text-white font-mono outline-none cursor-not-allowed"
                   placeholder="your@email.com"
                 />
               </div>
@@ -62,10 +39,8 @@ const Contact = () => {
                   type="text"
                   id="subject"
                   name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-dark-bg border border-dark-border focus:border-neon-cyan rounded-lg text-white font-mono outline-none transition-colors duration-300"
+                  disabled
+                  className="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg text-white font-mono outline-none cursor-not-allowed"
                   placeholder="Subject"
                 />
               </div>
@@ -77,10 +52,8 @@ const Contact = () => {
                 <select
                   id="category"
                   name="category"
-                  value={formData.category}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-dark-bg border border-dark-border focus:border-neon-cyan rounded-lg text-white font-mono outline-none transition-colors duration-300"
+                  disabled
+                  className="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg text-white font-mono outline-none cursor-not-allowed"
                 >
                   <option value="">Select a category</option>
                   <option value="general">General Inquiry</option>
@@ -97,18 +70,17 @@ const Contact = () => {
                 <textarea
                   id="body"
                   name="body"
-                  value={formData.body}
-                  onChange={handleChange}
-                  required
+                  disabled
                   rows={6}
-                  className="w-full px-4 py-3 bg-dark-bg border border-dark-border focus:border-neon-cyan rounded-lg text-white font-mono outline-none transition-colors duration-300 resize-none"
+                  className="w-full px-4 py-3 bg-dark-bg border border-dark-border rounded-lg text-white font-mono outline-none resize-none cursor-not-allowed"
                   placeholder="Your message..."
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-pink text-white font-bold uppercase tracking-wider border-2 border-neon-pink hover:scale-105 transition-transform duration-300 flex items-center justify-center gap-2"
+                disabled
+                className="w-full px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-pink text-white font-bold uppercase tracking-wider border-2 border-neon-pink flex items-center justify-center gap-2 cursor-not-allowed opacity-50"
               >
                 <AiOutlineSend className="w-5 h-5" />
                 {t('contact.form.send')}

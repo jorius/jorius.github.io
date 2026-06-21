@@ -3,7 +3,7 @@
   "category": "tech",
   "date": "2026-06-10",
   "len": "10 min",
-  "tag": "homelab",
+  "tags": ["homelab"],
   "draft": false,
   "title": {
     "en": "Home Lab",

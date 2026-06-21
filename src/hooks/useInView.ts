@@ -7,6 +7,7 @@ export const useInView = <T extends HTMLElement = HTMLDivElement>(
 ): [RefObject<T | null>, boolean] => {
   const ref = useRef<T>(null);
   const [seen, setSeen] = useState(false);
+  const optionsRef = useRef(options);
 
   useEffect(() => {
     const node = ref.current;
@@ -20,11 +21,11 @@ export const useInView = <T extends HTMLElement = HTMLDivElement>(
           }
         });
       },
-      { threshold: 0.12, ...options },
+      { threshold: 0.12, ...optionsRef.current },
     );
     io.observe(node);
     return () => io.disconnect();
-  }, [seen, options]);
+  }, [seen]);
 
   return [ref, seen];
 };

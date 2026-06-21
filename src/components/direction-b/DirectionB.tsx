@@ -15,7 +15,6 @@ import { BExperience } from './BExperience';
 import { BHero } from './BHero';
 import { BNow } from './BNow';
 import { BOssWriting } from './BOssWriting';
-// import { BProjects } from './BProjects';
 import { BServices } from './BServices';
 import { BTopBar } from './BTopBar';
 import { BWhy } from './BWhy';
@@ -61,7 +60,6 @@ export const DirectionB = (): React.ReactElement => {
       <BNow />
       <BServices />
       <BExperience />
-      {/* <BProjects /> */}
       <BOssWriting />
       <BWhy />
       <BContact />

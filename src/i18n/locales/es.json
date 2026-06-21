@@ -293,7 +293,8 @@
       "visitDirectly": "Visita",
       "directly": "directamente.",
       "empty": "Aún no hay repositorios públicos, sin forks ni archivados.",
-      "writingEmpty": "Los escritos volverán cuando conecte un CMS. Atento."
+      "writingEmpty": "Los escritos volverán cuando conecte un CMS. Atento.",
+      "viewAllPosts": "→ Todos los artículos"
     },
     "contact": {
       "headline1": "CUÉNTAME,",
@@ -338,7 +339,17 @@
       "fullWidth": "⤢ ancho completo",
       "normalWidth": "⤡ ancho normal",
       "imageZoom": "ver a tamaño completo",
-      "lightboxClose": "cerrar imagen"
+      "lightboxClose": "cerrar imagen",
+      "blogHomeMeta": "JOSE RÍOS · BLOG PERSONAL",
+      "blogHomeTitle": "Escritura",
+      "blogHomeIntro": "Un espacio personal donde escribo sobre las cosas que exploro: hardware, ciberseguridad, infraestructura, bases de datos y algún que otro agujero de conejo de ciencia ficción. Sin calendario editorial. Solo apuntes de alguien que disfruta aprender en voz alta.",
+      "blogHomeCms": "Contenido gestionado con",
+      "tagsLabel": "Etiquetas",
+      "tagsShowMore": "+ Ver más",
+      "tagsAllTags": "Todas las etiquetas",
+      "tagsFilterLabel": "Artículos con etiqueta",
+      "tagsAllPosts": "← Todos los artículos",
+      "tagsModalClose": "Cerrar etiquetas"
     },
     "experience": {
       "present": "Presente",

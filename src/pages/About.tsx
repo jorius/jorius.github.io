@@ -1,13 +1,8 @@
 // packages
 import { useTranslation } from 'react-i18next';
 
-const About = () => {
+const About = (): React.ReactElement => {
   const { t } = useTranslation();
-
-  const catImages: string[] = [
-    // Add your cat images here
-    // '/images/cat1.jpg',
-  ];
 
   return (
     <div className="min-h-screen bg-dark-bg dark:bg-dark-bg text-white pt-32 pb-20">
@@ -25,19 +20,6 @@ const About = () => {
             <p className="text-gray-300 leading-relaxed mb-6">
               {t('about.personal.description')}
             </p>
-
-            {/* Cat Images */}
-            <div className="grid grid-cols-3 gap-4 mt-8">
-              {catImages.map((img, index) => (
-                <div key={index} className="aspect-square overflow-hidden rounded-lg border-2 border-neon-pink">
-                  <img
-                    src={img}
-                    alt={`Cat ${index + 1}`}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Professional Section */}
@@ -56,7 +38,7 @@ const About = () => {
                   <li>• Full-Stack Development</li>
                   <li>• Cybersecurity</li>
                   <li>• Cloud Architecture</li>
-                  <li>• DevOps & CI/CD</li>
+                  <li>• DevOps &amp; CI/CD</li>
                 </ul>
               </div>
               <div className="border-l-4 border-neon-blue pl-4">
@@ -65,7 +47,7 @@ const About = () => {
                   <li>• Open Source</li>
                   <li>• Security Research</li>
                   <li>• System Design</li>
-                  <li>• AI & Machine Learning</li>
+                  <li>• AI &amp; Machine Learning</li>
                 </ul>
               </div>
             </div>

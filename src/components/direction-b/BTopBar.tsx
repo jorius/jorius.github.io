@@ -1,7 +1,7 @@
 // packages
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 // contexts
@@ -10,6 +10,7 @@ import { useBTheme } from '../../contexts/ThemeContext';
 // hooks
 import { useScrollDirection } from '../../hooks/useScrollDirection';
 import { useIsMobile } from '../../hooks/useMediaQuery';
+import { useScrollToSection } from '../../hooks/useNavigation';
 
 // utils
 import { currentQuarter, currentYear } from '../../utils/dateLabels';
@@ -29,8 +30,7 @@ const NAV_TARGETS: Record<(typeof NAV_KEYS)[number], string> = {
 export const BTopBar = (): React.ReactElement => {
   const { t, i18n } = useTranslation();
   const { t: th, theme, toggleTheme } = useBTheme();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const scrollToSection = useScrollToSection();
   const scrollDir = useScrollDirection();
   const visible = scrollDir === 'up';
   const isMobile = useIsMobile();
@@ -53,15 +53,7 @@ export const BTopBar = (): React.ReactElement => {
       onClick={(e) => {
         e.preventDefault();
         setMenuRequested(false);
-        const targetId = NAV_TARGETS[key];
-        if (location.pathname === '/') {
-          document
-            .querySelector(`[data-jump="${targetId}"]`)
-            ?.scrollIntoView({ behavior: 'smooth' });
-        } else {
-          // Off the landing page: go home, then DirectionB scrolls to the section.
-          navigate('/', { state: { scrollTo: targetId } });
-        }
+        scrollToSection(NAV_TARGETS[key]);
       }}
       style={{
         color: th.ink,
