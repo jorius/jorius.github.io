@@ -1,5 +1,7 @@
 {
   "id": "hardware",
   "order": 1,
-  "label": { "en": "Hardware", "es": "Hardware" }
+  "label": { "en": "Hardware", "es": "Hardware" },
+  "color": "#c2410c",
+  "glyph": "Hw"
 }

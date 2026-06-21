@@ -48,6 +48,11 @@ export interface WritingTag {
   id: string;
   order: number;
   label: Localized;
+  // Optional chip styling, editable in Pages CMS. `color` is a hex value for the
+  // glyph square; `glyph` is a 1–2 char monogram. Both fall back gracefully when
+  // a CMS entry omits them (see BTagChip).
+  color?: string;
+  glyph?: string;
 }
 
 export interface WritingPost {

@@ -1,5 +1,7 @@
 {
   "id": "homelab",
   "order": 2,
-  "label": { "en": "Homelab", "es": "Homelab" }
+  "label": { "en": "Homelab", "es": "Homelab" },
+  "color": "#0e7490",
+  "glyph": "Hl"
 }

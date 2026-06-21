@@ -92,6 +92,8 @@ content:
         fields:
           - { name: en, label: English, type: string }
           - { name: es, label: Spanish, type: string }
+      - { name: color, label: Chip color (hex, e.g. #c2410c), type: string }
+      - { name: glyph, label: Chip glyph (1–2 chars; defaults to label initials), type: string }
 
   - name: writing-posts
     label: Writing — Posts

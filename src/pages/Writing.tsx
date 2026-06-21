@@ -17,6 +17,7 @@ import { useIsMobile } from '../hooks/useMediaQuery';
 import { loadCategories, loadPosts, loadTags, pickLocale } from '../utils/content';
 
 // components
+import { BTagChip } from '../components/direction-b/BTagChip';
 import { BTopBar } from '../components/direction-b/BTopBar';
 import { CommandPalette } from '../components/CommandPalette';
 import { PALETTE_SECTIONS } from '../components/direction-b/paletteSections';
@@ -88,6 +89,30 @@ const Writing = (): React.ReactElement => {
 
   const treeWidth = isMobile ? '100%' : 'clamp(220px, 26vw, 320px)';
 
+  // Reader width toggle — shared by the blog home and the article view (desktop
+  // only; mobile is already full width).
+  const fullWidthToggle = !isMobile ? (
+    <button
+      type="button"
+      onClick={() => setFullWidth((v) => !v)}
+      aria-pressed={fullWidth}
+      style={{
+        background: 'transparent',
+        border: `1px solid ${t.rule}`,
+        color: t.ink,
+        padding: '3px 9px',
+        fontSize: 11,
+        cursor: 'pointer',
+        fontFamily: 'inherit',
+        textTransform: 'uppercase',
+        letterSpacing: '0.04em',
+        whiteSpace: 'nowrap',
+      }}
+    >
+      {fullWidth ? tr('directionB.read.normalWidth') : tr('directionB.read.fullWidth')}
+    </button>
+  ) : null;
+
   return (
     <div style={{ background: t.paper, color: t.ink, minHeight: '100vh', position: 'relative' }}>
       <ScanLines />
@@ -111,21 +136,16 @@ const Writing = (): React.ReactElement => {
             borderRight: isMobile ? 'none' : `1px solid ${t.rule}`,
             display: 'flex',
             flexDirection: 'column',
-            height: isMobile ? 'auto' : 'calc(100vh - 80px)',
+            // Subtract more than the sticky `top` offset so the pinned tags
+            // footer clears the viewport bottom instead of being pushed under it.
+            height: isMobile ? 'auto' : 'calc(100vh - 96px)',
           }}
         >
           {/* scrollable tree area */}
           <div style={{ flex: 1, overflowY: isMobile ? 'visible' : 'auto', paddingRight: isMobile ? 0 : 20 }}>
-            <Link
-              to="/"
-              style={{ fontSize: 11, color: t.ink, opacity: 0.6, textDecoration: 'none', letterSpacing: '0.08em', textTransform: 'uppercase' }}
-            >
-              <Glitch trigger="hover">{tr('directionB.read.back')}</Glitch>
-            </Link>
-
             {activeTag ? (
               /* ── FILTERED VIEW ── */
-              <div style={{ marginTop: 20 }}>
+              <div>
                 <button
                   type="button"
                   onClick={() => setActiveTag(null)}
@@ -147,19 +167,23 @@ const Writing = (): React.ReactElement => {
                 </button>
                 <div
                   style={{
-                    fontSize: 10,
+                    fontSize: 11,
                     color: t.dim,
                     letterSpacing: '0.12em',
                     textTransform: 'uppercase',
-                    marginBottom: 14,
+                    marginBottom: 10,
                   }}
                 >
-                  {tr('directionB.read.tagsFilterLabel')}{' '}
-                  {(() => {
-                    const tg = tags.find((x) => x.id === activeTag);
-                    return tg ? pickLocale(tg.label, lang).toUpperCase() : activeTag.toUpperCase();
-                  })()}
+                  {tr('directionB.read.tagsFilterLabel')}
                 </div>
+                {(() => {
+                  const tg = tags.find((x) => x.id === activeTag);
+                  return tg ? (
+                    <div style={{ marginBottom: 16 }}>
+                      <BTagChip tag={tg} lang={lang} />
+                    </div>
+                  ) : null;
+                })()}
                 {posts
                   .filter((p) => p.tags.includes(activeTag))
                   .map((p) => {
@@ -170,10 +194,11 @@ const Writing = (): React.ReactElement => {
                         to={`/writing/${p.slug}`}
                         style={{
                           display: 'block',
-                          padding: '10px 0',
+                          padding: '10px 20px 10px 0',
+                          marginRight: isMobile ? 0 : -20,
                           borderBottom: `1px solid ${t.soft}`,
                           color: t.ink,
-                          opacity: isActive ? 1 : 0.78,
+                          opacity: isActive ? 1 : 0.85,
                           textDecoration: 'none',
                           fontSize: 13,
                           fontWeight: isActive ? 700 : 400,
@@ -181,7 +206,7 @@ const Writing = (): React.ReactElement => {
                           transition: 'opacity 150ms',
                         }}
                         onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.opacity = isActive ? '1' : '0.78'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.opacity = isActive ? '1' : '0.85'; }}
                       >
                         <Glitch trigger="hover">{pickLocale(p.title, lang)}</Glitch>
                         <span style={{ display: 'block', fontSize: 11, color: t.dim, marginTop: 2 }}>
@@ -193,7 +218,7 @@ const Writing = (): React.ReactElement => {
               </div>
             ) : (
               /* ── CATEGORY TREE (existing) ── */
-              <div style={{ marginTop: 20 }}>
+              <div>
                 {categories.map((cat) => {
                   const catPosts = postsByCategory(cat.id);
                   if (catPosts.length === 0) return null;
@@ -218,7 +243,7 @@ const Writing = (): React.ReactElement => {
                           textAlign: 'left',
                           fontSize: 11,
                           color: t.ink,
-                          opacity: 0.62,
+                          opacity: 0.85,
                           letterSpacing: '0.14em',
                           textTransform: 'uppercase',
                         }}
@@ -248,14 +273,14 @@ const Writing = (): React.ReactElement => {
                                   padding: '7px 0 7px 12px',
                                   borderLeft: `2px solid ${isActive ? t.ink : t.soft}`,
                                   color: t.ink,
-                                  opacity: isActive ? 1 : 0.72,
+                                  opacity: isActive ? 1 : 0.85,
                                   textDecoration: 'none',
                                   fontSize: 14,
                                   lineHeight: 1.4,
                                   transition: 'opacity 150ms, border-color 150ms',
                                 }}
                                 onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.opacity = isActive ? '1' : '0.72'; }}
+                                onMouseLeave={(e) => { e.currentTarget.style.opacity = isActive ? '1' : '0.85'; }}
                               >
                                 <Glitch trigger="hover">{pickLocale(p.title, lang)}</Glitch>
                               </Link>
@@ -275,14 +300,14 @@ const Writing = (): React.ReactElement => {
               style={{
                 borderTop: `1px solid ${t.rule}`,
                 paddingTop: 16,
-                paddingBottom: isMobile ? 0 : 16,
+                paddingBottom: isMobile ? 0 : 24,
                 paddingRight: isMobile ? 0 : 20,
                 flexShrink: 0,
               }}
             >
               <div
                 style={{
-                  fontSize: 10,
+                  fontSize: 11,
                   color: t.dim,
                   letterSpacing: '0.15em',
                   textTransform: 'uppercase',
@@ -293,28 +318,13 @@ const Writing = (): React.ReactElement => {
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                 {tags.slice(0, TAGS_VISIBLE).map((tg) => (
-                  <button
+                  <BTagChip
                     key={tg.id}
-                    type="button"
+                    tag={tg}
+                    lang={lang}
+                    active={activeTag === tg.id}
                     onClick={() => setActiveTag((prev) => (prev === tg.id ? null : tg.id))}
-                    style={{
-                      fontFamily: 'inherit',
-                      fontSize: 10,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      color: activeTag === tg.id ? t.ink : t.dim,
-                      border: `1px solid ${activeTag === tg.id ? t.ink : t.rule}`,
-                      background: activeTag === tg.id ? `${t.ink}18` : 'transparent',
-                      padding: '4px 9px',
-                      cursor: 'pointer',
-                      lineHeight: 1,
-                      transition: 'color 150ms, border-color 150ms, background 150ms',
-                    }}
-                    onMouseEnter={(e) => { if (activeTag !== tg.id) { e.currentTarget.style.color = t.ink; e.currentTarget.style.borderColor = t.ink; } }}
-                    onMouseLeave={(e) => { if (activeTag !== tg.id) { e.currentTarget.style.color = t.dim; e.currentTarget.style.borderColor = t.rule; } }}
-                  >
-                    {pickLocale(tg.label, lang)}
-                  </button>
+                  />
                 ))}
                 {tags.length > TAGS_VISIBLE ? (
                   <button
@@ -322,7 +332,7 @@ const Writing = (): React.ReactElement => {
                     onClick={() => setShowAllTags(true)}
                     style={{
                       fontFamily: 'inherit',
-                      fontSize: 10,
+                      fontSize: 11,
                       letterSpacing: '0.1em',
                       textTransform: 'uppercase',
                       color: t.rgbB,
@@ -359,8 +369,11 @@ const Writing = (): React.ReactElement => {
           {!slug ? (
             /* ── BLOG HOME ── */
             <>
-              <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 24 }}>
-                {tr('directionB.read.blogHomeMeta')}
+              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 24 }}>
+                <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                  {tr('directionB.read.blogHomeMeta')}
+                </div>
+                {fullWidthToggle}
               </div>
               <h1
                 style={{
@@ -377,7 +390,7 @@ const Writing = (): React.ReactElement => {
               <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 16, lineHeight: 1.75, color: t.ink, opacity: 0.8, maxWidth: '62ch', marginBottom: 12 }}>
                 {tr('directionB.read.blogHomeIntro')}
               </p>
-              <p style={{ fontSize: 12, color: t.dim, marginBottom: 48 }}>
+              <p style={{ fontSize: 12, color: t.dim, marginBottom: 0 }}>
                 {tr('directionB.read.blogHomeCms')}{' '}
                 <a
                   href="https://pagescms.org"
@@ -388,135 +401,14 @@ const Writing = (): React.ReactElement => {
                   Pages CMS
                 </a>
               </p>
-              <div
-                style={{
-                  fontSize: 10,
-                  color: t.dim,
-                  letterSpacing: '0.15em',
-                  textTransform: 'uppercase',
-                  marginBottom: 12,
-                  paddingBottom: 10,
-                  borderBottom: `1px solid ${t.rule}`,
-                }}
-              >
-                {tr('directionB.read.blogHomeRecent')}
-              </div>
-              {posts.map((p) => (
-                <Link
-                  key={p.slug}
-                  to={`/writing/${p.slug}`}
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: isMobile ? '1fr' : '100px 1fr 64px',
-                    padding: '16px 0',
-                    borderBottom: `1px solid ${t.soft}`,
-                    gap: isMobile ? 6 : 12,
-                    alignItems: 'baseline',
-                    textDecoration: 'none',
-                    color: t.ink,
-                    transition: 'background 180ms',
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = t.sub; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
-                >
-                  <span style={{ color: t.dim, fontSize: 12 }}>{p.date}</span>
-                  <span>
-                    <span style={{ fontSize: 16, letterSpacing: '-0.01em' }}>
-                      {pickLocale(p.title, lang)}
-                    </span>
-                    {p.tags.length > 0 ? (
-                      <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', marginTop: 6 }}>
-                        {p.tags.map((tid) => {
-                          const tg = tags.find((x) => x.id === tid);
-                          return (
-                            <span
-                              key={tid}
-                              style={{
-                                fontSize: 9,
-                                letterSpacing: '0.1em',
-                                textTransform: 'uppercase',
-                                color: t.dim,
-                                border: `1px solid ${t.soft}`,
-                                padding: '2px 6px',
-                                lineHeight: 1,
-                              }}
-                            >
-                              {tg ? pickLocale(tg.label, lang) : tid}
-                            </span>
-                          );
-                        })}
-                      </div>
-                    ) : null}
-                  </span>
-                  <span style={{ color: t.dim, fontSize: 12, textAlign: isMobile ? 'left' : 'right' }}>{p.len}</span>
-                </Link>
-              ))}
             </>
           ) : active ? (
             <>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-                  <span>{active.date} · {active.len}</span>
-                  {active.tags.map((tid) => {
-                    const tg = tags.find((x) => x.id === tid);
-                    const isActiveChip = activeTag === tid;
-                    return (
-                      <button
-                        key={tid}
-                        type="button"
-                        onClick={() => setActiveTag((prev) => (prev === tid ? null : tid))}
-                        style={{
-                          fontFamily: 'inherit',
-                          fontSize: 10,
-                          letterSpacing: '0.1em',
-                          textTransform: 'uppercase',
-                          color: isActiveChip ? t.ink : t.dim,
-                          border: `1px solid ${isActiveChip ? t.ink : t.rule}`,
-                          background: isActiveChip ? `${t.ink}18` : 'transparent',
-                          padding: '3px 8px',
-                          cursor: 'pointer',
-                          lineHeight: 1,
-                          transition: 'color 150ms, border-color 150ms, background 150ms',
-                        }}
-                        onMouseEnter={(e) => {
-                          if (!isActiveChip) {
-                            e.currentTarget.style.color = t.ink;
-                            e.currentTarget.style.borderColor = t.ink;
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          if (!isActiveChip) {
-                            e.currentTarget.style.color = t.dim;
-                            e.currentTarget.style.borderColor = t.rule;
-                          }
-                        }}
-                      >
-                        {tg ? pickLocale(tg.label, lang) : tid}
-                      </button>
-                    );
-                  })}
-                </div>
-                {!isMobile ? (
-                  <button
-                    type="button"
-                    onClick={() => setFullWidth((v) => !v)}
-                    aria-pressed={fullWidth}
-                    style={{
-                      background: 'transparent',
-                      border: `1px solid ${t.rule}`,
-                      color: t.ink,
-                      padding: '3px 9px',
-                      fontSize: 11,
-                      cursor: 'pointer',
-                      fontFamily: 'inherit',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.04em',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    {fullWidth ? tr('directionB.read.normalWidth') : tr('directionB.read.fullWidth')}
-                  </button>
-                ) : null}
+                <span style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                  {active.date} · {active.len}
+                </span>
+                {fullWidthToggle}
               </div>
               <h1
                 style={{
@@ -567,6 +459,36 @@ const Writing = (): React.ReactElement => {
                   {pickLocale(active.body, lang)}
                 </Markdown>
               </div>
+              {active.tags.length > 0 ? (
+                <div
+                  style={{
+                    marginTop: 56,
+                    paddingTop: 24,
+                    borderTop: `1px solid ${t.rule}`,
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    alignItems: 'center',
+                    gap: 8,
+                  }}
+                >
+                  <span style={{ fontSize: 11, color: t.dim, letterSpacing: '0.15em', textTransform: 'uppercase', marginRight: 4 }}>
+                    {tr('directionB.read.tagsLabel')}
+                  </span>
+                  {active.tags.map((tid) => {
+                    const tg = tags.find((x) => x.id === tid);
+                    if (!tg) return null;
+                    return (
+                      <BTagChip
+                        key={tid}
+                        tag={tg}
+                        lang={lang}
+                        active={activeTag === tid}
+                        onClick={() => setActiveTag((prev) => (prev === tid ? null : tid))}
+                      />
+                    );
+                  })}
+                </div>
+              ) : null}
             </>
           ) : (
             <div style={{ fontSize: 14, color: t.dim }}>{tr('directionB.oss.writingEmpty')}</div>
@@ -692,7 +614,7 @@ const Writing = (): React.ReactElement => {
             </button>
             <div
               style={{
-                fontSize: 10,
+                fontSize: 11,
                 color: t.dim,
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
@@ -703,28 +625,13 @@ const Writing = (): React.ReactElement => {
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
               {tags.map((tg) => (
-                <button
+                <BTagChip
                   key={tg.id}
-                  type="button"
+                  tag={tg}
+                  lang={lang}
+                  active={activeTag === tg.id}
                   onClick={() => { setActiveTag(tg.id); setShowAllTags(false); }}
-                  style={{
-                    fontFamily: 'inherit',
-                    fontSize: 10,
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    color: t.dim,
-                    border: `1px solid ${t.rule}`,
-                    background: 'transparent',
-                    padding: '4px 9px',
-                    cursor: 'pointer',
-                    lineHeight: 1,
-                    transition: 'color 150ms, border-color 150ms',
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = t.ink; e.currentTarget.style.borderColor = t.ink; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = t.dim; e.currentTarget.style.borderColor = t.rule; }}
-                >
-                  {pickLocale(tg.label, lang)}
-                </button>
+                />
               ))}
             </div>
           </div>
