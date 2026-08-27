@@ -3,7 +3,7 @@
 // packages
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -14,7 +14,7 @@ import { useBTheme } from '../contexts/ThemeContext';
 import { useIsMobile } from '../hooks/useMediaQuery';
 
 // utils
-import { loadCategories, loadPosts, loadTags, pickLocale } from '../utils/content';
+import { loadCategories, loadPosts, loadRevisions, loadTags, pickLocale } from '../utils/content';
 
 // components
 import { BTagChip } from '../components/direction-b/BTagChip';
@@ -43,6 +43,27 @@ const Writing = (): React.ReactElement => {
     () => (slug ? posts.find((p) => p.slug === slug) ?? null : null),
     [posts, slug],
   );
+  // id of the previous version being read in place; null = the current post.
+  // Kept in the query string so a specific version can be linked and survives
+  // a reload: /writing/home-lab?rev=home-lab--2026-06-10
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeRevision = searchParams.get('rev');
+  const setActiveRevision = (id: string | null) => {
+    const next = new URLSearchParams(searchParams);
+    if (id) next.set('rev', id);
+    else next.delete('rev');
+    setSearchParams(next);
+  };
+  const revisions = useMemo(() => (slug ? loadRevisions(slug) : []), [slug]);
+  // No reset needed when the slug changes: `revisions` is already scoped to the
+  // open post, so a leftover id from another post simply finds nothing here and
+  // the reader falls back to the current version.
+  const viewedRevision = useMemo(
+    () => revisions.find((r) => r.id === activeRevision) ?? null,
+    [revisions, activeRevision],
+  );
+  // What the reader actually renders: the picked previous version, or the post.
+  const reading = viewedRevision ?? active;
 
   const postsByCategory = (catId: string): typeof posts => posts.filter((p) => p.category === catId);
 
@@ -402,14 +423,62 @@ const Writing = (): React.ReactElement => {
                 </a>
               </p>
             </>
-          ) : active ? (
+          ) : active && reading ? (
             <>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
                 <span style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-                  {active.date} · {active.len}
+                  {reading.date} · {active.len}
                 </span>
                 {fullWidthToggle}
               </div>
+              {viewedRevision ? (
+                <div
+                  style={{
+                    marginTop: 14,
+                    padding: '12px 14px',
+                    border: `1px solid ${t.rgbB}`,
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    alignItems: 'center',
+                    gap: 10,
+                    fontSize: 13,
+                    lineHeight: 1.55,
+                    color: t.ink,
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "'IBM Plex Mono', ui-monospace, monospace",
+                      fontSize: 10,
+                      letterSpacing: '0.14em',
+                      textTransform: 'uppercase',
+                      color: t.rgbB,
+                    }}
+                  >
+                    {tr('directionB.read.revisionsViewing')}
+                  </span>
+                  <span style={{ flex: '1 1 240px' }}>{pickLocale(viewedRevision.note, lang)}</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveRevision(null);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    style={{
+                      background: 'none',
+                      border: `1px solid ${t.rule}`,
+                      padding: '5px 10px',
+                      cursor: 'pointer',
+                      color: t.ink,
+                      font: 'inherit',
+                      fontSize: 12,
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {tr('directionB.read.revisionsBackToCurrent')}
+                  </button>
+                </div>
+              ) : null}
               <h1
                 style={{
                   fontFamily: "'Space Mono', monospace",
@@ -420,7 +489,7 @@ const Writing = (): React.ReactElement => {
                   color: t.ink,
                 }}
               >
-                {pickLocale(active.title, lang)}
+                {pickLocale(reading.title, lang)}
               </h1>
               <div
                 className="b-reader"
@@ -456,7 +525,7 @@ const Writing = (): React.ReactElement => {
                     ),
                   }}
                 >
-                  {pickLocale(active.body, lang)}
+                  {pickLocale(reading.body, lang)}
                 </Markdown>
               </div>
               {active.tags.length > 0 ? (
@@ -487,6 +556,74 @@ const Writing = (): React.ReactElement => {
                       />
                     );
                   })}
+                </div>
+              ) : null}
+              {revisions.length > 0 ? (
+                <div style={{ marginTop: 32, paddingTop: 24, borderTop: `1px solid ${t.rule}` }}>
+                  <div
+                    style={{
+                      fontSize: 11,
+                      color: t.dim,
+                      letterSpacing: '0.15em',
+                      textTransform: 'uppercase',
+                      marginBottom: 10,
+                    }}
+                  >
+                    {tr('directionB.read.revisionsLabel')}
+                  </div>
+                  <p style={{ fontSize: 13, color: t.dim, margin: '0 0 14px', lineHeight: 1.6 }}>
+                    {tr('directionB.read.revisionsIntro')}
+                  </p>
+                  <ul style={{ listStyle: 'none', margin: 0, padding: 0, fontSize: 13, lineHeight: 1.6 }}>
+                    {revisions.map((rev) => {
+                      const isOpen = rev.id === activeRevision;
+                      return (
+                        <li key={rev.id} style={{ marginBottom: 10 }}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setActiveRevision(isOpen ? null : rev.id);
+                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }}
+                            style={{
+                              display: 'flex',
+                              gap: 12,
+                              alignItems: 'baseline',
+                              width: '100%',
+                              textAlign: 'left',
+                              background: 'none',
+                              border: 'none',
+                              borderLeft: `2px solid ${isOpen ? t.rgbB : 'transparent'}`,
+                              padding: '2px 0 2px 10px',
+                              margin: 0,
+                              cursor: 'pointer',
+                              color: 'inherit',
+                              font: 'inherit',
+                            }}
+                          >
+                            <time
+                              dateTime={rev.date}
+                              style={{
+                                color: isOpen ? t.rgbB : t.dim,
+                                fontFamily: "'IBM Plex Mono', ui-monospace, monospace",
+                                flexShrink: 0,
+                              }}
+                            >
+                              {rev.date}
+                            </time>
+                            <span style={{ color: t.ink }}>
+                              {pickLocale(rev.note, lang)}{' '}
+                              <span style={{ color: t.rgbB, textDecoration: 'underline', textUnderlineOffset: 3 }}>
+                                {isOpen
+                                  ? tr('directionB.read.revisionsHide')
+                                  : tr('directionB.read.revisionsView')}
+                              </span>
+                            </span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
               ) : null}
             </>

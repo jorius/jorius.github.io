@@ -122,12 +122,21 @@
       "calathea": {
         "title": "Calathea",
         "description": "A beautiful e-commerce platform for plant enthusiasts with real-time inventory and AI-powered recommendations.",
-        "tags": ["React", "Node.js", "MongoDB", "AI"]
+        "tags": [
+          "React",
+          "Node.js",
+          "MongoDB",
+          "AI"
+        ]
       },
       "modernApp": {
         "title": "Modern App",
         "description": "A cutting-edge mobile application featuring seamless user experience and innovative features.",
-        "tags": ["React Native", "Firebase", "TypeScript"]
+        "tags": [
+          "React Native",
+          "Firebase",
+          "TypeScript"
+        ]
       }
     }
   },
@@ -240,8 +249,13 @@
         "contact": "Contact"
       },
       "available": "Available",
-      "themeToggle": { "toLight": "☀ LIGHT", "toDark": "☾ DARK" },
-      "languageToggle": { "label": "Language" },
+      "themeToggle": {
+        "toLight": "☀ LIGHT",
+        "toDark": "☾ DARK"
+      },
+      "languageToggle": {
+        "label": "Language"
+      },
       "pressKey": "press"
     },
     "hero": {
@@ -268,12 +282,36 @@
       "subcaption": "[ 4 cats, no bugs ]"
     },
     "sections": {
-      "now": { "label": "NOW.", "num": "01", "kicker": "Updated by hand, roughly every two weeks. The rest of the site is a static record; this part moves." },
-      "work": { "label": "WORK.", "num": "02", "kicker": "Three engagements I take. Weekly rate, quarterly retainer, or fixed scope — you decide." },
-      "record": { "label": "RECORD.", "num": "03", "kicker": "Six engagements, four companies, a lot of branches merged into tidy commits." },
-      "index": { "label": "INDEX.", "num": "04", "kicker": "A shortlist of personal and client projects. Case studies available on request." },
-      "writing": { "label": "WRITING & OSS.", "num": "05", "kicker": "Long-form notes and live public repositories. The things I'd point a hiring manager at, if asked." },
-      "why": { "label": "WHY.", "num": "06", "kicker": "Four honest reasons to bring me into your team or project." },
+      "now": {
+        "label": "NOW.",
+        "num": "01",
+        "kicker": "Updated by hand, roughly every two weeks. The rest of the site is a static record; this part moves."
+      },
+      "work": {
+        "label": "WORK.",
+        "num": "02",
+        "kicker": "Three engagements I take. Weekly rate, quarterly retainer, or fixed scope — you decide."
+      },
+      "record": {
+        "label": "RECORD.",
+        "num": "03",
+        "kicker": "Six engagements, four companies, a lot of branches merged into tidy commits."
+      },
+      "index": {
+        "label": "INDEX.",
+        "num": "04",
+        "kicker": "A shortlist of personal and client projects. Case studies available on request."
+      },
+      "writing": {
+        "label": "WRITING & OSS.",
+        "num": "05",
+        "kicker": "Long-form notes and live public repositories. The things I'd point a hiring manager at, if asked."
+      },
+      "why": {
+        "label": "WHY.",
+        "num": "06",
+        "kicker": "Four honest reasons to bring me into your team or project."
+      },
       "contact": "§ 07 · Contact"
     },
     "now": {
@@ -283,7 +321,10 @@
       "openCase": "open case ↗",
       "private": "private",
       "tagSuffix": "project",
-      "category": { "personal": "PERSONAL", "client": "CLIENT" }
+      "category": {
+        "personal": "PERSONAL",
+        "client": "CLIENT"
+      }
     },
     "oss": {
       "writingHeader": "— Writing",
@@ -349,7 +390,13 @@
       "tagsAllTags": "All Tags",
       "tagsFilterLabel": "Posts tagged",
       "tagsAllPosts": "← All posts",
-      "tagsModalClose": "Close tags"
+      "tagsModalClose": "Close tags",
+      "revisionsLabel": "Revision history",
+      "revisionsIntro": "This post has been rewritten since it was first published. You can read the earlier versions here:",
+      "revisionsView": "read this version",
+      "revisionsHide": "back to the current version",
+      "revisionsViewing": "Older version",
+      "revisionsBackToCurrent": "Back to current"
     },
     "experience": {
       "present": "Present",

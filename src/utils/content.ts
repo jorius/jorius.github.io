@@ -55,6 +55,28 @@ export interface WritingTag {
   glyph?: string;
 }
 
+// A superseded version of a post, kept in full so the reader can show it in
+// place rather than sending anyone off to GitHub. Stored as its own content
+// file rather than derived from git: the deploy checkout is shallow, so commit
+// history isn't available at build time, and a hand-written note explains
+// *what* changed better than a commit subject does.
+//
+// IMPORTANT: a revision body must point at *pinned* image copies, suffixed with
+// its own date (home-lab-topology--2026-06-10.png), never at the live path the
+// current post uses. Post images get overwritten in place when a diagram or a
+// screenshot is refreshed, so an archived version sharing that path silently
+// starts illustrating itself with today's picture - which is exactly wrong for
+// a post describing how things used to be, and fails with no error.
+export interface WritingRevisionDoc {
+  id: string;
+  // slug of the post this is a previous version of
+  post: string;
+  date: string;
+  note: Localized;
+  title: Localized;
+  body: Localized;
+}
+
 export interface WritingPost {
   slug: string;
   category: string;
@@ -69,6 +91,7 @@ export interface WritingPost {
 const categoryModules = import.meta.glob('../content/writing/categories/*.json', { eager: true });
 const tagModules = import.meta.glob('../content/writing/tags/*.json', { eager: true });
 const postModules = import.meta.glob('../content/writing/posts/*.json', { eager: true });
+const revisionModules = import.meta.glob('../content/writing/revisions/*.json', { eager: true });
 
 export const loadCategories = (): WritingCategory[] =>
   Object.values(categoryModules)
@@ -96,4 +119,13 @@ export const loadPosts = (): WritingPost[] =>
     // nothing to render and would throw in pickLocale.
     .filter((p) => isLocalized(p.title) && isLocalized(p.body))
     .filter((p) => (import.meta.env.PROD ? !p.draft : true))
+    .sort((a, b) => b.date.localeCompare(a.date));
+
+// Previous versions of a given post, newest first. Same defensive filtering as
+// posts: a half-written CMS entry has nothing renderable and would throw in
+// pickLocale.
+export const loadRevisions = (slug: string): WritingRevisionDoc[] =>
+  Object.values(revisionModules)
+    .map((m) => (m as { default: WritingRevisionDoc }).default)
+    .filter((r) => r?.post === slug && isLocalized(r?.title) && isLocalized(r?.body) && isLocalized(r?.note))
     .sort((a, b) => b.date.localeCompare(a.date));
