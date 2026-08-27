@@ -56,7 +56,7 @@
     },
     "perficient_current": {
       "company": "Perficient",
-      "period": "Nov 2025 - Presente",
+      "period": "Nov 2025 - Ago 2026",
       "role": "Consultor Técnico Senior",
       "description": "Liderando proyectos de consultoría técnica y arquitectura de software para clientes empresariales. Especializado en soluciones cloud-native y frameworks modernos de JavaScript."
     },
@@ -403,7 +403,7 @@
       "remote": "Remoto",
       "perficient_current": {
         "role": "Consultor Técnico Senior",
-        "body": "Liderando la entrega técnica de flujos de seguros y cuidado personal para un cliente de servicios de salud en EE.UU. Arquitecté e implementé soluciones en la pila JS/TS y coordiné con equipos de ingeniería distribuidos en distintas zonas horarias."
+        "body": "Lideré la entrega técnica de flujos de seguros y cuidado personal para un cliente de servicios de salud en EE.UU. Arquitecté e implementé soluciones en la pila JS/TS y coordiné con equipos de ingeniería distribuidos en distintas zonas horarias."
       },
       "celerik_recent": {
         "role": "Desarrollador Senior & Líder Técnico",

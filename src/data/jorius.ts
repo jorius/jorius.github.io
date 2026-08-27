@@ -81,7 +81,7 @@ export const JORIUS: JoriusData = {
       logo: '/images/perficient_logo.png',
       loc: 'Colombia',
       from: 'Dec 2025',
-      to: 'Present',
+      to: 'Aug 2026',
     },
     {
       key: 'celerik_recent',
