@@ -92,8 +92,8 @@ content:
         fields:
           - { name: en, label: English, type: string }
           - { name: es, label: Spanish, type: string }
-      - { name: color, label: Chip color (hex, e.g. #c2410c), type: string }
-      - { name: glyph, label: Chip glyph (1–2 chars; defaults to label initials), type: string }
+      - { name: color, label: "Chip color (hex, e.g. #c2410c)", type: string }
+      - { name: glyph, label: "Chip glyph (1–2 chars; defaults to label initials)", type: string }
 
   - name: writing-posts
     label: Writing — Posts
@@ -138,16 +138,42 @@ content:
         fields:
           - { name: en, label: English, type: rich-text }
           - { name: es, label: Spanish, type: rich-text }
-      - name: revisions
-        label: Revision history
+
+  - name: writing-revisions
+    label: Writing — Previous versions
+    type: collection
+    path: src/content/writing/revisions
+    filename: '{fields.id}.json'
+    view:
+      primary: id
+      sort: date
+      order: desc
+    fields:
+      - { name: id, label: "ID (e.g. home-lab--2026-06-10)", type: string }
+      - name: post
+        label: Post this is a previous version of
+        type: reference
+        options:
+          collection: writing-posts
+          value: '{fields.slug}'
+          label: '{fields.title.en}'
+          search: 'fields.slug,fields.title.en'
+      - { name: date, label: Date this version was published, type: date }
+      - name: note
+        label: What changed since
         type: object
-        list: true
         fields:
-          - { name: date, label: Date, type: date }
-          - name: note
-            label: What changed
-            type: object
-            fields:
-              - { name: en, label: English, type: text }
-              - { name: es, label: Spanish, type: text }
-          - { name: url, label: Link to that version (optional), type: string }
+          - { name: en, label: English, type: text }
+          - { name: es, label: Spanish, type: text }
+      - name: title
+        label: Title at the time
+        type: object
+        fields:
+          - { name: en, label: English, type: string }
+          - { name: es, label: Spanish, type: string }
+      - name: body
+        label: Body as it was
+        type: object
+        fields:
+          - { name: en, label: English, type: rich-text }
+          - { name: es, label: Spanish, type: rich-text }

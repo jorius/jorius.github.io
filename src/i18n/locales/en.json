@@ -392,8 +392,11 @@
       "tagsAllPosts": "← All posts",
       "tagsModalClose": "Close tags",
       "revisionsLabel": "Revision history",
-      "revisionsIntro": "This post has been rewritten since it was first published. Earlier versions:",
-      "revisionsView": "view this version"
+      "revisionsIntro": "This post has been rewritten since it was first published. You can read the earlier versions here:",
+      "revisionsView": "read this version",
+      "revisionsHide": "back to the current version",
+      "revisionsViewing": "Older version",
+      "revisionsBackToCurrent": "Back to current"
     },
     "experience": {
       "present": "Present",

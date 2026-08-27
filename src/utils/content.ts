@@ -55,16 +55,19 @@ export interface WritingTag {
   glyph?: string;
 }
 
-// One prior version of a post, for the revisions block under the reader. These
-// are written by hand in Pages CMS rather than derived from git: the deploy
-// checkout is shallow, so commit history isn't available at build time, and a
-// hand-written note explains *what* changed better than a commit subject does.
-export interface WritingRevision {
+// A superseded version of a post, kept in full so the reader can show it in
+// place rather than sending anyone off to GitHub. Stored as its own content
+// file rather than derived from git: the deploy checkout is shallow, so commit
+// history isn't available at build time, and a hand-written note explains
+// *what* changed better than a commit subject does.
+export interface WritingRevisionDoc {
+  id: string;
+  // slug of the post this is a previous version of
+  post: string;
   date: string;
   note: Localized;
-  // Optional link to the version being described (a GitHub permalink to the
-  // post's JSON at that commit). Omitted entries render as plain text.
-  url?: string;
+  title: Localized;
+  body: Localized;
 }
 
 export interface WritingPost {
@@ -76,12 +79,12 @@ export interface WritingPost {
   draft: boolean;
   title: Localized;
   body: Localized;
-  revisions?: WritingRevision[];
 }
 
 const categoryModules = import.meta.glob('../content/writing/categories/*.json', { eager: true });
 const tagModules = import.meta.glob('../content/writing/tags/*.json', { eager: true });
 const postModules = import.meta.glob('../content/writing/posts/*.json', { eager: true });
+const revisionModules = import.meta.glob('../content/writing/revisions/*.json', { eager: true });
 
 export const loadCategories = (): WritingCategory[] =>
   Object.values(categoryModules)
@@ -103,15 +106,19 @@ export const loadPosts = (): WritingPost[] =>
         // normalize here so every post always carries a valid string[].
         tags: Array.isArray(raw.tags) ? raw.tags : [],
         draft: raw.draft ?? false,
-        // Same guard as tags: a CMS entry can persist a partially filled
-        // revision, which would render an empty row or throw in pickLocale.
-        revisions: Array.isArray(raw.revisions)
-          ? raw.revisions.filter((r) => typeof r?.date === 'string' && isLocalized(r?.note))
-          : [],
       };
     })
     // Drop incomplete CMS entries: a post without localized title/body has
     // nothing to render and would throw in pickLocale.
     .filter((p) => isLocalized(p.title) && isLocalized(p.body))
     .filter((p) => (import.meta.env.PROD ? !p.draft : true))
+    .sort((a, b) => b.date.localeCompare(a.date));
+
+// Previous versions of a given post, newest first. Same defensive filtering as
+// posts: a half-written CMS entry has nothing renderable and would throw in
+// pickLocale.
+export const loadRevisions = (slug: string): WritingRevisionDoc[] =>
+  Object.values(revisionModules)
+    .map((m) => (m as { default: WritingRevisionDoc }).default)
+    .filter((r) => r?.post === slug && isLocalized(r?.title) && isLocalized(r?.body) && isLocalized(r?.note))
     .sort((a, b) => b.date.localeCompare(a.date));

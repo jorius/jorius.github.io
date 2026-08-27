@@ -392,8 +392,11 @@
       "tagsAllPosts": "← Todos los artículos",
       "tagsModalClose": "Cerrar etiquetas",
       "revisionsLabel": "Historial de revisiones",
-      "revisionsIntro": "Este post ha sido reescrito desde su publicación original. Versiones anteriores:",
-      "revisionsView": "ver esta versión"
+      "revisionsIntro": "Este post ha sido reescrito desde su publicación original. Puedes leer las versiones anteriores aquí:",
+      "revisionsView": "leer esta versión",
+      "revisionsHide": "volver a la versión actual",
+      "revisionsViewing": "Versión anterior",
+      "revisionsBackToCurrent": "Volver a la actual"
     },
     "experience": {
       "present": "Presente",
