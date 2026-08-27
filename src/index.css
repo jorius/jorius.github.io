@@ -38,7 +38,10 @@
 }
 
 /* Writing reader — readable long-form inside the paper box */
-.b-reader { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; }
+/* Atkinson Hyperlegible Next (Braille Institute) for the reader body: these
+   posts are dense with hostnames, ports and quantisation tags, and its
+   exaggerated 0/O and 1/l/I separation is exactly what that content needs. */
+.b-reader { font-family: 'Atkinson Hyperlegible Next', system-ui, -apple-system, sans-serif; }
 .b-reader h2 { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 1.4em; margin: 1.6em 0 0.6em; letter-spacing: -0.01em; }
 .b-reader h3 { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 1.15em; margin: 1.4em 0 0.5em; }
 .b-reader p { margin: 0 0 1.1em; }
@@ -46,15 +49,20 @@
 .b-reader li { margin: 0.3em 0; }
 .b-reader a { color: var(--b-link, currentColor); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .b-reader a:hover { text-decoration-thickness: 2px; }
-.b-reader code { font-family: 'Space Mono', monospace; font-size: 0.9em; padding: 0.1em 0.35em; background: rgba(0,0,0,0.06); }
-.b-reader pre { overflow-x: auto; padding: 14px 16px; background: rgba(0,0,0,0.06); margin: 0 0 1.2em; }
+.b-reader code { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.9em; padding: 0.1em 0.35em; background: rgba(0,0,0,0.06); }
+.b-reader pre { overflow-x: auto; padding: 14px 16px; background: rgba(0,0,0,0.06); margin: 0 0 1.2em;
+               font-size: 0.82em; line-height: 1.5; }
+/* Inherit the block size rather than re-applying the inline-code scale, so a
+   wide terminal dump (fastfetch, unit files) shows as much as it can before
+   it has to scroll. The full-width toggle fits the rest. */
+.b-reader pre code { font-size: 1em; }
 .b-reader pre code { padding: 0; background: none; }
 .b-reader blockquote { margin: 0 0 1.2em; padding-left: 16px; border-left: 2px solid currentColor; opacity: 0.85; }
 .b-reader img { max-width: 100%; height: auto; display: block; margin: 1.6em 0; border: 1px solid currentColor; }
 .b-reader .b-table-wrap { overflow-x: auto; margin: 0 0 1.4em; }
 .b-reader table { width: 100%; border-collapse: collapse; font-size: 0.82em; line-height: 1.5; }
 .b-reader th, .b-reader td { border: 1px solid currentColor; padding: 0.55em 0.8em; text-align: left; vertical-align: top; }
-.b-reader th { font-family: 'Space Mono', monospace; font-size: 0.82em; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(0,0,0,0.06); }
+.b-reader th { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.82em; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(0,0,0,0.06); }
 
 /* Markdown images are wrapped in a button that opens the lightbox */
 .b-img-zoom { display: block; width: 100%; padding: 0; margin: 0; border: none; background: none; cursor: zoom-in; text-align: left; font: inherit; color: inherit; }
