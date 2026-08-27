@@ -2,11 +2,8 @@
   "slug": "jellyfin-samsung-tizen",
   "category": "tech",
   "date": "2026-08-26",
-  "len": "6 min",
-  "tags": [
-    "homelab",
-    "hardware"
-  ],
+  "len": "5 min",
+  "tags": ["homelab", "hardware"],
   "draft": false,
   "title": {
     "en": "Jellyfin on a Samsung TV That Keeps Expiring",
