@@ -489,6 +489,52 @@ const Writing = (): React.ReactElement => {
                   })}
                 </div>
               ) : null}
+              {active.revisions && active.revisions.length > 0 ? (
+                <div style={{ marginTop: 32, paddingTop: 24, borderTop: `1px solid ${t.rule}` }}>
+                  <div
+                    style={{
+                      fontSize: 11,
+                      color: t.dim,
+                      letterSpacing: '0.15em',
+                      textTransform: 'uppercase',
+                      marginBottom: 10,
+                    }}
+                  >
+                    {tr('directionB.read.revisionsLabel')}
+                  </div>
+                  <p style={{ fontSize: 13, color: t.dim, margin: '0 0 12px', lineHeight: 1.6 }}>
+                    {tr('directionB.read.revisionsIntro')}
+                  </p>
+                  <ul style={{ listStyle: 'none', margin: 0, padding: 0, fontSize: 13, lineHeight: 1.7 }}>
+                    {active.revisions.map((rev) => (
+                      <li key={`${rev.date}-${rev.url ?? ''}`} style={{ display: 'flex', gap: 12, marginBottom: 6 }}>
+                        <time
+                          dateTime={rev.date}
+                          style={{ color: t.dim, fontFamily: "'IBM Plex Mono', ui-monospace, monospace", flexShrink: 0 }}
+                        >
+                          {rev.date}
+                        </time>
+                        <span style={{ color: t.ink }}>
+                          {pickLocale(rev.note, lang)}
+                          {rev.url ? (
+                            <>
+                              {' '}
+                              <a
+                                href={rev.url}
+                                target="_blank"
+                                rel="noreferrer"
+                                style={{ color: t.rgbB, textDecoration: 'underline', textUnderlineOffset: 3 }}
+                              >
+                                {tr('directionB.read.revisionsView')}
+                              </a>
+                            </>
+                          ) : null}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
             </>
           ) : (
             <div style={{ fontSize: 14, color: t.dim }}>{tr('directionB.oss.writingEmpty')}</div>

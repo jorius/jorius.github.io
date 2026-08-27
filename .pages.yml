@@ -138,3 +138,16 @@ content:
         fields:
           - { name: en, label: English, type: rich-text }
           - { name: es, label: Spanish, type: rich-text }
+      - name: revisions
+        label: Revision history
+        type: object
+        list: true
+        fields:
+          - { name: date, label: Date, type: date }
+          - name: note
+            label: What changed
+            type: object
+            fields:
+              - { name: en, label: English, type: text }
+              - { name: es, label: Spanish, type: text }
+          - { name: url, label: Link to that version (optional), type: string }

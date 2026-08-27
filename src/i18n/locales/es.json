@@ -122,12 +122,21 @@
       "calathea": {
         "title": "Calathea",
         "description": "Una hermosa plataforma de comercio electrónico para entusiastas de las plantas con inventario en tiempo real y recomendaciones impulsadas por IA.",
-        "tags": ["React", "Node.js", "MongoDB", "IA"]
+        "tags": [
+          "React",
+          "Node.js",
+          "MongoDB",
+          "IA"
+        ]
       },
       "modernApp": {
         "title": "Aplicación Moderna",
         "description": "Una aplicación móvil de vanguardia con experiencia de usuario fluida y características innovadoras.",
-        "tags": ["React Native", "Firebase", "TypeScript"]
+        "tags": [
+          "React Native",
+          "Firebase",
+          "TypeScript"
+        ]
       }
     }
   },
@@ -240,8 +249,13 @@
         "contact": "Contacto"
       },
       "available": "Disponible",
-      "themeToggle": { "toLight": "☀ CLARO", "toDark": "☾ OSCURO" },
-      "languageToggle": { "label": "Idioma" },
+      "themeToggle": {
+        "toLight": "☀ CLARO",
+        "toDark": "☾ OSCURO"
+      },
+      "languageToggle": {
+        "label": "Idioma"
+      },
       "pressKey": "pulsa"
     },
     "hero": {
@@ -268,12 +282,36 @@
       "subcaption": "[ 4 gatos, sin bugs ]"
     },
     "sections": {
-      "now": { "label": "AHORA.", "num": "01", "kicker": "Actualizado a mano, cada dos semanas más o menos. El resto del sitio es estático; esta parte se mueve." },
-      "work": { "label": "TRABAJO.", "num": "02", "kicker": "Tres tipos de servicio. Tarifa semanal, retainer trimestral o alcance cerrado — tú eliges." },
-      "record": { "label": "TRAYECTORIA.", "num": "03", "kicker": "Seis contratos, cuatro empresas, muchas ramas mergeadas en commits limpios." },
-      "index": { "label": "ÍNDICE.", "num": "04", "kicker": "Una selección de proyectos personales y de cliente. Casos detallados disponibles a petición." },
-      "writing": { "label": "ESCRITOS Y OSS.", "num": "05", "kicker": "Notas largas y repositorios públicos vivos. Lo que le mostraría a un reclutador, si me lo pide." },
-      "why": { "label": "POR QUÉ.", "num": "06", "kicker": "Cuatro razones honestas para sumarme a tu equipo o proyecto." },
+      "now": {
+        "label": "AHORA.",
+        "num": "01",
+        "kicker": "Actualizado a mano, cada dos semanas más o menos. El resto del sitio es estático; esta parte se mueve."
+      },
+      "work": {
+        "label": "TRABAJO.",
+        "num": "02",
+        "kicker": "Tres tipos de servicio. Tarifa semanal, retainer trimestral o alcance cerrado — tú eliges."
+      },
+      "record": {
+        "label": "TRAYECTORIA.",
+        "num": "03",
+        "kicker": "Seis contratos, cuatro empresas, muchas ramas mergeadas en commits limpios."
+      },
+      "index": {
+        "label": "ÍNDICE.",
+        "num": "04",
+        "kicker": "Una selección de proyectos personales y de cliente. Casos detallados disponibles a petición."
+      },
+      "writing": {
+        "label": "ESCRITOS Y OSS.",
+        "num": "05",
+        "kicker": "Notas largas y repositorios públicos vivos. Lo que le mostraría a un reclutador, si me lo pide."
+      },
+      "why": {
+        "label": "POR QUÉ.",
+        "num": "06",
+        "kicker": "Cuatro razones honestas para sumarme a tu equipo o proyecto."
+      },
       "contact": "§ 07 · Contacto"
     },
     "now": {
@@ -283,7 +321,10 @@
       "openCase": "ver caso ↗",
       "private": "privado",
       "tagSuffix": "proyecto",
-      "category": { "personal": "PERSONAL", "client": "CLIENTE" }
+      "category": {
+        "personal": "PERSONAL",
+        "client": "CLIENTE"
+      }
     },
     "oss": {
       "writingHeader": "— Escritos",
@@ -349,7 +390,10 @@
       "tagsAllTags": "Todas las etiquetas",
       "tagsFilterLabel": "Artículos con etiqueta",
       "tagsAllPosts": "← Todos los artículos",
-      "tagsModalClose": "Cerrar etiquetas"
+      "tagsModalClose": "Cerrar etiquetas",
+      "revisionsLabel": "Historial de revisiones",
+      "revisionsIntro": "Este post ha sido reescrito desde su publicación original. Versiones anteriores:",
+      "revisionsView": "ver esta versión"
     },
     "experience": {
       "present": "Presente",

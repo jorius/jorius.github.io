@@ -55,6 +55,18 @@ export interface WritingTag {
   glyph?: string;
 }
 
+// One prior version of a post, for the revisions block under the reader. These
+// are written by hand in Pages CMS rather than derived from git: the deploy
+// checkout is shallow, so commit history isn't available at build time, and a
+// hand-written note explains *what* changed better than a commit subject does.
+export interface WritingRevision {
+  date: string;
+  note: Localized;
+  // Optional link to the version being described (a GitHub permalink to the
+  // post's JSON at that commit). Omitted entries render as plain text.
+  url?: string;
+}
+
 export interface WritingPost {
   slug: string;
   category: string;
@@ -64,6 +76,7 @@ export interface WritingPost {
   draft: boolean;
   title: Localized;
   body: Localized;
+  revisions?: WritingRevision[];
 }
 
 const categoryModules = import.meta.glob('../content/writing/categories/*.json', { eager: true });
@@ -90,6 +103,11 @@ export const loadPosts = (): WritingPost[] =>
         // normalize here so every post always carries a valid string[].
         tags: Array.isArray(raw.tags) ? raw.tags : [],
         draft: raw.draft ?? false,
+        // Same guard as tags: a CMS entry can persist a partially filled
+        // revision, which would render an empty row or throw in pickLocale.
+        revisions: Array.isArray(raw.revisions)
+          ? raw.revisions.filter((r) => typeof r?.date === 'string' && isLocalized(r?.note))
+          : [],
       };
     })
     // Drop incomplete CMS entries: a post without localized title/body has
