@@ -60,6 +60,13 @@ export interface WritingTag {
 // file rather than derived from git: the deploy checkout is shallow, so commit
 // history isn't available at build time, and a hand-written note explains
 // *what* changed better than a commit subject does.
+//
+// IMPORTANT: a revision body must point at *pinned* image copies, suffixed with
+// its own date (home-lab-topology--2026-06-10.png), never at the live path the
+// current post uses. Post images get overwritten in place when a diagram or a
+// screenshot is refreshed, so an archived version sharing that path silently
+// starts illustrating itself with today's picture - which is exactly wrong for
+// a post describing how things used to be, and fails with no error.
 export interface WritingRevisionDoc {
   id: string;
   // slug of the post this is a previous version of

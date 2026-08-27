@@ -173,6 +173,10 @@ content:
           - { name: es, label: Spanish, type: string }
       - name: body
         label: Body as it was
+        description: >-
+          Point images at date-pinned copies (home-lab-topology--2026-06-10.png),
+          not the live path the current post uses - those get overwritten when a
+          diagram is refreshed, and this version would then show today's image.
         type: object
         fields:
           - { name: en, label: English, type: rich-text }
