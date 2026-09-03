@@ -68,6 +68,23 @@ export const BTopBar = (): React.ReactElement => {
     </a>
   ));
 
+  const darkGalaxyLink = (
+    <Link
+      to="/darkgalaxy"
+      onClick={() => setMenuRequested(false)}
+      style={{
+        color: '#9D4EDD',
+        textDecoration: 'none',
+        letterSpacing: '0.04em',
+        padding: isMobile ? '12px 0' : 0,
+        fontSize: isMobile ? 14 : 12,
+        borderBottom: isMobile ? `1px solid ${th.sub}` : 'none',
+      }}
+    >
+      <Glitch trigger="hover">{t('directionB.topbar.nav.darkgalaxy')} ↗</Glitch>
+    </Link>
+  );
+
   const utilities = (
     <>
       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 12, color: th.dim }}>
@@ -164,6 +181,7 @@ export const BTopBar = (): React.ReactElement => {
         {!isMobile ? (
           <nav style={{ display: 'flex', gap: 22 }}>
             {navLinks}
+            {darkGalaxyLink}
           </nav>
         ) : null}
 
@@ -215,6 +233,7 @@ export const BTopBar = (): React.ReactElement => {
         >
           <nav style={{ display: 'flex', flexDirection: 'column' }}>
             {navLinks}
+            {darkGalaxyLink}
           </nav>
           <div
             style={{

@@ -246,7 +246,8 @@
         "record": "Trayectoria",
         "index": "Índice",
         "writing": "Escritos",
-        "contact": "Contacto"
+        "contact": "Contacto",
+        "darkgalaxy": "Dark Galaxy"
       },
       "available": "Disponible",
       "themeToggle": {
@@ -443,6 +444,13 @@
         "h": "Trabajo entre zonas horarias.",
         "b": "Años de entrega distribuida entre equipos de LATAM y EE.UU. Async por costumbre, sync cuando realmente mueve el trabajo."
       }
+    }
+  },
+  "darkgalaxy": {
+    "back": "← jorius",
+    "footer": "un universo de Jorius",
+    "teaser": {
+      "comingSoon": "próximamente"
     }
   }
 }

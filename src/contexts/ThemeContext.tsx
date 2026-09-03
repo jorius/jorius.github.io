@@ -3,6 +3,10 @@
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 
+// contexts
+import { pickOverride, resolveTheme, resolveTokens } from './themeTokens';
+import type { TokensByMode } from './themeTokens';
+
 // utils
 import { storage } from '../utils/storage';
 
@@ -27,6 +31,10 @@ export interface BThemeContextValue {
   toggleTheme: () => void;
   t: ThemeTokens;
   glitch: number;
+  // Multiplier on the ambient glitch period (2 = half as often).
+  glitchRate: number;
+  // Multiplier on glitch displacement; above 1 the slices also re-seed while on.
+  glitchChaos: number;
   scanLines: boolean;
 }
 
@@ -63,6 +71,8 @@ const BThemeContext = createContext<BThemeContextValue>({
   toggleTheme: () => {},
   t: B_THEMES.dark,
   glitch: 1,
+  glitchRate: 1,
+  glitchChaos: 1,
   scanLines: true,
 });
 
@@ -71,6 +81,16 @@ interface BThemeProviderProps {
   initialTheme?: ThemeMode;
   glitch?: number;
   scanLines?: boolean;
+  // Pin the theme: the stored preference is ignored and toggling is a no-op.
+  // Used by dark-only sections such as /darkgalaxy.
+  lock?: ThemeMode;
+  // Token overrides merged over the base palette of the active mode, so a
+  // section can recolour every primitive without forking them.
+  tokens?: Partial<ThemeTokens>;
+  // Per-mode overrides applied on top of `tokens` for the active mode.
+  tokensByMode?: TokensByMode;
+  glitchRate?: number;
+  glitchChaos?: number;
 }
 
 export const BThemeProvider = ({
@@ -78,28 +98,36 @@ export const BThemeProvider = ({
   initialTheme = 'dark',
   glitch = 1,
   scanLines = true,
+  lock,
+  tokens,
+  tokensByMode,
+  glitchRate = 1,
+  glitchChaos = 1,
 }: BThemeProviderProps): ReactElement => {
   const [theme, setThemeState] = useState<ThemeMode>(
-    () => storage.getTheme() ?? initialTheme,
+    () => resolveTheme(lock, storage.getTheme() ?? initialTheme),
   );
 
   const setTheme = useCallback((mode: ThemeMode) => {
+    if (lock) return;
     storage.setTheme(mode);
     setThemeState(mode);
-  }, []);
+  }, [lock]);
 
   const value = useMemo<BThemeContextValue>(() => {
-    const base = B_THEMES[theme];
-    const t: ThemeTokens = { ...base, scan: theme === 'dark' && scanLines };
+    const active = resolveTheme(lock, theme);
+    const t = resolveTokens(B_THEMES[active], pickOverride(active, tokens, tokensByMode), active === 'dark' && scanLines);
     return {
-      theme,
+      theme: active,
       setTheme,
-      toggleTheme: () => setTheme(theme === 'dark' ? 'light' : 'dark'),
+      toggleTheme: () => setTheme(active === 'dark' ? 'light' : 'dark'),
       t,
       glitch,
+      glitchRate,
+      glitchChaos,
       scanLines,
     };
-  }, [theme, glitch, scanLines, setTheme]);
+  }, [theme, lock, tokens, tokensByMode, glitch, glitchRate, glitchChaos, scanLines, setTheme]);
 
   return <BThemeContext.Provider value={value}>{children}</BThemeContext.Provider>;
 };

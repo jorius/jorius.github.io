@@ -246,7 +246,8 @@
         "record": "Record",
         "index": "Index",
         "writing": "Writing",
-        "contact": "Contact"
+        "contact": "Contact",
+        "darkgalaxy": "Dark Galaxy"
       },
       "available": "Available",
       "themeToggle": {
@@ -443,6 +444,13 @@
         "h": "I work across time zones.",
         "b": "Years of distributed delivery between LATAM and U.S. teams. Async-first by habit, sync when it actually moves the work."
       }
+    }
+  },
+  "darkgalaxy": {
+    "back": "← jorius",
+    "footer": "a universe by Jorius",
+    "teaser": {
+      "comingSoon": "coming soon"
     }
   }
 }
