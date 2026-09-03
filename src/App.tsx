@@ -8,6 +8,7 @@ import { ScrollToTop } from './components/ScrollToTop';
 // pages
 import About from './pages/About';
 import Contact from './pages/Contact';
+import DarkGalaxyTeaser from './pages/DarkGalaxyTeaser';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Palette from './pages/Palette';
@@ -27,6 +28,8 @@ function App() {
         <Route path="/read/:slug" element={<Navigate to="/writing" replace />} />
         <Route path="/pgp" element={<Pgp />} />
         <Route path="/palette" element={<Palette />} />
+        {/* Dark Galaxy — the section is not published yet; this is its held title card. */}
+        <Route path="/darkgalaxy" element={<DarkGalaxyTeaser />} />
 
         {/* Legacy routes — wrapped in old Header/Footer until each page is redesigned. */}
         <Route element={<LegacyLayout />}>
