@@ -30,7 +30,7 @@ export const Glitch = ({
   strong = false,
   className,
 }: GlitchProps): React.ReactElement => {
-  const { t, glitch, theme } = useBTheme();
+  const { t, glitch, glitchRate, glitchChaos, theme } = useBTheme();
   // 'screen' lightens the channel-split copies over the dark paper; on the
   // light paper that washes them out, so 'multiply' (which darkens) is what
   // makes the red/blue split actually visible in the light theme.
@@ -45,7 +45,7 @@ export const Glitch = ({
     let timer: ReturnType<typeof setTimeout>;
     const schedule = (): void => {
       if (!alive) return;
-      const wait = (period * (0.35 + Math.random() * 0.7)) / Math.max(0.2, glitch);
+      const wait = ((period * (0.35 + Math.random() * 0.7)) / Math.max(0.2, glitch)) * glitchRate;
       timer = setTimeout(() => {
         if (!alive) return;
         setPulseOn(true);
@@ -62,7 +62,7 @@ export const Glitch = ({
       clearTimeout(timer);
       setPulseOn(false);
     };
-  }, [trigger, period, glitch]);
+  }, [trigger, period, glitch, glitchRate]);
 
   // Derive on directly from trigger + state. Avoids needing a setState-in-
   // effect to sync external trigger changes.
@@ -71,6 +71,14 @@ export const Glitch = ({
   else if (trigger === 'off') on = false;
   else if (trigger === 'hover') on = hoverOn;
   else on = pulseOn;
+
+  // Chaos above 1: while a glitch is on, re-seed the slices every few frames
+  // so the displacement jumps around instead of holding one shape.
+  useEffect(() => {
+    if (!on || glitchChaos <= 1) return undefined;
+    const id = window.setInterval(() => setRev((r) => r + 1), 70);
+    return () => window.clearInterval(id);
+  }, [on, glitchChaos]);
 
   const hoverProps =
     trigger === 'hover'
@@ -83,11 +91,11 @@ export const Glitch = ({
         }
       : {};
 
-  const mag = (strong ? 2.6 : 1.4) * (0.5 + glitch * 1.4);
+  const mag = (strong ? 2.6 : 1.4) * (0.5 + glitch * 1.4) * glitchChaos;
   const seed = rev;
   const jx = on ? Number((Math.sin(seed * 9.1) * 16 * mag).toFixed(2)) : 0;
   const jy = on ? Number((Math.cos(seed * 7.3) * 5 * mag).toFixed(2)) : 0;
-  const skew = on ? Number((Math.sin(seed * 2.3) * 2.2).toFixed(2)) : 0;
+  const skew = on ? Number((Math.sin(seed * 2.3) * 2.2 * glitchChaos).toFixed(2)) : 0;
   const clipA = on
     ? `polygon(0 ${4 + ((seed * 13) % 30)}%, 100% ${4 + ((seed * 13) % 30)}%, 100% ${30 + ((seed * 17) % 30)}%, 0 ${30 + ((seed * 17) % 30)}%)`
     : 'none';
