@@ -42,5 +42,21 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!--
+      Umami analytics (cloud.umami.is, cookieless, no IP storage).
+      Kept AFTER the app entry on purpose: deferred and module scripts run in
+      document order, so this executes once main.tsx has restored the real path
+      from the 404 fallback. Placed in the head it would record every deep link
+      as a visit to "/". data-domains keeps the dev server and previews silent.
+    -->
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="f182739a-828d-4a63-81ab-07e8fd73945f"
+      data-domains="jorius.github.io"
+      data-exclude-search="true"
+      data-exclude-hash="true"
+      data-do-not-track="true"
+    ></script>
   </body>
 </html>
