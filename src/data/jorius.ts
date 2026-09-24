@@ -47,6 +47,7 @@ export interface JoriusData {
     github: string;
     linkedin: string;
     stackoverflow: string;
+    academy: string;
   };
   experience: ExperienceEntry[];
   testimonials: TestimonialEntry[];
@@ -71,6 +72,7 @@ export const JORIUS: JoriusData = {
     github: 'https://github.com/jorius',
     linkedin: 'https://www.linkedin.com/in/jose-rios-4ab123163/',
     stackoverflow: 'https://es.stackoverflow.com/users/18771/jorius',
+    academy: 'https://jorius.github.io/engineer-mentat-academy/',
   },
   experience: [
     {
