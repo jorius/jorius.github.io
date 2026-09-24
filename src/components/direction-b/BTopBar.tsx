@@ -13,6 +13,7 @@ import { useIsMobile } from '../../hooks/useMediaQuery';
 import { useScrollToSection } from '../../hooks/useNavigation';
 
 // utils
+import { track } from '../../utils/analytics';
 import { currentQuarter, currentYear } from '../../utils/dateLabels';
 
 // components
@@ -43,7 +44,12 @@ export const BTopBar = (): React.ReactElement => {
   const lang = i18n.language.startsWith('es') ? 'es' : 'en';
   const otherLang = lang === 'es' ? 'en' : 'es';
   const switchLang = (): void => {
+    track('language-switch', { to: otherLang });
     i18n.changeLanguage(otherLang);
+  };
+  const switchTheme = (): void => {
+    track('theme-toggle', { to: theme === 'dark' ? 'light' : 'dark' });
+    toggleTheme();
   };
 
   const navLinks = NAV_KEYS.map((key) => (
@@ -121,7 +127,7 @@ export const BTopBar = (): React.ReactElement => {
       </button>
       <button
         type="button"
-        onClick={toggleTheme}
+        onClick={switchTheme}
         aria-label="toggle theme"
         style={{
           background: 'transparent',
