@@ -75,6 +75,16 @@ One blank line between groups, no blank lines within a group.
 
 **No client-side tokens.** Anything prefixed `VITE_` is bundled into the browser JS by Vite, so it cannot hold a secret. The portfolio is intentionally token-free; if a token-bearing GitHub call ever becomes necessary, route it through a serverless backend rather than re-introducing a client-side env var.
 
+## Analytics
+
+Umami Cloud (Hobby plan, cookieless, no IP storage, no consent banner needed), website `jorius.github.io`. Design spec: `docs/superpowers/specs/2026-09-24-umami-analytics-design.md`.
+
+- **The tracker tag lives in `index.html`, in `<body>`, after the app's module script.** Keep it there: deferred and module scripts run in document order, so the tracker executes only after `main.tsx` has restored the real path from the 404 fallback. In the `<head>` it would record every deep link as a visit to `/`. Vite injects the built entry into the head, so the order also holds in production.
+- `data-domains="jorius.github.io"` means the dev server and local previews load the script but send nothing. No env vars are involved; nothing here is secret.
+- Page views need no code (Umami hooks `pushState`). Custom events go through `src/utils/analytics.ts`: `track(name, data)` is a no-op when the tracker is blocked or absent, and `installOutboundTracking(document)` (called once in `main.tsx`) turns clicks on external links into `outbound-click` events. Current events: `language-switch` (`to`), `theme-toggle` (`to`), `outbound-click` (`host`, with `mailto` for email links).
+- To exclude your own visits, run once per browser on the live site: `localStorage.setItem('umami.disabled', 1);`
+- Moving the collector (e.g. self-hosted Umami on Railway) means changing the tag's `src` host and, if the website is recreated, `data-website-id`. Nothing else.
+
 ## Deployment notes
 
 - Pages source is configured as **"GitHub Actions"** (not a branch). Changing this via the UI will break deploys.
