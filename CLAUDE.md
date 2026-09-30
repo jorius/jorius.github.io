@@ -47,7 +47,7 @@ React **19** + TypeScript 5.9 + Vite 7 SPA.
 - `src/pages/` — Route-level components. `Projects.tsx` renders the curated cards from `src/content/projects/*.json` (one file per project, `{ en, es }` strings, `draft` hides a card in production); `/portfolio` redirects there. See `docs/superpowers/specs/2026-09-29-projects-page-and-repo-publishing-design.md`.
 - `src/data/` — `jorius.ts` (identity, links, experience) and the PGP key. Editorial content lives under `src/content/` (writing, now, work, projects).
 - `src/hooks/` — Cross-component hooks (e.g. `useGitHubRepos` for the GitHub API integration).
-- `src/utils/` — `scrollUtils` (smooth scroll to sections from other routes, reads `location.state.scrollTo`), `validationUtils` (email validation), `techConfig` (tech-stack chip mapping).
+- `src/utils/` — `content` (typed loaders for writing, now, work and projects content), `projects` (project-card helpers), `analytics` (Umami events), `dateLabels`, `languageIcons`, `storage`.
 - `src/i18n/` — i18next setup + locale JSON.
 
 ## Import ordering

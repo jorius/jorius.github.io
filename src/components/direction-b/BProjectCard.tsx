@@ -21,13 +21,9 @@ interface BProjectCardProps {
   columnsPerRow: number;
 }
 
-// The hover rules for .b-index-card live in index.html and read these vars.
+// The hover rule for .b-index-card in index.html reads --sub.
 interface CardCSS extends CSSProperties {
   '--sub'?: string;
-  '--ink'?: string;
-  '--dim'?: string;
-  '--rule'?: string;
-  '--rgbB'?: string;
 }
 
 export const BProjectCard = ({ p, i, columnsPerRow }: BProjectCardProps): React.ReactElement => {
@@ -45,10 +41,6 @@ export const BProjectCard = ({ p, i, columnsPerRow }: BProjectCardProps): React.
     gap: 12,
     minWidth: 0,
     '--sub': t.sub,
-    '--ink': t.ink,
-    '--dim': t.dim,
-    '--rule': t.rule,
-    '--rgbB': t.rgbB,
   };
   const metaStyle: CSSProperties = { fontSize: 11, color: t.dim, letterSpacing: '0.1em', textTransform: 'uppercase' };
 

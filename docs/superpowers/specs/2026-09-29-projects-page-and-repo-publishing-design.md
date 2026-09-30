@@ -236,8 +236,8 @@ title, `StackChip` for the stack.
 Card anatomy, top to bottom:
 
 1. Meta row: `№ 01` on the left; on the right the kind label
-   (`directionB.projectsPage.kind.<kind>`) and, when `status` is set, a small
-   status badge (`WIP` / `ARCHIVED`).
+   (`directionB.projectsPage.kind.<kind>`) and, when `status` is set, the status as
+   inline text after a middle dot (` · WIP` / ` · ARCHIVED`).
 2. Title, `Glitch trigger="hover" strong`, 22px mobile / 26px desktop.
 3. Year line, dim, 12px.
 4. Summary, 13px, line-height 1.55.
@@ -295,8 +295,8 @@ the owner before merge.
 Stacks come from each README (for example pokedex: React 19, TypeScript,
 Express, .NET, Postgres, Redis, Drizzle; ArrowFin: Next.js, NestJS, Prisma,
 Postgres, WebSockets; waveless: Node). Names not in `StackChip`'s `TECH`
-table render with the built-in monogram fallback; the table is not extended
-in this work unless a chip looks wrong in the headless check.
+table render with the built-in monogram fallback; the table was extended
+with twelve entries (React, Vite, JavaScript, Express, .NET, NestJS, Prisma, WebSockets, Astro, Redux, Zustand, CodeMirror) so every card chip has a colour and glyph.
 
 ### 4.8 Testing
 
