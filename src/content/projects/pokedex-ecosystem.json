@@ -9,6 +9,10 @@
     "en": "One React frontend and three contract-identical backends (Express + TypeScript, Express + JavaScript, ASP.NET Core) sharing one Postgres database and one JWT key, so the UI can switch backend mid-session without logging out.",
     "es": "Un frontend en React y tres backends con contrato idéntico (Express + TypeScript, Express + JavaScript, ASP.NET Core) que comparten una base Postgres y una clave JWT, así que la interfaz puede cambiar de backend a mitad de sesión sin cerrarla."
   },
+  "note": {
+    "en": "Built just for fun, and to learn a little more about .NET basics.",
+    "es": "Hecho solo por diversión y para aprender un poco más de los fundamentos de .NET."
+  },
   "details": [
     { "en": "Byte-identical responses verified with live parity gates", "es": "Respuestas idénticas byte a byte, verificadas con pruebas de paridad en vivo" },
     { "en": "Pokeball economy: wallet, ball shop, catches you can lose and a slot machine to fund them", "es": "Economía de pokébolas: billetera, tienda, capturas que puedes fallar y una tragamonedas para financiarlas" },

@@ -11,7 +11,8 @@
   },
   "details": [
     { "en": "JSON content collections validated with zod", "es": "Colecciones de contenido en JSON validadas con zod" },
-    { "en": "Light and dark themes, language toggle, no framework runtime in the browser", "es": "Temas claro y oscuro, cambio de idioma, sin runtime de framework en el navegador" }
+    { "en": "Light and dark themes, language toggle, no framework runtime in the browser", "es": "Temas claro y oscuro, cambio de idioma, sin runtime de framework en el navegador" },
+    { "en": "Content edited through Pages CMS (pagescms.org), committed straight to the repository", "es": "Contenido editado con Pages CMS (pagescms.org), guardado directamente en el repositorio" }
   ],
   "stack": ["Astro", "TypeScript"],
   "links": [

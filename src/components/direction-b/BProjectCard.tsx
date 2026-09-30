@@ -29,7 +29,7 @@ interface CardCSS extends CSSProperties {
 }
 
 // One glyph per link kind so a visitor can tell "the source" from "the thing
-// running" before reading the label; the trailing arrow stays on every link.
+// running" before reading the label.
 const LINK_ICONS: Record<ProjectLinkKind, IconType> = {
   repo: FaGithub,
   live: FaExternalLinkAlt,
@@ -81,6 +81,10 @@ export const BProjectCard = ({ p, i, columnsPerRow }: BProjectCardProps): React.
         </ul>
       ) : null}
 
+      {p.note ? (
+        <p style={{ margin: 0, fontSize: 12, color: t.rgbB, lineHeight: 1.5 }}>{pickLocale(p.note, lang)}</p>
+      ) : null}
+
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
         {p.stack.map((s) => <StackChip key={s} name={s} />)}
       </div>
@@ -97,7 +101,7 @@ export const BProjectCard = ({ p, i, columnsPerRow }: BProjectCardProps): React.
               style={{ ...metaStyle, color: t.ink, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 6 }}
             >
               <Icon aria-hidden size={12} />
-              {projectLinkLabel(l, lang, tr)} ↗
+              {projectLinkLabel(l, lang, tr)}
             </a>
           );
         })}
