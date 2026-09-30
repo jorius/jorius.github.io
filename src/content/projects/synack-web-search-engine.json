@@ -1,0 +1,20 @@
+{
+  "id": "synack-web-search-engine",
+  "order": 100,
+  "year": "2020",
+  "kind": "assessment",
+  "status": "archived",
+  "draft": false,
+  "title": { "en": "Synack web search engine", "es": "Synack web search engine" },
+  "summary": {
+    "en": "Technical test from 2020: a React app that queries Google Custom Search and Bing and renders the results with its own layout. The Azure deployment is retired and the APIs need your own keys.",
+    "es": "Prueba técnica de 2020: una app React que consulta Google Custom Search y Bing y muestra los resultados con un diseño propio. El despliegue en Azure está retirado y las APIs requieren tus propias claves."
+  },
+  "details": [
+    { "en": "React, Redux, Material UI; the README walks through both API setups", "es": "React, Redux, Material UI; el README explica la configuración de ambas APIs" }
+  ],
+  "stack": ["JavaScript", "React", "Redux"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/jorius/synack-web-search-engine" }
+  ]
+}

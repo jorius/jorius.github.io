@@ -1,0 +1,19 @@
+{
+  "id": "ticket-dashboard-challenge",
+  "order": 70,
+  "year": "2026",
+  "kind": "assessment",
+  "draft": false,
+  "title": { "en": "Ticket Dashboard Challenge", "es": "Ticket Dashboard Challenge" },
+  "summary": {
+    "en": "A take-home challenge I wrote for candidates: a React + TypeScript support-ticket dashboard with a mocked data layer, where the candidate implements the data hook, pagination, sorting and filtering.",
+    "es": "Una prueba para candidatos que escribí yo: un panel de tickets de soporte en React + TypeScript con datos simulados, donde el candidato implementa el hook de datos, la paginación, el orden y los filtros."
+  },
+  "details": [
+    { "en": "Deliberately does not compile on a fresh checkout", "es": "No compila a propósito en un checkout limpio" }
+  ],
+  "stack": ["TypeScript", "React", "Vite"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/jorius/ticket-dashboard-challenge" }
+  ]
+}

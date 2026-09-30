@@ -1,0 +1,20 @@
+{
+  "id": "waveless",
+  "order": 110,
+  "year": "2017–2023",
+  "kind": "package",
+  "draft": false,
+  "title": { "en": "waveless", "es": "waveless" },
+  "summary": {
+    "en": "A tiny npm package that turns Node's plain console output into colour-coded, timestamped log levels, with an option to print any value as an inspected object.",
+    "es": "Un pequeño paquete npm que convierte la salida de consola de Node en niveles de log con color y marca de tiempo, con opción de imprimir cualquier valor como objeto inspeccionado."
+  },
+  "details": [
+    { "en": "Published as waveless 2.1.6 on npm", "es": "Publicado como waveless 2.1.6 en npm" }
+  ],
+  "stack": ["Node", "JavaScript"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/jorius/waveless" },
+    { "kind": "npm", "url": "https://www.npmjs.com/package/waveless" }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "arrowfin-trader-daily-snapshot",
+  "order": 20,
+  "year": "2026",
+  "kind": "assessment",
+  "draft": true,
+  "title": { "en": "ArrowFin · Trader Daily Snapshot", "es": "ArrowFin · Trader Daily Snapshot" },
+  "summary": {
+    "en": "Timed technical assessment for a Senior Full Stack / Team Lead role: a NestJS + Prisma service that computes a trader's daily snapshot and streams fills over a tenant-scoped WebSocket, plus a Next.js widget that renders it live.",
+    "es": "Prueba técnica cronometrada para un puesto Senior Full Stack / Team Lead: un servicio NestJS + Prisma que calcula el resumen diario de un trader y emite operaciones por un WebSocket aislado por tenant, más un widget Next.js que lo muestra en vivo."
+  },
+  "details": [
+    { "en": "Opaque API keys, app-layer tenant isolation, Swagger and a Postman collection", "es": "Claves API opacas, aislamiento por tenant en la capa de aplicación, Swagger y una colección de Postman" },
+    { "en": "API on Railway, widget on Netlify; the submission repo documents every prompt used", "es": "API en Railway, widget en Netlify; el repositorio de entrega documenta cada prompt utilizado" }
+  ],
+  "stack": ["TypeScript", "Next.js", "NestJS", "Prisma", "Postgres", "WebSockets"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/jorius/arrowfin-mt-daily-snap-svc", "label": { "en": "API", "es": "API" } },
+    { "kind": "repo", "url": "https://github.com/jorius/arrowfin-mt-daily-snap-fe", "label": { "en": "Frontend", "es": "Frontend" } },
+    { "kind": "docs", "url": "https://github.com/jorius/arrowfin-llm-usage-docs", "label": { "en": "Submission docs", "es": "Documentos de entrega" } },
+    { "kind": "live", "url": "https://arrowfin-mt-daily-snap.netlify.app" }
+  ]
+}

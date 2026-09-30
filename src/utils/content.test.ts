@@ -2,8 +2,11 @@
 import { describe, expect, it } from 'vitest';
 
 // utils
-import { normaliseProject, selectPublished } from './content';
+import { loadProjects, normaliseProject, selectPublished } from './content';
 import type { ProjectEntry } from './content';
+
+// components
+import { TECH } from '../components/direction-b/StackChip';
 
 export const entry = (over: Partial<ProjectEntry> = {}): ProjectEntry => ({
   id: 'x',
@@ -50,5 +53,65 @@ describe('normaliseProject', () => {
     const p = normaliseProject(entry({ draft: true, stack: ['Node'] }));
     expect(p.draft).toBe(true);
     expect(p.stack).toEqual(['Node']);
+  });
+});
+
+const KINDS = ['personal', 'assessment', 'client', 'tool', 'package'];
+const STATUSES = ['wip', 'archived'];
+const LINK_KINDS = ['repo', 'live', 'npm', 'docs'];
+
+const hasBoth = (v: unknown): boolean =>
+  typeof v === 'object' && v !== null
+  && typeof (v as { en?: unknown }).en === 'string' && (v as { en: string }).en.trim() !== ''
+  && typeof (v as { es?: unknown }).es === 'string' && (v as { es: string }).es.trim() !== '';
+
+describe('projects content', () => {
+  // vitest runs outside PROD, so drafts are included and validated too.
+  const projects = loadProjects();
+
+  it('has the eleven cards', () => {
+    expect(projects).toHaveLength(11);
+  });
+
+  it('has unique ids and orders', () => {
+    expect(new Set(projects.map((p) => p.id)).size).toBe(projects.length);
+    expect(new Set(projects.map((p) => p.order)).size).toBe(projects.length);
+  });
+
+  it('comes back sorted by order', () => {
+    const orders = projects.map((p) => p.order);
+    expect(orders).toEqual([...orders].sort((a, b) => a - b));
+  });
+
+  it('carries English and Spanish for every string', () => {
+    for (const p of projects) {
+      expect(hasBoth(p.title), `${p.id} title`).toBe(true);
+      expect(hasBoth(p.summary), `${p.id} summary`).toBe(true);
+      for (const d of p.details) expect(hasBoth(d), `${p.id} detail`).toBe(true);
+      for (const l of p.links) if (l.label) expect(hasBoth(l.label), `${p.id} link ${l.url}`).toBe(true);
+      expect(p.year.trim(), `${p.id} year`).not.toBe('');
+    }
+  });
+
+  it('uses only known kinds, statuses and link kinds', () => {
+    for (const p of projects) {
+      expect(KINDS, `${p.id} kind`).toContain(p.kind);
+      if (p.status !== undefined) expect(STATUSES, `${p.id} status`).toContain(p.status);
+      for (const l of p.links) expect(LINK_KINDS, `${p.id} link kind`).toContain(l.kind);
+    }
+  });
+
+  it('links only to https URLs and has at least one link and one chip per card', () => {
+    for (const p of projects) {
+      expect(p.links.length, `${p.id} links`).toBeGreaterThan(0);
+      expect(p.stack.length, `${p.id} stack`).toBeGreaterThan(0);
+      for (const l of p.links) expect(l.url, `${p.id} ${l.url}`).toMatch(/^https:\/\//);
+    }
+  });
+
+  it('only uses stack names that have a chip definition', () => {
+    for (const p of projects) {
+      for (const s of p.stack) expect(Object.keys(TECH), `${p.id} chip ${s}`).toContain(s);
+    }
   });
 });
