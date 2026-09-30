@@ -20,7 +20,7 @@
 - Every user-facing string goes through `useTranslation()` with keys in **both** `src/i18n/locales/en.json` and `es.json`. The two files round-trip through `JSON.stringify(…, null, 2) + '\n'` unchanged, so a node script may edit them.
 - Theme tokens come from `useBTheme().t`: `paper`, `sub`, `ink`, `dim`, `mute`, `soft`, `rule`, `rgbR`, `rgbB`, `scan`.
 - The owner runs his own dev server on port 5173; use 5180 for dev and 4180 for preview, and stop them when done.
-- Headless browser only: `NODE_PATH=/mnt/media/Sources/JerichoDigital/geromanager/node_modules node <script>.cjs` with Playwright's cached `chromium_headless_shell`. Never the headed Playwright MCP.
+- Headless browser only: `NODE_PATH=/mnt/media/Sources/JerichoDigital/geromanager/node_modules node <script>.cjs`; that Playwright (1.59.1) expects `chromium_headless_shell-1217`, which is not cached, so every launch passes `executablePath: '/home/jorius/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell'` (verified working on 2026-09-29). Never install browsers, never the headed Playwright MCP.
 - Final URLs for links come from the repository plan's "Done when" report; the values below are the expected ones.
 
 ## Review Focus
@@ -1147,7 +1147,8 @@ const { chromium } = require('playwright');
 const base = process.env.BASE_URL || 'http://127.0.0.1:4180';
 const shots = process.env.SHOTS || '/tmp/claude-1000/-home-jorius/33b2420a-0cc6-42ed-9a54-a2b333440b05/scratchpad';
 (async () => {
-  const browser = await chromium.launch({ headless: true });
+  // The geromanager Playwright (1.59.1) expects chromium_headless_shell-1217; only 1243 is cached, so point at it explicitly. Still headless.
+  const browser = await chromium.launch({ headless: true, executablePath: '/home/jorius/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell' });
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   const errors = [];
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
