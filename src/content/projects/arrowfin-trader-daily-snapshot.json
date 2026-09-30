@@ -3,7 +3,7 @@
   "order": 20,
   "year": "2026",
   "kind": "assessment",
-  "draft": true,
+  "draft": false,
   "title": { "en": "ArrowFin · Trader Daily Snapshot", "es": "ArrowFin · Trader Daily Snapshot" },
   "summary": {
     "en": "Timed technical assessment for a Senior Full Stack / Team Lead role: a NestJS + Prisma service that computes a trader's daily snapshot and streams fills over a tenant-scoped WebSocket, plus a Next.js widget that renders it live.",
