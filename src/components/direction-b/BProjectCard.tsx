@@ -1,13 +1,15 @@
 // packages
 import type { CSSProperties } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaBook, FaExternalLinkAlt, FaGithub, FaNpm } from 'react-icons/fa';
+import type { IconType } from 'react-icons';
 
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
 // utils
 import { pickLocale } from '../../utils/content';
-import type { ProjectEntry } from '../../utils/content';
+import type { ProjectEntry, ProjectLinkKind } from '../../utils/content';
 import { projectLinkLabel } from '../../utils/projects';
 
 // components
@@ -25,6 +27,15 @@ interface BProjectCardProps {
 interface CardCSS extends CSSProperties {
   '--sub'?: string;
 }
+
+// One glyph per link kind so a visitor can tell "the source" from "the thing
+// running" before reading the label; the trailing arrow stays on every link.
+const LINK_ICONS: Record<ProjectLinkKind, IconType> = {
+  repo: FaGithub,
+  live: FaExternalLinkAlt,
+  npm: FaNpm,
+  docs: FaBook,
+};
 
 export const BProjectCard = ({ p, i, columnsPerRow }: BProjectCardProps): React.ReactElement => {
   const { t } = useBTheme();
@@ -75,17 +86,21 @@ export const BProjectCard = ({ p, i, columnsPerRow }: BProjectCardProps): React.
       </div>
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 16px', marginTop: 'auto', paddingTop: 6 }}>
-        {p.links.map((l) => (
-          <a
-            key={l.url}
-            href={l.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ ...metaStyle, color: t.ink, textDecoration: 'none' }}
-          >
-            {projectLinkLabel(l, lang, tr)} ↗
-          </a>
-        ))}
+        {p.links.map((l) => {
+          const Icon = LINK_ICONS[l.kind];
+          return (
+            <a
+              key={l.url}
+              href={l.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ ...metaStyle, color: t.ink, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 6 }}
+            >
+              <Icon aria-hidden size={12} />
+              {projectLinkLabel(l, lang, tr)} ↗
+            </a>
+          );
+        })}
       </div>
     </Reveal>
   );
