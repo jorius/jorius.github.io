@@ -30,7 +30,7 @@ Branching: simple flow — feature branches off `main`, PRs target `main`, merge
 
 React **19** + TypeScript 5.9 + Vite 7 SPA.
 
-**Routing** — React Router DOM 7 with nested routes in `src/App.tsx`. Main pages (`Home`, `About`, `Portfolio`, `Contact`) share a `Header`/`Footer` layout; `/palette` is an isolated route without layout.
+**Routing** — React Router DOM 7 with nested routes in `src/App.tsx`. Legacy pages (`About`, `Contact`) share the old `Header`/`Footer` layout; `/projects` and `/pgp` are standalone routes on the direction-b chrome; `/palette` is an isolated route without layout.
 
 **State** — No global state library. Per-component `useState` and i18next for locale. (A previous Redux + dark-mode toggle was removed in `fix/security-and-dead-code-removal` because the site is light-mode only.)
 
@@ -44,8 +44,8 @@ React **19** + TypeScript 5.9 + Vite 7 SPA.
 
 - `src/components/sections/` — Homepage sections (Hero, Services, WorkExperience, WhyHireMe, ContactForm, SkillsBanner, Testimonials, Blog). Composed in `src/pages/Home.tsx`. **Some are currently commented out in Home.tsx** — that's intentional (disabled, not deleted). If you touch them, keep that convention or wire them back on purposefully.
 - `src/components/common/` — Shared UI (Header, Footer, Button, Badge, LanguageSelector, SectionTitle).
-- `src/pages/` — Route-level components. `Portfolio.tsx` is the canonical portfolio renderer (uses `portfolio.json`'s `personalProjects`/`clientProjects` shape).
-- `src/data/*.json` — Content extracted from components (experiences, portfolio, services, blog posts, testimonials, private-repos config). Prefer editing JSON over hard-coding copy in components.
+- `src/pages/` — Route-level components. `Projects.tsx` renders the curated cards from `src/content/projects/*.json` (one file per project, `{ en, es }` strings, `draft` hides a card in production); `/portfolio` redirects there. See `docs/superpowers/specs/2026-09-29-projects-page-and-repo-publishing-design.md`.
+- `src/data/` — `jorius.ts` (identity, links, experience) and the PGP key. Editorial content lives under `src/content/` (writing, now, work, projects).
 - `src/hooks/` — Cross-component hooks (e.g. `useGitHubRepos` for the GitHub API integration).
 - `src/utils/` — `scrollUtils` (smooth scroll to sections from other routes, reads `location.state.scrollTo`), `validationUtils` (email validation), `techConfig` (tech-stack chip mapping).
 - `src/i18n/` — i18next setup + locale JSON.

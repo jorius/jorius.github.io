@@ -13,7 +13,7 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Palette from './pages/Palette';
 import Pgp from './pages/Pgp';
-import Portfolio from './pages/Portfolio';
+import Projects from './pages/Projects';
 import Writing from './pages/Writing';
 
 function App() {
@@ -27,6 +27,9 @@ function App() {
         <Route path="/writing/:slug" element={<Writing />} />
         <Route path="/read/:slug" element={<Navigate to="/writing" replace />} />
         <Route path="/pgp" element={<Pgp />} />
+        <Route path="/projects" element={<Projects />} />
+        {/* The legacy portfolio page showed placeholder projects; its URL now lands on the curated list. */}
+        <Route path="/portfolio" element={<Navigate to="/projects" replace />} />
         <Route path="/palette" element={<Palette />} />
         {/* Dark Galaxy — the section is not published yet; this is its held title card. */}
         <Route path="/darkgalaxy" element={<DarkGalaxyTeaser />} />
@@ -34,7 +37,6 @@ function App() {
         {/* Legacy routes — wrapped in old Header/Footer until each page is redesigned. */}
         <Route element={<LegacyLayout />}>
           <Route path="/about" element={<About />} />
-          <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/contact" element={<Contact />} />
         </Route>
 
