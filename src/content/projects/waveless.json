@@ -1,12 +1,12 @@
 {
   "id": "waveless",
   "order": 110,
-  "year": "2017–2023",
+  "year": "2017–2020",
   "kind": "package",
   "draft": false,
   "title": { "en": "waveless", "es": "waveless" },
   "summary": {
-    "en": "A tiny npm package that turns Node's plain console output into colour-coded, timestamped log levels, with an option to print any value as an inspected object.",
+    "en": "A tiny npm package that turns Node's plain console output into color-coded, timestamped log levels, with an option to print any value as an inspected object.",
     "es": "Un pequeño paquete npm que convierte la salida de consola de Node en niveles de log con color y marca de tiempo, con opción de imprimir cualquier valor como objeto inspeccionado."
   },
   "details": [

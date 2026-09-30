@@ -12,7 +12,7 @@
   },
   "details": [
     { "en": "Create React App, Material UI, Redux", "es": "Create React App, Material UI, Redux" },
-    { "en": "Republished on GitHub Pages in 2026 from the original branch, unchanged", "es": "Republicada en GitHub Pages en 2026 desde la rama original, sin cambios" }
+    { "en": "Republished on GitHub Pages in 2026 with one fix so navigation keeps the site's sub-path", "es": "Republicada en GitHub Pages en 2026 con un único arreglo para que la navegación conserve la subruta del sitio" }
   ],
   "stack": ["JavaScript", "React", "Redux"],
   "links": [
