@@ -39,6 +39,7 @@ Recorded from the 2026-09-29 session.
 | History | never rewritten | repo rule: merge only, no rebase, no history rewriting; the one exposed dev password is neutralised by a new commit and by changing it locally |
 | Legacy `/portfolio` | redirects to `/projects`; `Portfolio.tsx`, `portfolio.json` and `private-repos.json` are removed | it still renders placeholder projects such as "Project Alpha" and is reachable by URL |
 | Imagery | none in this version | thumbnails would need eleven screenshots kept current; the card reads fine as text |
+| Top bar | the "Academy ↗" entry is **replaced** by "Projects" (owner, 2026-09-29) | the academy is the first card on the page, so a second entry in the bar is noise; `JORIUS.links.academy` and the `nav.academy` key go with it |
 | Analytics | no new events | the existing `outbound-click` listener already records every link click with its host |
 
 ## 3. Out of scope
@@ -118,9 +119,10 @@ authorised by the owner for exactly the changes below.
   `master` and `playground`. Merge that branch into `master` with a merge
   commit. The eleven Dependabot branches are left alone.
 - Add `.github/workflows/deploy-pages.yml`: on push to `master` and manual
-  dispatch; `actions/setup-node` with Node 14 (the lockfile pins
-  `node-sass` 4.13.1, whose prebuilt binary exists only up to Node 14; the
-  Node 16 binary is gone, verified 2026-09-29); `npm ci`; build with
+  dispatch; `actions/setup-node` with **Node 12** (the lockfile pins
+  `node-sass` 4.13.1 through `node-sass-chokidar`; its prebuilt Linux binary
+  exists for Node 12 (ABI 72) and not for Node 14, verified 2026-09-29);
+  `npm ci`; build with
   `CI=false` (CRA 3 fails on lint warnings when `CI=true`) and
   `PUBLIC_URL=/pratech-tt-web/`; upload `build/`; `actions/deploy-pages`. The
   build script is the repo's production one (`build:prd`, which sets
@@ -138,8 +140,9 @@ authorised by the owner for exactly the changes below.
   `"serviceMocker": { "isEnabled": true }`. Login then works with
   `admin@wolox.com.ar` / `123456`, as the README states.
 - Replace `.github/workflows/master_wlx-tt.yml` (Azure, app gone) with the
-  same Pages workflow as pratech, Node 14 (`node-sass` 4.14.1), script
-  `build-prod`, `PUBLIC_URL=/wolox-tt/`.
+  same Pages workflow as pratech but on Node 14 (`node-sass` 4.14.1 has a
+  Node 14 binary and no Node 16 one), script `build-prod`,
+  `PUBLIC_URL=/wolox-tt/`.
 - README: the "Currently deployed in" Azure link becomes the Pages URL.
 - Enable Pages, set the homepage.
 
@@ -255,8 +258,11 @@ border always. No thumbnail box.
 ### 4.6 Navigation and palette
 
 - `BTopBar`: a `projectsLink` (`<Link to="/projects">`, ink colour, `Glitch`
-  on hover, no arrow because it is internal) placed after the section links
-  and before Academy, on desktop and in the mobile panel. Locale key
+  on hover, no arrow because it is internal) **replaces** the `academyLink`
+  in the same slot, after the section links and before Dark Galaxy, on
+  desktop and in the mobile panel. The academy stays reachable from its card.
+  `JORIUS.links.academy` (type and value) and the locale key
+  `directionB.topbar.nav.academy` are removed; the new key
   `directionB.topbar.nav.projects` = "Projects" / "Proyectos".
 - `CommandPalette`: a command item `directionB.palette.items.showProjects`
   ("show projects" / "ver proyectos"), target `/projects`, internal, hint
