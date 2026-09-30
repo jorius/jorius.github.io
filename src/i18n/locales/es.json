@@ -247,8 +247,8 @@
         "index": "Índice",
         "writing": "Escritos",
         "contact": "Contacto",
-        "academy": "Academia",
-        "darkgalaxy": "Dark Galaxy"
+        "darkgalaxy": "Dark Galaxy",
+        "projects": "Proyectos"
       },
       "available": "Disponible",
       "themeToggle": {
@@ -319,15 +319,6 @@
     "now": {
       "lastUpdatedLabel": "Última actualización"
     },
-    "projects": {
-      "openCase": "ver caso ↗",
-      "private": "privado",
-      "tagSuffix": "proyecto",
-      "category": {
-        "personal": "PERSONAL",
-        "client": "CLIENTE"
-      }
-    },
     "oss": {
       "writingHeader": "— Escritos",
       "ossHeader": "— Open source",
@@ -368,7 +359,9 @@
         "openGithub": "abrir GitHub",
         "copyPgp": "copiar huella PGP",
         "showPgp": "ver clave pública PGP",
-        "githubHint": "github.com/jorius"
+        "githubHint": "github.com/jorius",
+        "showProjects": "ver proyectos",
+        "projectsHint": "jorius.github.io/projects"
       }
     },
     "read": {
@@ -444,6 +437,29 @@
       "04": {
         "h": "Trabajo entre zonas horarias.",
         "b": "Años de entrega distribuida entre equipos de LATAM y EE.UU. Async por costumbre, sync cuando realmente mueve el trabajo."
+      }
+    },
+    "projectsPage": {
+      "meta": "§ PROYECTOS",
+      "title": "Proyectos",
+      "intro": "Proyectos personales, herramientas y pruebas técnicas, cada uno con su código fuente y, cuando existe, una versión en línea. La portada muestra lo que GitHub considera popular; esta página muestra lo que yo enseñaría.",
+      "empty": "Nada publicado todavía.",
+      "kind": {
+        "personal": "PERSONAL",
+        "assessment": "PRUEBA TÉCNICA",
+        "client": "CLIENTE",
+        "tool": "HERRAMIENTA",
+        "package": "PAQUETE"
+      },
+      "status": {
+        "wip": "EN CURSO",
+        "archived": "ARCHIVADO"
+      },
+      "link": {
+        "repo": "repositorio",
+        "live": "en línea",
+        "npm": "npm",
+        "docs": "docs"
       }
     }
   },

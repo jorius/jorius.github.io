@@ -1,0 +1,22 @@
+{
+  "id": "wolox-tt",
+  "order": 90,
+  "year": "2020",
+  "kind": "assessment",
+  "status": "archived",
+  "draft": false,
+  "title": { "en": "Wolox technical test", "es": "Prueba técnica Wolox" },
+  "summary": {
+    "en": "Front-end technical test from 2020: login, password recovery and a tech-collection view against an interview API, with a service mocker so it runs without the backend.",
+    "es": "Prueba técnica de front-end de 2020: login, recuperación de contraseña y una vista de colección contra la API de la entrevista, con un simulador de servicios para funcionar sin backend."
+  },
+  "details": [
+    { "en": "React, Redux, Material UI, lazy routes with error boundaries", "es": "React, Redux, Material UI, rutas diferidas con límites de error" },
+    { "en": "The Pages build runs on the mocker: admin@wolox.com.ar / 123456", "es": "La versión en Pages usa el simulador: admin@wolox.com.ar / 123456" }
+  ],
+  "stack": ["JavaScript", "React", "Redux"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/jorius/wolox-tt" },
+    { "kind": "live", "url": "https://jorius.github.io/wolox-tt/" }
+  ]
+}

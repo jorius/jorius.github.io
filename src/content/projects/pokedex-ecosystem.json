@@ -1,0 +1,24 @@
+{
+  "id": "pokedex-ecosystem",
+  "order": 40,
+  "year": "2026",
+  "kind": "personal",
+  "draft": false,
+  "title": { "en": "Pokedex ecosystem", "es": "Ecosistema Pokedex" },
+  "summary": {
+    "en": "One React frontend and three contract-identical backends (Express + TypeScript, Express + JavaScript, ASP.NET Core) sharing one Postgres database and one JWT key, so the UI can switch backend mid-session without logging out.",
+    "es": "Un frontend en React y tres backends con contrato idéntico (Express + TypeScript, Express + JavaScript, ASP.NET Core) que comparten una base Postgres y una clave JWT, así que la interfaz puede cambiar de backend a mitad de sesión sin cerrarla."
+  },
+  "details": [
+    { "en": "Byte-identical responses verified with live parity gates", "es": "Respuestas idénticas byte a byte, verificadas con pruebas de paridad en vivo" },
+    { "en": "Pokeball economy: wallet, ball shop, catches you can lose and a slot machine to fund them", "es": "Economía de pokébolas: billetera, tienda, capturas que puedes fallar y una tragamonedas para financiarlas" },
+    { "en": "Nine game themes, en/es, virtualised infinite scroll", "es": "Nueve temas de los juegos, es/en, scroll infinito virtualizado" }
+  ],
+  "stack": ["TypeScript", "React", "Node", "Express", ".NET", "Postgres", "Redis"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/jorius/pokedex-web", "label": { "en": "Frontend", "es": "Frontend" } },
+    { "kind": "repo", "url": "https://github.com/jorius/pokedex-api-express-ts", "label": { "en": "API · Express TS", "es": "API · Express TS" } },
+    { "kind": "repo", "url": "https://github.com/jorius/pokedex-api-express-js", "label": { "en": "API · Express JS", "es": "API · Express JS" } },
+    { "kind": "repo", "url": "https://github.com/jorius/pokedex-api-dotnet", "label": { "en": "API · .NET", "es": "API · .NET" } }
+  ]
+}

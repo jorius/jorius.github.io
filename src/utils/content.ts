@@ -88,10 +88,58 @@ export interface WritingPost {
   body: Localized;
 }
 
+// ---- /projects --------------------------------------------------------------
+
+export type ProjectKind = 'personal' | 'assessment' | 'client' | 'tool' | 'package';
+export type ProjectStatus = 'wip' | 'archived';
+export type ProjectLinkKind = 'repo' | 'live' | 'npm' | 'docs';
+
+export interface ProjectLink {
+  kind: ProjectLinkKind;
+  url: string;
+  // Overrides the generic label for the kind ("Frontend", "API · .NET").
+  label?: Localized;
+}
+
+// One card on /projects. `order` is explicit and spaced by 10 so a card can be
+// slotted in without renumbering; `year` is display text ("2017–2023").
+export interface ProjectEntry {
+  id: string;
+  order: number;
+  year: string;
+  kind: ProjectKind;
+  status?: ProjectStatus;
+  draft: boolean;
+  title: Localized;
+  summary: Localized;
+  details: Localized[];
+  stack: string[];
+  links: ProjectLink[];
+}
+
+// A hand-written JSON file may omit the optional arrays or the draft flag;
+// give every entry the full shape so the card never branches on undefined.
+export const normaliseProject = (raw: Partial<ProjectEntry>): ProjectEntry => ({
+  ...(raw as ProjectEntry),
+  details: Array.isArray(raw.details) ? raw.details : [],
+  links: Array.isArray(raw.links) ? raw.links : [],
+  stack: Array.isArray(raw.stack) ? raw.stack : [],
+  draft: raw.draft ?? false,
+});
+
+// Drafts stay visible in dev so a card can be previewed before it ships;
+// production builds drop them. Always ordered by the explicit `order`.
+export const selectPublished = (entries: ProjectEntry[], isProd: boolean): ProjectEntry[] =>
+  entries
+    .filter((p) => (isProd ? !p.draft : true))
+    .slice()
+    .sort((a, b) => a.order - b.order);
+
 const categoryModules = import.meta.glob('../content/writing/categories/*.json', { eager: true });
 const tagModules = import.meta.glob('../content/writing/tags/*.json', { eager: true });
 const postModules = import.meta.glob('../content/writing/posts/*.json', { eager: true });
 const revisionModules = import.meta.glob('../content/writing/revisions/*.json', { eager: true });
+const projectModules = import.meta.glob('../content/projects/*.json', { eager: true });
 
 export const loadCategories = (): WritingCategory[] =>
   Object.values(categoryModules)
@@ -129,3 +177,13 @@ export const loadRevisions = (slug: string): WritingRevisionDoc[] =>
     .map((m) => (m as { default: WritingRevisionDoc }).default)
     .filter((r) => r?.post === slug && isLocalized(r?.title) && isLocalized(r?.body) && isLocalized(r?.note))
     .sort((a, b) => b.date.localeCompare(a.date));
+
+// Every project card, published set only in production. Entries without a
+// localized title or summary have nothing to render and are dropped.
+export const loadProjects = (): ProjectEntry[] =>
+  selectPublished(
+    Object.values(projectModules)
+      .map((m) => normaliseProject((m as { default: Partial<ProjectEntry> }).default))
+      .filter((p) => isLocalized(p.title) && isLocalized(p.summary)),
+    import.meta.env.PROD,
+  );

@@ -7,9 +7,6 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
-// data
-import { JORIUS } from '../../data/jorius';
-
 // hooks
 import { useScrollDirection } from '../../hooks/useScrollDirection';
 import { useIsMobile } from '../../hooks/useMediaQuery';
@@ -77,9 +74,9 @@ export const BTopBar = (): React.ReactElement => {
     </a>
   ));
 
-  const academyLink = (
-    <a
-      href={JORIUS.links.academy}
+  const projectsLink = (
+    <Link
+      to="/projects"
       onClick={() => setMenuRequested(false)}
       style={{
         color: th.ink,
@@ -90,8 +87,8 @@ export const BTopBar = (): React.ReactElement => {
         borderBottom: isMobile ? `1px solid ${th.sub}` : 'none',
       }}
     >
-      <Glitch trigger="hover">{t('directionB.topbar.nav.academy')} ↗</Glitch>
-    </a>
+      <Glitch trigger="hover">{t('directionB.topbar.nav.projects')}</Glitch>
+    </Link>
   );
 
   const darkGalaxyLink = (
@@ -207,7 +204,7 @@ export const BTopBar = (): React.ReactElement => {
         {!isMobile ? (
           <nav style={{ display: 'flex', gap: 22 }}>
             {navLinks}
-            {academyLink}
+            {projectsLink}
             {darkGalaxyLink}
           </nav>
         ) : null}
@@ -260,7 +257,7 @@ export const BTopBar = (): React.ReactElement => {
         >
           <nav style={{ display: 'flex', flexDirection: 'column' }}>
             {navLinks}
-            {academyLink}
+            {projectsLink}
             {darkGalaxyLink}
           </nav>
           <div

@@ -247,8 +247,8 @@
         "index": "Index",
         "writing": "Writing",
         "contact": "Contact",
-        "academy": "Academy",
-        "darkgalaxy": "Dark Galaxy"
+        "darkgalaxy": "Dark Galaxy",
+        "projects": "Projects"
       },
       "available": "Available",
       "themeToggle": {
@@ -319,15 +319,6 @@
     "now": {
       "lastUpdatedLabel": "Last updated"
     },
-    "projects": {
-      "openCase": "open case ↗",
-      "private": "private",
-      "tagSuffix": "project",
-      "category": {
-        "personal": "PERSONAL",
-        "client": "CLIENT"
-      }
-    },
     "oss": {
       "writingHeader": "— Writing",
       "ossHeader": "— Open source",
@@ -368,7 +359,9 @@
         "openGithub": "open GitHub",
         "copyPgp": "copy PGP fingerprint",
         "showPgp": "show PGP public key",
-        "githubHint": "github.com/jorius"
+        "githubHint": "github.com/jorius",
+        "showProjects": "show projects",
+        "projectsHint": "jorius.github.io/projects"
       }
     },
     "read": {
@@ -444,6 +437,29 @@
       "04": {
         "h": "I work across time zones.",
         "b": "Years of distributed delivery between LATAM and U.S. teams. Async-first by habit, sync when it actually moves the work."
+      }
+    },
+    "projectsPage": {
+      "meta": "§ PROJECTS",
+      "title": "Projects",
+      "intro": "Side projects, tools and technical assessments, each with its source and, where one exists, a live build. The landing page lists what GitHub says is popular; this page lists what I would actually show you.",
+      "empty": "Nothing published yet.",
+      "kind": {
+        "personal": "PERSONAL",
+        "assessment": "ASSESSMENT",
+        "client": "CLIENT",
+        "tool": "TOOL",
+        "package": "PACKAGE"
+      },
+      "status": {
+        "wip": "WIP",
+        "archived": "ARCHIVED"
+      },
+      "link": {
+        "repo": "repository",
+        "live": "live",
+        "npm": "npm",
+        "docs": "docs"
       }
     }
   },

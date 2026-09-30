@@ -1,0 +1,22 @@
+{
+  "id": "pratech-tt-web",
+  "order": 80,
+  "year": "2020",
+  "kind": "assessment",
+  "status": "archived",
+  "draft": false,
+  "title": { "en": "Pratech technical test", "es": "Prueba técnica Pratech" },
+  "summary": {
+    "en": "Technical test from 2020: a React app that builds a form dynamically from a JSON schema, with validations per field, a mocked login and English/Spanish text.",
+    "es": "Prueba técnica de 2020: una app React que construye un formulario dinámicamente a partir de un esquema JSON, con validaciones por campo, login simulado y textos en inglés y español."
+  },
+  "details": [
+    { "en": "Create React App, Material UI, Redux", "es": "Create React App, Material UI, Redux" },
+    { "en": "Republished on GitHub Pages in 2026 with one fix so navigation keeps the site's sub-path", "es": "Republicada en GitHub Pages en 2026 con un único arreglo para que la navegación conserve la subruta del sitio" }
+  ],
+  "stack": ["JavaScript", "React", "Redux"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/jorius/pratech-tt-web" },
+    { "kind": "live", "url": "https://jorius.github.io/pratech-tt-web/" }
+  ]
+}

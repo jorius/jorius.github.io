@@ -1,0 +1,21 @@
+{
+  "id": "balatro-advisor",
+  "order": 50,
+  "year": "2026",
+  "kind": "tool",
+  "draft": false,
+  "title": { "en": "Balatro Advisor", "es": "Balatro Advisor" },
+  "summary": {
+    "en": "Watches Balatro's autosave and scores every possible play with the game's own hand rules, jokers, enhancements, editions and seals, then serves a live recommendation page on localhost.",
+    "es": "Observa el autoguardado de Balatro y puntúa cada jugada posible con las reglas del juego, comodines, mejoras, ediciones y sellos, y sirve una página local con la recomendación en vivo."
+  },
+  "details": [
+    { "en": "Monte Carlo lookahead estimates the chance of clearing the blind", "es": "Una proyección Monte Carlo estima la probabilidad de superar la ciega" },
+    { "en": "After each real hand it compares its prediction with the chips the game added", "es": "Tras cada mano real compara su predicción con las fichas que sumó el juego" },
+    { "en": "Scoring engine: the vendored Balatrolator (MIT)", "es": "Motor de puntuación: Balatrolator, incluido en el repositorio (MIT)" }
+  ],
+  "stack": ["Node", "JavaScript"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/jorius/balatro-advisor" }
+  ]
+}

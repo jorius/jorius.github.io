@@ -1,0 +1,21 @@
+{
+  "id": "carolina-rivera-portfolio",
+  "order": 30,
+  "year": "2026",
+  "kind": "client",
+  "draft": false,
+  "title": { "en": "Carolina M. Rivera — Portfolio", "es": "Carolina M. Rivera — Portafolio" },
+  "summary": {
+    "en": "Portfolio site for a graphic designer and visual artist, built from a Claude Design handoff as an Astro static site with vanilla TypeScript islands, in English and Spanish, deployed on GitHub Pages.",
+    "es": "Sitio de portafolio para una diseñadora gráfica y artista visual, construido a partir de un handoff de Claude Design como sitio estático en Astro con islas de TypeScript, en inglés y español, publicado en GitHub Pages."
+  },
+  "details": [
+    { "en": "JSON content collections validated with zod", "es": "Colecciones de contenido en JSON validadas con zod" },
+    { "en": "Light and dark themes, language toggle, no framework runtime in the browser", "es": "Temas claro y oscuro, cambio de idioma, sin runtime de framework en el navegador" }
+  ],
+  "stack": ["Astro", "TypeScript"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/cmrivera97/cmrivera97.github.io" },
+    { "kind": "live", "url": "https://cmrivera97.github.io/" }
+  ]
+}

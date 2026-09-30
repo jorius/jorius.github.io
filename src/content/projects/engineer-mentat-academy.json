@@ -1,0 +1,21 @@
+{
+  "id": "engineer-mentat-academy",
+  "order": 10,
+  "year": "2026",
+  "kind": "personal",
+  "draft": false,
+  "title": { "en": "Engineer Mentat Academy", "es": "Engineer Mentat Academy" },
+  "summary": {
+    "en": "Interactive interview trainer: 385 junior-to-senior questions in English and Spanish, with in-browser code and SQL scratchpads, drills, timed mocks and saved progress.",
+    "es": "Entrenador interactivo de entrevistas: 385 preguntas de nivel junior a senior en inglés y español, con editores de código y SQL en el navegador, ejercicios, simulacros cronometrados y progreso guardado."
+  },
+  "details": [
+    { "en": "Single-page app on GitHub Pages, no backend; progress lives in the browser", "es": "Aplicación de una sola página en GitHub Pages, sin backend; el progreso vive en el navegador" },
+    { "en": "Built for my own senior interview prep, then kept and published", "es": "Construida para preparar mi propia entrevista senior, luego conservada y publicada" }
+  ],
+  "stack": ["TypeScript", "React", "Vite", "CodeMirror"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/jorius/engineer-mentat-academy" },
+    { "kind": "live", "url": "https://jorius.github.io/engineer-mentat-academy/" }
+  ]
+}

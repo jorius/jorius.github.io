@@ -23,7 +23,7 @@ const NAV_ITEMS: NavItem[] = [
   { labelKey: 'nav.services', sectionId: 'b-services' },
   { labelKey: 'nav.about', route: '/about' },
   { labelKey: 'nav.contact', sectionId: 'b-contact' },
-  { labelKey: 'nav.portfolio', route: '/portfolio' },
+  { labelKey: 'nav.portfolio', route: '/projects' },
 ];
 
 const Header = (): React.ReactElement => {
@@ -64,7 +64,7 @@ const Header = (): React.ReactElement => {
   const hoverClass = isInServicesSection ? 'hover:bg-portfolio-dark-900/10' : 'hover:bg-white/10';
 
   const getNavLinkClass = (item: NavItem): string => {
-    const isPortfolioRoute = item.route === '/portfolio' && location.pathname === '/portfolio';
+    const isPortfolioRoute = item.route === '/projects' && location.pathname === '/projects';
     const isSectionActive = item.sectionId !== undefined && activeSection === item.sectionId && location.pathname === '/';
     if (isPortfolioRoute || isSectionActive) {
       return 'px-8 py-3 rounded-none font-space-mono text-lg text-white tracking-[-0.3px] bg-[#505050] hover:bg-[#505050]/90 transition-all cursor-pointer';
