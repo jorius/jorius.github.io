@@ -1,0 +1,25 @@
+{
+  "id": "jorius-github-io",
+  "order": 15,
+  "year": "2025–2026",
+  "kind": "personal",
+  "draft": false,
+  "title": { "en": "This site", "es": "Este sitio" },
+  "summary": {
+    "en": "The site you are reading: React 19 and Vite on GitHub Pages, English and Spanish, writing managed through Pages CMS, cookieless analytics, a command palette, and this projects page fed by one JSON file per card.",
+    "es": "El sitio que estás leyendo: React 19 y Vite en GitHub Pages, inglés y español, escritos gestionados con Pages CMS, analítica sin cookies, una paleta de comandos y esta página de proyectos alimentada por un JSON por tarjeta."
+  },
+  "note": {
+    "en": "Designed and built with Claude Code, reviewed and steered by hand.",
+    "es": "Diseñado y construido con Claude Code, revisado y dirigido a mano."
+  },
+  "details": [
+    { "en": "Deploys from main through GitHub Actions; deep links survive through the 404 fallback", "es": "Se despliega desde main con GitHub Actions; los enlaces profundos sobreviven gracias al fallback 404" },
+    { "en": "Umami on the Hobby plan: page views and three custom events, no cookies", "es": "Umami en el plan Hobby: vistas de página y tres eventos propios, sin cookies" }
+  ],
+  "stack": ["TypeScript", "React", "Vite"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/jorius/jorius.github.io" },
+    { "kind": "live", "url": "https://jorius.github.io/" }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "react-native-navigation",
+  "order": 105,
+  "year": "2020",
+  "kind": "personal",
+  "status": "archived",
+  "draft": false,
+  "title": { "en": "React Native Navigation 101", "es": "React Native Navigation 101" },
+  "summary": {
+    "en": "A small React Native playground from 2020 showing how to build a dynamic, scalable navigation flow with nested navigators and screens, written up as a guide with a demo gif.",
+    "es": "Un pequeño playground de React Native de 2020 que muestra cómo construir un flujo de navegación dinámico y escalable con navegadores y pantallas anidados, escrito como guía con un gif de demostración."
+  },
+  "note": {
+    "en": "A mid-to-junior playground from a long time ago, kept exactly as it was: an example, not a product.",
+    "es": "Un playground de nivel junior/mid de hace mucho tiempo, conservado tal cual: un ejemplo, no un producto."
+  },
+  "details": [
+    { "en": "Still the most-starred repository on my GitHub", "es": "Sigue siendo el repositorio con más estrellas de mi GitHub" }
+  ],
+  "stack": ["JavaScript", "React Native"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/jorius/react-native-navigation" }
+  ]
+}

@@ -35,6 +35,7 @@ export const TECH: Record<string, TechSpec> = {
   Redux: { color: '#764ABC', glyph: 'Rx' },
   Zustand: { color: '#5B4636', glyph: 'Zu' },
   CodeMirror: { color: '#D30707', glyph: 'CM' },
+  'React Native': { color: '#61DAFB', glyph: 'RN' },
   // Security
   OWASP: { color: '#0071BC', glyph: 'Ow' },
   'OAuth/OIDC': { color: '#EB5424', glyph: 'O2' },

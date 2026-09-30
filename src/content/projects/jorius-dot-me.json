@@ -1,0 +1,26 @@
+{
+  "id": "jorius-dot-me",
+  "order": 75,
+  "year": "2021",
+  "kind": "personal",
+  "status": "archived",
+  "draft": false,
+  "title": { "en": "jorius.me, the old site", "es": "jorius.me, el sitio anterior" },
+  "summary": {
+    "en": "My personal website before this one: a Create React App with Redux and Material UI that listed my repositories straight from the GitHub API, hosted on my own server at jorius.me.",
+    "es": "Mi sitio personal antes de este: una app de Create React App con Redux y Material UI que listaba mis repositorios directamente desde la API de GitHub, alojada en un servidor propio en jorius.me."
+  },
+  "note": {
+    "en": "Built by hand, before AI coding assistants.",
+    "es": "Hecho a mano, antes de los asistentes de IA para programar."
+  },
+  "details": [
+    { "en": "Deployed back then over SSH from GitHub Actions to a personal server", "es": "Se desplegaba entonces por SSH desde GitHub Actions a un servidor propio" },
+    { "en": "Republished on GitHub Pages in 2026 with one fix so the router works under the site's sub-path", "es": "Republicado en GitHub Pages en 2026 con un único arreglo para que el enrutador funcione bajo la subruta del sitio" }
+  ],
+  "stack": ["JavaScript", "React", "Redux"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/jorius/jorius-dot-me" },
+    { "kind": "live", "url": "https://jorius.github.io/jorius-dot-me/" }
+  ]
+}
