@@ -10,6 +10,10 @@
     "en": "Client-side dashboard for a Steam library: grid and list views with stats, favorites, an achievement tracker with guides, all kept in the browser and fed through a tiny CORS proxy you deploy yourself.",
     "es": "Panel del lado del cliente para una biblioteca de Steam: vistas en cuadrícula y lista con estadísticas, favoritos, un rastreador de logros con guías, todo guardado en el navegador y servido a través de un pequeño proxy CORS que despliegas tú mismo."
   },
+  "note": {
+    "en": "Built just for fun, to get a better view of my own Steam library.",
+    "es": "Hecho solo por diversión, para ver mejor mi propia biblioteca de Steam."
+  },
   "details": [
     { "en": "Nothing-style design system, en/es, JSON export and import", "es": "Sistema de diseño estilo Nothing, es/en, exportación e importación en JSON" },
     { "en": "Early and unfinished: expect rough edges", "es": "Aún en construcción: tiene detalles sin pulir" }

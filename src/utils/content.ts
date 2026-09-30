@@ -112,6 +112,8 @@ export interface ProjectEntry {
   draft: boolean;
   title: Localized;
   summary: Localized;
+  // A personal aside ("built for fun to learn X"), rendered in the accent colour.
+  note?: Localized;
   details: Localized[];
   stack: string[];
   links: ProjectLink[];

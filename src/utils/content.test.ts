@@ -88,6 +88,7 @@ describe('projects content', () => {
       expect(hasBoth(p.title), `${p.id} title`).toBe(true);
       expect(hasBoth(p.summary), `${p.id} summary`).toBe(true);
       for (const d of p.details) expect(hasBoth(d), `${p.id} detail`).toBe(true);
+      if (p.note !== undefined) expect(hasBoth(p.note), `${p.id} note`).toBe(true);
       for (const l of p.links) if (l.label) expect(hasBoth(l.label), `${p.id} link ${l.url}`).toBe(true);
       expect(p.year.trim(), `${p.id} year`).not.toBe('');
     }
