@@ -69,7 +69,7 @@ export const JORIUS: JoriusData = {
   whatsapp: '+57 301 393 02 89',
   links: {
     github: 'https://github.com/jorius',
-    linkedin: 'https://www.linkedin.com/in/jose-rios-4ab123163/',
+    linkedin: 'https://www.linkedin.com/in/jose-rios-c/',
     stackoverflow: 'https://es.stackoverflow.com/users/18771/jorius',
   },
   experience: [

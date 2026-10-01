@@ -40,6 +40,8 @@ React **19** + TypeScript 5.9 + Vite 7 SPA.
 
 **Vite config quirk** (`vite.config.ts`) — a custom plugin forces a full page reload when `tailwind.config.js` changes (Tailwind v3 doesn't HMR config changes on its own). Don't remove this unless you migrate to Tailwind v4.
 
+**Crawler files** (`scripts/llms/`) — a second Vite plugin, `llmsPlugin`, renders `llms.txt`, `llms-full.txt`, a markdown copy of every published post (`/writing/<slug>.md` and `.es.md`) and of the projects page, plus `sitemap.xml` and `robots.txt`, from the same JSON content the app reads. They are emitted into `dist/` at build time and served by the dev server, so nothing is checked in under `public/`. `render.ts` is pure and unit-tested; `load.ts` reads the content from disk (it cannot reuse `src/utils/content.ts`, which depends on `import.meta.glob`). Dark Galaxy is deliberately left out. `robots.txt` allows search engines and on-demand fetchers and disallows known training crawlers.
+
 ## Project structure
 
 - `src/components/sections/` — Homepage sections (Hero, Services, WorkExperience, WhyHireMe, ContactForm, SkillsBanner, Testimonials, Blog). Composed in `src/pages/Home.tsx`. **Some are currently commented out in Home.tsx** — that's intentional (disabled, not deleted). If you touch them, keep that convention or wire them back on purposefully.
@@ -49,6 +51,7 @@ React **19** + TypeScript 5.9 + Vite 7 SPA.
 - `src/hooks/` — Cross-component hooks (e.g. `useGitHubRepos` for the GitHub API integration).
 - `src/utils/` — `content` (typed loaders for writing, now, work and projects content), `projects` (project-card helpers), `analytics` (Umami events), `dateLabels`, `languageIcons`, `storage`.
 - `src/i18n/` — i18next setup + locale JSON.
+- `scripts/llms/` — Build-time generator for the crawler-facing files (see **Crawler files** above). Type-checked through `tsconfig.node.json`.
 
 ## Import ordering
 

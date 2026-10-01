@@ -90,7 +90,7 @@ const Header = (): React.ReactElement => {
         {/* Social Icons - Left */}
         <div className="flex items-center gap-4">
           <a
-            href="https://www.linkedin.com/in/jose-rios-4ab123163/"
+            href="https://www.linkedin.com/in/jose-rios-c/"
             target="_blank"
             rel="noopener noreferrer"
             className={`${textColorClass} ${hoverClass} p-2 rounded transition-all`}
