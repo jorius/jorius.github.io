@@ -11,8 +11,10 @@ import { useIsMobile } from '../../hooks/useMediaQuery';
 // components
 import { Reveal } from '../primitives/Reveal';
 
-// The hover rule for .b-index-card in index.html reads --sub.
+// The .b-index-card rules in index.html paint --paper and, on hover, --sub.
+// Both come in as variables: an inline background would outrank the hover rule.
 interface CardCSS extends CSSProperties {
+  '--paper'?: string;
   '--sub'?: string;
 }
 
@@ -30,7 +32,7 @@ export const BCard = ({ index, children, style }: BCardProps): React.ReactElemen
   const isMobile = useIsMobile();
   const columns = useCardColumns();
   const cellStyle: CardCSS = {
-    background: t.paper,
+    '--paper': t.paper,
     padding: isMobile ? 18 : 24,
     display: 'flex',
     flexDirection: 'column',
