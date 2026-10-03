@@ -1,7 +1,6 @@
 // packages
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaWhatsapp } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 // contexts
@@ -16,6 +15,9 @@ import { useIsMobile } from '../../hooks/useMediaQuery';
 // utils
 import { currentQuarter, currentYear } from '../../utils/dateLabels';
 
+// styles
+import { FONT_CODE } from '../../styles/fonts';
+
 // components
 import { Glitch } from '../primitives/Glitch';
 import { TypedCaret } from '../primitives/TypedCaret';
@@ -23,8 +25,6 @@ import { TypedCaret } from '../primitives/TypedCaret';
 // Strip the protocol and trailing slash for cleaner display.
 const displayUrl = (url: string): string =>
   url.replace(/^https?:\/\//, '').replace(/\/$/, '');
-
-const WHATSAPP_HREF = `https://wa.me/${JORIUS.whatsapp.replace(/[^0-9]/g, '')}`;
 
 const HEX_CHARS = '0123456789ABCDEF';
 
@@ -82,7 +82,7 @@ const PgpBlock = (): React.ReactElement => {
         <Glitch trigger={hovered ? 'off' : 'always'} strong>
           {tr('directionB.contact.pgp')} {JORIUS.pgp.algo} · {JORIUS.pgp.keyId}
         </Glitch>
-        <div style={{ fontSize: 13, color: t.dim, opacity: 0.85, marginTop: 5, wordBreak: 'break-all' }}>
+        <div style={{ fontFamily: FONT_CODE, fontSize: 13, color: t.dim, opacity: 0.85, marginTop: 5, wordBreak: 'break-all' }}>
           {displayedFp}
         </div>
       </Link>
@@ -104,7 +104,7 @@ const PgpBlock = (): React.ReactElement => {
       <div
         aria-hidden
         style={{
-          fontSize: 12,
+          fontSize: 13,
           color: t.dim,
           letterSpacing: '0.14em',
           opacity: 1,
@@ -133,7 +133,7 @@ export const BContact = (): React.ReactElement => {
     >
       <div
         style={{
-          fontSize: 11,
+          fontSize: 13,
           color: t.dim,
           letterSpacing: '0.18em',
           textTransform: 'uppercase',
@@ -169,7 +169,7 @@ export const BContact = (): React.ReactElement => {
       >
         {/* EMAIL column */}
         <div>
-          <div style={{ fontSize: 11, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>{tr('directionB.contact.email')}</div>
+          <div style={{ fontSize: 13, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>{tr('directionB.contact.email')}</div>
           <a
             href={`mailto:${JORIUS.email}`}
             style={{ fontSize: isMobile ? 17 : 20, color: t.ink, textDecoration: 'none', display: 'block', marginTop: 6, wordBreak: 'break-all' }}
@@ -184,7 +184,7 @@ export const BContact = (): React.ReactElement => {
 
           {JORIUS.affiliations.length > 0 ? (
             <div style={{ marginTop: 18, paddingTop: 14, borderTop: `1px dashed ${t.sub}` }}>
-              <div style={{ fontSize: 10, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.14em', marginBottom: 6 }}>
+              <div style={{ fontSize: 13, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.14em', marginBottom: 6 }}>
                 {tr('directionB.contact.affiliations')}
               </div>
               {JORIUS.affiliations.map((a) => (
@@ -198,7 +198,7 @@ export const BContact = (): React.ReactElement => {
                   <span
                     style={{
                       marginLeft: 8,
-                      fontSize: 9,
+                      fontSize: 13,
                       color: t.dim,
                       letterSpacing: '0.14em',
                       textTransform: 'uppercase',
@@ -208,7 +208,7 @@ export const BContact = (): React.ReactElement => {
                   >
                     [ {a.tag} ]
                   </span>
-                  <div style={{ fontSize: 11, color: t.dim, marginTop: 2 }}>{a.name}</div>
+                  <div style={{ fontSize: 13, color: t.dim, marginTop: 2 }}>{a.name}</div>
                 </div>
               ))}
             </div>
@@ -217,7 +217,7 @@ export const BContact = (): React.ReactElement => {
 
         {/* ELSEWHERE column */}
         <div>
-          <div style={{ fontSize: 11, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>{tr('directionB.contact.elsewhere')}</div>
+          <div style={{ fontSize: 13, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>{tr('directionB.contact.elsewhere')}</div>
           <div style={{ fontSize: 15, color: t.ink, marginTop: 6, lineHeight: 1.7 }}>
             <a
               href={JORIUS.links.github}
@@ -248,45 +248,9 @@ export const BContact = (): React.ReactElement => {
 
         {/* AVAILABILITY column */}
         <div style={{ textAlign: isMobile ? 'left' : 'right' }}>
-          <div style={{ fontSize: 11, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>{tr('directionB.contact.availability')}</div>
+          <div style={{ fontSize: 13, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>{tr('directionB.contact.availability')}</div>
           <div style={{ fontSize: 18, color: t.ink, marginTop: 6 }}>{tr('directionB.contact.status')} {currentQuarter()}</div>
 
-          <div style={{ display: 'flex', gap: 10, justifyContent: isMobile ? 'flex-start' : 'flex-end', marginTop: 16, flexWrap: 'wrap', alignItems: 'stretch' }}>
-            <a
-              href={WHATSAPP_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${tr('directionB.contact.whatsappLabel')} ${JORIUS.whatsapp}`}
-              title={`${tr('directionB.contact.whatsappLabel')} ${JORIUS.whatsapp}`}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: 'transparent',
-                color: t.ink,
-                border: `1px solid ${t.rule}`,
-                width: 44,
-                textDecoration: 'none',
-              }}
-            >
-              <FaWhatsapp aria-hidden style={{ width: 18, height: 18 }} />
-            </a>
-            <a
-              href="https://cal.com/jorius"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-block',
-                background: t.ink,
-                color: t.paper,
-                padding: '12px 18px',
-                fontSize: 13,
-                textDecoration: 'none',
-              }}
-            >
-              <Glitch trigger="hover">{tr('directionB.contact.book')}</Glitch>
-            </a>
-          </div>
         </div>
       </div>
 
@@ -298,7 +262,7 @@ export const BContact = (): React.ReactElement => {
           display: 'flex',
           flexDirection: isMobile ? 'column' : 'row',
           justifyContent: 'space-between',
-          fontSize: 11,
+          fontSize: 13,
           color: t.dim,
           flexWrap: 'wrap',
           gap: isMobile ? 6 : 12,
