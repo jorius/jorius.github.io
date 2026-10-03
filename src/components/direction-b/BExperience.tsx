@@ -44,23 +44,22 @@ export const BExperience = (): React.ReactElement => {
             const accent: AccentCSS = { '--acc': e.accent };
             return (
               <BCard key={e.key} index={i} style={accent}>
-                <div style={{ ...meta, display: 'flex', justifyContent: 'space-between', gap: 12 }}>
-                  <span>№ {String(i + 1).padStart(2, '0')}</span>
-                  <span>{e.loc === 'Remote' ? tr('directionB.experience.remote') : e.loc}</span>
-                </div>
-                {/* The owner asked for dates that are easy to find: same spot on every card, ink, bold, accent bar. */}
-                <div
-                  style={{
-                    fontSize: 16,
-                    fontWeight: 700,
-                    letterSpacing: '0.02em',
-                    color: t.ink,
-                    fontVariantNumeric: 'tabular-nums',
-                    padding: '4px 0 4px 12px',
-                    borderLeft: '3px solid var(--acc)',
-                  }}
-                >
-                  {e.from} → {e.to === 'Present' ? tr('directionB.experience.present') : e.to}
+                {/* The owner asked for dates that are easy to find: beside the number, ink, bold, accent bar. */}
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap' }}>
+                  <span style={meta}>№ {String(i + 1).padStart(2, '0')}</span>
+                  <span
+                    style={{
+                      fontSize: 15,
+                      fontWeight: 700,
+                      letterSpacing: '0.02em',
+                      color: t.ink,
+                      fontVariantNumeric: 'tabular-nums',
+                      padding: '2px 0 2px 10px',
+                      borderLeft: '3px solid var(--acc)',
+                    }}
+                  >
+                    {e.from} → {e.to === 'Present' ? tr('directionB.experience.present') : e.to}
+                  </span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
                   <div

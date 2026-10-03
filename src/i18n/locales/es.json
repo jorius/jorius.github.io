@@ -303,8 +303,6 @@
       "pgp": "PGP",
       "affiliations": "Afiliaciones",
       "elsewhere": "En otros lugares",
-      "availability": "Disponibilidad actual",
-      "status": "Abierto a roles ·",
       "footer": {
         "copyright": "JOSE RÍOS · REGISTRO PERSONAL",
         "set": "EN SPACE MONO Y ATKINSON HYPERLEGIBLE · SIN COOKIES",
@@ -362,7 +360,6 @@
     },
     "experience": {
       "present": "Presente",
-      "remote": "Remoto",
       "perficient_current": {
         "role": "Consultor Técnico Senior",
         "body": "Lideré la entrega técnica de flujos de seguros y cuidado personal para un cliente de servicios de salud en EE.UU. Arquitecté e implementé soluciones en la pila JS/TS y coordiné con equipos de ingeniería distribuidos en distintas zonas horarias."

@@ -231,11 +231,12 @@ Three cards, one per `work.json` service, in a `BCardGrid`:
 Six cards, one per `JORIUS.experience` entry, in a `BCardGrid`. Each `BCard`
 gets `--acc: e.accent`:
 
-- Top row: `№ 01`… and the location (`experience.remote` when `loc` is
-  `Remote`), 13px `dim` uppercase.
-- **Dates**: `${from} → ${to}` (`to` of `Present` translated), 16px, 700,
-  letter-spacing 0.02em, `ink`, `font-variant-numeric: tabular-nums`,
-  padding `4px 0 4px 12px`, `border-left: 3px solid var(--acc)`.
+- Top row (flex, baseline, gap 14px): `№ 01`… at 13px `dim` uppercase, then
+  the **dates** right beside it: `${from} → ${to}` (`to` of `Present`
+  translated), 15px, 700, letter-spacing 0.02em, `ink`,
+  `font-variant-numeric: tabular-nums`, padding `2px 0 2px 10px`,
+  `border-left: 3px solid var(--acc)`. The location is not shown (owner,
+  2026-10-03).
 - Company row: the 56px white logo tile with the accent dot, as today, next
   to the company name at 20px, 700, `Glitch trigger="hover"`.
 - Role: 15px, 700.
@@ -263,8 +264,9 @@ The two-column layout and the right-hand "Last updated" block are gone.
 
 Unchanged in structure, with these edits:
 
-- The availability column keeps the label and `contact.status · <quarter>`
-  and loses the WhatsApp and BOOK buttons.
+- The availability column is removed altogether (owner, 2026-10-03: no
+  buttons, and no "Open to roles · quarter" line); the grid becomes two
+  columns, email and elsewhere.
 - Sizes: `§ 04 · Contact` 13px; PGP line 15px; fingerprint 13px IBM Plex
   Mono; `[ ENCRYPTED ]` 13px; affiliation tag and name 13px; footer line 13px.
 - Footer strings: `contact.footer.set` becomes "SET IN SPACE MONO & ATKINSON
