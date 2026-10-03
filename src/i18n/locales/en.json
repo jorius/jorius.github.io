@@ -261,12 +261,12 @@
     "hero": {
       "intro": "More than 10 years of production software. Full-stack by habit, security-minded by training, consultant by current invoice.",
       "body": "I design and ship large-scale systems end to end — frontend, backend, AWS, infrastructure, CI/CD. I plug into big teams and established ecosystems, or architect new ones from scratch: the kind of platform that has to hold up at Twitch-, Spotify-, or Amazon-scale from day one.",
-      "writeMe": "WRITE ME →",
+      "writeMe": "WRITE ME",
       "eyebrow": "Full-stack engineer · Security",
       "anywhere": "Work from anywhere",
       "tz": "GMT-5 · Colombia",
       "whatsapp": "WHATSAPP",
-      "book": "BOOK 20 MIN →"
+      "book": "BOOK 20 MIN"
     },
     "portrait": {
       "exhibit": "EXHIBIT_",

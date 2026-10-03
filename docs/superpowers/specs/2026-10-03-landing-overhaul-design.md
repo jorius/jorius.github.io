@@ -155,12 +155,15 @@ a 22px gap:
 4. **Buttons** (flex, wrap, gap 10px). Shared style: inline-flex, padding
    `13px 20px`, 13px, letter-spacing 0.06em, 1px `ink` border, no underline,
    label wrapped in `Glitch trigger="hover"`.
-   - `hero.writeMe` → `mailto:${JORIUS.email}`, filled (`ink` background,
-     `paper` text).
-   - `hero.whatsapp` → `https://wa.me/<digits>`, outlined, `FaWhatsapp` at
-     16px before the label, `aria-label` and `title` carry the number as
-     today's Contact button does.
-   - `hero.book` → `https://cal.com/jorius`, outlined.
+   Each label is preceded by a 16px icon in the same slot (owner, 2026-10-03:
+   icons instead of the "→" arrows the labels used to carry).
+   - `hero.writeMe` ("WRITE ME") → `mailto:${JORIUS.email}`, filled (`ink`
+     background, `paper` text), `FaEnvelope`.
+   - `hero.whatsapp` → `https://wa.me/<digits>`, outlined, `FaWhatsapp`,
+     `aria-label` and `title` carry the number as today's Contact button
+     does.
+   - `hero.book` ("BOOK 20 MIN") → `https://cal.com/jorius`, outlined,
+     `FaCalendarAlt`.
 5. **Body**: `hero.body` in `FONT_BODY`, 16px, line-height 1.6, max-width
    62ch.
 
@@ -296,7 +299,7 @@ Locale keys under `directionB` (both files, English / Spanish):
 | `hero.anywhere` | Work from anywhere | Trabajo desde cualquier lugar |
 | `hero.tz` | GMT-5 · Colombia | GMT-5 · Colombia |
 | `hero.whatsapp` | WHATSAPP | WHATSAPP |
-| `hero.book` | BOOK 20 MIN → | AGENDA 20 MIN → |
+| `hero.book` | BOOK 20 MIN | AGENDA 20 MIN |
 | `sections.work.num` / `record.num` / `now.num` | 01 / 02 / 03 | 01 / 02 / 03 |
 | `sections.work.cardKind` | Service | Servicio |
 | `sections.contact` | § 04 · Contact | § 04 · Contacto |

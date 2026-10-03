@@ -22,6 +22,7 @@ export const TECH: Record<string, TechSpec> = {
   Kafka: { color: '#231F20', glyph: 'K' },
   'Next.js': { color: '#000000', glyph: 'N' },
   Terraform: { color: '#7B42BC', glyph: 'tf' },
+  AWS: { color: '#FF9900', glyph: 'aw' },
   // Web
   React: { color: '#61DAFB', glyph: 'Re' },
   Vite: { color: '#646CFF', glyph: 'Vi' },
@@ -50,7 +51,7 @@ export const TECH: Record<string, TechSpec> = {
   Roadmaps: { color: '#7C3AED', glyph: 'rm' },
 };
 
-const LIGHT_GLYPH_COLORS = new Set(['#FFD43B', '#F7DF1E', '#61DAFB', '#9BCB3A']);
+const LIGHT_GLYPH_COLORS = new Set(['#FFD43B', '#F7DF1E', '#61DAFB', '#9BCB3A', '#FF9900']);
 
 interface StackChipProps {
   name: string;

@@ -1,7 +1,7 @@
 // packages
 import type { CSSProperties } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaCalendarAlt, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
 
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
@@ -90,6 +90,7 @@ export const BHero = (): React.ReactElement => {
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
           <a href={`mailto:${JORIUS.email}`} style={filled}>
+            <FaEnvelope aria-hidden style={{ width: 16, height: 16 }} />
             <Glitch trigger="hover">{tr('directionB.hero.writeMe')}</Glitch>
           </a>
           <a
@@ -104,6 +105,7 @@ export const BHero = (): React.ReactElement => {
             <Glitch trigger="hover">{tr('directionB.hero.whatsapp')}</Glitch>
           </a>
           <a href={BOOKING_HREF} target="_blank" rel="noopener noreferrer" style={outlined}>
+            <FaCalendarAlt aria-hidden style={{ width: 16, height: 16 }} />
             <Glitch trigger="hover">{tr('directionB.hero.book')}</Glitch>
           </a>
         </div>
