@@ -296,8 +296,9 @@
       },
       "work": {
         "label": "WORK.",
-        "num": "02",
-        "kicker": "Three engagements I take. Weekly rate, quarterly retainer, or fixed scope — you decide."
+        "num": "01",
+        "kicker": "Three engagements I take. Weekly rate, quarterly retainer, or fixed scope — you decide.",
+        "cardKind": "Service"
       },
       "record": {
         "label": "RECORD.",

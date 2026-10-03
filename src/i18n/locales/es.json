@@ -296,8 +296,9 @@
       },
       "work": {
         "label": "TRABAJO.",
-        "num": "02",
-        "kicker": "Tres tipos de servicio. Tarifa semanal, retainer trimestral o alcance cerrado — tú eliges."
+        "num": "01",
+        "kicker": "Tres tipos de servicio. Tarifa semanal, retainer trimestral o alcance cerrado — tú eliges.",
+        "cardKind": "Servicio"
       },
       "record": {
         "label": "TRAYECTORIA.",
