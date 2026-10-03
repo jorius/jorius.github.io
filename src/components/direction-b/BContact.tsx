@@ -13,7 +13,7 @@ import { JORIUS } from '../../data/jorius';
 import { useIsMobile } from '../../hooks/useMediaQuery';
 
 // utils
-import { currentQuarter, currentYear } from '../../utils/dateLabels';
+import { currentYear } from '../../utils/dateLabels';
 
 // styles
 import { FONT_CODE } from '../../styles/fonts';
@@ -160,7 +160,7 @@ export const BContact = (): React.ReactElement => {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr',
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
           gap: isMobile ? 20 : 32,
           marginTop: isMobile ? 40 : 56,
           paddingTop: 28,
@@ -246,12 +246,6 @@ export const BContact = (): React.ReactElement => {
           </div>
         </div>
 
-        {/* AVAILABILITY column */}
-        <div style={{ textAlign: isMobile ? 'left' : 'right' }}>
-          <div style={{ fontSize: 13, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.12em' }}>{tr('directionB.contact.availability')}</div>
-          <div style={{ fontSize: 18, color: t.ink, marginTop: 6 }}>{tr('directionB.contact.status')} {currentQuarter()}</div>
-
-        </div>
       </div>
 
       <div
