@@ -6,6 +6,24 @@
   },
   "entries": [
     {
+      "key": "looking",
+      "label": {
+        "en": "looking",
+        "es": "buscando"
+      },
+      "en": "Looking for new open positions as full-stack and/or cybersec-focused, remote.",
+      "es": "Buscando nuevas oportunidades laborales como full-stack y/u orientado a ciberseguridad, remoto."
+    },
+    {
+      "key": "co-founding",
+      "label": {
+        "en": "co-founding",
+        "es": "co-fundando"
+      },
+      "en": "Small studio with a friend, custom software + SaaS + agentic development with AI",
+      "es": "Un pequeño estudio con un amigo, software a medida + SaaS + desarrollo \"agentico\" con IA."
+    },
+    {
       "key": "writing",
       "label": {
         "en": "writing",
@@ -24,15 +42,6 @@
       "es": "Un juego 2D ambientado en el mismo universo de ciencia ficción -DG-"
     },
     {
-      "key": "looking",
-      "label": {
-        "en": "looking",
-        "es": "buscando"
-      },
-      "en": "Looking for new open positions as full-stack and/or cybersec-focused, remote.",
-      "es": "Buscando nuevas oportunidades laborales como full-stack y/u orientado a ciberseguridad, remoto."
-    },
-    {
       "key": "home",
       "label": {
         "en": "home",
@@ -40,15 +49,6 @@
       },
       "en": "Taking care of a lovely family and 4 naughty cats.",
       "es": "Cuidando de mi amada familia y 4 gatos traviesos."
-    },
-    {
-      "key": "co-founding",
-      "label": {
-        "en": "co-founding",
-        "es": "co-fundando"
-      },
-      "en": "Small studio with a friend, custom software + SaaS + agentic development with AI",
-      "es": "Un pequeño estudio con un amigo, software a medida + SaaS + desarrollo \"agentico\" con IA."
     }
   ]
 }
