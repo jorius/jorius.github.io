@@ -44,12 +44,12 @@ React **19** + TypeScript 5.9 + Vite 7 SPA.
 
 ## Project structure
 
-- `src/components/sections/` — Homepage sections (Hero, Services, WorkExperience, WhyHireMe, ContactForm, SkillsBanner, Testimonials, Blog). Composed in `src/pages/Home.tsx`. **Some are currently commented out in Home.tsx** — that's intentional (disabled, not deleted). If you touch them, keep that convention or wire them back on purposefully.
+- `src/components/direction-b/` — The landing: `BTopBar`, `BHero`, `BServices` (Work), `BExperience` (Record), `BNow`, `BContact`, composed in that order in `DirectionB.tsx`. Work, Record and `/projects` share the card primitives `BCardGrid` (1px rules from the grid gap) and `BCard`; section titles go through `BSectionHead`, whose kicker sits under the title. Card bodies use `FONT_BODY` from `src/styles/fonts.ts` (Atkinson Hyperlegible Next); titles and labels stay Space Mono. The 2026-10 overhaul removed the vignette overlay (`DarkGrain`) site-wide and set a 13px / 4.5:1 legibility floor guarded by `src/utils/contrast.test.ts`. Design: `docs/superpowers/specs/2026-10-03-landing-overhaul-design.md`.
 - `src/components/common/` — Shared UI (Header, Footer, Button, Badge, LanguageSelector, SectionTitle).
 - `src/pages/` — Route-level components. `Projects.tsx` renders the curated cards from `src/content/projects/*.json` (one file per project, `{ en, es }` strings, `draft` hides a card in production); `/portfolio` redirects there. See `docs/superpowers/specs/2026-09-29-projects-page-and-repo-publishing-design.md`.
 - `src/data/` — `jorius.ts` (identity, links, experience) and the PGP key. Editorial content lives under `src/content/` (writing, now, work, projects).
-- `src/hooks/` — Cross-component hooks (e.g. `useGitHubRepos` for the GitHub API integration).
-- `src/utils/` — `content` (typed loaders for writing, now, work and projects content), `projects` (project-card helpers), `analytics` (Umami events), `dateLabels`, `languageIcons`, `storage`.
+- `src/hooks/` — Cross-component hooks (`useMediaQuery` with `useIsMobile`/`useIsTablet`/`usePrefersReducedMotion`, `useCardColumns`, `useInView`, `useScrollDirection`, `useNavigation`).
+- `src/utils/` — `content` (typed loaders for writing, now, work and projects content), `projects` (project-card helpers), `analytics` (Umami events), `dateLabels`, `contrast`, `glitchTiming`, `storage`.
 - `src/i18n/` — i18next setup + locale JSON.
 - `scripts/llms/` — Build-time generator for the crawler-facing files (see **Crawler files** above). Type-checked through `tsconfig.node.json`.
 
@@ -74,7 +74,7 @@ One blank line between groups, no blank lines within a group.
 
 `.env` is gitignored. Variables are Vite-prefixed (`VITE_*`), exposed to the client bundle. See `.env.example`:
 
-- `VITE_GITHUB_USERNAME` — target username for the GitHub API calls (called unauthenticated via `/users/{username}/repos`; rate-limited to 60/hr per visitor IP). Also injected by CI for the production build.
+- None today. `.env.example` is kept as the template; the GitHub API integration left with the landing's Writing & OSS section in the 2026-10 overhaul.
 
 **No client-side tokens.** Anything prefixed `VITE_` is bundled into the browser JS by Vite, so it cannot hold a secret. The portfolio is intentionally token-free; if a token-bearing GitHub call ever becomes necessary, route it through a serverless backend rather than re-introducing a client-side env var.
 

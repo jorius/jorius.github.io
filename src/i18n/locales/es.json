@@ -244,7 +244,6 @@
         "now": "Ahora",
         "work": "Trabajo",
         "record": "Trayectoria",
-        "index": "Índice",
         "writing": "Escritos",
         "contact": "Contacto",
         "darkgalaxy": "Dark Galaxy",
@@ -257,25 +256,12 @@
       },
       "languageToggle": {
         "label": "Idioma"
-      },
-      "pressKey": "pulsa"
+      }
     },
     "hero": {
-      "meta": "REGISTRO PERSONAL · ",
       "intro": "Más de 10 años de software en producción. Full-stack por costumbre, mentalidad de seguridad por formación, consultor por la factura actual.",
-      "headline": {
-        "fullstack": "INGENIERO",
-        "engineer": "FULL-STACK,",
-        "engineerKicker": "(full-stack, remoto)",
-        "security": "SEGURIDAD,",
-        "shipped": "ENTREGADA."
-      },
       "body": "Diseño y entrego sistemas a gran escala de punta a punta — frontend, backend, AWS, infraestructura, CI/CD. Me integro a equipos grandes y ecosistemas ya establecidos, o los diseño desde cero: plataformas que deben sostenerse a escala Twitch, Spotify o Amazon desde el primer día.",
-      "operating": "Opero desde",
-      "operatingValue": "Colombia · GMT-5",
-      "remote": "remoto en toda América",
       "writeMe": "ESCRÍBEME →",
-      "replies": "respondo en menos de 24h",
       "eyebrow": "Ingeniero full-stack · Seguridad",
       "anywhere": "Trabajo desde cualquier lugar",
       "tz": "GMT-5 · Colombia",
@@ -305,36 +291,10 @@
         "num": "02",
         "kicker": "Seis contratos, cuatro empresas, muchas ramas mergeadas en commits limpios."
       },
-      "index": {
-        "label": "ÍNDICE.",
-        "num": "04",
-        "kicker": "Una selección de proyectos personales y de cliente. Casos detallados disponibles a petición."
-      },
-      "writing": {
-        "label": "ESCRITOS Y OSS.",
-        "num": "05",
-        "kicker": "Notas largas y repositorios públicos vivos. Lo que le mostraría a un reclutador, si me lo pide."
-      },
-      "why": {
-        "label": "POR QUÉ.",
-        "num": "06",
-        "kicker": "Cuatro razones honestas para sumarme a tu equipo o proyecto."
-      },
       "contact": "§ 04 · Contacto"
     },
     "now": {
       "lastUpdatedLabel": "Última actualización"
-    },
-    "oss": {
-      "writingHeader": "— Escritos",
-      "ossHeader": "— Open source",
-      "loading": "cargando repositorios públicos…",
-      "errorPrefix": "API de GitHub no disponible",
-      "visitDirectly": "Visita",
-      "directly": "directamente.",
-      "empty": "Aún no hay repositorios públicos, sin forks ni archivados.",
-      "writingEmpty": "Los escritos volverán cuando conecte un CMS. Atento.",
-      "viewAllPosts": "→ Todos los artículos"
     },
     "contact": {
       "headline1": "CUÉNTAME,",
@@ -344,8 +304,6 @@
       "affiliations": "Afiliaciones",
       "elsewhere": "En otros lugares",
       "availability": "Disponibilidad actual",
-      "book": "AGENDA 20 MIN →",
-      "whatsappLabel": "WhatsApp",
       "status": "Abierto a roles ·",
       "footer": {
         "copyright": "JOSE RÍOS · REGISTRO PERSONAL",
@@ -427,24 +385,6 @@
       "comtic": {
         "role": "Desarrollador Full-Stack",
         "body": "Diseñé, modelé y administré bases de datos relacionales en MySQL y PostgreSQL. Administré servidores Linux en DigitalOcean y Heroku. Desarrollé y mantuve aplicaciones web en PHP con CodeIgniter y Laravel."
-      }
-    },
-    "hireWhy": {
-      "01": {
-        "h": "Lo entrego.",
-        "b": "Diez años en seis proyectos. Cada trimestre algo estuvo vivo en producción: fintech, geoespacial, logística, créditos."
-      },
-      "02": {
-        "h": "Lo dejo documentado.",
-        "b": "Notas de arquitectura, ADRs, READMEs que tu próxima contratación puede leer. El CV literalmente dice 'documentación que sobrevive al proyecto' — se ganó ese lugar."
-      },
-      "03": {
-        "h": "Proyecto nuevo o legacy, aparezco igual.",
-        "b": "Igual de cómodo arquitectando desde cero que entrando a un codebase enredado para desbloquear al equipo. Las dos situaciones ocurren en cada proyecto."
-      },
-      "04": {
-        "h": "Trabajo entre zonas horarias.",
-        "b": "Años de entrega distribuida entre equipos de LATAM y EE.UU. Async por costumbre, sync cuando realmente mueve el trabajo."
       }
     },
     "projectsPage": {

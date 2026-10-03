@@ -244,7 +244,6 @@
         "now": "Now",
         "work": "Work",
         "record": "Record",
-        "index": "Index",
         "writing": "Writing",
         "contact": "Contact",
         "darkgalaxy": "Dark Galaxy",
@@ -257,25 +256,12 @@
       },
       "languageToggle": {
         "label": "Language"
-      },
-      "pressKey": "press"
+      }
     },
     "hero": {
-      "meta": "PERSONAL RECORD · ",
       "intro": "More than 10 years of production software. Full-stack by habit, security-minded by training, consultant by current invoice.",
-      "headline": {
-        "fullstack": "FULL-STACK",
-        "engineer": "ENGINEER.",
-        "engineerKicker": "(full-stack, remote)",
-        "security": "SECURITY,",
-        "shipped": "SHIPPED."
-      },
       "body": "I design and ship large-scale systems end to end — frontend, backend, AWS, infrastructure, CI/CD. I plug into big teams and established ecosystems, or architect new ones from scratch: the kind of platform that has to hold up at Twitch-, Spotify-, or Amazon-scale from day one.",
-      "operating": "Operating from",
-      "operatingValue": "Colombia · GMT-5",
-      "remote": "remote across the Americas",
       "writeMe": "WRITE ME →",
-      "replies": "replies within 24h",
       "eyebrow": "Full-stack engineer · Security",
       "anywhere": "Work from anywhere",
       "tz": "GMT-5 · Colombia",
@@ -305,36 +291,10 @@
         "num": "02",
         "kicker": "Six engagements, four companies, a lot of branches merged into tidy commits."
       },
-      "index": {
-        "label": "INDEX.",
-        "num": "04",
-        "kicker": "A shortlist of personal and client projects. Case studies available on request."
-      },
-      "writing": {
-        "label": "WRITING & OSS.",
-        "num": "05",
-        "kicker": "Long-form notes and live public repositories. The things I'd point a hiring manager at, if asked."
-      },
-      "why": {
-        "label": "WHY.",
-        "num": "06",
-        "kicker": "Four honest reasons to bring me into your team or project."
-      },
       "contact": "§ 04 · Contact"
     },
     "now": {
       "lastUpdatedLabel": "Last updated"
-    },
-    "oss": {
-      "writingHeader": "— Writing",
-      "ossHeader": "— Open source",
-      "loading": "loading public repos…",
-      "errorPrefix": "GitHub API unavailable",
-      "visitDirectly": "Visit",
-      "directly": "directly.",
-      "empty": "No public, non-forked, non-archived repositories found yet.",
-      "writingEmpty": "Writing will return once a CMS is wired up. Stand by.",
-      "viewAllPosts": "→ All posts"
     },
     "contact": {
       "headline1": "TELL ME",
@@ -344,8 +304,6 @@
       "affiliations": "Affiliations",
       "elsewhere": "Elsewhere",
       "availability": "Current availability",
-      "book": "BOOK 20 MIN →",
-      "whatsappLabel": "WhatsApp",
       "status": "Open to roles ·",
       "footer": {
         "copyright": "JOSE RÍOS · PERSONAL RECORD",
@@ -427,24 +385,6 @@
       "comtic": {
         "role": "Full-Stack Developer",
         "body": "Designed, modeled, and administered relational databases in MySQL and PostgreSQL. Administered Linux servers on DigitalOcean and Heroku. Developed and maintained web applications in PHP with CodeIgniter and Laravel."
-      }
-    },
-    "hireWhy": {
-      "01": {
-        "h": "I ship.",
-        "b": "Ten years across six engagements. Every quarter has had something live in production — fintech, geospatial, logistics, lending."
-      },
-      "02": {
-        "h": "I write it down.",
-        "b": "Architecture notes, ADRs, READMEs your next hire can actually read. The CV literally says \"documentation that outlives the project\" — it earned its place."
-      },
-      "03": {
-        "h": "Greenfield or legacy, I show up the same.",
-        "b": "Equally happy architecting from scratch and diving into a tangled codebase to unblock the team. Both happen on every engagement."
-      },
-      "04": {
-        "h": "I work across time zones.",
-        "b": "Years of distributed delivery between LATAM and U.S. teams. Async-first by habit, sync when it actually moves the work."
       }
     },
     "projectsPage": {
