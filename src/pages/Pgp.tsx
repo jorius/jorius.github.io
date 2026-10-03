@@ -15,7 +15,6 @@ import { PGP_PUBLIC_KEY } from '../data/pgp-public-key';
 
 // components
 import { BTopBar } from '../components/direction-b/BTopBar';
-import { DarkGrain } from '../components/primitives/DarkGrain';
 import { Glitch } from '../components/primitives/Glitch';
 import { Reveal } from '../components/primitives/Reveal';
 import { ScanLines } from '../components/primitives/ScanLines';
@@ -180,7 +179,6 @@ const Pgp = (): React.ReactElement => {
       </article>
 
       <ScanLines />
-      <DarkGrain />
     </div>
   );
 };

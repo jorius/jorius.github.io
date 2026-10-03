@@ -8,7 +8,6 @@ import { useBTheme } from '../../contexts/ThemeContext';
 // components
 import { CommandPalette } from '../CommandPalette';
 import { PALETTE_SECTIONS } from './paletteSections';
-import { DarkGrain } from '../primitives/DarkGrain';
 import { ScanLines } from '../primitives/ScanLines';
 import { BContact } from './BContact';
 import { BExperience } from './BExperience';
@@ -64,7 +63,6 @@ export const DirectionB = (): React.ReactElement => {
       <BWhy />
       <BContact />
       <ScanLines />
-      <DarkGrain />
       <CommandPalette sections={PALETTE_SECTIONS} />
     </div>
   );

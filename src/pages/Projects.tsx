@@ -17,7 +17,6 @@ import { BProjectCard } from '../components/direction-b/BProjectCard';
 import { BTopBar } from '../components/direction-b/BTopBar';
 import { CommandPalette } from '../components/CommandPalette';
 import { PALETTE_SECTIONS } from '../components/direction-b/paletteSections';
-import { DarkGrain } from '../components/primitives/DarkGrain';
 import { Glitch } from '../components/primitives/Glitch';
 import { Reveal } from '../components/primitives/Reveal';
 import { ScanLines } from '../components/primitives/ScanLines';
@@ -117,7 +116,6 @@ const Projects = (): React.ReactElement => {
 
       <CommandPalette sections={PALETTE_SECTIONS} />
       <ScanLines />
-      <DarkGrain />
     </div>
   );
 };
