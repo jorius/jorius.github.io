@@ -13,6 +13,7 @@ import { useIsMobile } from '../hooks/useMediaQuery';
 import { loadProjects } from '../utils/content';
 
 // components
+import { BCardGrid } from '../components/direction-b/BCardGrid';
 import { BProjectCard } from '../components/direction-b/BProjectCard';
 import { BTopBar } from '../components/direction-b/BTopBar';
 import { CommandPalette } from '../components/CommandPalette';
@@ -26,7 +27,6 @@ const Projects = (): React.ReactElement => {
   const { t: tr } = useTranslation();
   const isMobile = useIsMobile();
   const projects = useMemo(() => loadProjects(), []);
-  const columnsPerRow = isMobile ? 1 : 3;
 
   return (
     <div
@@ -99,18 +99,11 @@ const Projects = (): React.ReactElement => {
             <div style={{ marginTop: 40, fontSize: 13, color: t.dim }}>{tr('directionB.projectsPage.empty')}</div>
           </Reveal>
         ) : (
-          <div
-            style={{
-              marginTop: 40,
-              display: 'grid',
-              gridTemplateColumns: `repeat(${columnsPerRow}, minmax(0, 1fr))`,
-              borderTop: `1px solid ${t.rule}`,
-            }}
-          >
+          <BCardGrid style={{ marginTop: 40 }}>
             {projects.map((p, i) => (
-              <BProjectCard key={p.id} p={p} i={i} columnsPerRow={columnsPerRow} />
+              <BProjectCard key={p.id} p={p} i={i} />
             ))}
-          </div>
+          </BCardGrid>
         )}
       </article>
 

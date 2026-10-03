@@ -12,20 +12,17 @@ import { pickLocale } from '../../utils/content';
 import type { ProjectEntry, ProjectLinkKind } from '../../utils/content';
 import { projectLinkLabel } from '../../utils/projects';
 
+// styles
+import { FONT_BODY } from '../../styles/fonts';
+
 // components
 import { Glitch } from '../primitives/Glitch';
-import { Reveal } from '../primitives/Reveal';
+import { BCard } from './BCard';
 import { StackChip } from './StackChip';
 
 interface BProjectCardProps {
   p: ProjectEntry;
   i: number;
-  columnsPerRow: number;
-}
-
-// The hover rule for .b-index-card in index.html reads --sub.
-interface CardCSS extends CSSProperties {
-  '--sub'?: string;
 }
 
 // One glyph per link kind so a visitor can tell "the source" from "the thing
@@ -37,26 +34,14 @@ const LINK_ICONS: Record<ProjectLinkKind, IconType> = {
   docs: FaBook,
 };
 
-export const BProjectCard = ({ p, i, columnsPerRow }: BProjectCardProps): React.ReactElement => {
+export const BProjectCard = ({ p, i }: BProjectCardProps): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr, i18n } = useTranslation();
   const lang = i18n.language;
-  const isLastInRow = i % columnsPerRow === columnsPerRow - 1;
-  const isMobileCard = columnsPerRow === 1;
-  const cardStyle: CardCSS = {
-    padding: isMobileCard ? 16 : 24,
-    borderRight: !isLastInRow ? `1px solid ${t.rule}` : 'none',
-    borderBottom: `1px solid ${t.rule}`,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 12,
-    minWidth: 0,
-    '--sub': t.sub,
-  };
-  const metaStyle: CSSProperties = { fontSize: 11, color: t.dim, letterSpacing: '0.1em', textTransform: 'uppercase' };
+  const metaStyle: CSSProperties = { fontSize: 13, color: t.dim, letterSpacing: '0.1em', textTransform: 'uppercase' };
 
   return (
-    <Reveal delay={(i % columnsPerRow) * 70} className="b-index-card" style={cardStyle}>
+    <BCard index={i}>
       <div style={{ ...metaStyle, display: 'flex', justifyContent: 'space-between', gap: 12 }}>
         <span>№ {String(i + 1).padStart(2, '0')}</span>
         <span>
@@ -65,16 +50,16 @@ export const BProjectCard = ({ p, i, columnsPerRow }: BProjectCardProps): React.
         </span>
       </div>
 
-      <div style={{ fontSize: isMobileCard ? 22 : 26, color: t.ink, letterSpacing: '-0.02em', lineHeight: 1.05 }}>
+      <div style={{ fontSize: 24, color: t.ink, letterSpacing: '-0.02em', lineHeight: 1.08, fontWeight: 700 }}>
         <Glitch trigger="hover" strong>{pickLocale(p.title, lang)}</Glitch>
       </div>
 
-      <div style={{ fontSize: 12, color: t.dim }}>{p.year}</div>
+      <div style={{ fontSize: 13, color: t.dim }}>{p.year}</div>
 
-      <p style={{ margin: 0, fontSize: 13, color: t.ink, lineHeight: 1.55 }}>{pickLocale(p.summary, lang)}</p>
+      <p style={{ margin: 0, fontFamily: FONT_BODY, fontSize: 15, color: t.ink, lineHeight: 1.55 }}>{pickLocale(p.summary, lang)}</p>
 
       {p.details.length > 0 ? (
-        <ul style={{ margin: 0, padding: 0, listStyle: 'none', fontSize: 12, color: t.dim, lineHeight: 1.5 }}>
+        <ul style={{ margin: 0, padding: 0, listStyle: 'none', fontFamily: FONT_BODY, fontSize: 14, color: t.dim, lineHeight: 1.5 }}>
           {p.details.map((d) => (
             <li key={d.en}>— {pickLocale(d, lang)}</li>
           ))}
@@ -82,7 +67,7 @@ export const BProjectCard = ({ p, i, columnsPerRow }: BProjectCardProps): React.
       ) : null}
 
       {p.note ? (
-        <p style={{ margin: 0, fontSize: 12, color: t.rgbB, lineHeight: 1.5 }}>{pickLocale(p.note, lang)}</p>
+        <p style={{ margin: 0, fontFamily: FONT_BODY, fontSize: 14, color: t.rgbB, lineHeight: 1.5 }}>{pickLocale(p.note, lang)}</p>
       ) : null}
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
@@ -106,6 +91,6 @@ export const BProjectCard = ({ p, i, columnsPerRow }: BProjectCardProps): React.
           );
         })}
       </div>
-    </Reveal>
+    </BCard>
   );
 };

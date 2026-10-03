@@ -68,7 +68,7 @@ export const StackChip = ({ name }: StackChipProps): React.ReactElement => {
         gap: 6,
         padding: '3px 9px 3px 3px',
         border: `1px solid ${t.rule}`,
-        fontSize: 11,
+        fontSize: 12,
         color: t.ink,
         letterSpacing: '0.02em',
         backgroundColor: t.sub,
