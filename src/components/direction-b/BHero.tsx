@@ -1,5 +1,7 @@
 // packages
+import type { CSSProperties } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaWhatsapp } from 'react-icons/fa';
 
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
@@ -10,97 +12,110 @@ import { JORIUS } from '../../data/jorius';
 // hooks
 import { useIsMobile } from '../../hooks/useMediaQuery';
 
-// utils
-import { currentMonthYear } from '../../utils/dateLabels';
+// styles
+import { FONT_BODY } from '../../styles/fonts';
 
 // components
 import { Glitch } from '../primitives/Glitch';
-import { Scramble } from '../primitives/Scramble';
 import { TypedCaret } from '../primitives/TypedCaret';
 import { Portrait } from './Portrait';
 
+const WHATSAPP_HREF = `https://wa.me/${JORIUS.whatsapp.replace(/[^0-9]/g, '')}`;
+const BOOKING_HREF = 'https://cal.com/jorius';
+
+// "Jose Ríos" → ["JOSE", "RÍOS"]: one headline line per word.
+const NAME_LINES = JORIUS.name.toUpperCase().split(' ');
+
 export const BHero = (): React.ReactElement => {
   const { t } = useBTheme();
-  const { t: tr, i18n } = useTranslation();
+  const { t: tr } = useTranslation();
   const isMobile = useIsMobile();
 
-  const sectionPadding = isMobile ? '40px 20px 32px 20px' : '64px 32px 48px 32px';
-  const stack: React.CSSProperties = isMobile
-    ? { display: 'grid', gridTemplateColumns: '1fr', gap: 16 }
-    : { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 };
-  const headlineGrid: React.CSSProperties = isMobile
-    ? { display: 'grid', gridTemplateColumns: '1fr', gap: 24, alignItems: 'stretch' }
-    : { display: 'grid', gridTemplateColumns: '1fr clamp(280px, 32vw, 480px)', gap: 40, alignItems: 'end' };
-  const footerGrid: React.CSSProperties = isMobile
-    ? { display: 'grid', gridTemplateColumns: '1fr', gap: 20 }
-    : { display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 32 };
+  const button: CSSProperties = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: 8,
+    padding: '13px 20px',
+    fontSize: 13,
+    letterSpacing: '0.06em',
+    textDecoration: 'none',
+    border: `1px solid ${t.ink}`,
+    whiteSpace: 'nowrap',
+  };
+  const filled: CSSProperties = { ...button, background: t.ink, color: t.paper };
+  const outlined: CSSProperties = { ...button, background: 'transparent', color: t.ink };
 
   return (
-    <section style={{ borderBottom: `1px solid ${t.rule}`, padding: sectionPadding, position: 'relative' }}>
-      <div style={{ ...stack, marginBottom: isMobile ? 24 : 40 }}>
-        <div style={{ fontSize: 12, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-          <Scramble text={`${tr('directionB.hero.meta')}${currentMonthYear(i18n.language)}`} />
-        </div>
-        <div
+    <section
+      style={{
+        borderBottom: `1px solid ${t.rule}`,
+        padding: isMobile ? '36px 20px 32px 20px' : '56px 32px 48px 32px',
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : '1fr clamp(280px, 32vw, 480px)',
+        gap: isMobile ? 28 : 40,
+        alignItems: 'end',
+      }}
+    >
+      <div style={{ minWidth: 0, display: 'grid', gap: 22 }}>
+        <p
           style={{
+            margin: 0,
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            gap: '8px 10px',
             fontSize: 13,
-            color: t.ink,
-            maxWidth: 480,
-            justifySelf: isMobile ? 'start' : 'end',
-            textAlign: isMobile ? 'left' : 'right',
+            color: t.dim,
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
           }}
         >
-          {tr('directionB.hero.intro')}
-        </div>
-      </div>
+          <span>{tr('directionB.hero.eyebrow')}</span>
+          <span style={{ color: t.ink, border: `1px solid ${t.ink}`, padding: '4px 9px', fontWeight: 700 }}>{tr('directionB.hero.anywhere')}</span>
+          <span>{tr('directionB.hero.tz')}</span>
+        </p>
 
-      <div style={headlineGrid}>
-        <div style={{ fontSize: 'clamp(54px, 11vw, 172px)', lineHeight: 0.86, letterSpacing: '-0.045em', fontWeight: 700, color: t.ink }}>
-          <Glitch as="div" strong period={3800}>{tr('directionB.hero.headline.fullstack')}</Glitch>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: isMobile ? 16 : 24, flexWrap: 'wrap' }}>
-            <Glitch strong period={4400}>{tr('directionB.hero.headline.engineer')}</Glitch>
-            <span style={{ fontSize: isMobile ? 13 : 16, color: t.dim, letterSpacing: 0, fontWeight: 400, alignSelf: 'end', marginBottom: '0.6em' }}>
-              {tr('directionB.hero.headline.engineerKicker')}
+        <h1 style={{ margin: 0, fontSize: 'clamp(56px, 11vw, 168px)', lineHeight: 0.86, letterSpacing: '-0.045em', fontWeight: 700, color: t.ink }}>
+          {NAME_LINES.map((line, i) => (
+            <span key={line} style={{ display: 'block' }}>
+              <Glitch strong period={i === 0 ? 4200 : 5000}>{line}</Glitch>
+              {i === NAME_LINES.length - 1 ? <TypedCaret /> : null}
             </span>
-          </div>
-          <Glitch as="div" strong period={5000}>{tr('directionB.hero.headline.security')}</Glitch>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: isMobile ? 16 : 24 }}>
-            <Glitch strong period={3400}>{tr('directionB.hero.headline.shipped')}</Glitch>
-            <TypedCaret />
-          </div>
+          ))}
+        </h1>
+
+        <p style={{ margin: 0, fontFamily: FONT_BODY, fontSize: 'clamp(17px, 1.6vw, 21px)', lineHeight: 1.5, maxWidth: '56ch', color: t.ink }}>
+          {tr('directionB.hero.intro')}
+        </p>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+          <a href={`mailto:${JORIUS.email}`} style={filled}>
+            <Glitch trigger="hover">{tr('directionB.hero.writeMe')}</Glitch>
+          </a>
+          <a
+            href={WHATSAPP_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${tr('directionB.hero.whatsapp')} ${JORIUS.whatsapp}`}
+            title={`${tr('directionB.hero.whatsapp')} ${JORIUS.whatsapp}`}
+            style={outlined}
+          >
+            <FaWhatsapp aria-hidden style={{ width: 16, height: 16 }} />
+            <Glitch trigger="hover">{tr('directionB.hero.whatsapp')}</Glitch>
+          </a>
+          <a href={BOOKING_HREF} target="_blank" rel="noopener noreferrer" style={outlined}>
+            <Glitch trigger="hover">{tr('directionB.hero.book')}</Glitch>
+          </a>
         </div>
-        <div style={isMobile ? { display: 'flex', justifyContent: 'center' } : undefined}>
-          <div style={isMobile ? { width: '100%', maxWidth: 360 } : { width: '100%' }}>
-            <Portrait />
-          </div>
-        </div>
+
+        <p style={{ margin: 0, fontFamily: FONT_BODY, fontSize: 16, lineHeight: 1.6, maxWidth: '62ch', color: t.ink }}>
+          {tr('directionB.hero.body')}
+        </p>
       </div>
 
-      <div style={{ ...footerGrid, marginTop: isMobile ? 36 : 56, paddingTop: isMobile ? 20 : 28, borderTop: `1px solid ${t.rule}` }}>
-        <div style={{ color: t.ink, fontSize: 14, lineHeight: 1.6, maxWidth: 640 }}>
-          {tr('directionB.hero.body')}
-        </div>
-        <div>
-          <div style={{ fontSize: 11, color: t.dim, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{tr('directionB.hero.operating')}</div>
-          <div style={{ fontSize: 15, color: t.ink, marginTop: 6 }}>{tr('directionB.hero.operatingValue')}</div>
-          <div style={{ fontSize: 13, color: t.dim, marginTop: 2 }}>{tr('directionB.hero.remote')}</div>
-        </div>
-        <div style={{ textAlign: isMobile ? 'left' : 'right' }}>
-          <a
-            href={`mailto:${JORIUS.email}`}
-            style={{
-              display: 'inline-block',
-              background: t.ink,
-              color: t.paper,
-              padding: '14px 22px',
-              fontSize: 13,
-              textDecoration: 'none',
-              letterSpacing: '0.04em',
-            }}
-          >
-            <Glitch trigger="hover" strong>{tr('directionB.hero.writeMe')}</Glitch>
-          </a>
-          <div style={{ fontSize: 11, color: t.dim, marginTop: 8 }}>{tr('directionB.hero.replies')}</div>
+      <div style={isMobile ? { display: 'flex', justifyContent: 'center' } : { justifySelf: 'end', width: '100%' }}>
+        <div style={isMobile ? { width: '100%', maxWidth: 360 } : { width: '100%' }}>
+          <Portrait />
         </div>
       </div>
     </section>

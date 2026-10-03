@@ -275,7 +275,12 @@
       "operatingValue": "Colombia · GMT-5",
       "remote": "remoto en toda América",
       "writeMe": "ESCRÍBEME →",
-      "replies": "respondo en menos de 24h"
+      "replies": "respondo en menos de 24h",
+      "eyebrow": "Ingeniero full-stack · Seguridad",
+      "anywhere": "Trabajo desde cualquier lugar",
+      "tz": "GMT-5 · Colombia",
+      "whatsapp": "WHATSAPP",
+      "book": "AGENDA 20 MIN →"
     },
     "portrait": {
       "exhibit": "EXHIBICIÓN_",
