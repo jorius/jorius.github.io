@@ -22,25 +22,27 @@ interface BCardProps {
   style?: CSSProperties;
 }
 
-// One cell of a BCardGrid: paper background (the grid shows through the gaps
-// as rules), column flex with a 12px gap, and the shared hover tint.
+// One cell of a BCardGrid. The cell itself is always opaque paper (the grid
+// behind it is rule-coloured to draw the 1px lines, so a transparent cell
+// would show as a bright block); only the content fades and slides in.
 export const BCard = ({ index, children, style }: BCardProps): React.ReactElement => {
   const { t } = useBTheme();
   const isMobile = useIsMobile();
   const columns = useCardColumns();
-  const cardStyle: CardCSS = {
+  const cellStyle: CardCSS = {
     background: t.paper,
     padding: isMobile ? 18 : 24,
     display: 'flex',
     flexDirection: 'column',
-    gap: 12,
     minWidth: 0,
     '--sub': t.sub,
     ...style,
   };
   return (
-    <Reveal delay={(index % columns) * 70} className="b-index-card" style={cardStyle}>
-      {children}
-    </Reveal>
+    <div className="b-index-card" style={cellStyle}>
+      <Reveal delay={(index % columns) * 70} style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12, minWidth: 0 }}>
+        {children}
+      </Reveal>
+    </div>
   );
 };
