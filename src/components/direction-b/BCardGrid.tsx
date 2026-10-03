@@ -1,8 +1,14 @@
+// packages
+import { Children } from 'react';
+
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
 // hooks
 import { useCardColumns } from '../../hooks/useCardColumns';
+
+// utils
+import { fillerCount } from '../../utils/gridFill';
 
 interface BCardGridProps {
   children: React.ReactNode;
@@ -15,6 +21,9 @@ interface BCardGridProps {
 export const BCardGrid = ({ children, style }: BCardGridProps): React.ReactElement => {
   const { t } = useBTheme();
   const columns = useCardColumns();
+  // Empty tracks in the last row get paper-coloured fillers, or the rule
+  // background behind the grid shows as a block there.
+  const fillers = fillerCount(Children.count(children), columns);
   return (
     <div
       style={{
@@ -28,6 +37,9 @@ export const BCardGrid = ({ children, style }: BCardGridProps): React.ReactEleme
       }}
     >
       {children}
+      {Array.from({ length: fillers }, (_, i) => (
+        <div key={`filler-${i}`} aria-hidden style={{ background: t.paper }} />
+      ))}
     </div>
   );
 };

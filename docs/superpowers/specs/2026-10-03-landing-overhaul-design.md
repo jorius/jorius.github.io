@@ -197,12 +197,15 @@ box was.
 and a 1px `rule` top and bottom border, so the 1px lines between cards come
 from the gap and work for any column count. Columns: 3 at ≥ 1024px, 2 at
 768–1023px, 1 below (it reads `useIsMobile` and `useIsTablet`). It takes
-`children` and renders inside the section's horizontal padding.
+`children` and renders inside the section's horizontal padding. Empty tracks
+in the last row are covered by paper-coloured filler cells (`fillerCount` in
+`src/utils/gridFill.ts`), so the rule background never shows as a block.
 
 `BCard` is the cell: `background: paper`, padding 24px (18px on mobile),
 `display: flex; flex-direction: column; gap: 12px; min-width: 0`, class
-`b-index-card` so the existing hover rule in `index.html` (background →
-`sub`) applies, wrapped in `Reveal` with the same per-column stagger
+`b-index-card`; paper and the hover tint both come from `index.html` through
+the `--paper` and `--sub` variables (an inline background would outrank the
+`:hover` rule), wrapped in `Reveal` with the same per-column stagger
 `BProjectCard` uses today. It takes `children`, `delay` and an optional
 `style` (used for the Record accent variable).
 
@@ -305,6 +308,9 @@ Locale keys under `directionB` (both files, English / Spanish):
 | `sections.contact` | § 04 · Contact | § 04 · Contacto |
 | `palette.items.showWriting` | show writing | ver escritos |
 | `palette.items.writingHint` | jorius.github.io/writing | jorius.github.io/writing |
+
+Added: `read.noPost`, the copy `/writing/<unknown-slug>` shows (it used to
+read `oss.writingEmpty`).
 
 Kept: `hero.intro`, `hero.body`, `hero.writeMe`, `topbar.*` except
 `pressKey` and `nav.index`, `sections.{work,record,now}.{label,kicker}`,
