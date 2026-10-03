@@ -13,16 +13,6 @@ export interface ExperienceEntry {
   to: string;
 }
 
-export interface TestimonialEntry {
-  who: string;
-  role: string;
-  body: string;
-}
-
-export interface HireWhyEntry {
-  n: string;
-}
-
 export interface AffiliationEntry {
   name: string;
   email: string;
@@ -49,8 +39,6 @@ export interface JoriusData {
     stackoverflow: string;
   };
   experience: ExperienceEntry[];
-  testimonials: TestimonialEntry[];
-  hire_why: HireWhyEntry[];
 }
 
 export const JORIUS: JoriusData = {
@@ -133,12 +121,5 @@ export const JORIUS: JoriusData = {
       from: '2015',
       to: '2017',
     },
-  ],
-  testimonials: [],
-  hire_why: [
-    { n: '01' },
-    { n: '02' },
-    { n: '03' },
-    { n: '04' },
   ],
 };
