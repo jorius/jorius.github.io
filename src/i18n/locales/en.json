@@ -367,7 +367,9 @@
         "showPgp": "show PGP public key",
         "githubHint": "github.com/jorius",
         "showProjects": "show projects",
-        "projectsHint": "jorius.github.io/projects"
+        "projectsHint": "jorius.github.io/projects",
+        "showWriting": "show writing",
+        "writingHint": "jorius.github.io/writing"
       }
     },
     "read": {

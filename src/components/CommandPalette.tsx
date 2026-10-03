@@ -84,6 +84,7 @@ export const CommandPalette = ({ sections }: CommandPaletteProps): React.ReactEl
     all.push({ kind: 'cmd', label: tr('directionB.palette.items.openGithub'), target: JORIUS.links.github, hint: tr('directionB.palette.items.githubHint'), ext: true });
     all.push({ kind: 'cmd', label: tr('directionB.palette.items.copyPgp'), target: 'copy:pgp', hint: JORIUS.pgp.keyId });
     all.push({ kind: 'cmd', label: tr('directionB.palette.items.showPgp'), target: '/pgp', hint: JORIUS.pgp.algo, internal: true });
+    all.push({ kind: 'cmd', label: tr('directionB.palette.items.showWriting'), target: '/writing', hint: tr('directionB.palette.items.writingHint'), internal: true });
     all.push({ kind: 'cmd', label: tr('directionB.palette.items.showProjects'), target: '/projects', hint: tr('directionB.palette.items.projectsHint'), internal: true });
     const f = q.trim().toLowerCase();
     return f ? all.filter((i) => i.label.toLowerCase().includes(f) || i.hint.toLowerCase().includes(f)) : all;
