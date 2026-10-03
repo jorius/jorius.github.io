@@ -626,7 +626,7 @@ const Writing = (): React.ReactElement => {
               ) : null}
             </>
           ) : (
-            <div style={{ fontSize: 14, color: t.dim }}>{tr('directionB.oss.writingEmpty')}</div>
+            <div style={{ fontSize: 14, color: t.dim }}>{tr('directionB.read.noPost')}</div>
           )}
         </article>
       </div>

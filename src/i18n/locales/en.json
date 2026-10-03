@@ -357,7 +357,8 @@
       "revisionsView": "read this version",
       "revisionsHide": "back to the current version",
       "revisionsViewing": "Older version",
-      "revisionsBackToCurrent": "Back to current"
+      "revisionsBackToCurrent": "Back to current",
+      "noPost": "No post at this address. Check the link or head back to the list."
     },
     "experience": {
       "present": "Present",

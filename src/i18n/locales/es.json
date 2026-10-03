@@ -357,7 +357,8 @@
       "revisionsView": "leer esta versión",
       "revisionsHide": "volver a la versión actual",
       "revisionsViewing": "Versión anterior",
-      "revisionsBackToCurrent": "Volver a la actual"
+      "revisionsBackToCurrent": "Volver a la actual",
+      "noPost": "No hay un artículo en esta dirección. Revisa el enlace o vuelve a la lista."
     },
     "experience": {
       "present": "Presente",
