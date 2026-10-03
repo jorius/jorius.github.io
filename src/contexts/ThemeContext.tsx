@@ -38,12 +38,14 @@ export interface BThemeContextValue {
   scanLines: boolean;
 }
 
-const B_THEMES: Record<ThemeMode, ThemeTokens> = {
+export const B_THEMES: Record<ThemeMode, ThemeTokens> = {
   dark: {
     paper: '#292929',
     sub: '#333333',
     ink: '#f2efe7',
-    dim: '#7c7a72',
+    // 5.6:1 on paper, 4.9:1 on sub. The old #7c7a72 sat at 3.4:1 and was the
+    // grey behind every red and yellow box in the 2026-10 design review.
+    dim: '#a4a197',
     mute: '#3a3a3a',
     soft: '#1c1c1c',
     rule: '#e6e2d6',
@@ -55,7 +57,8 @@ const B_THEMES: Record<ThemeMode, ThemeTokens> = {
     paper: '#efece4',
     sub: '#e8e4d6',
     ink: '#0d0d0d',
-    dim: '#6d6a62',
+    // 5.6:1 on paper, 5.2:1 on sub (was #6d6a62, 4.6:1).
+    dim: '#5f5c55',
     mute: '#c8c8c8',
     soft: '#c8c8c8',
     rule: '#0d0d0d',
