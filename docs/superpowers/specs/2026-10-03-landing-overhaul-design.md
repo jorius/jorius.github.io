@@ -116,15 +116,16 @@ imports in `DirectionB`, `Writing`, `Projects`, `Pgp` and `NotFound`.
 
 Desktop (≥ 768px): a three-column grid `1fr auto 1fr`.
 
-- Left: `Now · Work · Record · Writing · Contact`, 13px, hover glitch.
+- Left: `Now · Work · Record · Writing · Contact · Projects` then the
+  `● Available · Q4 2026` dot line, 13px, hover glitch (owner, 2026-10-04:
+  Projects and the availability moved left).
 - Centre: the brand block, a `<Link to="/">` with `JORIUS` (14px, 700,
   letter-spacing 0.08em, hover glitch) over `VOL. X · 2026` (12px, `dim`,
   letter-spacing 0.08em), centred, as in the designer's proposal
   (`figma/02-topbar-proposal-centered-brand.png`).
-- Right: `Projects` (route link), `Dark Galaxy ↗` in `ink` preceded by an
-  8px purple dot (`#9D4EDD`, same glow treatment as the green availability
-  dot), `● Available · Q4 2026` in `ink`, the language button, the theme
-  button. The "press /" hint is removed; the `/` shortcut and the palette
+- Right: `Dark Galaxy` in `ink` preceded by an 8px purple dot (`#9D4EDD`,
+  same glow treatment as the green availability dot; no arrow), the language
+  button, the theme button. The "press /" hint is removed; the `/` shortcut and the palette
   are unchanged.
 
 Mobile (< 768px): brand block at the left, hamburger at the right; the
@@ -137,8 +138,10 @@ background.
 
 ### 4.5 Hero (`BHero`)
 
-Layout: grid `1fr clamp(280px, 32vw, 480px)`, gap 40px, `align-items: end`,
-padding `56px 32px 48px`; on mobile one column, padding `36px 20px 32px`,
+Layout: grid `1fr clamp(280px, 32vw, 480px)`, gap 48px, `align-items:
+center` (the text column centres on the portrait), padding
+`56px clamp(32px, 6vw, 96px) 48px` so both columns sit in from the edges
+(owner, 2026-10-04); on mobile one column, padding `36px 20px 32px`,
 portrait centred at max-width 360px. The left column is a vertical stack with
 a 22px gap:
 

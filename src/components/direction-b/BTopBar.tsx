@@ -111,12 +111,14 @@ export const BTopBar = (): React.ReactElement => {
   const route = (key: 'writing' | 'projects' | 'darkgalaxy', to: string, dot?: string): React.ReactElement => (
     <Link key={key} to={to} onClick={() => setMenuRequested(false)} style={linkStyle}>
       {dot ? <Dot color={dot} /> : null}
-      <Glitch trigger="hover">{t(`directionB.topbar.nav.${key}`)}{key === 'darkgalaxy' ? ' ↗' : ''}</Glitch>
+      <Glitch trigger="hover">{t(`directionB.topbar.nav.${key}`)}</Glitch>
     </Link>
   );
 
-  const leftLinks = [anchor('now'), anchor('work'), anchor('record'), route('writing', '/writing'), anchor('contact')];
-  const rightLinks = [route('projects', '/projects'), route('darkgalaxy', '/darkgalaxy', DARK_GALAXY_PURPLE)];
+  // Left: the landing anchors plus the two inner pages and the availability
+  // dot. Right: Dark Galaxy and the two toggles (owner, 2026-10-04).
+  const leftLinks = [anchor('now'), anchor('work'), anchor('record'), route('writing', '/writing'), anchor('contact'), route('projects', '/projects')];
+  const rightLinks = [route('darkgalaxy', '/darkgalaxy', DARK_GALAXY_PURPLE)];
 
   // The designer's proposal: the brand and its volume line sit between the
   // two link groups, out of the corner the review marked unreadable.
@@ -133,12 +135,15 @@ export const BTopBar = (): React.ReactElement => {
     </Link>
   );
 
+  const availability = (
+    <span style={{ display: 'inline-flex', alignItems: 'center', fontSize: isMobile ? 14 : 13, color: th.ink, padding: isMobile ? '12px 0' : 0 }}>
+      <Dot color={AVAILABLE_GREEN} />
+      {t('directionB.topbar.available')} · {currentQuarter()}
+    </span>
+  );
+
   const utilities = (
     <>
-      <span style={{ display: 'inline-flex', alignItems: 'center', fontSize: 13, color: th.ink }}>
-        <Dot color={AVAILABLE_GREEN} />
-        {t('directionB.topbar.available')} · {currentQuarter()}
-      </span>
       <button
         type="button"
         onClick={switchLang}
@@ -179,7 +184,7 @@ export const BTopBar = (): React.ReactElement => {
           gap: 16,
         }}
       >
-        {isMobile ? brand : <nav style={{ display: 'flex', gap: 22, flexWrap: 'wrap' }}>{leftLinks}</nav>}
+        {isMobile ? brand : <nav style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center' }}>{leftLinks}{availability}</nav>}
 
         {!isMobile ? brand : null}
 
@@ -213,6 +218,7 @@ export const BTopBar = (): React.ReactElement => {
           <nav style={{ display: 'flex', flexDirection: 'column' }}>
             {leftLinks}
             {rightLinks}
+            {availability}
           </nav>
           <div
             style={{
