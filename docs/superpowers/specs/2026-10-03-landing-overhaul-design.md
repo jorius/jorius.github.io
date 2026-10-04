@@ -145,11 +145,10 @@ a 22px gap:
 1. **Eyebrow** (flex, wrap, gap `8px 10px`, 13px, uppercase, letter-spacing
    0.14em): `hero.eyebrow` in `dim`; `hero.anywhere` in `ink`, 700, inside a
    1px `ink` border with `4px 9px` padding; `hero.tz` in `dim`.
-2. **Name**: `<h1>` set from `JORIUS.name` split on the space and uppercased,
-   two lines (`JOSE` / `RÍOS`), `clamp(56px, 11vw, 168px)`, line-height
-   0.86, letter-spacing -0.045em, 700. Each line is a `Glitch strong`
-   with the ambient periods 4200 and 5000; a `TypedCaret` follows the second
-   line.
+2. **Name**: `<h1>` set from `JORIUS.name` uppercased on one line, never
+   wrapped (`white-space: nowrap`), `clamp(44px, 8.6vw, 132px)`, line-height
+   0.9, letter-spacing -0.045em, 700, as one `Glitch strong` with ambient
+   period 4200; a `TypedCaret` follows (owner, 2026-10-04: single line).
 3. **Tagline**: `hero.intro` in `FONT_BODY`, `clamp(17px, 1.6vw, 21px)`,
    line-height 1.5, max-width 56ch.
 4. **Buttons** (flex, wrap, gap 10px). Shared style: inline-flex, padding
@@ -206,8 +205,12 @@ in the last row are covered by paper-coloured filler cells (`fillerCount` in
 `b-index-card`; paper and the hover tint both come from `index.html` through
 the `--paper` and `--sub` variables (an inline background would outrank the
 `:hover` rule), wrapped in `Reveal` with the same per-column stagger
-`BProjectCard` uses today. It takes `children`, `delay` and an optional
-`style` (used for the Record accent variable).
+`BProjectCard` uses today. It takes `children`, `index`, an optional `style`,
+and an optional `href` + `hrefLabel`: when given, a stretched anchor under the
+content makes the whole cell a link (the project card uses the live build,
+else the repository, via `primaryProjectLink`); link rows inside the card sit
+above it with `position: relative; z-index: 1`, and the card's hover drives
+the title glitch through `Glitch`'s `hoverActive` (owner, 2026-10-04).
 
 `BProjectCard` is rewritten on top of `BCard` (its `isLastInRow` border logic
 goes away) and `Projects.tsx` wraps its list in `BCardGrid`. Its summary
@@ -219,7 +222,8 @@ visually unchanged.
 Three cards, one per `work.json` service, in a `BCardGrid`:
 
 - Top row (flex, space-between, 13px `dim`, uppercase, letter-spacing
-  0.1em): `№ <id>` and `sections.work.cardKind` ("SERVICE").
+  0.1em): `#<n>` (plain hash, owner 2026-10-04) and `sections.work.cardKind`
+  ("SERVICE").
 - Title: `pickLocale(s.title)` at 24px, 700, letter-spacing -0.02em,
   line-height 1.08, `Glitch trigger="hover" strong`.
 - Body: `pickLocale(s.body)` in `FONT_BODY`, 15px, line-height 1.55.
@@ -228,15 +232,13 @@ Three cards, one per `work.json` service, in a `BCardGrid`:
 
 ### 4.9 Record (`BExperience`)
 
-Six cards, one per `JORIUS.experience` entry, in a `BCardGrid`. Each `BCard`
-gets `--acc: e.accent`:
+Six cards, one per `JORIUS.experience` entry, in a `BCardGrid`:
 
-- Top row (flex, baseline, gap 14px): `№ 01`… at 13px `dim` uppercase, then
+- Top row (flex, baseline, gap 14px): `#1`… at 13px `dim` uppercase, then
   the **dates** right beside it: `${from} → ${to}` (`to` of `Present`
   translated), 15px, 700, letter-spacing 0.02em, `ink`,
-  `font-variant-numeric: tabular-nums`, padding `2px 0 2px 10px`,
-  `border-left: 3px solid var(--acc)`. The location is not shown (owner,
-  2026-10-03).
+  `font-variant-numeric: tabular-nums`. No accent bar and no location
+  (owner, 2026-10-03/04); the accent survives as the dot on the logo tile.
 - Company row: the 56px white logo tile with the accent dot, as today, next
   to the company name at 20px, 700, `Glitch trigger="hover"`.
 - Role: 15px, 700.
