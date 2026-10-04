@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["vite.config.ts", "scripts/llms"]
+  "include": ["vite.config.ts", "scripts/llms", "scripts/i18n"]
 }

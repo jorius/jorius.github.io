@@ -21,7 +21,6 @@ import { BTagChip } from '../components/direction-b/BTagChip';
 import { BTopBar } from '../components/direction-b/BTopBar';
 import { CommandPalette } from '../components/CommandPalette';
 import { PALETTE_SECTIONS } from '../components/direction-b/paletteSections';
-import { DarkGrain } from '../components/primitives/DarkGrain';
 import { Glitch } from '../components/primitives/Glitch';
 import { ScanLines } from '../components/primitives/ScanLines';
 
@@ -137,7 +136,6 @@ const Writing = (): React.ReactElement => {
   return (
     <div style={{ background: t.paper, color: t.ink, minHeight: '100vh', position: 'relative' }}>
       <ScanLines />
-      <DarkGrain />
       <BTopBar />
 
       <div
@@ -628,7 +626,7 @@ const Writing = (): React.ReactElement => {
               ) : null}
             </>
           ) : (
-            <div style={{ fontSize: 14, color: t.dim }}>{tr('directionB.oss.writingEmpty')}</div>
+            <div style={{ fontSize: 14, color: t.dim }}>{tr('directionB.read.noPost')}</div>
           )}
         </article>
       </div>

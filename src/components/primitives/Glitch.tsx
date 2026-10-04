@@ -5,6 +5,12 @@ import type { CSSProperties, ElementType, ReactNode } from 'react';
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
+// hooks
+import { usePrefersReducedMotion } from '../../hooks/useMediaQuery';
+
+// utils
+import { ambientOn, ambientWait, hoverOff, hoverOn } from '../../utils/glitchTiming';
+
 export type GlitchTrigger = 'ambient' | 'hover' | 'always' | 'off';
 
 interface GlitchProps {
@@ -15,12 +21,16 @@ interface GlitchProps {
   period?: number;
   strong?: boolean;
   className?: string;
+  // With trigger="hover": drive the pulses from a parent's hover instead of
+  // this element's own (a card whose overlay link covers the title).
+  hoverActive?: boolean;
 }
 
 // Three stacked layers: the main ink layer plus red/blue channel-split
-// copies that jitter on a randomized timer. trigger="hover" only fires on
-// mouse enter; "ambient" runs on a randomized schedule scaled by glitch
-// intensity; "always" stays on; "off" stays off.
+// copies that jitter on a randomized timer. trigger="hover" runs short
+// on/off pulses while the pointer stays; "ambient" runs on a randomized
+// schedule scaled by glitch intensity; "always" stays on; "off" stays off.
+// With the OS reduce-motion switch on, nothing pulses.
 export const Glitch = ({
   children,
   as: As = 'span',
@@ -29,23 +39,24 @@ export const Glitch = ({
   period = 5200,
   strong = false,
   className,
+  hoverActive,
 }: GlitchProps): React.ReactElement => {
   const { t, glitch, glitchRate, glitchChaos, theme } = useBTheme();
+  const reduced = usePrefersReducedMotion();
   // 'screen' lightens the channel-split copies over the dark paper; on the
   // light paper that washes them out, so 'multiply' (which darkens) is what
   // makes the red/blue split actually visible in the light theme.
   const blendMode: CSSProperties['mixBlendMode'] = theme === 'dark' ? 'screen' : 'multiply';
   const [pulseOn, setPulseOn] = useState(false);
-  const [hoverOn, setHoverOn] = useState(false);
+  const [hoverOn_, setHoverOn] = useState(false);
   const [rev, setRev] = useState(0);
 
   useEffect(() => {
-    if (trigger !== 'ambient' || glitch <= 0) return;
+    if (trigger !== 'ambient' || glitch <= 0 || reduced) return;
     let alive = true;
     let timer: ReturnType<typeof setTimeout>;
     const schedule = (): void => {
       if (!alive) return;
-      const wait = ((period * (0.35 + Math.random() * 0.7)) / Math.max(0.2, glitch)) * glitchRate;
       timer = setTimeout(() => {
         if (!alive) return;
         setPulseOn(true);
@@ -53,8 +64,8 @@ export const Glitch = ({
         timer = setTimeout(() => {
           if (alive) setPulseOn(false);
           schedule();
-        }, 420 + Math.random() * 520);
-      }, wait);
+        }, ambientOn(Math.random()));
+      }, ambientWait(period, glitch, glitchRate, Math.random()));
     };
     schedule();
     return () => {
@@ -62,14 +73,41 @@ export const Glitch = ({
       clearTimeout(timer);
       setPulseOn(false);
     };
-  }, [trigger, period, glitch, glitchRate]);
+  }, [trigger, period, glitch, glitchRate, reduced]);
+
+  // Hover: while the pointer is over the element, run on/off pulses. The
+  // effect owns the timer chain, so leaving or unmounting clears it in one
+  // place, and the random durations stay out of render.
+  const [hovered, setHovered] = useState(false);
+  const hoverState = hoverActive ?? hovered;
+  useEffect(() => {
+    if (!hoverState || reduced || trigger !== 'hover') return;
+    let alive = true;
+    let timer: ReturnType<typeof setTimeout>;
+    const pulse = (): void => {
+      if (!alive) return;
+      setRev((r) => r + 1);
+      setHoverOn(true);
+      timer = setTimeout(() => {
+        if (!alive) return;
+        setHoverOn(false);
+        timer = setTimeout(pulse, hoverOff(Math.random()));
+      }, hoverOn(Math.random()));
+    };
+    pulse();
+    return () => {
+      alive = false;
+      clearTimeout(timer);
+      setHoverOn(false);
+    };
+  }, [hoverState, reduced, trigger]);
 
   // Derive on directly from trigger + state. Avoids needing a setState-in-
   // effect to sync external trigger changes.
   let on = false;
   if (trigger === 'always') on = true;
   else if (trigger === 'off') on = false;
-  else if (trigger === 'hover') on = hoverOn;
+  else if (trigger === 'hover') on = hoverOn_;
   else on = pulseOn;
 
   // Chaos above 1: while a glitch is on, re-seed the slices every few frames
@@ -80,16 +118,7 @@ export const Glitch = ({
     return () => window.clearInterval(id);
   }, [on, glitchChaos]);
 
-  const hoverProps =
-    trigger === 'hover'
-      ? {
-          onMouseEnter: () => {
-            setHoverOn(true);
-            setRev((r) => r + 1);
-          },
-          onMouseLeave: () => setHoverOn(false),
-        }
-      : {};
+  const hoverProps = trigger === 'hover' ? { onMouseEnter: () => setHovered(true), onMouseLeave: () => setHovered(false) } : {};
 
   const mag = (strong ? 2.6 : 1.4) * (0.5 + glitch * 1.4) * glitchChaos;
   const seed = rev;

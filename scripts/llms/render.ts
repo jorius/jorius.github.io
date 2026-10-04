@@ -84,10 +84,9 @@ export interface BioInput {
   links: { github: string; linkedin: string; stackoverflow: string };
   intro: string;
   body: string;
-  operating: string;
-  remote: string;
+  anywhere: string;
+  tz: string;
   experience: ExperienceInput[];
-  why: Array<{ h: string; b: string }>;
 }
 
 // Display labels taken from the locale files, per language.
@@ -219,7 +218,7 @@ const renderIndex = (input: SiteInput): string => {
   const projects = projectsInOrder(input);
 
   const summary =
-    `${bio.role}. Based in ${bio.operating}, ${bio.remote}. ${bio.intro} ` +
+    `${bio.role}. ${bio.anywhere}, ${bio.tz}. ${bio.intro} ` +
     `This file is the machine-readable index of ${SITE_URL}: every page listed below has a ` +
     'plain markdown copy, so nothing here needs JavaScript.';
 
@@ -247,7 +246,7 @@ const renderIndex = (input: SiteInput): string => {
       section('About', [
         `- Name: ${bio.name}, online as ${bio.handle}`,
         `- Role: ${bio.role}`,
-        `- Based in: ${bio.operating}, ${bio.remote}`,
+        `- Location: ${bio.tz}, ${bio.anywhere.toLowerCase()}`,
         `- Experience: ${bio.years}+ years`,
         `- Email: ${bio.email}`,
         `- PGP: ${bio.pgp.fingerprint} (${bio.pgp.algo}, ${bio.pgp.keyId}), public key at ${SITE_URL}/pgp`,
@@ -264,10 +263,6 @@ const renderIndex = (input: SiteInput): string => {
       section(
         'Experience',
         bio.experience.map((x) => `- **${x.co}** · ${x.role} · ${x.from} – ${x.to} · ${x.loc}: ${x.body}`),
-      ),
-      section(
-        'Why work with me',
-        bio.why.map((w) => `- **${w.h}** ${w.b}`),
       ),
       section(
         'Writing',

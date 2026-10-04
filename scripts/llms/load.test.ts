@@ -25,7 +25,8 @@ describe('loadSite against the real content', () => {
     expect(input.bio.intro.length).toBeGreaterThan(20);
     expect(input.bio.experience).toHaveLength(JORIUS.experience.length);
     expect(input.bio.experience[0].role.length).toBeGreaterThan(0);
-    expect(input.bio.why).toHaveLength(JORIUS.hire_why.length);
+    expect(input.bio.anywhere.length).toBeGreaterThan(0);
+    expect(input.bio.tz.length).toBeGreaterThan(0);
     expect(input.labels.es.kind.assessment).toBe('PRUEBA TÉCNICA');
   });
 

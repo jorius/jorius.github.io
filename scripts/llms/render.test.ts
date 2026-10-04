@@ -24,12 +24,11 @@ export const site = (over: Partial<SiteInput> = {}): SiteInput => ({
     },
     intro: 'More than 10 years of production software.',
     body: 'I design and ship systems end to end.',
-    operating: 'Colombia · GMT-5',
-    remote: 'remote across the Americas',
+    anywhere: 'Work from anywhere',
+    tz: 'GMT-5 · Colombia',
     experience: [
       { co: 'Acme', loc: 'Colombia', from: 'Jan 2020', to: 'Present', role: 'Lead', body: 'Led things.' },
     ],
-    why: [{ h: 'I ship.', b: 'Every quarter something went live.' }],
   },
   now: {
     lastUpdated: '2026-06-10',
@@ -255,17 +254,16 @@ describe('renderSite', () => {
       expect(index).toContain('AAAA BBBB CCCC');
       expect(index).toContain('https://github.com/jorius');
       expect(index).toContain('https://linkedin.example/jose');
-      expect(index).toContain('Colombia · GMT-5');
+      expect(index).toContain('Location: GMT-5 · Colombia, work from anywhere');
     });
 
-    it('carries now, work, experience and why sections', () => {
+    it('carries now, work and experience sections', () => {
       expect(index).toContain('## Now');
       expect(index).toContain('Open to remote roles.');
       expect(index).toContain('**Full-Stack Development**');
       expect(index).toContain('Shipping apps end to end.');
       expect(index).toContain('**Acme**');
       expect(index).toContain('Led things.');
-      expect(index).toContain('**I ship.**');
     });
 
     it('links each published post to its markdown copy with its metadata', () => {

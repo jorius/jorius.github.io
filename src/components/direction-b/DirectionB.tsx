@@ -8,16 +8,13 @@ import { useBTheme } from '../../contexts/ThemeContext';
 // components
 import { CommandPalette } from '../CommandPalette';
 import { PALETTE_SECTIONS } from './paletteSections';
-import { DarkGrain } from '../primitives/DarkGrain';
 import { ScanLines } from '../primitives/ScanLines';
 import { BContact } from './BContact';
 import { BExperience } from './BExperience';
 import { BHero } from './BHero';
 import { BNow } from './BNow';
-import { BOssWriting } from './BOssWriting';
 import { BServices } from './BServices';
 import { BTopBar } from './BTopBar';
-import { BWhy } from './BWhy';
 
 export const DirectionB = (): React.ReactElement => {
   const { t } = useBTheme();
@@ -57,14 +54,11 @@ export const DirectionB = (): React.ReactElement => {
     >
       <BTopBar />
       <BHero />
-      <BNow />
       <BServices />
       <BExperience />
-      <BOssWriting />
-      <BWhy />
+      <BNow />
       <BContact />
       <ScanLines />
-      <DarkGrain />
       <CommandPalette sections={PALETTE_SECTIONS} />
     </div>
   );

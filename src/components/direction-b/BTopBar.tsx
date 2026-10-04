@@ -1,5 +1,6 @@
 // packages
 import { useState } from 'react';
+import type { CSSProperties } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
@@ -14,19 +15,55 @@ import { useScrollToSection } from '../../hooks/useNavigation';
 
 // utils
 import { track } from '../../utils/analytics';
-import { currentQuarter, currentYear } from '../../utils/dateLabels';
+import { currentQuarter } from '../../utils/dateLabels';
 
 // components
 import { Glitch } from '../primitives/Glitch';
 
-const NAV_KEYS = ['now', 'work', 'record', 'writing', 'contact'] as const;
-const NAV_TARGETS: Record<(typeof NAV_KEYS)[number], string> = {
-  now: 'b-now',
+// Anchors on the landing, in page order; the two inner pages follow them.
+type AnchorKey = 'work' | 'record' | 'now' | 'contact';
+const ANCHOR_TARGETS: Record<AnchorKey, string> = {
   work: 'b-services',
   record: 'b-experience',
-  writing: 'b-writing',
+  now: 'b-now',
   contact: 'b-contact',
 };
+const DARK_GALAXY_PURPLE = '#9D4EDD';
+const AVAILABLE_GREEN = '#4ADE80';
+
+// The .b-dot keyframes in index.html read the two ring colours from here.
+interface DotCSS extends CSSProperties {
+  '--dot-a'?: string;
+  '--dot-b'?: string;
+}
+
+// A status dot that sits on the text's centre line and pulses a soft ring.
+const Dot = ({ color }: { color: string }): React.ReactElement => {
+  const style: DotCSS = {
+    display: 'inline-block',
+    width: 8,
+    height: 8,
+    borderRadius: '50%',
+    background: color,
+    marginRight: 8,
+    flexShrink: 0,
+    '--dot-a': `${color}99`,
+    '--dot-b': `${color}00`,
+  };
+  return <span aria-hidden className="b-dot" style={style} />;
+};
+
+const buttonStyle = (rule: string, ink: string): CSSProperties => ({
+  background: 'transparent',
+  border: `1px solid ${rule}`,
+  color: ink,
+  padding: '3px 9px',
+  fontSize: 12,
+  cursor: 'pointer',
+  fontFamily: 'inherit',
+  textTransform: 'uppercase',
+  letterSpacing: '0.04em',
+});
 
 export const BTopBar = (): React.ReactElement => {
   const { t, i18n } = useTranslation();
@@ -52,118 +89,64 @@ export const BTopBar = (): React.ReactElement => {
     toggleTheme();
   };
 
-  const navLinks = NAV_KEYS.map((key) => (
+  const linkStyle: CSSProperties = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    color: th.ink,
+    textDecoration: 'none',
+    letterSpacing: '0.04em',
+    padding: isMobile ? '12px 0' : 0,
+    fontSize: isMobile ? 14 : 13,
+    borderBottom: isMobile ? `1px solid ${th.sub}` : 'none',
+  };
+
+  const anchor = (key: AnchorKey): React.ReactElement => (
     <a
       key={key}
-      href={`#${NAV_TARGETS[key]}`}
+      href={`#${ANCHOR_TARGETS[key]}`}
       onClick={(e) => {
         e.preventDefault();
         setMenuRequested(false);
-        scrollToSection(NAV_TARGETS[key]);
+        scrollToSection(ANCHOR_TARGETS[key]);
       }}
-      style={{
-        color: th.ink,
-        textDecoration: 'none',
-        letterSpacing: '0.04em',
-        padding: isMobile ? '12px 0' : 0,
-        fontSize: isMobile ? 14 : 12,
-        borderBottom: isMobile ? `1px solid ${th.sub}` : 'none',
-      }}
+      style={linkStyle}
     >
       <Glitch trigger="hover">{t(`directionB.topbar.nav.${key}`)}</Glitch>
     </a>
-  ));
-
-  const projectsLink = (
-    <Link
-      to="/projects"
-      onClick={() => setMenuRequested(false)}
-      style={{
-        color: th.ink,
-        textDecoration: 'none',
-        letterSpacing: '0.04em',
-        padding: isMobile ? '12px 0' : 0,
-        fontSize: isMobile ? 14 : 12,
-        borderBottom: isMobile ? `1px solid ${th.sub}` : 'none',
-      }}
-    >
-      <Glitch trigger="hover">{t('directionB.topbar.nav.projects')}</Glitch>
+  );
+  const route = (key: 'writing' | 'projects' | 'darkgalaxy', to: string, dot?: string): React.ReactElement => (
+    <Link key={key} to={to} onClick={() => setMenuRequested(false)} style={linkStyle}>
+      {dot ? <Dot color={dot} /> : null}
+      <Glitch trigger="hover">{t(`directionB.topbar.nav.${key}`)}</Glitch>
     </Link>
   );
 
-  const darkGalaxyLink = (
-    <Link
-      to="/darkgalaxy"
-      onClick={() => setMenuRequested(false)}
-      style={{
-        color: '#9D4EDD',
-        textDecoration: 'none',
-        letterSpacing: '0.04em',
-        padding: isMobile ? '12px 0' : 0,
-        fontSize: isMobile ? 14 : 12,
-        borderBottom: isMobile ? `1px solid ${th.sub}` : 'none',
-      }}
-    >
-      <Glitch trigger="hover">{t('directionB.topbar.nav.darkgalaxy')} ↗</Glitch>
-    </Link>
+  // Left: the landing in page order, then the two inner pages. Right: Dark
+  // Galaxy, a rule, the two toggles (owner, 2026-10-04). No brand block.
+  const leftLinks = [anchor('work'), anchor('record'), anchor('now'), anchor('contact'), route('projects', '/projects'), route('writing', '/writing')];
+  const darkGalaxy = route('darkgalaxy', '/darkgalaxy', DARK_GALAXY_PURPLE);
+
+  const availability = (
+    <span style={{ display: 'inline-flex', alignItems: 'center', fontSize: isMobile ? 14 : 13, color: th.ink }}>
+      <Dot color={AVAILABLE_GREEN} />
+      {t('directionB.topbar.available')} · {currentQuarter()}
+    </span>
   );
 
-  const utilities = (
+  const toggles = (
     <>
-      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 12, color: th.dim }}>
-        <span
-          style={{
-            width: 8,
-            height: 8,
-            borderRadius: '50%',
-            background: '#4ADE80',
-            boxShadow: '0 0 8px rgba(74, 222, 128, 0.8)',
-            display: 'inline-block',
-          }}
-        />
-        {' '}{t('directionB.topbar.available')} · {currentQuarter()}
-      </span>
       <button
         type="button"
         onClick={switchLang}
         aria-label={t('directionB.topbar.languageToggle.label')}
         title={t('directionB.topbar.languageToggle.label')}
-        style={{
-          background: 'transparent',
-          border: `1px solid ${th.rule}`,
-          color: th.ink,
-          padding: '3px 9px',
-          fontSize: 11,
-          cursor: 'pointer',
-          fontFamily: 'inherit',
-          textTransform: 'uppercase',
-          letterSpacing: '0.04em',
-        }}
+        style={buttonStyle(th.rule, th.ink)}
       >
         {otherLang}
       </button>
-      <button
-        type="button"
-        onClick={switchTheme}
-        aria-label="toggle theme"
-        style={{
-          background: 'transparent',
-          border: `1px solid ${th.rule}`,
-          color: th.ink,
-          padding: '3px 9px',
-          fontSize: 11,
-          cursor: 'pointer',
-          fontFamily: 'inherit',
-        }}
-      >
+      <button type="button" onClick={switchTheme} aria-label="toggle theme" style={buttonStyle(th.rule, th.ink)}>
         {theme === 'dark' ? t('directionB.topbar.themeToggle.toLight') : t('directionB.topbar.themeToggle.toDark')}
       </button>
-      {!isMobile ? (
-        <span style={{ color: th.dim, fontSize: 12 }}>
-          {t('directionB.topbar.pressKey')}{' '}
-          <kbd style={{ border: `1px solid ${th.rule}`, padding: '0 6px', color: th.ink }}>/</kbd>
-        </span>
-      ) : null}
     </>
   );
 
@@ -173,11 +156,11 @@ export const BTopBar = (): React.ReactElement => {
         position: 'sticky',
         top: 0,
         zIndex: 40,
-        background: theme === 'dark' ? 'rgba(11,11,11,0.85)' : 'rgba(239,236,228,0.85)',
+        background: theme === 'dark' ? 'rgba(41,41,41,0.88)' : 'rgba(239,236,228,0.88)',
         backdropFilter: 'blur(8px)',
         borderBottom: `1px solid ${th.rule}`,
         color: th.ink,
-        fontSize: 12,
+        fontSize: 13,
         willChange: 'transform',
         transform: visible ? 'translateY(0)' : 'translateY(-100%)',
         transition: 'transform 260ms ease',
@@ -186,41 +169,24 @@ export const BTopBar = (): React.ReactElement => {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr auto' : '1fr auto 1fr',
+          gridTemplateColumns: '1fr auto',
           alignItems: 'center',
-          padding: isMobile ? '14px 20px' : '14px 32px',
-          gap: 12,
+          padding: isMobile ? '10px 20px' : '12px 32px',
+          gap: 16,
         }}
       >
-        <div style={{ display: 'flex', gap: 20, color: th.dim, alignItems: 'baseline' }}>
-          <Link to="/" style={{ textDecoration: 'none', color: th.ink }} aria-label="Home">
-            <Glitch trigger="hover" style={{ color: th.ink, fontWeight: 700, letterSpacing: '0.04em' }}>
-              JORIUS
-            </Glitch>
-          </Link>
-          {!isMobile ? <span>{t('directionB.topbar.volume')}{currentYear()}</span> : null}
-        </div>
-
-        {!isMobile ? (
-          <nav style={{ display: 'flex', gap: 22 }}>
-            {navLinks}
-            {projectsLink}
-            {darkGalaxyLink}
+        {isMobile ? availability : (
+          <nav style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center' }}>
+            {leftLinks}
+            {availability}
           </nav>
-        ) : null}
+        )}
 
         {!isMobile ? (
-          <div
-            style={{
-              textAlign: 'right',
-              color: th.dim,
-              display: 'flex',
-              justifyContent: 'flex-end',
-              gap: 14,
-              alignItems: 'center',
-            }}
-          >
-            {utilities}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
+            {darkGalaxy}
+            <span aria-hidden style={{ width: 1, height: 18, background: th.rule, opacity: 0.45, margin: '0 8px' }} />
+            {toggles}
           </div>
         ) : (
           <button
@@ -228,18 +194,7 @@ export const BTopBar = (): React.ReactElement => {
             onClick={() => setMenuRequested((v) => !v)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
-            style={{
-              background: 'transparent',
-              border: `1px solid ${th.rule}`,
-              color: th.ink,
-              width: 36,
-              height: 36,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontFamily: 'inherit',
-            }}
+            style={{ ...buttonStyle(th.rule, th.ink), width: 36, height: 36, padding: 0, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
           >
             {menuOpen ? <FaTimes aria-hidden style={{ width: 14, height: 14 }} /> : <FaBars aria-hidden style={{ width: 14, height: 14 }} />}
           </button>
@@ -251,14 +206,13 @@ export const BTopBar = (): React.ReactElement => {
         <div
           style={{
             borderTop: `1px solid ${th.rule}`,
-            background: theme === 'dark' ? 'rgba(11,11,11,0.97)' : 'rgba(239,236,228,0.97)',
+            background: theme === 'dark' ? 'rgba(41,41,41,0.97)' : 'rgba(239,236,228,0.97)',
             padding: '8px 20px 20px 20px',
           }}
         >
           <nav style={{ display: 'flex', flexDirection: 'column' }}>
-            {navLinks}
-            {projectsLink}
-            {darkGalaxyLink}
+            {leftLinks}
+            {darkGalaxy}
           </nav>
           <div
             style={{
@@ -266,12 +220,11 @@ export const BTopBar = (): React.ReactElement => {
               paddingTop: 16,
               borderTop: `1px solid ${th.sub}`,
               display: 'flex',
-              flexDirection: 'column',
               gap: 14,
-              alignItems: 'flex-start',
+              alignItems: 'center',
             }}
           >
-            {utilities}
+            {toggles}
           </div>
         </div>
       ) : null}

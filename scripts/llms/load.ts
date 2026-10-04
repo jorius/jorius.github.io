@@ -25,9 +25,8 @@ import type {
 // The slice of src/i18n/locales/*.json the renderer needs.
 interface LocaleFile {
   directionB: {
-    hero: { intro: string; body: string; operatingValue: string; remote: string };
+    hero: { intro: string; body: string; anywhere: string; tz: string };
     experience: Record<string, { role: string; body: string } | string>;
-    hireWhy: Record<string, { h: string; b: string }>;
     projectsPage: {
       title: string;
       intro: string;
@@ -66,8 +65,6 @@ export const loadSite = (root: string): SiteInput => {
     return { co: x.co, loc: x.loc, from: x.from, to: x.to, role: text.role, body: text.body };
   });
 
-  const why = JORIUS.hire_why.map((w) => d.hireWhy[w.n]).filter((w) => w !== undefined);
-
   const posts = readDir<Partial<PostInput>>(join(content, 'writing', 'posts'))
     .filter((p) => typeof p.slug === 'string' && isLocalized(p.title) && isLocalized(p.body))
     .map((p) => ({
@@ -97,10 +94,9 @@ export const loadSite = (root: string): SiteInput => {
       links: JORIUS.links,
       intro: d.hero.intro,
       body: d.hero.body,
-      operating: d.hero.operatingValue,
-      remote: d.hero.remote,
+      anywhere: d.hero.anywhere,
+      tz: d.hero.tz,
       experience,
-      why,
     },
     now: readJson<NowInput>(join(content, 'now.json')),
     work: readJson<WorkInput>(join(content, 'work.json')),

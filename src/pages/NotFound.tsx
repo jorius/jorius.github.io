@@ -12,7 +12,6 @@ import { useIsMobile } from '../hooks/useMediaQuery';
 import { BTopBar } from '../components/direction-b/BTopBar';
 import { CommandPalette } from '../components/CommandPalette';
 import { PALETTE_SECTIONS } from '../components/direction-b/paletteSections';
-import { DarkGrain } from '../components/primitives/DarkGrain';
 import { ScanLines } from '../components/primitives/ScanLines';
 
 // Seconds per glitch cycle — all keyframe durations reference this constant.
@@ -90,7 +89,6 @@ const NotFound = (): React.ReactElement => {
       `}</style>
 
       <ScanLines />
-      <DarkGrain />
       <BTopBar />
 
       <section

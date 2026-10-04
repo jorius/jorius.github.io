@@ -38,7 +38,9 @@ export const Reveal = ({
       onMouseLeave={onMouseLeave}
       style={{
         opacity: seen ? 1 : 0,
-        transform: seen ? 'translateY(0)' : 'translateY(12px)',
+        // 'none' once seen: a lingering transform would start a stacking
+        // context and trap the z-index of links inside a card with an overlay.
+        transform: seen ? 'none' : 'translateY(12px)',
         transition: `opacity 600ms cubic-bezier(.2,.7,.2,1) ${delay}ms, transform 600ms cubic-bezier(.2,.7,.2,1) ${delay}ms`,
         ...style,
       }}

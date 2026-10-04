@@ -27,3 +27,7 @@ export const useMediaQuery = (query: string): boolean => {
 // Standard breakpoints for the brutalist editorial design.
 export const useIsMobile = (): boolean => useMediaQuery('(max-width: 767px)');
 export const useIsTablet = (): boolean => useMediaQuery('(max-width: 1023px)');
+
+// The OS "reduce motion" switch. Glitches, pulses and the portrait swap stop
+// when it is on.
+export const usePrefersReducedMotion = (): boolean => useMediaQuery('(prefers-reduced-motion: reduce)');

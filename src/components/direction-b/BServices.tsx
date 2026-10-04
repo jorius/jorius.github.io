@@ -13,9 +13,13 @@ import { pickLocale } from '../../utils/content';
 // data
 import workContent from '../../content/work.json';
 
+// styles
+import { FONT_BODY } from '../../styles/fonts';
+
 // components
 import { Glitch } from '../primitives/Glitch';
-import { Reveal } from '../primitives/Reveal';
+import { BCard } from './BCard';
+import { BCardGrid } from './BCardGrid';
 import { BSectionHead } from './BSectionHead';
 import { StackChip } from './StackChip';
 
@@ -24,6 +28,7 @@ export const BServices = (): React.ReactElement => {
   const { t: tr, i18n } = useTranslation();
   const isMobile = useIsMobile();
   const lang = i18n.language;
+  const meta: React.CSSProperties = { fontSize: 13, color: t.dim, letterSpacing: '0.1em', textTransform: 'uppercase' };
   return (
     <>
       <BSectionHead
@@ -32,37 +37,24 @@ export const BServices = (): React.ReactElement => {
         label={tr('directionB.sections.work.label')}
         kicker={tr('directionB.sections.work.kicker')}
       />
-      <div style={{ padding: isMobile ? '0 20px 40px 20px' : '0 32px 60px 32px' }}>
-        {workContent.services.map((s, i) => (
-          <Reveal
-            key={s.id}
-            delay={i * 80}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: isMobile ? '1fr' : '90px 1fr 1.4fr 1fr',
-              gap: isMobile ? 12 : 32,
-              padding: isMobile ? '24px 0' : '32px 0',
-              borderBottom: `1px solid ${t.rule}`,
-              alignItems: 'start',
-            }}
-          >
-            <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.15em' }}>{s.id}</div>
-            <h3 style={{ margin: 0, fontSize: 'clamp(22px, 7vw, 40px)', color: t.ink, letterSpacing: '-0.025em', lineHeight: 1 }}>
-              <Glitch trigger="hover" strong>{pickLocale(s.title, lang)}</Glitch>
-            </h3>
-            <p style={{ color: t.ink, fontSize: 15, lineHeight: 1.55, margin: 0 }}>{pickLocale(s.body, lang)}</p>
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: 6,
-                justifyContent: isMobile ? 'flex-start' : 'flex-end',
-              }}
-            >
-              {s.stack.map((tag) => <StackChip key={tag} name={tag} />)}
-            </div>
-          </Reveal>
-        ))}
+      <div style={{ padding: isMobile ? '0 20px 40px 20px' : '0 32px 40px 32px' }}>
+        <BCardGrid style={{ marginTop: 16 }}>
+          {workContent.services.map((s, i) => (
+            <BCard key={s.id} index={i}>
+              <div style={{ ...meta, display: 'flex', justifyContent: 'space-between', gap: 12 }}>
+                <span>#{Number(s.id)}</span>
+                <span>{tr('directionB.sections.work.cardKind')}</span>
+              </div>
+              <h3 style={{ margin: 0, fontSize: 24, color: t.ink, letterSpacing: '-0.02em', lineHeight: 1.08, fontWeight: 700 }}>
+                <Glitch trigger="hover" strong>{pickLocale(s.title, lang)}</Glitch>
+              </h3>
+              <p style={{ margin: 0, fontFamily: FONT_BODY, fontSize: 15, lineHeight: 1.55, color: t.ink }}>{pickLocale(s.body, lang)}</p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                {s.stack.map((tag) => <StackChip key={tag} name={tag} />)}
+              </div>
+            </BCard>
+          ))}
+        </BCardGrid>
       </div>
     </>
   );
