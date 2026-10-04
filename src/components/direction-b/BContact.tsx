@@ -264,7 +264,6 @@ export const BContact = (): React.ReactElement => {
       >
         <span>© {currentYear()} {tr('directionB.contact.footer.copyright')}</span>
         <span>{tr('directionB.contact.footer.set')}</span>
-        <span>{tr('directionB.contact.footer.vol')}</span>
       </div>
     </section>
   );

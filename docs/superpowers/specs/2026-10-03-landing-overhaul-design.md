@@ -274,8 +274,8 @@ Unchanged in structure, with these edits:
   Mono; `[ ENCRYPTED ]` 13px; affiliation tag and name 13px; footer line 13px.
 - Footer strings: `contact.footer.set` becomes "SET IN SPACE MONO & ATKINSON
   HYPERLEGIBLE · NO COOKIES" / "EN SPACE MONO Y ATKINSON HYPERLEGIBLE · SIN
-  COOKIES"; `contact.footer.vol` becomes "VOL. X, NO. 011" / "VOL. X, N.º
-  011".
+  COOKIES"; the `VOL. X, NO. …` span is removed (owner, 2026-10-04), so the
+  footer row is the copyright at the left and the "set in" line at the right.
 
 ### 4.12 Glitch hover pulses (`Glitch`)
 
