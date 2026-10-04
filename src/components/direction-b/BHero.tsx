@@ -87,17 +87,14 @@ export const BHero = (): React.ReactElement => {
         </p>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-          <a href={`mailto:${JORIUS.email}`} style={filled}>
-            <FaEnvelope aria-hidden style={{ width: 16, height: 16 }} />
-            <Glitch trigger="hover">{tr('directionB.hero.writeMe')}</Glitch>
-          </a>
+          {/* Owner's order (2026-10-04): WhatsApp first and filled, then booking, then email. */}
           <a
             href={WHATSAPP_HREF}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${tr('directionB.hero.whatsapp')} ${JORIUS.whatsapp}`}
             title={`${tr('directionB.hero.whatsapp')} ${JORIUS.whatsapp}`}
-            style={outlined}
+            style={filled}
           >
             <FaWhatsapp aria-hidden style={{ width: 16, height: 16 }} />
             <Glitch trigger="hover">{tr('directionB.hero.whatsapp')}</Glitch>
@@ -105,6 +102,10 @@ export const BHero = (): React.ReactElement => {
           <a href={BOOKING_HREF} target="_blank" rel="noopener noreferrer" style={outlined}>
             <FaCalendarAlt aria-hidden style={{ width: 16, height: 16 }} />
             <Glitch trigger="hover">{tr('directionB.hero.book')}</Glitch>
+          </a>
+          <a href={`mailto:${JORIUS.email}`} style={outlined}>
+            <FaEnvelope aria-hidden style={{ width: 16, height: 16 }} />
+            <Glitch trigger="hover">{tr('directionB.hero.writeMe')}</Glitch>
           </a>
         </div>
 

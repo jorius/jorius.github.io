@@ -157,13 +157,13 @@ a 22px gap:
    label wrapped in `Glitch trigger="hover"`.
    Each label is preceded by a 16px icon in the same slot (owner, 2026-10-03:
    icons instead of the "→" arrows the labels used to carry).
-   - `hero.writeMe` ("WRITE ME") → `mailto:${JORIUS.email}`, filled (`ink`
-     background, `paper` text), `FaEnvelope`.
-   - `hero.whatsapp` → `https://wa.me/<digits>`, outlined, `FaWhatsapp`,
-     `aria-label` and `title` carry the number as today's Contact button
-     does.
+   Order (owner, 2026-10-04): WhatsApp, booking, email.
+   - `hero.whatsapp` → `https://wa.me/<digits>`, filled (`ink` background,
+     `paper` text), `FaWhatsapp`, `aria-label` and `title` carry the number.
    - `hero.book` ("BOOK 20 MIN") → `https://cal.com/jorius`, outlined,
      `FaCalendarAlt`.
+   - `hero.writeMe` ("WRITE ME") → `mailto:${JORIUS.email}`, outlined,
+     `FaEnvelope`.
 5. **Body**: `hero.body` in `FONT_BODY`, 16px, line-height 1.6, max-width
    62ch.
 
