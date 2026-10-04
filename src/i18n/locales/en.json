@@ -328,7 +328,6 @@
       }
     },
     "read": {
-      "back": "← back",
       "readingMeta": "§ READING",
       "lenSuffix": "read",
       "placeholder": "Placeholder copy — real piece coming soon",
@@ -385,7 +384,6 @@
       }
     },
     "projectsPage": {
-      "meta": "§ PROJECTS",
       "title": "Projects",
       "intro": "Side projects, tools and technical assessments, each with its source and, where one exists, a live build. The landing page lists what GitHub says is popular; this page lists what I would actually show you.",
       "empty": "Nothing published yet.",

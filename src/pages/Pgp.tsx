@@ -1,7 +1,5 @@
 // packages
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 
 // contexts
 import { useBTheme } from '../contexts/ThemeContext';
@@ -21,7 +19,6 @@ import { ScanLines } from '../components/primitives/ScanLines';
 
 const Pgp = (): React.ReactElement => {
   const { t } = useBTheme();
-  const { t: tr } = useTranslation();
   const isMobile = useIsMobile();
   const [copied, setCopied] = useState<'block' | 'fingerprint' | null>(null);
 
@@ -47,22 +44,6 @@ const Pgp = (): React.ReactElement => {
       <BTopBar />
 
       <article style={{ maxWidth: 920, margin: '0 auto', padding: isMobile ? '40px 20px 64px 20px' : '64px 32px 96px 32px' }}>
-        <Reveal>
-          <Link
-            to="/"
-            style={{
-              fontSize: 12,
-              color: t.dim,
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              display: 'inline-block',
-              marginBottom: 28,
-            }}
-          >
-            {tr('directionB.read.back')}
-          </Link>
-        </Reveal>
 
         <Reveal delay={80}>
           <div

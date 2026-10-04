@@ -328,7 +328,6 @@
       }
     },
     "read": {
-      "back": "← volver",
       "readingMeta": "§ LECTURA",
       "lenSuffix": "lectura",
       "placeholder": "Texto de relleno — pieza real próximamente",
@@ -385,7 +384,6 @@
       }
     },
     "projectsPage": {
-      "meta": "§ PROYECTOS",
       "title": "Proyectos",
       "intro": "Proyectos personales, herramientas y pruebas técnicas, cada uno con su código fuente y, cuando existe, una versión en línea. La portada muestra lo que GitHub considera popular; esta página muestra lo que yo enseñaría.",
       "empty": "Nada publicado todavía.",

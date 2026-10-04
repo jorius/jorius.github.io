@@ -1,7 +1,6 @@
 // packages
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 
 // contexts
 import { useBTheme } from '../contexts/ThemeContext';
@@ -42,39 +41,8 @@ const Projects = (): React.ReactElement => {
       <BTopBar />
 
       <article style={{ maxWidth: 1180, margin: '0 auto', padding: isMobile ? '40px 20px 64px 20px' : '64px 32px 96px 32px' }}>
+
         <Reveal>
-          <Link
-            to="/"
-            style={{
-              fontSize: 12,
-              color: t.dim,
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              display: 'inline-block',
-              marginBottom: 28,
-            }}
-          >
-            {tr('directionB.read.back')}
-          </Link>
-        </Reveal>
-
-        <Reveal delay={80}>
-          <div
-            data-testid="projects-meta"
-            style={{
-              fontSize: 11,
-              color: t.dim,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              marginBottom: 20,
-            }}
-          >
-            {tr('directionB.projectsPage.meta')} · {projects.length}
-          </div>
-        </Reveal>
-
-        <Reveal delay={160}>
           <h1
             style={{
               margin: 0,
@@ -88,7 +56,7 @@ const Projects = (): React.ReactElement => {
           </h1>
         </Reveal>
 
-        <Reveal delay={240}>
+        <Reveal delay={80}>
           <p style={{ margin: '20px 0 0 0', maxWidth: 720, fontSize: 14, color: t.dim, lineHeight: 1.6 }}>
             {tr('directionB.projectsPage.intro')}
           </p>
