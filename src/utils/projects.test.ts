@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 
 // utils
-import { projectLinkLabel } from './projects';
+import { primaryProjectLink, projectLinkLabel } from './projects';
 
 const t = (key: string): string => `<${key}>`;
 
@@ -16,5 +16,21 @@ describe('projectLinkLabel', () => {
     const link = { kind: 'repo' as const, url: 'https://x', label: { en: 'Frontend', es: 'Interfaz' } };
     expect(projectLinkLabel(link, 'en', t)).toBe('Frontend');
     expect(projectLinkLabel(link, 'es-CO', t)).toBe('Interfaz');
+  });
+});
+
+describe('primaryProjectLink', () => {
+  const live = { kind: 'live' as const, url: 'https://x.example/' };
+  const repo = { kind: 'repo' as const, url: 'https://github.com/jorius/x' };
+  const docs = { kind: 'docs' as const, url: 'https://docs.example/' };
+
+  it('prefers the live build, then the repository', () => {
+    expect(primaryProjectLink([repo, live])).toBe(live);
+    expect(primaryProjectLink([docs, repo])).toBe(repo);
+  });
+
+  it('gives nothing when the card has neither', () => {
+    expect(primaryProjectLink([docs])).toBeUndefined();
+    expect(primaryProjectLink([])).toBeUndefined();
   });
 });

@@ -1,4 +1,5 @@
 // packages
+import { useState } from 'react';
 import type { CSSProperties } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaBook, FaExternalLinkAlt, FaGithub, FaNpm } from 'react-icons/fa';
@@ -10,7 +11,7 @@ import { useBTheme } from '../../contexts/ThemeContext';
 // utils
 import { pickLocale } from '../../utils/content';
 import type { ProjectEntry, ProjectLinkKind } from '../../utils/content';
-import { projectLinkLabel } from '../../utils/projects';
+import { primaryProjectLink, projectLinkLabel } from '../../utils/projects';
 
 // styles
 import { FONT_BODY } from '../../styles/fonts';
@@ -38,12 +39,23 @@ export const BProjectCard = ({ p, i }: BProjectCardProps): React.ReactElement =>
   const { t } = useBTheme();
   const { t: tr, i18n } = useTranslation();
   const lang = i18n.language;
+  // The whole card opens the live build or the repository; while the pointer
+  // is anywhere on it, the title glitches as if hovered directly.
+  const primary = primaryProjectLink(p.links);
+  const [cardHover, setCardHover] = useState(false);
+  const title = pickLocale(p.title, lang);
   const metaStyle: CSSProperties = { fontSize: 13, color: t.dim, letterSpacing: '0.1em', textTransform: 'uppercase' };
 
   return (
-    <BCard index={i}>
+    <BCard
+      index={i}
+      href={primary?.url}
+      hrefLabel={primary ? title : undefined}
+      onMouseEnter={primary ? () => setCardHover(true) : undefined}
+      onMouseLeave={primary ? () => setCardHover(false) : undefined}
+    >
       <div style={{ ...metaStyle, display: 'flex', justifyContent: 'space-between', gap: 12 }}>
-        <span>№ {String(i + 1).padStart(2, '0')}</span>
+        <span>#{i + 1}</span>
         <span>
           {tr(`directionB.projectsPage.kind.${p.kind}`)}
           {p.status ? ` · ${tr(`directionB.projectsPage.status.${p.status}`)}` : null}
@@ -51,7 +63,7 @@ export const BProjectCard = ({ p, i }: BProjectCardProps): React.ReactElement =>
       </div>
 
       <div style={{ fontSize: 24, color: t.ink, letterSpacing: '-0.02em', lineHeight: 1.08, fontWeight: 700 }}>
-        <Glitch trigger="hover" strong>{pickLocale(p.title, lang)}</Glitch>
+        <Glitch trigger="hover" strong hoverActive={primary ? cardHover : undefined} style={primary ? { pointerEvents: 'none' } : undefined}>{title}</Glitch>
       </div>
 
       <div style={{ fontSize: 13, color: t.dim }}>{p.year}</div>
@@ -74,7 +86,7 @@ export const BProjectCard = ({ p, i }: BProjectCardProps): React.ReactElement =>
         {p.stack.map((s) => <StackChip key={s} name={s} />)}
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 16px', marginTop: 'auto', paddingTop: 6 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px 16px', marginTop: 'auto', paddingTop: 6, position: 'relative', zIndex: 1 }}>
         {p.links.map((l) => {
           const Icon = LINK_ICONS[l.kind];
           return (

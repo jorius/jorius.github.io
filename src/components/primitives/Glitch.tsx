@@ -21,6 +21,9 @@ interface GlitchProps {
   period?: number;
   strong?: boolean;
   className?: string;
+  // With trigger="hover": drive the pulses from a parent's hover instead of
+  // this element's own (a card whose overlay link covers the title).
+  hoverActive?: boolean;
 }
 
 // Three stacked layers: the main ink layer plus red/blue channel-split
@@ -36,6 +39,7 @@ export const Glitch = ({
   period = 5200,
   strong = false,
   className,
+  hoverActive,
 }: GlitchProps): React.ReactElement => {
   const { t, glitch, glitchRate, glitchChaos, theme } = useBTheme();
   const reduced = usePrefersReducedMotion();
@@ -75,8 +79,9 @@ export const Glitch = ({
   // effect owns the timer chain, so leaving or unmounting clears it in one
   // place, and the random durations stay out of render.
   const [hovered, setHovered] = useState(false);
+  const hoverState = hoverActive ?? hovered;
   useEffect(() => {
-    if (!hovered || reduced) return;
+    if (!hoverState || reduced || trigger !== 'hover') return;
     let alive = true;
     let timer: ReturnType<typeof setTimeout>;
     const pulse = (): void => {
@@ -95,7 +100,7 @@ export const Glitch = ({
       clearTimeout(timer);
       setHoverOn(false);
     };
-  }, [hovered, reduced]);
+  }, [hoverState, reduced, trigger]);
 
   // Derive on directly from trigger + state. Avoids needing a setState-in-
   // effect to sync external trigger changes.
