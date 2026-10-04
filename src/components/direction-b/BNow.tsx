@@ -63,9 +63,6 @@ export const BNow = (): React.ReactElement => {
             <div style={{ fontFamily: FONT_BODY, fontSize: 16, lineHeight: 1.5, color: t.ink, maxWidth: '70ch' }}>{pickLocale(n, lang)}</div>
           </Reveal>
         ))}
-        <p style={{ margin: '18px 0 0 0', fontFamily: FONT_BODY, fontSize: 15, lineHeight: 1.5, color: t.dim, maxWidth: '62ch' }}>
-          {pickLocale(nowContent.siversNote, lang)}
-        </p>
       </div>
     </>
   );

@@ -258,8 +258,8 @@ Below the head, inside the section padding and under a 1px `rule`: one row
 per entry, grid `150px 1fr` (one column on mobile), gap 16px, padding
 `16px 0`, bottom border `soft`, `align-items: baseline`. The label is 13px
 `ink`, uppercase, letter-spacing 0.12em; the text is `FONT_BODY`, 16px,
-line-height 1.5, max-width 70ch. After the list, the Sivers note in
-`FONT_BODY`, 15px, `dim`, max-width 62ch, 18px above.
+line-height 1.5, max-width 70ch. The Sivers note is not rendered (owner,
+2026-10-04); the `siversNote` field stays in `now.json` for the CMS schema.
 
 The two-column layout and the right-hand "Last updated" block are gone.
 
