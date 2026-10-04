@@ -23,8 +23,8 @@ import { Portrait } from './Portrait';
 const WHATSAPP_HREF = `https://wa.me/${JORIUS.whatsapp.replace(/[^0-9]/g, '')}`;
 const BOOKING_HREF = 'https://cal.com/jorius';
 
-// "Jose Ríos" → ["JOSE", "RÍOS"]: one headline line per word.
-const NAME_LINES = JORIUS.name.toUpperCase().split(' ');
+// "JOSE RÍOS", one line, never wrapped: the size scales with the viewport.
+const NAME = JORIUS.name.toUpperCase();
 
 export const BHero = (): React.ReactElement => {
   const { t } = useBTheme();
@@ -75,13 +75,9 @@ export const BHero = (): React.ReactElement => {
           <span>{tr('directionB.hero.tz')}</span>
         </p>
 
-        <h1 style={{ margin: 0, fontSize: 'clamp(56px, 11vw, 168px)', lineHeight: 0.86, letterSpacing: '-0.045em', fontWeight: 700, color: t.ink }}>
-          {NAME_LINES.map((line, i) => (
-            <span key={line} style={{ display: 'block' }}>
-              <Glitch strong period={i === 0 ? 4200 : 5000}>{line}</Glitch>
-              {i === NAME_LINES.length - 1 ? <TypedCaret /> : null}
-            </span>
-          ))}
+        <h1 style={{ margin: 0, fontSize: 'clamp(44px, 8.6vw, 132px)', lineHeight: 0.9, letterSpacing: '-0.045em', fontWeight: 700, color: t.ink, whiteSpace: 'nowrap' }}>
+          <Glitch strong period={4200}>{NAME}</Glitch>
+          <TypedCaret />
         </h1>
 
         <p style={{ margin: 0, fontFamily: FONT_BODY, fontSize: 'clamp(17px, 1.6vw, 21px)', lineHeight: 1.5, maxWidth: '56ch', color: t.ink }}>
