@@ -49,11 +49,13 @@ export const BHero = (): React.ReactElement => {
     <section
       style={{
         borderBottom: `1px solid ${t.rule}`,
-        padding: isMobile ? '36px 20px 32px 20px' : '56px 32px 48px 32px',
+        // Wider side padding than the sections below so the text block and the
+        // portrait both sit in from the edges; the text centres on the portrait.
+        padding: isMobile ? '36px 20px 32px 20px' : '56px clamp(32px, 6vw, 96px) 48px',
         display: 'grid',
         gridTemplateColumns: isMobile ? '1fr' : '1fr clamp(280px, 32vw, 480px)',
-        gap: isMobile ? 28 : 40,
-        alignItems: 'end',
+        gap: isMobile ? 28 : 48,
+        alignItems: 'center',
       }}
     >
       <div style={{ minWidth: 0, display: 'grid', gap: 22 }}>
