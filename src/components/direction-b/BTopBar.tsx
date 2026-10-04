@@ -1,5 +1,6 @@
 // packages
 import { useState } from 'react';
+import type { CSSProperties } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
@@ -14,42 +15,45 @@ import { useScrollToSection } from '../../hooks/useNavigation';
 
 // utils
 import { track } from '../../utils/analytics';
-import { currentQuarter, currentYear } from '../../utils/dateLabels';
+import { currentQuarter } from '../../utils/dateLabels';
 
 // components
 import { Glitch } from '../primitives/Glitch';
 
-// Anchors on the landing; "writing" is a route and sits between record and
-// contact in the bar.
-type AnchorKey = 'now' | 'work' | 'record' | 'contact';
+// Anchors on the landing, in page order; the two inner pages follow them.
+type AnchorKey = 'work' | 'record' | 'now' | 'contact';
 const ANCHOR_TARGETS: Record<AnchorKey, string> = {
-  now: 'b-now',
   work: 'b-services',
   record: 'b-experience',
+  now: 'b-now',
   contact: 'b-contact',
 };
 const DARK_GALAXY_PURPLE = '#9D4EDD';
 const AVAILABLE_GREEN = '#4ADE80';
 
-const Dot = ({ color }: { color: string }): React.ReactElement => (
-  <span
-    aria-hidden
-    style={{
-      display: 'inline-block',
-      width: 8,
-      height: 8,
-      borderRadius: '50%',
-      background: color,
-      boxShadow: `0 0 8px ${color}`,
-      marginRight: 8,
-      verticalAlign: 'middle',
-      position: 'relative',
-      top: -1,
-    }}
-  />
-);
+// The .b-dot keyframes in index.html read the two ring colours from here.
+interface DotCSS extends CSSProperties {
+  '--dot-a'?: string;
+  '--dot-b'?: string;
+}
 
-const buttonStyle = (rule: string, ink: string): React.CSSProperties => ({
+// A status dot that sits on the text's centre line and pulses a soft ring.
+const Dot = ({ color }: { color: string }): React.ReactElement => {
+  const style: DotCSS = {
+    display: 'inline-block',
+    width: 8,
+    height: 8,
+    borderRadius: '50%',
+    background: color,
+    marginRight: 8,
+    flexShrink: 0,
+    '--dot-a': `${color}99`,
+    '--dot-b': `${color}00`,
+  };
+  return <span aria-hidden className="b-dot" style={style} />;
+};
+
+const buttonStyle = (rule: string, ink: string): CSSProperties => ({
   background: 'transparent',
   border: `1px solid ${rule}`,
   color: ink,
@@ -85,7 +89,9 @@ export const BTopBar = (): React.ReactElement => {
     toggleTheme();
   };
 
-  const linkStyle: React.CSSProperties = {
+  const linkStyle: CSSProperties = {
+    display: 'inline-flex',
+    alignItems: 'center',
     color: th.ink,
     textDecoration: 'none',
     letterSpacing: '0.04em',
@@ -115,34 +121,19 @@ export const BTopBar = (): React.ReactElement => {
     </Link>
   );
 
-  // Left: the landing anchors plus the two inner pages and the availability
-  // dot. Right: Dark Galaxy and the two toggles (owner, 2026-10-04).
-  const leftLinks = [anchor('now'), anchor('work'), anchor('record'), route('writing', '/writing'), anchor('contact'), route('projects', '/projects')];
-  const rightLinks = [route('darkgalaxy', '/darkgalaxy', DARK_GALAXY_PURPLE)];
-
-  // The designer's proposal: the brand and its volume line sit between the
-  // two link groups, out of the corner the review marked unreadable.
-  const brand = (
-    <Link
-      to="/"
-      aria-label="Home"
-      style={{ textDecoration: 'none', color: th.ink, display: 'grid', justifyItems: isMobile ? 'start' : 'center', gap: 2, lineHeight: 1.1 }}
-    >
-      <Glitch trigger="hover" style={{ fontWeight: 700, letterSpacing: '0.08em', fontSize: 14 }}>JORIUS</Glitch>
-      <span style={{ fontSize: 12, color: th.dim, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-        {t('directionB.topbar.volume')}{currentYear()}
-      </span>
-    </Link>
-  );
+  // Left: the landing in page order, then the two inner pages. Right: Dark
+  // Galaxy, a rule, the two toggles (owner, 2026-10-04). No brand block.
+  const leftLinks = [anchor('work'), anchor('record'), anchor('now'), anchor('contact'), route('projects', '/projects'), route('writing', '/writing')];
+  const darkGalaxy = route('darkgalaxy', '/darkgalaxy', DARK_GALAXY_PURPLE);
 
   const availability = (
-    <span style={{ display: 'inline-flex', alignItems: 'center', fontSize: isMobile ? 14 : 13, color: th.ink, padding: isMobile ? '12px 0' : 0 }}>
+    <span style={{ display: 'inline-flex', alignItems: 'center', fontSize: isMobile ? 14 : 13, color: th.ink }}>
       <Dot color={AVAILABLE_GREEN} />
       {t('directionB.topbar.available')} · {currentQuarter()}
     </span>
   );
 
-  const utilities = (
+  const toggles = (
     <>
       <button
         type="button"
@@ -178,20 +169,24 @@ export const BTopBar = (): React.ReactElement => {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr auto' : '1fr auto 1fr',
+          gridTemplateColumns: '1fr auto',
           alignItems: 'center',
-          padding: isMobile ? '10px 20px' : '10px 32px',
+          padding: isMobile ? '10px 20px' : '12px 32px',
           gap: 16,
         }}
       >
-        {isMobile ? brand : <nav style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center' }}>{leftLinks}{availability}</nav>}
-
-        {!isMobile ? brand : null}
+        {isMobile ? availability : (
+          <nav style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center' }}>
+            {leftLinks}
+            {availability}
+          </nav>
+        )}
 
         {!isMobile ? (
-          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
-            {rightLinks}
-            {utilities}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
+            {darkGalaxy}
+            <span aria-hidden style={{ width: 1, height: 18, background: th.rule, opacity: 0.45, margin: '0 8px' }} />
+            {toggles}
           </div>
         ) : (
           <button
@@ -217,8 +212,7 @@ export const BTopBar = (): React.ReactElement => {
         >
           <nav style={{ display: 'flex', flexDirection: 'column' }}>
             {leftLinks}
-            {rightLinks}
-            {availability}
+            {darkGalaxy}
           </nav>
           <div
             style={{
@@ -226,12 +220,11 @@ export const BTopBar = (): React.ReactElement => {
               paddingTop: 16,
               borderTop: `1px solid ${th.sub}`,
               display: 'flex',
-              flexDirection: 'column',
               gap: 14,
-              alignItems: 'flex-start',
+              alignItems: 'center',
             }}
           >
-            {utilities}
+            {toggles}
           </div>
         </div>
       ) : null}

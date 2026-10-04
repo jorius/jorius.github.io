@@ -114,24 +114,22 @@ imports in `DirectionB`, `Writing`, `Projects`, `Pgp` and `NotFound`.
 
 ### 4.4 Top bar (`BTopBar`)
 
-Desktop (≥ 768px): a three-column grid `1fr auto 1fr`.
+Desktop (≥ 768px): a two-column grid `1fr auto`; no brand block (owner,
+2026-10-04: the centred JORIUS / VOL. X block the designer proposed was
+tried and dropped as a mere separator).
 
-- Left: `Now · Work · Record · Writing · Contact · Projects` then the
-  `● Available · Q4 2026` dot line, 13px, hover glitch (owner, 2026-10-04:
-  Projects and the availability moved left).
-- Centre: the brand block, a `<Link to="/">` with `JORIUS` (14px, 700,
-  letter-spacing 0.08em, hover glitch) over `VOL. X · 2026` (12px, `dim`,
-  letter-spacing 0.08em), centred, as in the designer's proposal
-  (`figma/02-topbar-proposal-centered-brand.png`).
-- Right: `Dark Galaxy` in `ink` preceded by an 8px purple dot (`#9D4EDD`,
-  same glow treatment as the green availability dot; no arrow), the language
-  button, the theme button. The "press /" hint is removed; the `/` shortcut and the palette
+- Left, in landing order then the inner pages: `Work · Record · Now ·
+  Contact · Projects · Writing`, then the `● Available · Q4 2026` dot line,
+  13px, hover glitch.
+- Right: `Dark Galaxy` in `ink` preceded by an 8px purple dot (`#9D4EDD`), a
+  1px vertical rule, then the language button and the theme button.
+- Both dots are flex items on the text's centre line and pulse a soft ring
+  (`.b-dot` keyframes in `index.html`, off under reduced motion). The "press /" hint is removed; the `/` shortcut and the palette
   are unchanged.
 
-Mobile (< 768px): brand block at the left, hamburger at the right; the
-slide-down panel lists the five anchors, Projects, Dark Galaxy, then the
-availability line and the two buttons, as today. The `Vol. X` line shows in
-the brand block on mobile too.
+Mobile (< 768px): the availability line at the left, hamburger at the
+right; the slide-down panel lists the anchors, Projects, Writing and Dark
+Galaxy, then the two buttons.
 
 The bar keeps its sticky, hide-on-scroll-down behaviour and the blurred
 background.
