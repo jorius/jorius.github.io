@@ -42,7 +42,7 @@ export const BServices = (): React.ReactElement => {
           {workContent.services.map((s, i) => (
             <BCard key={s.id} index={i}>
               <div style={{ ...meta, display: 'flex', justifyContent: 'space-between', gap: 12 }}>
-                <span>№ {s.id}</span>
+                <span>#{Number(s.id)}</span>
                 <span>{tr('directionB.sections.work.cardKind')}</span>
               </div>
               <h3 style={{ margin: 0, fontSize: 24, color: t.ink, letterSpacing: '-0.02em', lineHeight: 1.08, fontWeight: 700 }}>

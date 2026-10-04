@@ -20,11 +20,6 @@ import { BCard } from './BCard';
 import { BCardGrid } from './BCardGrid';
 import { BSectionHead } from './BSectionHead';
 
-// The date row reads the company accent through this variable.
-interface AccentCSS extends CSSProperties {
-  '--acc'?: string;
-}
-
 export const BExperience = (): React.ReactElement => {
   const { t } = useBTheme();
   const { t: tr } = useTranslation();
@@ -41,12 +36,11 @@ export const BExperience = (): React.ReactElement => {
       <div style={{ padding: isMobile ? '0 20px 40px 20px' : '0 32px 40px 32px' }}>
         <BCardGrid style={{ marginTop: 16 }}>
           {JORIUS.experience.map((e, i) => {
-            const accent: AccentCSS = { '--acc': e.accent };
             return (
-              <BCard key={e.key} index={i} style={accent}>
-                {/* The owner asked for dates that are easy to find: beside the number, ink, bold, accent bar. */}
+              <BCard key={e.key} index={i}>
+                {/* The owner asked for dates that are easy to find: beside the number, ink, bold. */}
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap' }}>
-                  <span style={meta}>№ {String(i + 1).padStart(2, '0')}</span>
+                  <span style={meta}>#{i + 1}</span>
                   <span
                     style={{
                       fontSize: 15,
@@ -54,8 +48,6 @@ export const BExperience = (): React.ReactElement => {
                       letterSpacing: '0.02em',
                       color: t.ink,
                       fontVariantNumeric: 'tabular-nums',
-                      padding: '2px 0 2px 10px',
-                      borderLeft: '3px solid var(--acc)',
                     }}
                   >
                     {e.from} → {e.to === 'Present' ? tr('directionB.experience.present') : e.to}
