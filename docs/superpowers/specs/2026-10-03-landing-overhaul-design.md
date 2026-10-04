@@ -149,7 +149,11 @@ a 22px gap:
 2. **Name**: `<h1>` set from `JORIUS.name` uppercased on one line, never
    wrapped (`white-space: nowrap`), `clamp(44px, 8.6vw, 132px)`, line-height
    0.9, letter-spacing -0.045em, 700, as one `Glitch strong` with ambient
-   period 4200; a `TypedCaret` follows (owner, 2026-10-04: single line).
+   period 4200. Right after the name, on the same line, a square the height
+   of the capitals (0.74em, 1px `rule` border, `sub` fill) is the slot for a
+   portrait of the owner: it renders `JORIUS.portrait` when that path is set
+   and a hatched placeholder until then (owner, 2026-10-04). A `TypedCaret`
+   closes the line.
 3. **Tagline**: `hero.intro` in `FONT_BODY`, `clamp(17px, 1.6vw, 21px)`,
    line-height 1.5, max-width 56ch.
 4. **Buttons** (flex, wrap, gap 10px). Shared style: inline-flex, padding

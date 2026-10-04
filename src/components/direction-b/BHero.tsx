@@ -43,6 +43,22 @@ export const BHero = (): React.ReactElement => {
     whiteSpace: 'nowrap',
   };
   const filled: CSSProperties = { ...button, background: t.ink, color: t.paper };
+
+  // A square the height of the capitals, right after the name: the slot for a
+  // portrait of the owner. Until JORIUS.portrait points at a file it shows a
+  // hatched placeholder in the same frame.
+  const nameSquare: CSSProperties = {
+    display: 'inline-block',
+    width: '0.74em',
+    height: '0.74em',
+    marginLeft: '0.16em',
+    verticalAlign: 'baseline',
+    border: `1px solid ${t.rule}`,
+    background: t.sub,
+    backgroundImage: `repeating-linear-gradient(135deg, ${t.ink}14 0 0.06em, transparent 0.06em 0.12em)`,
+    objectFit: 'cover',
+    flexShrink: 0,
+  };
   const outlined: CSSProperties = { ...button, background: 'transparent', color: t.ink };
 
   return (
@@ -79,6 +95,11 @@ export const BHero = (): React.ReactElement => {
 
         <h1 style={{ margin: 0, fontSize: 'clamp(44px, 8.6vw, 132px)', lineHeight: 0.9, letterSpacing: '-0.045em', fontWeight: 700, color: t.ink, whiteSpace: 'nowrap' }}>
           <Glitch strong period={4200}>{NAME}</Glitch>
+          {JORIUS.portrait ? (
+            <img src={JORIUS.portrait} alt={JORIUS.name} style={{ ...nameSquare, backgroundImage: 'none' }} />
+          ) : (
+            <span aria-hidden style={nameSquare} />
+          )}
           <TypedCaret />
         </h1>
 
