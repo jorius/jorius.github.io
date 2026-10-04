@@ -25,9 +25,6 @@ export interface JoriusData {
   role: string;
   locale: string;
   years: number;
-  // Square photo of the owner shown beside the name in the hero, as a path
-  // under public/ ("/images/jose.jpg"). Unset: the hero shows a placeholder.
-  portrait?: string;
   email: string;
   affiliations: AffiliationEntry[];
   pgp: {

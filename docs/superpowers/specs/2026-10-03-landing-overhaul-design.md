@@ -149,15 +149,8 @@ a 22px gap:
 2. **Name**: `<h1>` set from `JORIUS.name` uppercased on one line, never
    wrapped (`white-space: nowrap`), `clamp(44px, 8.6vw, 132px)`, line-height
    0.9, letter-spacing -0.045em, 700, as one `Glitch strong` with ambient
-   period 4200; a `TypedCaret` closes the line. The `<h1>` is `position:
-   relative` and holds the **portrait slot**: a square of
-   `clamp(140px, 2.2em, 320px)` (well under the cats' 480px), absolutely
-   positioned at the column's right edge and centred on the name's line,
-   1px `rule` border, `sub` fill, `z-index: 0`; the eyebrow, the name, the
-   caret and the tagline carry `position: relative; z-index: 1`, so text may
-   run over the square. It renders `JORIUS.portrait` (object-fit cover) when
-   that path is set and a hatched placeholder until then (owner,
-   2026-10-04: bigger than the headline, overlap allowed).
+   period 4200; a `TypedCaret` closes the line. (A portrait slot beside the
+   name was tried in three sizes on 2026-10-04 and dropped by the owner.)
 3. **Tagline**: `hero.intro` in `FONT_BODY`, `clamp(17px, 1.6vw, 21px)`,
    line-height 1.5, max-width 56ch.
 4. **Buttons** (flex, wrap, gap 10px). Shared style: inline-flex, padding
