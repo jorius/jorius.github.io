@@ -44,18 +44,25 @@ export const BHero = (): React.ReactElement => {
   };
   const filled: CSSProperties = { ...button, background: t.ink, color: t.paper };
 
-  // A square as tall as the whole headline line, butted against the last
-  // letter with no gap or border, so name and photo read as one bar. Until
-  // JORIUS.portrait points at a file it shows a hatched placeholder.
-  const nameSquare: CSSProperties = {
-    display: 'block',
-    width: '0.9em',
-    alignSelf: 'stretch',
+  // The portrait slot: a square about 2.2 headline-ems (capped well under the
+  // cats' 480px), anchored to the right edge of the text column and centred on
+  // the name's line. It sits behind the text, so the end of the name and the
+  // eyebrow may run over it. Hatched until JORIUS.portrait names a photo.
+  const portraitSquare: CSSProperties = {
+    position: 'absolute',
+    right: 0,
+    top: '50%',
+    transform: 'translateY(-50%)',
+    width: 'clamp(140px, 2.2em, 320px)',
+    height: 'clamp(140px, 2.2em, 320px)',
+    border: `1px solid ${t.rule}`,
     background: t.sub,
-    backgroundImage: `repeating-linear-gradient(135deg, ${t.ink}14 0 0.06em, transparent 0.06em 0.12em)`,
+    backgroundImage: `repeating-linear-gradient(135deg, ${t.ink}14 0 8px, transparent 8px 16px)`,
     objectFit: 'cover',
-    flexShrink: 0,
+    zIndex: 0,
   };
+  // Text that may overlap the square stays above it.
+  const overSquare: CSSProperties = { position: 'relative', zIndex: 1 };
   const outlined: CSSProperties = { ...button, background: 'transparent', color: t.ink };
 
   return (
@@ -74,6 +81,7 @@ export const BHero = (): React.ReactElement => {
       <div style={{ minWidth: 0, display: 'grid', gap: 22 }}>
         <p
           style={{
+            ...overSquare,
             margin: 0,
             display: 'flex',
             flexWrap: 'wrap',
@@ -90,17 +98,17 @@ export const BHero = (): React.ReactElement => {
           <span>{tr('directionB.hero.tz')}</span>
         </p>
 
-        <h1 style={{ margin: 0, display: 'flex', alignItems: 'stretch', fontSize: 'clamp(44px, 8.6vw, 132px)', lineHeight: 0.9, letterSpacing: '-0.045em', fontWeight: 700, color: t.ink, whiteSpace: 'nowrap' }}>
-          <Glitch strong period={4200}>{NAME}</Glitch>
+        <h1 style={{ position: 'relative', margin: 0, fontSize: 'clamp(44px, 8.6vw, 132px)', lineHeight: 0.9, letterSpacing: '-0.045em', fontWeight: 700, color: t.ink, whiteSpace: 'nowrap' }}>
           {JORIUS.portrait ? (
-            <img src={JORIUS.portrait} alt={JORIUS.name} style={{ ...nameSquare, backgroundImage: 'none' }} />
+            <img src={JORIUS.portrait} alt={JORIUS.name} style={{ ...portraitSquare, backgroundImage: 'none' }} />
           ) : (
-            <span aria-hidden style={nameSquare} />
+            <span aria-hidden style={portraitSquare} />
           )}
-          <span style={{ alignSelf: 'center' }}><TypedCaret /></span>
+          <Glitch strong period={4200} style={overSquare}>{NAME}</Glitch>
+          <span style={overSquare}><TypedCaret /></span>
         </h1>
 
-        <p style={{ margin: 0, fontFamily: FONT_BODY, fontSize: 'clamp(17px, 1.6vw, 21px)', lineHeight: 1.5, maxWidth: '56ch', color: t.ink }}>
+        <p style={{ ...overSquare, margin: 0, fontFamily: FONT_BODY, fontSize: 'clamp(17px, 1.6vw, 21px)', lineHeight: 1.5, maxWidth: '56ch', color: t.ink }}>
           {tr('directionB.hero.intro')}
         </p>
 
