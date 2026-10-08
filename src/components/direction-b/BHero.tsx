@@ -78,7 +78,7 @@ export const BHero = (): React.ReactElement => {
           <span>{tr('directionB.hero.tz')}</span>
         </p>
 
-        <h1 style={{ margin: 0, fontSize: 'clamp(44px, 8.6vw, 132px)', lineHeight: 0.9, letterSpacing: '-0.045em', fontWeight: 700, color: t.ink, whiteSpace: 'nowrap' }}>
+        <h1 style={{ margin: 0, fontSize: 'clamp(44px, 8.6vw, 162px)', lineHeight: 0.9, letterSpacing: '-0.045em', fontWeight: 700, color: t.ink, whiteSpace: 'nowrap' }}>
           <Glitch strong period={4200}>{NAME}</Glitch>
           <TypedCaret />
         </h1>
