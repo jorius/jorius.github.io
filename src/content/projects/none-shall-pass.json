@@ -1,0 +1,21 @@
+{
+  "id": "none-shall-pass",
+  "order": 5,
+  "year": "2026",
+  "kind": "personal",
+  "draft": false,
+  "title": { "en": "None Shall Pass", "es": "None Shall Pass" },
+  "summary": {
+    "en": "Firewall-defense mini-game: packets arrive as real HTTP and SSH requests, you read the tell and throw the spear before the malicious ones reach the server. Six knights, four difficulties, a rogue-lite upgrade draft, a wave recap of your mistakes, in English and Spanish.",
+    "es": "Minijuego de defensa de firewall: los paquetes llegan como peticiones HTTP y SSH reales, lees la pista y lanzas la lanza antes de que los maliciosos lleguen al servidor. Seis caballeros, cuatro dificultades, un sorteo de mejoras rogue-lite y un repaso de tus errores por oleada, en inglés y español."
+  },
+  "details": [
+    { "en": "Phaser 4 scene over a pure TypeScript core with 500+ tests; every sound effect and the music loop are synthesized in the browser, so nothing is downloaded or licensed", "es": "Escena de Phaser 4 sobre un núcleo puro de TypeScript con más de 500 pruebas; cada efecto de sonido y el loop musical se sintetizan en el navegador, así que nada se descarga ni se licencia" },
+    { "en": "Shaped by my own play-test rounds: the knights, the Armory and the mistakes recap all came out of the first one", "es": "Moldeado por mis propias rondas de prueba: los caballeros, la Armería y el repaso de errores salieron de la primera" }
+  ],
+  "stack": ["TypeScript", "Phaser 4", "Vite", "Web Audio"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/jorius/none-shall-pass" },
+    { "kind": "live", "url": "https://jorius.github.io/none-shall-pass/" }
+  ]
+}

@@ -37,6 +37,8 @@ export const TECH: Record<string, TechSpec> = {
   Zustand: { color: '#5B4636', glyph: 'Zu' },
   CodeMirror: { color: '#D30707', glyph: 'CM' },
   'React Native': { color: '#61DAFB', glyph: 'RN' },
+  'Phaser 4': { color: '#7B3FE4', glyph: 'Ph' },
+  'Web Audio': { color: '#0EA5E9', glyph: 'WA' },
   // Security
   OWASP: { color: '#0071BC', glyph: 'Ow' },
   'OAuth/OIDC': { color: '#EB5424', glyph: 'O2' },

@@ -69,8 +69,8 @@ describe('projects content', () => {
   // vitest runs outside PROD, so drafts are included and validated too.
   const projects = loadProjects();
 
-  it('has the fourteen cards', () => {
-    expect(projects).toHaveLength(14);
+  it('has the fifteen cards', () => {
+    expect(projects).toHaveLength(15);
   });
 
   it('has unique ids and orders', () => {
