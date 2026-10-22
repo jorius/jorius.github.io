@@ -1,0 +1,21 @@
+{
+  "id": "liber-linteum",
+  "order": 1,
+  "year": "2026",
+  "kind": "personal",
+  "draft": false,
+  "title": { "en": "Liber Linteum", "es": "Liber Linteum" },
+  "summary": {
+    "en": "Private, local-only notes: plain Markdown in folders you own, mapped as a canvas of cards with covers and relationships. Opens Obsidian vaults as they are, imports Notion workspaces on your machine, and can seal a vault with a passphrase. No cloud, no accounts, no telemetry: the app makes no network requests at all.",
+    "es": "Notas privadas y solo locales: Markdown plano en carpetas tuyas, mapeado como un lienzo de tarjetas con portadas y relaciones. Abre bóvedas de Obsidian tal como están, importa espacios de Notion en tu equipo y puede sellar una bóveda con una frase de contraseña. Sin nube, sin cuentas, sin telemetría: la app no hace ninguna petición de red."
+  },
+  "details": [
+    { "en": "Tauri 2 desktop app with a Rust core (vault, index, encryption, importer) and a React UI; Linux, Windows and macOS from one codebase", "es": "App de escritorio en Tauri 2 con un núcleo en Rust (bóveda, índice, cifrado, importador) y una interfaz en React; Linux, Windows y macOS desde un solo código" },
+    { "en": "An idea by José Meza, built by Jose Ríos", "es": "Una idea de José Meza, construida por Jose Ríos" }
+  ],
+  "stack": ["Rust", "Tauri 2", "React", "TypeScript", "SQLite"],
+  "links": [
+    { "kind": "repo", "url": "https://github.com/jorius/liber-linteum" },
+    { "kind": "live", "url": "https://jorius.github.io/liber-linteum/" }
+  ]
+}
