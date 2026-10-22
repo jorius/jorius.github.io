@@ -1,9 +1,9 @@
 {
   "id": "liber-linteum",
-  "order": 3,
+  "order": 1,
   "year": "2026",
   "kind": "personal",
-  "draft": true,
+  "draft": false,
   "title": { "en": "Liber Linteum", "es": "Liber Linteum" },
   "summary": {
     "en": "Private, local-only notes: plain Markdown in folders you own, mapped as a canvas of cards with covers and relationships. Opens Obsidian vaults as they are, imports Notion workspaces on your machine, and can seal a vault with a passphrase. No cloud, no accounts, no telemetry: the app makes no network requests at all.",
