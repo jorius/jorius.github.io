@@ -19,6 +19,7 @@ import { currentQuarter } from '../../utils/dateLabels';
 
 // components
 import { Glitch } from '../primitives/Glitch';
+import { AcademyMark } from './AcademyMark';
 import { KnightMark } from './KnightMark';
 import { LiberMark } from './LiberMark';
 
@@ -37,6 +38,9 @@ const NONE_SHALL_PASS_GOLD = '#d9b44a';
 // The notes app's showcase is its own Pages site too; the ring takes its terracotta.
 const LIBER_LINTEUM_URL = 'https://jorius.github.io/liber-linteum/';
 const LIBER_LINTEUM_TERRACOTTA = '#cd6532';
+// The interview trainer is a Pages site as well; the ring takes its orange.
+const ACADEMY_URL = 'https://jorius.github.io/engineer-mentat-academy/';
+const ACADEMY_ORANGE = '#f97316';
 const AVAILABLE_GREEN = '#4ADE80';
 
 // The .b-dot keyframes in index.html read the two ring colours from here.
@@ -130,7 +134,7 @@ export const BTopBar = (): React.ReactElement => {
   );
 
   // A link that leaves the SPA (the outbound tracker in main.tsx counts the click).
-  const external = (key: 'liberLinteum' | 'noneShallPass', href: string, mark: React.ReactNode): React.ReactElement => (
+  const external = (key: 'liberLinteum' | 'noneShallPass' | 'academy', href: string, mark: React.ReactNode): React.ReactElement => (
     <a key={key} href={href} onClick={() => setMenuRequested(false)} style={linkStyle}>
       {mark}
       <Glitch trigger="hover">{t(`directionB.topbar.nav.${key}`)}</Glitch>
@@ -138,11 +142,12 @@ export const BTopBar = (): React.ReactElement => {
   );
 
   // Left: the landing in page order, then the two inner pages. Right: the notes
-  // app, the game, Dark Galaxy, a rule, the two toggles (owner, 2026-10-04). No
-  // brand block.
+  // app, the game, the academy, Dark Galaxy, a rule, the two toggles (owner,
+  // 2026-10-04). No brand block.
   const leftLinks = [anchor('work'), anchor('record'), anchor('now'), anchor('contact'), route('projects', '/projects'), route('writing', '/writing')];
   const liberLinteum = external('liberLinteum', LIBER_LINTEUM_URL, <LiberMark ring={LIBER_LINTEUM_TERRACOTTA} />);
   const noneShallPass = external('noneShallPass', NONE_SHALL_PASS_URL, <KnightMark ring={NONE_SHALL_PASS_GOLD} />);
+  const academy = external('academy', ACADEMY_URL, <AcademyMark ring={ACADEMY_ORANGE} />);
   const darkGalaxy = route('darkgalaxy', '/darkgalaxy', DARK_GALAXY_PURPLE);
 
   const availability = (
@@ -205,6 +210,7 @@ export const BTopBar = (): React.ReactElement => {
           <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
             {liberLinteum}
             {noneShallPass}
+            {academy}
             {darkGalaxy}
             <span aria-hidden style={{ width: 1, height: 18, background: th.rule, opacity: 0.45, margin: '0 8px' }} />
             {toggles}
@@ -235,6 +241,7 @@ export const BTopBar = (): React.ReactElement => {
             {leftLinks}
             {liberLinteum}
             {noneShallPass}
+            {academy}
             {darkGalaxy}
           </nav>
           <div
