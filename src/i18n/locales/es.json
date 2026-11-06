@@ -404,6 +404,10 @@
         "npm": "npm",
         "docs": "docs"
       }
+    },
+    "self": {
+      "caption": "yo",
+      "subcaption": "[ 1 humano ]"
     }
   },
   "darkgalaxy": {

@@ -228,7 +228,7 @@ export const Portrait = (): React.ReactElement => {
         </span>
       </div>
 
-      {/* Bottom framing label */}
+      {/* Bottom framing label, stacked at the right: the lower-left corner holds Jose's pinned SelfPortrait */}
       <div
         style={{
           position: 'absolute',
@@ -238,8 +238,9 @@ export const Portrait = (): React.ReactElement => {
           fontSize: 11,
           color: '#f2efe7',
           display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'baseline',
+          flexDirection: 'column',
+          alignItems: 'flex-end',
+          gap: 3,
           textShadow: '0 1px 2px rgba(0,0,0,0.6)',
           pointerEvents: 'none',
         }}
