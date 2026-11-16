@@ -43,9 +43,13 @@
    exaggerated 0/O and 1/l/I separation is exactly what that content needs. */
 .b-reader { font-family: 'Atkinson Hyperlegible Next', system-ui, -apple-system, sans-serif; }
 .b-reader h2 { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 1.4em; margin: 1.6em 0 0.6em; letter-spacing: -0.01em; }
+.b-reader h2, .b-reader h3 { scroll-margin-top: 96px; }
 .b-reader h3 { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 1.15em; margin: 1.4em 0 0.5em; }
 .b-reader p { margin: 0 0 1.1em; }
-.b-reader ul, .b-reader ol { margin: 0 0 1.1em 1.2em; }
+.b-reader ul, .b-reader ol { margin: 0 0 1.1em 1.2em; padding-left: 0.4em; }
+/* Tailwind preflight strips list markers; posts need them back. */
+.b-reader ul { list-style: disc; }
+.b-reader ol { list-style: decimal; }
 .b-reader li { margin: 0.3em 0; }
 .b-reader a { color: var(--b-link, currentColor); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .b-reader a:hover { text-decoration-thickness: 2px; }
@@ -67,6 +71,28 @@
 .b-reader th { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.82em; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(0,0,0,0.06); }
 
 /* Markdown images are wrapped in a button that opens the lightbox */
+.b-mermaid { margin: 1.6em 0; overflow-x: auto; text-align: center; }
+.b-mermaid svg { max-width: 100%; height: auto; }
+/* A table written with an empty header row shows no header. */
+.b-reader thead:not(:has(th:not(:empty))) { display: none; }
+.b-reader td:has(> .b-social) { white-space: nowrap; }
+.b-reader .b-social { display: inline-flex; vertical-align: -0.15em; margin-right: 12px; }
+.b-reader .b-social svg { width: 17px; height: 17px; }
+.b-img-small { float: right; width: 150px; margin: 0.35em 0 0.8em 1.4em; }
+.b-img-small img { display: block; width: 100%; }
+.b-img-medium { display: block; width: min(280px, 70%); margin: 1.6em auto 0.6em; }
+.b-reader .b-img-medium img { display: block; width: 100%; border: none; box-shadow: none; }
+.b-reader .b-img-inline { display: inline-block; height: 1.9em; width: auto; margin: 0 0.25em 0 0; border: none; vertical-align: middle; }
+.b-reader .b-img-inline:first-child { height: 2.6em; }
+.b-carousel img { aspect-ratio: 3 / 4; object-fit: cover; margin: 0; }
+.b-carousel-controls { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; font-size: 12px; }
+.b-carousel-controls button { display: inline-flex; align-items: center; justify-content: center; padding: 0; background: none; border: 1px solid currentColor; color: inherit; width: 26px; height: 22px; cursor: pointer; }
+.b-carousel-controls svg { width: 10px; height: 10px; }
+.b-carousel-credits { display: grid; }
+.b-carousel-credits > * { grid-area: 1 / 1; }
+.b-img-credit { display: block; margin-top: 4px; font-size: 11px; line-height: 1.35; opacity: 0.7; }
+.b-video { display: block; aspect-ratio: 16 / 9; margin: 1.6em 0; border: 1px solid currentColor; }
+.b-video iframe { display: block; width: 100%; height: 100%; border: 0; }
 .b-img-zoom { display: block; width: 100%; padding: 0; margin: 0; border: none; background: none; cursor: zoom-in; text-align: center; font: inherit; color: inherit; }
 .b-img-zoom img { transition: opacity 150ms; }
 .b-img-zoom:hover img { opacity: 0.85; }

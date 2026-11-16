@@ -5,16 +5,21 @@ import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import Markdown from 'react-markdown';
+import type { Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { FaGithub, FaGlobe, FaLinkedin } from 'react-icons/fa';
+import type { IconType } from 'react-icons';
 
 // contexts
 import { useBTheme } from '../contexts/ThemeContext';
 
 // hooks
-import { useIsMobile } from '../hooks/useMediaQuery';
+import { useIsMobile, useMediaQuery } from '../hooks/useMediaQuery';
 
 // utils
 import { loadCategories, loadPosts, loadRevisions, loadTags, pickLocale } from '../utils/content';
+import { extractHeadings } from '../utils/headings';
+import { youtubeId } from '../utils/youtube';
 
 // components
 import { BTagChip } from '../components/direction-b/BTagChip';
@@ -22,9 +27,52 @@ import { BTopBar } from '../components/direction-b/BTopBar';
 import { CommandPalette } from '../components/CommandPalette';
 import { PALETTE_SECTIONS } from '../components/direction-b/paletteSections';
 import { Glitch } from '../components/primitives/Glitch';
+import { Mermaid } from '../components/primitives/Mermaid';
+import { PhotoCarousel } from '../components/primitives/PhotoCarousel';
 import { ScanLines } from '../components/primitives/ScanLines';
 
 const TAGS_VISIBLE = 5;
+
+const SOCIAL_ICONS: Record<string, IconType> = { LinkedIn: FaLinkedin, GitHub: FaGithub, Web: FaGlobe };
+
+// The two Markdown overrides below hold state (a carousel position, a rendered
+// diagram), so they live at module level: an inline override is a new component
+// on every render of the page, and React would remount them on each scroll.
+
+// A paragraph made only of two or more `#small` images, each optionally wrapped
+// in a link to its source, becomes a carousel.
+const MarkdownParagraph: Components['p'] = ({ node, children }) => {
+  const items = (node?.children ?? []).filter((c) => !(c.type === 'text' && !c.value.trim()));
+  const photos = items.flatMap((c) => {
+    const link = c.type === 'element' && c.tagName === 'a' ? c : undefined;
+    const img = link ? link.children.find((k) => k.type === 'element' && k.tagName === 'img') : c;
+    if (img?.type !== 'element' || img.tagName !== 'img' || !String(img.properties.src).endsWith('#small')) return [];
+    return [
+      {
+        src: String(img.properties.src).slice(0, -'#small'.length),
+        alt: String(img.properties.alt ?? ''),
+        credit: img.properties.title ? String(img.properties.title) : undefined,
+        href: link?.properties.href ? String(link.properties.href) : undefined,
+      },
+    ];
+  });
+  if (photos.length > 1 && photos.length === items.length) return <PhotoCarousel photos={photos} />;
+  return <p>{children}</p>;
+};
+
+// ```mermaid fences become diagrams; every other block stays a <pre>.
+const MarkdownPre: Components['pre'] = ({ node, children }) => {
+  const { theme } = useBTheme();
+  const code = node?.children[0];
+  if (code?.type === 'element' && code.tagName === 'code') {
+    const classes = code.properties.className;
+    if (Array.isArray(classes) && classes.includes('language-mermaid')) {
+      const text = code.children.map((c) => (c.type === 'text' ? c.value : '')).join('');
+      return <Mermaid code={text} dark={theme === 'dark'} />;
+    }
+  }
+  return <pre>{children}</pre>;
+};
 
 const Writing = (): React.ReactElement => {
   const { t } = useBTheme();
@@ -63,6 +111,9 @@ const Writing = (): React.ReactElement => {
   );
   // What the reader actually renders: the picked previous version, or the post.
   const reading = viewedRevision ?? active;
+  const readingBody = reading ? pickLocale(reading.body, lang) : '';
+  const headings = useMemo(() => extractHeadings(readingBody), [readingBody]);
+  const headingIdByLine = useMemo(() => new Map(headings.map((h) => [h.line, h.id])), [headings]);
 
   const postsByCategory = (catId: string): typeof posts => posts.filter((p) => p.category === catId);
 
@@ -74,6 +125,32 @@ const Writing = (): React.ReactElement => {
 
   // Reader width: session-only preference, desktop only (mobile is already full width).
   const [fullWidth, setFullWidth] = useState(false);
+
+  // Post index, in its own column right of the article. To make room for it the
+  // category tree and the article's side padding narrow, which keeps the text
+  // column within a few percent of its width without the index from 1280px up.
+  // The reader can hide it; full width only applies while it's hidden.
+  const indexFits = useMediaQuery('(min-width: 1280px)');
+  const [indexOpen, setIndexOpen] = useState(true);
+  const indexAvailable = Boolean(slug) && headings.length >= 2 && indexFits;
+  const showIndex = indexAvailable && indexOpen;
+  const [activeHeading, setActiveHeading] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!showIndex) return undefined;
+    // The current section is the last heading scrolled past the sticky top bar.
+    const onScroll = (): void => {
+      let current: string | null = null;
+      for (const h of headings) {
+        const el = document.getElementById(h.id);
+        if (el && el.getBoundingClientRect().top < 120) current = h.id;
+      }
+      setActiveHeading(current);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [showIndex, headings]);
 
   const [showAllTags, setShowAllTags] = useState(false);
   const [activeTag, setActiveTag] = useState<string | null>(null);
@@ -107,29 +184,39 @@ const Writing = (): React.ReactElement => {
     };
   }, [showAllTags]);
 
-  const treeWidth = isMobile ? '100%' : 'clamp(220px, 26vw, 320px)';
+  const treeWidth = isMobile ? '100%' : showIndex ? 'clamp(200px, 17vw, 240px)' : 'clamp(220px, 26vw, 320px)';
 
   // Reader width toggle — shared by the blog home and the article view (desktop
-  // only; mobile is already full width).
-  const fullWidthToggle = !isMobile ? (
+  // only; mobile is already full width), and the index toggle beside it.
+  const toggleStyle: React.CSSProperties = {
+    background: 'transparent',
+    border: `1px solid ${t.rule}`,
+    color: t.ink,
+    padding: '3px 9px',
+    fontSize: 11,
+    cursor: 'pointer',
+    fontFamily: 'inherit',
+    textTransform: 'uppercase',
+    letterSpacing: '0.04em',
+    whiteSpace: 'nowrap',
+  };
+  const fullWidthToggle = !isMobile && !showIndex ? (
+    <button type="button" onClick={() => setFullWidth((v) => !v)} aria-pressed={fullWidth} style={toggleStyle}>
+      {fullWidth ? tr('directionB.read.normalWidth') : tr('directionB.read.fullWidth')}
+    </button>
+  ) : null;
+  const indexToggle = indexAvailable ? (
     <button
       type="button"
-      onClick={() => setFullWidth((v) => !v)}
-      aria-pressed={fullWidth}
-      style={{
-        background: 'transparent',
-        border: `1px solid ${t.rule}`,
-        color: t.ink,
-        padding: '3px 9px',
-        fontSize: 11,
-        cursor: 'pointer',
-        fontFamily: 'inherit',
-        textTransform: 'uppercase',
-        letterSpacing: '0.04em',
-        whiteSpace: 'nowrap',
+      onClick={() => {
+        // Opening the index takes the room full width was using.
+        if (!indexOpen) setFullWidth(false);
+        setIndexOpen((v) => !v);
       }}
+      aria-pressed={indexOpen}
+      style={toggleStyle}
     >
-      {fullWidth ? tr('directionB.read.normalWidth') : tr('directionB.read.fullWidth')}
+      {indexOpen ? tr('directionB.read.indexHide') : tr('directionB.read.indexShow')}
     </button>
   ) : null;
 
@@ -373,16 +460,18 @@ const Writing = (): React.ReactElement => {
           ) : null}
         </nav>
 
-        {/* RIGHT — paper reader */}
+        {/* RIGHT — paper reader, plus the post index when it fits */}
+        <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', justifyContent: 'center', minWidth: 0 }}>
         <article
           style={{
             background: t.sub,
             border: `1px solid ${t.rule}`,
             boxShadow: `8px 8px 0 ${t.ink}`,
-            padding: isMobile ? '28px 22px' : '64px clamp(32px, 6vw, 96px)',
+            padding: isMobile ? '28px 22px' : showIndex ? '64px clamp(32px, 3vw, 56px)' : '64px clamp(32px, 6vw, 96px)',
             maxWidth: fullWidth ? 'none' : 940,
             width: '100%',
-            margin: isMobile ? '0' : '0 auto',
+            minWidth: 0,
+            margin: isMobile || showIndex ? '0' : '0 auto',
           }}
         >
           {!slug ? (
@@ -427,7 +516,10 @@ const Writing = (): React.ReactElement => {
                 <span style={{ fontSize: 11, color: t.dim, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
                   {reading.date} · {active.len}
                 </span>
-                {fullWidthToggle}
+                <span style={{ display: 'flex', gap: 8 }}>
+                  {indexToggle}
+                  {fullWidthToggle}
+                </span>
               </div>
               {viewedRevision ? (
                 <div
@@ -504,12 +596,69 @@ const Writing = (): React.ReactElement => {
                 <Markdown
                   remarkPlugins={[remarkGfm]}
                   components={{
+                    h2: ({ node, children }) => (
+                      <h2 id={headingIdByLine.get(node?.position?.start.line ?? -1)}>{children}</h2>
+                    ),
+                    h3: ({ node, children }) => (
+                      <h3 id={headingIdByLine.get(node?.position?.start.line ?? -1)}>{children}</h3>
+                    ),
+                    p: MarkdownParagraph,
+                    pre: MarkdownPre,
                     table: ({ children }) => (
                       <div className="b-table-wrap">
                         <table>{children}</table>
                       </div>
                     ),
-                    img: ({ src, alt }) => (
+                    // A link whose whole text is LinkedIn, GitHub or Web renders as that glyph.
+                    a: ({ href, children }) => {
+                      const Icon = typeof children === 'string' ? SOCIAL_ICONS[children] : undefined;
+                      if (!Icon) return <a href={href}>{children}</a>;
+                      let label = String(children);
+                      if (label === 'Web' && href) {
+                        try {
+                          label = new URL(href).host;
+                        } catch {
+                          // keep "Web"
+                        }
+                      }
+                      return (
+                        <a href={href} className="b-social" aria-label={label} title={label}>
+                          <Icon aria-hidden />
+                        </a>
+                      );
+                    },
+                    img: ({ src, alt, title }) => {
+                      // `![alt](src#small "credit")` is a small floated picture with its credit;
+                      // `#medium` a centred one (logos); `#inline` sits in the line, e.g. in a heading. None zoom.
+                      const size = typeof src === 'string' ? /#(small|medium|inline)$/.exec(src)?.[1] : undefined;
+                      if (typeof src === 'string' && size === 'inline') {
+                        return <img className="b-img-inline" src={src.slice(0, -'#inline'.length)} alt={alt ?? ''} />;
+                      }
+                      if (typeof src === 'string' && size) {
+                        return (
+                          <span className={`b-img-${size}`}>
+                            <img src={src.slice(0, -size.length - 1)} alt={alt} loading="lazy" />
+                            {title ? <span className="b-img-credit">{title}</span> : null}
+                          </span>
+                        );
+                      }
+                      // `![title](youtube url)` embeds the video instead of an image.
+                      const video = typeof src === 'string' ? youtubeId(src) : null;
+                      if (video) {
+                        return (
+                          <span className="b-video">
+                            <iframe
+                              src={`https://www.youtube-nocookie.com/embed/${video}`}
+                              title={alt || 'YouTube video'}
+                              loading="lazy"
+                              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              referrerPolicy="strict-origin-when-cross-origin"
+                              allowFullScreen
+                            />
+                          </span>
+                        );
+                      }
+                      return (
                       <button
                         type="button"
                         className="b-img-zoom"
@@ -520,10 +669,11 @@ const Writing = (): React.ReactElement => {
                       >
                         <img src={typeof src === 'string' ? src : undefined} alt={alt} />
                       </button>
-                    ),
+                      );
+                    },
                   }}
                 >
-                  {pickLocale(reading.body, lang)}
+                  {readingBody}
                 </Markdown>
               </div>
               {active.tags.length > 0 ? (
@@ -629,6 +779,46 @@ const Writing = (): React.ReactElement => {
             <div style={{ fontSize: 14, color: t.dim }}>{tr('directionB.read.noPost')}</div>
           )}
         </article>
+        {showIndex ? (
+          <nav
+            aria-label={tr('directionB.read.indexLabel')}
+            style={{
+              position: 'sticky',
+              top: 80,
+              flex: '0 0 180px',
+              maxHeight: 'calc(100vh - 96px)',
+              overflowY: 'auto',
+              paddingTop: 64,
+            }}
+          >
+            <div style={{ fontSize: 11, color: t.dim, letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12 }}>
+              {tr('directionB.read.indexLabel')}
+            </div>
+            <ol style={{ listStyle: 'none', margin: 0, padding: 0, fontSize: 13, lineHeight: 1.45 }}>
+              {headings.map((h) => {
+                const isActive = h.id === activeHeading;
+                return (
+                  <li key={h.id} style={{ margin: '0 0 8px', paddingLeft: h.depth === 3 ? 12 : 0 }}>
+                    <a
+                      href={`#${h.id}`}
+                      aria-current={isActive ? 'location' : undefined}
+                      style={{
+                        display: 'block',
+                        borderLeft: `2px solid ${isActive ? t.rgbB : 'transparent'}`,
+                        paddingLeft: 10,
+                        color: isActive ? t.ink : t.dim,
+                        textDecoration: 'none',
+                      }}
+                    >
+                      {h.text}
+                    </a>
+                  </li>
+                );
+              })}
+            </ol>
+          </nav>
+        ) : null}
+        </div>
       </div>
 
       {lightbox ? (

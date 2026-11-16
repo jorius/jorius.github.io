@@ -253,8 +253,8 @@
       },
       "available": "Available",
       "themeToggle": {
-        "toLight": "☀ LIGHT",
-        "toDark": "☾ DARK"
+        "toLight": "Switch to light theme",
+        "toDark": "Switch to dark theme"
       },
       "languageToggle": {
         "label": "Language"
@@ -340,6 +340,8 @@
       "normalWidth": "⤡ normal width",
       "imageZoom": "view full size",
       "lightboxClose": "close image",
+      "carouselPrev": "previous photo",
+      "carouselNext": "next photo",
       "blogHomeMeta": "JOSE RÍOS · PERSONAL BLOG",
       "blogHomeTitle": "Writing",
       "blogHomeIntro": "A personal space where I write about the things I'm exploring — hardware tinkering, cybersecurity, infrastructure, databases, and the occasional sci-fi rabbit hole. No editorial calendar. Just notes from someone who enjoys learning out loud.",
@@ -354,6 +356,9 @@
       "revisionsIntro": "This post has been rewritten since it was first published. You can read the earlier versions here:",
       "revisionsView": "read this version",
       "revisionsHide": "back to the current version",
+      "indexLabel": "On this page",
+      "indexHide": "⇥ hide index",
+      "indexShow": "⇤ show index",
       "revisionsViewing": "Older version",
       "revisionsBackToCurrent": "Back to current",
       "noPost": "No post at this address. Check the link or head back to the list."
