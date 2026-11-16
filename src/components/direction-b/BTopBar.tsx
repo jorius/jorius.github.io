@@ -3,14 +3,14 @@ import { useState } from 'react';
 import type { CSSProperties } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaMoon, FaSun, FaTimes } from 'react-icons/fa';
 
 // contexts
 import { useBTheme } from '../../contexts/ThemeContext';
 
 // hooks
 import { useScrollDirection } from '../../hooks/useScrollDirection';
-import { useIsMobile } from '../../hooks/useMediaQuery';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { useScrollToSection } from '../../hooks/useNavigation';
 
 // utils
@@ -31,7 +31,6 @@ const ANCHOR_TARGETS: Record<AnchorKey, string> = {
   now: 'b-now',
   contact: 'b-contact',
 };
-const DARK_GALAXY_PURPLE = '#9D4EDD';
 // The game is its own Pages site next to this one; the ring takes its score gold.
 const NONE_SHALL_PASS_URL = 'https://jorius.github.io/none-shall-pass/';
 const NONE_SHALL_PASS_GOLD = '#d9b44a';
@@ -83,12 +82,13 @@ export const BTopBar = (): React.ReactElement => {
   const scrollToSection = useScrollToSection();
   const scrollDir = useScrollDirection();
   const visible = scrollDir === 'up';
-  const isMobile = useIsMobile();
+  // The full bar needs about 1380px on one line (Spanish labels are longer); below that it wraps, so it folds into the menu.
+  const compact = useMediaQuery('(max-width: 1399px)');
   const [menuRequested, setMenuRequested] = useState(false);
-  // Derive the visible-open state from isMobile so we never need an effect
+  // Derive the visible-open state from compact so we never need an effect
   // to "close on resize past breakpoint" — the menu is implicitly closed
   // any time we're not in the mobile breakpoint.
-  const menuOpen = isMobile && menuRequested;
+  const menuOpen = compact && menuRequested;
 
   const lang = i18n.language.startsWith('es') ? 'es' : 'en';
   const otherLang = lang === 'es' ? 'en' : 'es';
@@ -107,9 +107,9 @@ export const BTopBar = (): React.ReactElement => {
     color: th.ink,
     textDecoration: 'none',
     letterSpacing: '0.04em',
-    padding: isMobile ? '12px 0' : 0,
-    fontSize: isMobile ? 14 : 13,
-    borderBottom: isMobile ? `1px solid ${th.sub}` : 'none',
+    padding: compact ? '12px 0' : 0,
+    fontSize: compact ? 14 : 13,
+    borderBottom: compact ? `1px solid ${th.sub}` : 'none',
   };
 
   const anchor = (key: AnchorKey): React.ReactElement => (
@@ -142,21 +142,21 @@ export const BTopBar = (): React.ReactElement => {
   );
 
   // Left: the landing in page order, then the two inner pages. Right: the notes
-  // app, the game, the academy, Dark Galaxy, a rule, the two toggles (owner,
-  // 2026-10-04). No brand block.
+  // app, the game, the academy, a rule, the two toggles (owner, 2026-10-04).
+  // No brand block. Dark Galaxy is hidden from the bar for now; /darkgalaxy still resolves.
   const leftLinks = [anchor('work'), anchor('record'), anchor('now'), anchor('contact'), route('projects', '/projects'), route('writing', '/writing')];
   const liberLinteum = external('liberLinteum', LIBER_LINTEUM_URL, <LiberMark ring={LIBER_LINTEUM_TERRACOTTA} />);
   const noneShallPass = external('noneShallPass', NONE_SHALL_PASS_URL, <KnightMark ring={NONE_SHALL_PASS_GOLD} />);
   const academy = external('academy', ACADEMY_URL, <AcademyMark ring={ACADEMY_ORANGE} />);
-  const darkGalaxy = route('darkgalaxy', '/darkgalaxy', DARK_GALAXY_PURPLE);
 
   const availability = (
-    <span style={{ display: 'inline-flex', alignItems: 'center', fontSize: isMobile ? 14 : 13, color: th.ink }}>
+    <span style={{ display: 'inline-flex', alignItems: 'center', fontSize: compact ? 14 : 13, color: th.ink }}>
       <Dot color={AVAILABLE_GREEN} />
       {t('directionB.topbar.available')} · {currentQuarter()}
     </span>
   );
 
+  const themeLabel = theme === 'dark' ? t('directionB.topbar.themeToggle.toLight') : t('directionB.topbar.themeToggle.toDark');
   const toggles = (
     <>
       <button
@@ -168,8 +168,14 @@ export const BTopBar = (): React.ReactElement => {
       >
         {otherLang}
       </button>
-      <button type="button" onClick={switchTheme} aria-label="toggle theme" style={buttonStyle(th.rule, th.ink)}>
-        {theme === 'dark' ? t('directionB.topbar.themeToggle.toLight') : t('directionB.topbar.themeToggle.toDark')}
+      <button
+        type="button"
+        onClick={switchTheme}
+        aria-label={themeLabel}
+        title={themeLabel}
+        style={{ ...buttonStyle(th.rule, th.ink), display: 'inline-flex', alignItems: 'center', alignSelf: 'stretch' }}
+      >
+        {theme === 'dark' ? <FaSun aria-hidden style={{ width: 13, height: 13 }} /> : <FaMoon aria-hidden style={{ width: 13, height: 13 }} />}
       </button>
     </>
   );
@@ -195,23 +201,22 @@ export const BTopBar = (): React.ReactElement => {
           display: 'grid',
           gridTemplateColumns: '1fr auto',
           alignItems: 'center',
-          padding: isMobile ? '10px 20px' : '12px 32px',
+          padding: compact ? '10px 20px' : '12px 32px',
           gap: 16,
         }}
       >
-        {isMobile ? availability : (
+        {compact ? availability : (
           <nav style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center' }}>
             {leftLinks}
             {availability}
           </nav>
         )}
 
-        {!isMobile ? (
+        {!compact ? (
           <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
             {liberLinteum}
             {noneShallPass}
             {academy}
-            {darkGalaxy}
             <span aria-hidden style={{ width: 1, height: 18, background: th.rule, opacity: 0.45, margin: '0 8px' }} />
             {toggles}
           </div>
@@ -229,7 +234,7 @@ export const BTopBar = (): React.ReactElement => {
       </div>
 
       {/* Mobile slide-down panel */}
-      {isMobile && menuOpen ? (
+      {compact && menuOpen ? (
         <div
           style={{
             borderTop: `1px solid ${th.rule}`,
@@ -242,7 +247,6 @@ export const BTopBar = (): React.ReactElement => {
             {liberLinteum}
             {noneShallPass}
             {academy}
-            {darkGalaxy}
           </nav>
           <div
             style={{
